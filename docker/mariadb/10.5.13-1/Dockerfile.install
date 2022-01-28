@@ -1,3 +1,6 @@
+# refer : https://github.com/MariaDB/mariadb-docker
+# license : GPL v2.0
+# https://github.com/MariaDB/mariadb-docker/blob/master/LICENSE
 
 # bashbrew-architectures: amd64 arm64v8 ppc64le s390x
 ARG MARIADB_MAJOR=10.5
