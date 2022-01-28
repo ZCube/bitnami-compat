@@ -3,8 +3,9 @@ ENV RABBITMQ_VERSION 3.8.27
 ENV RABBITMQ_HOME=/opt/bitnami/rabbitmq
 
 RUN RABBITMQ_SOURCE_URL="https://github.com/rabbitmq/rabbitmq-server/releases/download/v$RABBITMQ_VERSION/rabbitmq-server-generic-unix-latest-toolchain-$RABBITMQ_VERSION.tar.xz"; \
-	RABBITMQ_PATH="/usr/local/src/rabbitmq-$RABBITMQ_VERSION"; \
-	mkdir -p "$RABBITMQ_HOME"; \
+	RABBITMQ_PATH="rabbitmq-server-generic-unix-latest-toolchain-$RABBITMQ_VERSION.tar.xz"; \
+	curl -LO "$RABBITMQ_SOURCE_URL"; \
+    mkdir -p "$RABBITMQ_HOME"; \
 	tar --extract --file "$RABBITMQ_PATH.tar.xz" --directory "$RABBITMQ_HOME" --strip-components 1; \
 	rm -rf "$RABBITMQ_PATH"*; \
 	grep -qE '^SYS_PREFIX=\$\{RABBITMQ_HOME\}$' "$RABBITMQ_HOME/sbin/rabbitmq-defaults"; \
