@@ -5,7 +5,7 @@ env:
   REGISTRY: ghcr.io
 
 jobs:
-  build-base:
+  build-bitnami-shell:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -16,7 +16,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          repository: https://github.com/bitnami/bitnami-docker-bitnami-shell
+          repository: bitnami/bitnami-docker-bitnami-shell
           path: 'bitnami-docker-bitnami-shell'
           ref: refs/heads/release
       - name: Set up QEMU dependency
