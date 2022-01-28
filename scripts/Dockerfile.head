@@ -1,5 +1,5 @@
 FROM golang:1.17-bullseye AS golang-builder
 
 ADD packages.sh /packages.sh
-RUN chmod +x packages.sh && \
-    packages.sh
+RUN chmod +x /packages.sh && \
+    /packages.sh
