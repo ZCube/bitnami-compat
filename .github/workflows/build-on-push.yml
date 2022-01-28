@@ -64,7 +64,7 @@ jobs:
         id: extract_branch
       - name: Update Dockerfile OS_ARCH
         shell: bash
-        run: ./scripts/update.sh bitnami-docker-${{ matrix.APP }}
+        run: ./scripts/update.sh
       - name: Extract lowercase repository name
         uses: ASzc/change-string-case-action@v1
         with:

@@ -1,0 +1,4 @@
+COPY --from=minio-client /licenses/ /opt/bitnami/minio-client/licenses/
+COPY --from=minio-client /opt/bin/ /opt/bitnami/minio-client/bin/
+
+RUN ln -s /opt/bitnami/minio/bin/mc /opt/bitnami/minio/bin/minio-client
