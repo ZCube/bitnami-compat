@@ -72,7 +72,7 @@ jobs:
         with:
           context: bitnami-docker-${{ matrix.APP }}/${{ matrix.VERSION_MAJOR }}/${{ matrix.OS_FLAVOUR }}
           push: true
-          tags: ${{ matrix.VERSION_MAJOR }}-${{ steps.meta.outputs.tags }}
+          tags: ${{ steps.meta.outputs.tags }}-${{ matrix.VERSION_MAJOR }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
           labels: ${{ steps.meta.outputs.labels }}
