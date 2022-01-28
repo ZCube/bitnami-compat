@@ -1,6 +1,7 @@
 RUN install_packages mariadb-server \
     && mkdir -p /opt/bitnami/mariadb/bin \
     && mkdir -p /opt/bitnami/mariadb/sbin \
+    && mkdir -p /opt/bitnami/mariadb/lib \
     && ln -s /usr/bin/my* /opt/bitnami/mariadb/bin/ \
     && ln -s /usr/sbin/my* /opt/bitnami/mariadb/sbin/ \
     && ln -s /usr/bin/maria* /opt/bitnami/mariadb/bin/ \
