@@ -56,7 +56,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: ${{ env.REGISTRY }}/${{ github.repository }}/${{ matrix.APP }}:${{ matrix.VERSION_MAJOR }}
+          images: ${{ env.REGISTRY }}/${{ github.repository }}/${{ matrix.APP }}
       # https://stackoverflow.com/questions/58033366/how-to-get-the-current-branch-within-github-actions
       - name: Extract branch name
         shell: bash
@@ -72,7 +72,7 @@ jobs:
         with:
           context: bitnami-docker-${{ matrix.APP }}/${{ matrix.VERSION_MAJOR }}/${{ matrix.OS_FLAVOUR }}
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: ${{ matrix.VERSION_MAJOR }}-${{ steps.meta.outputs.tags }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
           labels: ${{ steps.meta.outputs.labels }}
