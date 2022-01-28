@@ -4,4 +4,5 @@ RUN install_packages mariadb-server \
     && ln -s /usr/bin/my* /opt/bitnami/mariadb/bin/ \
     && ln -s /usr/sbin/my* /opt/bitnami/mariadb/sbin/ \
     && ln -s /usr/bin/maria* /opt/bitnami/mariadb/bin/ \
-    && ln -s /usr/sbin/maria* /opt/bitnami/mariadb/sbin/
+    && ln -s /usr/sbin/maria* /opt/bitnami/mariadb/sbin/ \
+    && ln -s /usr/lib/x86_64-linux-gnu/mariadb19/plugin /opt/bitnami/mariadb/plugin
