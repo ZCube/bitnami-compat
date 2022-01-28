@@ -2,6 +2,8 @@ ENV RABBITMQ_VERSION 3.8.27
 
 ENV RABBITMQ_HOME=/opt/bitnami/rabbitmq
 
+RUN install_packages xz-utils
+
 RUN RABBITMQ_SOURCE_URL="https://github.com/rabbitmq/rabbitmq-server/releases/download/v$RABBITMQ_VERSION/rabbitmq-server-generic-unix-latest-toolchain-$RABBITMQ_VERSION.tar.xz"; \
 	RABBITMQ_PATH="rabbitmq-server-generic-unix-latest-toolchain-$RABBITMQ_VERSION"; \
 	curl -LO "$RABBITMQ_SOURCE_URL"; \
