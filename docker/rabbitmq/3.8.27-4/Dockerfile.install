@@ -1,7 +1,6 @@
 ENV RABBITMQ_VERSION 3.8.27
 
 ENV RABBITMQ_HOME=/opt/bitnami/rabbitmq
-ENV RABBITMQ_VERSION /usr/lib/rabbitmq/bin
 
 RUN RABBITMQ_SOURCE_URL="https://github.com/rabbitmq/rabbitmq-server/releases/download/v$RABBITMQ_VERSION/rabbitmq-server-generic-unix-latest-toolchain-$RABBITMQ_VERSION.tar.xz"; \
 	RABBITMQ_PATH="/usr/local/src/rabbitmq-$RABBITMQ_VERSION"; \
