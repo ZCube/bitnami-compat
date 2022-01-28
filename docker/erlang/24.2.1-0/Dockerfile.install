@@ -1,0 +1,2 @@
+# refer : https://packages.debian.org/sid/all/rabbitmq-server
+RUN install_packages erlang-base erlang-crypto erlang-eldap erlang-inets erlang-mnesia erlang-os-mon erlang-parsetools erlang-public-key erlang-runtime-tools erlang-ssl erlang-syntax-tools erlang-tools erlang-xmerl

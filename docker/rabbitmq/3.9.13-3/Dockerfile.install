@@ -1,0 +1,3 @@
+RUN install_packages rabbitmq-server \
+    && mkdir -p /opt/bitnami/rabbitmq/sbin \
+    && ln -s /usr/lib/rabbitmq/bin/* /opt/bitnami/rabbitmq/sbin/
