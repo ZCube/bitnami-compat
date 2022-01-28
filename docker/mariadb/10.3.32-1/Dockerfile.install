@@ -88,5 +88,5 @@ RUN mkdir -p /opt/bitnami/mariadb/bin \
     && cp -rf /usr/share/mysql/                    /opt/bitnami/mariadb/share/ \
     && rm -rf /var/lib/dpkg/alternatives/my.cnf \
     && rm -rf /etc/mysql/my.cnf \
-    && rm -rf /etc/mysql/mariadb.cnf \
-    && chown 1001:1001 -R /usr/lib/mysql/plugin/auth_pam_tool_dir
+    && rm -rf /etc/mysql/mariadb.cnf
+    # && chown 1001:1001 -R /opt/bitnami/mariadb/plugin/auth_pam_tool_dir
