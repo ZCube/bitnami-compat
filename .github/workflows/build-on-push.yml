@@ -5,19 +5,42 @@ env:
   REGISTRY: ghcr.io
 
 jobs:
-  build-bitnami-shell:
+  build-bitnami-compat:
     runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
+    strategy:
+      matrix:
+        include:
+         - APP: bitnami-shell
+           OS_FLAVOUR: debian-10
+           VERSION_MAJOR: 10
+           VERSION: 10
+           OS_NAME: linux
+         - APP: mysql
+           OS_FLAVOUR: debian-10
+           VERSION_MAJOR: 8.0
+           VERSION: 8.0.28
+           OS_NAME: linux
+         - APP: rabbitmq
+           OS_FLAVOUR: debian-10
+           VERSION_MAJOR: 3.9
+           VERSION: 3.9.13
+           OS_NAME: linux
+         - APP: minio
+           OS_FLAVOUR: debian-10
+           VERSION_MAJOR: 2022
+           VERSION: 2022.1.8
+           OS_NAME: linux
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Checkout
+      - name: Checkout bitnami recipe
         uses: actions/checkout@v2
         with:
-          repository: bitnami/bitnami-docker-bitnami-shell
-          path: 'bitnami-docker-bitnami-shell'
+          repository: bitnami/bitnami-docker-${{ matrix.APP }}
+          path: 'bitnami-docker-${{ matrix.APP }}'
           ref: master
       - name: Set up QEMU dependency
         uses: docker/setup-qemu-action@v1
@@ -33,7 +56,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: ${{ env.REGISTRY }}/${{ github.repository }}/bitnami-shell
+          images: ${{ env.REGISTRY }}/${{ github.repository }}/${{ matrix.APP }}:${{ matrix.VERSION_MAJOR }}
       # https://stackoverflow.com/questions/58033366/how-to-get-the-current-branch-within-github-actions
       - name: Extract branch name
         shell: bash
@@ -47,7 +70,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
-          context: bitnami-docker-bitnami-shell/10/debian-10
+          context: bitnami-docker-${{ matrix.APP }}/${{ matrix.VERSION_MAJOR }}/${{ matrix.OS_FLAVOUR }}
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           cache-from: type=gha
