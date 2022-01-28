@@ -13,26 +13,26 @@ jobs:
     strategy:
       matrix:
         include:
-         - APP: bitnami-shell
-           OS_FLAVOUR: debian-10
-           VERSION_MAJOR: 10
-           VERSION: 10
-           OS_NAME: linux
-         - APP: mysql
-           OS_FLAVOUR: debian-10
-           VERSION_MAJOR: 8.0
-           VERSION: 8.0.28
-           OS_NAME: linux
-         - APP: rabbitmq
-           OS_FLAVOUR: debian-10
-           VERSION_MAJOR: 3.9
-           VERSION: 3.9.13
-           OS_NAME: linux
-         - APP: minio
-           OS_FLAVOUR: debian-10
-           VERSION_MAJOR: 2022
-           VERSION: 2022.1.8
-           OS_NAME: linux
+         - APP: "bitnami-shell"
+           OS_FLAVOUR: "debian-10"
+           VERSION_MAJOR: "10"
+           VERSION: "10"
+           OS_NAME: "linux"
+         - APP: "mysql"
+           OS_FLAVOUR: "debian-10"
+           VERSION_MAJOR: "8.0"
+           VERSION: "8.0.28"
+           OS_NAME: "linux"
+         - APP: "rabbitmq"
+           OS_FLAVOUR: "debian-10"
+           VERSION_MAJOR: "3.9"
+           VERSION: "3.9.13"
+           OS_NAME: "linux"
+         - APP: "minio"
+           OS_FLAVOUR: "debian-10"
+           VERSION_MAJOR: "2022"
+           VERSION: "2022.1.8"
+           OS_NAME: "linux"
     steps:
       - name: Checkout
         uses: actions/checkout@v2
