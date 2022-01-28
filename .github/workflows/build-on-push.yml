@@ -67,12 +67,6 @@ jobs:
            VERSION: "2022.1.8"
            OS_NAME: "linux"
            REPO_OWNER: "bitnami"
-         - APP: "consul-exporter"
-           OS_FLAVOUR: "debian-10"
-           VERSION_MAJOR: "0"
-           VERSION: "0"
-           OS_NAME: "linux"
-           REPO_OWNER: "gitpod-arm"
     steps:
       - name: Checkout
         uses: actions/checkout@v2
