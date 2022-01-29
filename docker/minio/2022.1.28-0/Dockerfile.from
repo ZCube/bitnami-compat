@@ -1,0 +1,1 @@
+FROM minio/minio:RELEASE.2022-01-08T03-11-54Z AS minio
