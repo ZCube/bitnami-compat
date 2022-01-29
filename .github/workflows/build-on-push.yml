@@ -97,6 +97,18 @@ jobs:
            VERSION: "2022.1.8"
            OS_NAME: "linux"
            REPO_OWNER: "bitnami"
+         - APP: "mysqld-exporter"
+           OS_FLAVOUR: "debian-10"
+           VERSION_MAJOR: "0"
+           VERSION: "0.13.0"
+           OS_NAME: "linux"
+           REPO_OWNER: "bitnami"
+         - APP: "consul-exporter"
+           OS_FLAVOUR: "debian-10"
+           VERSION_MAJOR: "0"
+           VERSION: "0.7.1"
+           OS_NAME: "linux"
+           REPO_OWNER: "bitnami"
     steps:
       - name: Checkout
         uses: actions/checkout@v2

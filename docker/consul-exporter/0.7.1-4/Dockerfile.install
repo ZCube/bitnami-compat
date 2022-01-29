@@ -1,0 +1,2 @@
+ADD https://raw.githubusercontent.com/prometheus/consul_exporter/master/LICENSE /opt/bitnami/consul-exporter/licenses/LICENSE
+COPY --from=consul-exporter /bin/consul_exporter /opt/bitnami/consul-exporter/bin/

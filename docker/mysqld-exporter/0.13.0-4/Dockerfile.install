@@ -1,0 +1,2 @@
+ADD https://raw.githubusercontent.com/prometheus/mysqld_exporter/master/LICENSE /opt/bitnami/consul-exporter/licenses/LICENSE
+COPY --from=mysqld-exporter /bin/mysqld_exporter /opt/bitnami/mysqld-exporter/bin/
