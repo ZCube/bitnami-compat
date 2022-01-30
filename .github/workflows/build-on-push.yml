@@ -203,11 +203,11 @@ jobs:
           context: bitnami-docker-${{ matrix.APP }}/${{ matrix.VERSION_MAJOR }}/${{ matrix.OS_FLAVOUR }}
           push: true
           tags: |
-            type=raw,value=${{ matrix.VERSION_MAJOR }}
-            type=raw,value=${{ matrix.VERSION_MAJOR }}-${{ matrix.OS_FLAVOUR }}
-            type=raw,value=${{ matrix.VERSION }}
-            type=raw,value=${{ matrix.VERSION }}-${{ matrix.OS_FLAVOUR }}
-            type=raw,value=${{ matrix.VERSION }}-${{ matrix.OS_FLAVOUR }}-r${{ matrix.REVISION }}
+            ${{ matrix.VERSION_MAJOR }}
+            ${{ matrix.VERSION_MAJOR }}-${{ matrix.OS_FLAVOUR }}
+            ${{ matrix.VERSION }}
+            ${{ matrix.VERSION }}-${{ matrix.OS_FLAVOUR }}
+            ${{ matrix.VERSION }}-${{ matrix.OS_FLAVOUR }}-r${{ matrix.REVISION }}
           cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ github.repository }}/cache/${{ matrix.APP }}-${{ matrix.VERSION }}
           cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ github.repository }}/cache/${{ matrix.APP }}-${{ matrix.VERSION }}
           labels: ${{ steps.meta.outputs.labels }}
