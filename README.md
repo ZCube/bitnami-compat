@@ -16,6 +16,6 @@ This images uses Bitnami's script. Binaries refer to the official Docker or offi
   * [bitnami/mysqld-exporter](https://github.com/bitnami/bitnami-docker-mysqld-exporter)
   * [bitnami/etcd](https://github.com/bitnami/bitnami-docker-etcd)
   * [bitnami/cert-manager](https://github.com/bitnami/bitnami-docker-cert-manager)
-  * [bitnami/acmeresolver](https://github.com/bitnami/bitnami-docker-acmeresolver)
+  * [bitnami/acmesolver](https://github.com/bitnami/bitnami-docker-acmesolver)
   * [bitnami/cert-manager-webhook](https://github.com/bitnami/bitnami-docker-cert-manager-webhook)
   * [bitnami/cainjector](https://github.com/bitnami/bitnami-docker-cainjector)

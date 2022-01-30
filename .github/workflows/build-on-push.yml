@@ -133,7 +133,7 @@ jobs:
            VERSION: "1.7.0"
            OS_NAME: "linux"
            REPO_OWNER: "bitnami"
-         - APP: "acmeresolver"
+         - APP: "acmesolver"
            OS_FLAVOUR: "debian-10"
            VERSION_MAJOR: "1"
            VERSION: "1.7.0"
