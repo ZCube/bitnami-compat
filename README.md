@@ -19,3 +19,6 @@ This images uses Bitnami's script. Binaries refer to the official Docker or offi
   * [bitnami/acmesolver](https://github.com/bitnami/bitnami-docker-acmesolver)
   * [bitnami/cert-manager-webhook](https://github.com/bitnami/bitnami-docker-cert-manager-webhook)
   * [bitnami/cainjector](https://github.com/bitnami/bitnami-docker-cainjector)
+  * [bitnami/redis](https://github.com/bitnami/bitnami-docker-redis)
+  * [bitnami/redis-sentinel](https://github.com/bitnami/bitnami-docker-redis-sentinel)
+  * [bitnami/redis-exporter](https://github.com/bitnami/bitnami-docker-redis-exporter)
