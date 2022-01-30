@@ -6,7 +6,7 @@ ENV REDIS_VERSION 6.2.6
 ENV REDIS_DOWNLOAD_URL http://download.redis.io/releases/redis-6.2.6.tar.gz
 ENV REDIS_DOWNLOAD_SHA 5b2b8b7a50111ef395bf1c1d5be11e6e167ac018125055daa8b5c2317ae131ab
 
-RUN mkdir -p /opt/bitnami/redis/etc
+RUN mkdir -p /opt/bitnami/redis-sentinel/etc
 
 RUN set -eux; \
 	\
@@ -70,7 +70,7 @@ RUN set -eux; \
 		-exec ln -svfT 'redis-server' '{}' ';' \
 	; \
 	\
-	cp -f /usr/src/redis/sentinel.conf /opt/bitnami/redis/etc/; \
+	cp -f /usr/src/redis/sentinel.conf /opt/bitnami/redis-sentinel/etc/; \
 	rm -r /usr/src/redis; \
 	\
 	apt-mark auto '.*' > /dev/null; \
@@ -88,7 +88,7 @@ RUN set -eux; \
 	redis-cli --version; \
 	redis-server --version
 
-RUN mkdir -p /opt/bitnami/redis/bin \
-    && mkdir -p /opt/bitnami/redis/sbin \
-    && mkdir -p /opt/bitnami/redis/lib \
-    && ln -s /usr/local/bin/redis*                 /opt/bitnami/redis/bin/
+RUN mkdir -p /opt/bitnami/redis-sentinel/bin \
+    && mkdir -p /opt/bitnami/redis-sentinel/sbin \
+    && mkdir -p /opt/bitnami/redis-sentinel/lib \
+    && ln -s /usr/local/bin/redis*                 /opt/bitnami/redis-sentinel/bin/
