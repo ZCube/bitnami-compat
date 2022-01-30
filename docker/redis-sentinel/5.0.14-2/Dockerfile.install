@@ -7,7 +7,7 @@ ENV REDIS_DOWNLOAD_URL http://download.redis.io/releases/redis-5.0.14.tar.gz
 ENV REDIS_DOWNLOAD_SHA 3ea5024766d983249e80d4aa9457c897a9f079957d0fb1f35682df233f997f32
 
 RUN mkdir -p /opt/bitnami/redis-sentinel/etc \
-    && mkdir -p /opt/bitnami/redis/licenses
+    && mkdir -p /opt/bitnami/redis-sentinel/licenses
 
 RUN set -eux; \
 	\
