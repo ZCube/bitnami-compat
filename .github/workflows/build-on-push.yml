@@ -158,8 +158,8 @@ jobs:
           context: bitnami-docker-${{ matrix.APP }}/${{ matrix.VERSION_MAJOR }}/${{ matrix.OS_FLAVOUR }}
           push: true
           tags: ${{ steps.meta.outputs.tags }}-${{ matrix.VERSION_MAJOR }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-from: type=registry,ref=${{ steps.meta.outputs.tags }}-${{ matrix.VERSION_MAJOR }}-build-cache
+          cache-to: type=registry,ref=${{ steps.meta.outputs.tags }}-${{ matrix.VERSION_MAJOR }}-build-cache
           labels: ${{ steps.meta.outputs.labels }}
           platforms: linux/amd64,linux/arm64
           build-args: |
