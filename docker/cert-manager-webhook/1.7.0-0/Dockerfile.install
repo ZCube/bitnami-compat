@@ -1,0 +1,2 @@
+ADD https://raw.githubusercontent.com/jetstack/cert-manager/master/LICENSE /opt/bitnami/cert-manager/licenses/LICENSE
+COPY --from=cert-manager-webhook /app/cmd/webhook/webhook /opt/bitnami/cert-manager-webhook/bin/cert-manager-webhook
