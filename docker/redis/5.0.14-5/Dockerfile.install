@@ -6,7 +6,8 @@ ENV REDIS_VERSION 5.0.14
 ENV REDIS_DOWNLOAD_URL http://download.redis.io/releases/redis-5.0.14.tar.gz
 ENV REDIS_DOWNLOAD_SHA 3ea5024766d983249e80d4aa9457c897a9f079957d0fb1f35682df233f997f32
 
-RUN mkdir -p /opt/bitnami/redis/etc
+RUN mkdir -p /opt/bitnami/redis/etc \
+    && mkdir -p /opt/bitnami/redis/licenses
 
 RUN set -eux; \
 	\
@@ -69,6 +70,7 @@ RUN set -eux; \
 	; \
 	\
 	cp -f /usr/src/redis/redis.conf /opt/bitnami/redis/etc/redis-default.conf; \
+	cp -f /usr/src/redis/COPYING /opt/bitnami/redis/licenses/COPYING; \
 	rm -r /usr/src/redis; \
 	\
 	apt-mark auto '.*' > /dev/null; \

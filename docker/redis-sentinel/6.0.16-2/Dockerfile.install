@@ -6,7 +6,8 @@ ENV REDIS_VERSION 6.0.16
 ENV REDIS_DOWNLOAD_URL http://download.redis.io/releases/redis-6.0.16.tar.gz
 ENV REDIS_DOWNLOAD_SHA 3639bbf29aca1a1670de1ab2ce224d6511c63969e7e590d3cdf8f7888184fa19
 
-RUN mkdir -p /opt/bitnami/redis-sentinel/etc
+RUN mkdir -p /opt/bitnami/redis-sentinel/etc \
+    && mkdir -p /opt/bitnami/redis/licenses
 
 RUN set -eux; \
 	\
@@ -71,6 +72,7 @@ RUN set -eux; \
 	; \
 	\
 	cp -f /usr/src/redis/sentinel.conf /opt/bitnami/redis-sentinel/etc/; \
+	cp -f /usr/src/redis/COPYING /opt/bitnami/redis-sentinel/licenses/COPYING; \
 	rm -r /usr/src/redis; \
 	\
 	apt-mark auto '.*' > /dev/null; \

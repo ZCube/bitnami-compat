@@ -22,3 +22,4 @@ This images uses Bitnami's script. Binaries refer to the official Docker or offi
   * [bitnami/redis](https://github.com/bitnami/bitnami-docker-redis)
   * [bitnami/redis-sentinel](https://github.com/bitnami/bitnami-docker-redis-sentinel)
   * [bitnami/redis-exporter](https://github.com/bitnami/bitnami-docker-redis-exporter)
+  * [bitnami/redis-cluster](https://github.com/bitnami/bitnami-docker-redis-cluster)
