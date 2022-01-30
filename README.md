@@ -11,3 +11,6 @@ This images uses Bitnami's script. Binaries refer to the official Docker or offi
   * [bitnami/minio](https://github.com/bitnami/bitnami-docker-minio)
   * [bitnami/consul](https://github.com/bitnami/bitnami-docker-consul)
   * [bitnami/postgresql](https://github.com/bitnami/bitnami-docker-postgresql)
+  * [bitnami/consul-exporter](https://github.com/bitnami/bitnami-docker-consul-exporter)
+  * [bitnami/mysqld-exporter](https://github.com/bitnami/bitnami-docker-mysqld-exporter)
+  * [bitnami/etcd](https://github.com/bitnami/bitnami-docker-etcd)

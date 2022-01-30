@@ -1,0 +1,1 @@
+FROM gcr.io/etcd-development/etcd:v3.5.1 AS etcd
