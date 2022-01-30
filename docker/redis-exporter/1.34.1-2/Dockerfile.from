@@ -1,1 +1,1 @@
-FROM prom/mysqld-exporter:v0.13.0 AS mysqld-exporter
+FROM oliver006/redis_exporter:v1.34.1 AS redis-exporter
