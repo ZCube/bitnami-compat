@@ -183,6 +183,12 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
+          tags: |
+            type=raw,value=${{ matrix.VERSION_MAJOR }}
+            type=raw,value=${{ matrix.VERSION_MAJOR }}-${{ matrix.OS_FLAVOUR }}
+            type=raw,value=${{ matrix.VERSION }}
+            type=raw,value=${{ matrix.VERSION }}-${{ matrix.OS_FLAVOUR }}
+            type=raw,value=${{ matrix.VERSION }}-${{ matrix.OS_FLAVOUR }}-r${{ matrix.REVISION }}
           images: ${{ env.REGISTRY }}/${{ github.repository }}/${{ matrix.APP }}
       # https://stackoverflow.com/questions/58033366/how-to-get-the-current-branch-within-github-actions
       - name: Extract branch name
@@ -202,12 +208,7 @@ jobs:
         with:
           context: bitnami-docker-${{ matrix.APP }}/${{ matrix.VERSION_MAJOR }}/${{ matrix.OS_FLAVOUR }}
           push: true
-          tags: |
-            ${{ matrix.VERSION_MAJOR }}
-            ${{ matrix.VERSION_MAJOR }}-${{ matrix.OS_FLAVOUR }}
-            ${{ matrix.VERSION }}
-            ${{ matrix.VERSION }}-${{ matrix.OS_FLAVOUR }}
-            ${{ matrix.VERSION }}-${{ matrix.OS_FLAVOUR }}-r${{ matrix.REVISION }}
+          tags: ${{ steps.meta.outputs.tags }}
           cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ github.repository }}/cache/${{ matrix.APP }}-${{ matrix.VERSION }}
           cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ github.repository }}/cache/${{ matrix.APP }}-${{ matrix.VERSION }}
           labels: ${{ steps.meta.outputs.labels }}
