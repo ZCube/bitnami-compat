@@ -209,7 +209,7 @@ jobs:
           context: bitnami-docker-${{ matrix.APP }}/${{ matrix.VERSION_MAJOR }}/${{ matrix.OS_FLAVOUR }}
           push: true
           tags: ${{ steps.meta.outputs.tags }}
-          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ github.repository }}/cache/${{ matrix.APP }}-${{ matrix.VERSION }}
-          cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ github.repository }}/cache/${{ matrix.APP }}-${{ matrix.VERSION }}
+          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ github.repository }}/cache/${{ matrix.APP }}:${{ matrix.VERSION }}
+          cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ github.repository }}/cache/${{ matrix.APP }}:${{ matrix.VERSION }}
           labels: ${{ steps.meta.outputs.labels }}
           platforms: linux/amd64,linux/arm64
