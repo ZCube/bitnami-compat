@@ -20,6 +20,7 @@ ENV PG_MAJOR 14
 ENV PATH $PATH:/usr/lib/postgresql/$PG_MAJOR/bin
 
 ENV PG_VERSION 14.1-1.pgdg100+1
+ENV EXTENSIONS postgresql-$PG_MAJOR-orafce postgresql-$PG_MAJOR-auto-failover postgresql-$PG_MAJOR-pljava postgresql-$PG_MAJOR-postgis-3
 
 RUN set -ex; \
 	\
