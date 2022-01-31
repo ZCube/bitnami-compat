@@ -57,6 +57,10 @@ This images uses Bitnami's script. Binaries refer to the official Docker or offi
 * redis-cluster : [`6.0`, `6.0-debian-10`, `6.0.16`, `6.0.16-debian-10`, `6.0.16-debian-10-r0`](https://github.com/gitpod-arm/bitnami-compat/pkgs/container/bitnami-compat%2Fredis-cluster)
 * redis-cluster : [`6.2`, `6.2-debian-10`, `6.2.6`, `6.2.6-debian-10`, `6.2.6-debian-10-r0`](https://github.com/gitpod-arm/bitnami-compat/pkgs/container/bitnami-compat%2Fredis-cluster)
 * redis-exporter : [`1`, `1-debian-10`, `1.34.1`, `1.34.1-debian-10`, `1.34.1-debian-10-r0`](https://github.com/gitpod-arm/bitnami-compat/pkgs/container/bitnami-compat%2Fredis-exporter)
+* tomcat : [`1`, `1-debian-10`, `8.5.75`, `8.5.75-debian-10`, `8.5.75-debian-10-r0`](https://github.com/gitpod-arm/bitnami-compat/pkgs/container/bitnami-compat%2Ftomcat)
+* tomcat : [`1`, `1-debian-10`, `9.0.58`, `9.0.58-debian-10`, `9.0.58-debian-10-r0`](https://github.com/gitpod-arm/bitnami-compat/pkgs/container/bitnami-compat%2Ftomcat)
+* tomcat : [`1`, `1-debian-10`, `10.0.16`, `10.0.16-debian-10`, `10.0.16-debian-10-r0`](https://github.com/gitpod-arm/bitnami-compat/pkgs/container/bitnami-compat%2Ftomcat)
+
 # TL;DR
 ```
 image:
