@@ -12,7 +12,7 @@ go mod download
 go build -v -ldflags '-d -s -w' .
 mkdir -p /opt/bitnami/${TARGET_DIR}/licenses
 mkdir -p /opt/bitnami/${TARGET_DIR}/bin
-cp -f LICENSE /opt/bitnami/${TARGET_DIR}/licenses/${PACKAGE}-${VERSION}.txt
+cp -f COPYING /opt/bitnami/${TARGET_DIR}/licenses/${PACKAGE}-${VERSION}.txt
 cp -f ${PACKAGE} /opt/bitnami/${TARGET_DIR}/bin/${PACKAGE}
 popd
 rm -rf ${PACKAGE}

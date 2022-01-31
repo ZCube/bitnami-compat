@@ -63,6 +63,8 @@ This images uses Bitnami's script. Binaries refer to the official Docker or offi
 * tomcat : [`9.0`, `9.0-debian-10`, `9.0.58`, `9.0.58-debian-10`, `9.0.58-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Ftomcat)
 * tomcat : [`10`, `10-debian-10`, `10.0.16`, `10.0.16-debian-10`, `10.0.16-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Ftomcat)
 * elasticsearch : [`7`, `7-debian-10`, `7.16.3`, `7.16.3-debian-10`, `7.16.3-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Felasticsearch)
+* kafka : [`2`, `2-debian-10`, `2.8.1`, `2.8.1-debian-10`, `2.8.1-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fkafka)
+* kafka : [`3`, `3-debian-10`, `3.1.0`, `3.1.0-debian-10`, `3.1.0-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fkafka)
 
 # TL;DR
 from
@@ -97,3 +99,5 @@ limitations under the License.
 ## Warning
 
 This repository contains sources, binaries and recipes from Bitnami and other software. Each software has its own license.
+
+This images not tested well.

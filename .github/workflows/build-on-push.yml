@@ -262,6 +262,20 @@ jobs:
            REVISION: "0"
            OS_NAME: "linux"
            REPO_OWNER: "bitnami"
+         - APP: "kafka"
+           OS_FLAVOUR: "debian-10"
+           VERSION_MAJOR: "2"
+           VERSION: "2.8.1"
+           REVISION: "0"
+           OS_NAME: "linux"
+           REPO_OWNER: "bitnami"
+         - APP: "kafka"
+           OS_FLAVOUR: "debian-10"
+           VERSION_MAJOR: "3"
+           VERSION: "3.1.0"
+           REVISION: "0"
+           OS_NAME: "linux"
+           REPO_OWNER: "bitnami"
     steps:
       - name: Checkout
         uses: actions/checkout@v2
