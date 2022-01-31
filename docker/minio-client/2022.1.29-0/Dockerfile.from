@@ -1,0 +1,1 @@
+FROM minio/mc:RELEASE.2022-01-29T01-03-27Z AS minio-client
