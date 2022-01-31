@@ -62,7 +62,6 @@ This images uses Bitnami's script. Binaries refer to the official Docker or offi
 * tomcat : [`1`, `1-debian-10`, `8.5.75`, `8.5.75-debian-10`, `8.5.75-debian-10-r0`](https://github.com/gitpod-arm/bitnami-compat/pkgs/container/bitnami-compat%2Ftomcat)
 * tomcat : [`1`, `1-debian-10`, `9.0.58`, `9.0.58-debian-10`, `9.0.58-debian-10-r0`](https://github.com/gitpod-arm/bitnami-compat/pkgs/container/bitnami-compat%2Ftomcat)
 * tomcat : [`1`, `1-debian-10`, `10.0.16`, `10.0.16-debian-10`, `10.0.16-debian-10-r0`](https://github.com/gitpod-arm/bitnami-compat/pkgs/container/bitnami-compat%2Ftomcat)
-* elasticsearch : [`6`, `6-debian-10`, `6.8.23`, `6.8.23-debian-10`, `6.8.23-debian-10-r0`](https://github.com/gitpod-arm/bitnami-compat/pkgs/container/bitnami-compat%2Felasticsearch)
 * elasticsearch : [`7`, `7-debian-10`, `7.16.3`, `7.16.3-debian-10`, `7.16.3-debian-10-r0`](https://github.com/gitpod-arm/bitnami-compat/pkgs/container/bitnami-compat%2Felasticsearch)
 
 # TL;DR
