@@ -277,6 +277,11 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Extract lowercase repository name
+        uses: ASzc/change-string-case-action@v1
+        with:
+          string: ${{ github.repository }}
+        id: string
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@v3
@@ -287,7 +292,7 @@ jobs:
             type=raw,value=${{ matrix.VERSION }}
             type=raw,value=${{ matrix.VERSION }}-${{ matrix.OS_FLAVOUR }}
             type=raw,value=${{ matrix.VERSION }}-${{ matrix.OS_FLAVOUR }}-r${{ matrix.REVISION }}
-          images: ${{ env.REGISTRY }}/${{ github.repository }}/${{ matrix.APP }}
+          images: ${{ env.REGISTRY }}/${{ steps.string.outputs.lowercase }}/${{ matrix.APP }}
       # https://stackoverflow.com/questions/58033366/how-to-get-the-current-branch-within-github-actions
       - name: Extract branch name
         shell: bash
