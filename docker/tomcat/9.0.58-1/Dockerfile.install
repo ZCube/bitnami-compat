@@ -10,4 +10,5 @@ RUN mkdir -p /opt/bitnami \
     && echo $(cat apache-tomcat-${TOMCAT_VERSION}.tar.gz.sha512) | sha512sum --check - \
     && tar -xzf apache-tomcat-${TOMCAT_VERSION}.tar.gz \
     && mv apache-tomcat-${TOMCAT_VERSION}/ tomcat \
-    && rm -rf apache-tomcat-${TOMCAT_VERSION}.tar.gz*
+    && rm -rf apache-tomcat-${TOMCAT_VERSION}.tar.gz* \
+    && chown 1001:1001 -R /opt/bitnami/tomcat
