@@ -323,7 +323,7 @@ jobs:
         uses: ASzc/change-string-case-action@v1
         with:
           string: ${{ github.repository }}
-        id: string
+        id: repository
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@v3
@@ -334,7 +334,7 @@ jobs:
             type=raw,value=${{ matrix.VERSION }}
             type=raw,value=${{ matrix.VERSION }}-${{ matrix.OS_FLAVOUR }}
             type=raw,value=${{ matrix.VERSION }}-${{ matrix.OS_FLAVOUR }}-r${{ matrix.REVISION }}
-          images: ${{ env.REGISTRY }}/${{ steps.string.outputs.lowercase }}/${{ matrix.APP }}
+          images: ${{ env.REGISTRY }}/${{ ${{ steps.repository.outputs.lowercase }} }}/${{ matrix.APP }}
       # https://stackoverflow.com/questions/58033366/how-to-get-the-current-branch-within-github-actions
       - name: Extract branch name
         shell: bash
@@ -349,7 +349,7 @@ jobs:
           context: bitnami-docker-${{ matrix.APP }}/${{ matrix.VERSION_MAJOR }}/${{ matrix.OS_FLAVOUR }}
           push: true
           tags: ${{ steps.meta.outputs.tags }}
-          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ github.repository }}/cache/${{ matrix.APP }}:${{ matrix.VERSION }}
-          cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ github.repository }}/cache/${{ matrix.APP }}:${{ matrix.VERSION }}
+          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ ${{ steps.repository.outputs.lowercase }} }}/cache/${{ matrix.APP }}:${{ matrix.VERSION }}
+          cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ ${{ steps.repository.outputs.lowercase }} }}/cache/${{ matrix.APP }}:${{ matrix.VERSION }}
           labels: ${{ steps.meta.outputs.labels }}
           platforms: linux/amd64,linux/arm64
