@@ -76,7 +76,7 @@ to
 ```
 image:
   registry: ghcr.io
-  repository: gitpod-arm/bitnami-compat/postgresql
+  repository: zcube/bitnami-compat/postgresql
   tag: 11.14.0-debian-10
 ```
 
