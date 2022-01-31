@@ -25,6 +25,7 @@ This images uses Bitnami's script. Binaries refer to the official Docker or offi
   * [bitnami/redis-cluster](https://github.com/bitnami/bitnami-docker-redis-cluster)
   * [bitnami/tomcat](https://github.com/bitnami/bitnami-docker-tomcat)
   * [bitnami/elasticsearch](https://github.com/bitnami/bitnami-docker-elasticsearch)
+  * [bitnami/kafka](https://github.com/bitnami/bitnami-docker-kafka)
 
 ## Supported tags
 
@@ -100,4 +101,4 @@ limitations under the License.
 
 This repository contains sources, binaries and recipes from Bitnami and other software. Each software has its own license.
 
-This images not tested well.
+These images are not well tested.
