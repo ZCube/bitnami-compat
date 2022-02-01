@@ -61,3 +61,6 @@
 [submodule "bitnami-docker-redis-sentinel"]
 	path = bitnami-docker-redis-sentinel
 	url = https://github.com/bitnami/bitnami-docker-redis-sentinel
+[submodule "bitnami-docker-keycloak"]
+	path = bitnami-docker-keycloak
+	url = https://github.com/bitnami/bitnami-docker-keycloak

@@ -276,15 +276,28 @@ jobs:
            REVISION: "0"
            OS_NAME: "linux"
            REPO_OWNER: "bitnami"
+         - APP: "keycloak"
+           OS_FLAVOUR: "debian-10"
+           VERSION_MAJOR: "16"
+           VERSION: "16.1.1"
+           REVISION: "0"
+           OS_NAME: "linux"
+           REPO_OWNER: "bitnami"
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Submodule init
+        shell: bash
+        run: git submodule init
       - name: Checkout bitnami recipe
-        uses: actions/checkout@v2
-        with:
-          repository: ${{ matrix.REPO_OWNER }}/bitnami-docker-${{ matrix.APP }}
-          path: 'bitnami-docker-${{ matrix.APP }}'
-          ref: master
+        shell: bash
+        run: git submodule update bitnami-docker-${{ matrix.APP }}
+      # - name: Checkout bitnami recipe
+      #   uses: actions/checkout@v2
+      #   with:
+      #     repository: ${{ matrix.REPO_OWNER }}/bitnami-docker-${{ matrix.APP }}
+      #     path: 'bitnami-docker-${{ matrix.APP }}'
+      #     ref: master
       - name: Set up QEMU dependency
         uses: docker/setup-qemu-action@v1
       - name: Set up Docker Buildx

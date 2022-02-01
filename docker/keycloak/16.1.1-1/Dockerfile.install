@@ -1,0 +1,14 @@
+RUN install_packages wget 
+
+ENV KEYCLOAK_MAJOR 16
+ENV KEYCLOAK_VERSION 16.1.1
+
+RUN mkdir -p /opt/bitnami \
+    && cd /opt/bitnami \
+    && wget https://github.com/keycloak/keycloak/releases/download/${KEYCLOAK_VERSION}/keycloak-${KEYCLOAK_VERSION}.tar.gz \
+    && wget https://github.com/keycloak/keycloak/releases/download/${KEYCLOAK_VERSION}/keycloak-${KEYCLOAK_VERSION}.tar.gz.sha1 \
+    && echo $(cat keycloak-${KEYCLOAK_VERSION}.tar.gz.sha1) keycloak-${KEYCLOAK_VERSION}.tar.gz | sha1sum --check - \
+    && tar -xzf keycloak-${KEYCLOAK_VERSION}.tar.gz \
+    && mv keycloak-${KEYCLOAK_VERSION}/ keycloak \
+    && rm -rf keycloak-${KEYCLOAK_VERSION}.tar.gz.sha1* \
+    && chown 1001:1001 -R /opt/bitnami/keycloak
