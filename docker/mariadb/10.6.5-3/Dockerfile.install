@@ -62,6 +62,7 @@ RUN set -ex; \
 RUN mkdir -p /opt/bitnami/mariadb/bin \
     && mkdir -p /opt/bitnami/mariadb/sbin \
     && mkdir -p /opt/bitnami/mariadb/lib \
+    && mkdir -p /opt/bitnami/mariadb/conf \
     && ln -s /usr/bin/aria_chk                     /opt/bitnami/mariadb/bin/ \
     && ln -s /usr/bin/aria_dump_log                /opt/bitnami/mariadb/bin/ \
     && ln -s /usr/bin/aria_ftdump                  /opt/bitnami/mariadb/bin/ \
@@ -89,4 +90,7 @@ RUN mkdir -p /opt/bitnami/mariadb/bin \
     && rm -rf /var/lib/dpkg/alternatives/my.cnf \
     && rm -rf /etc/mysql/my.cnf \
     && rm -rf /etc/mysql/mariadb.cnf \
-    && chown 1001:1001 -R /opt/bitnami/mariadb/plugin/auth_pam_tool_dir /opt/bitnami/mariadb
+    && chown 1001:1001 -R /usr/lib/mysql/plugin/auth_pam_tool_dir /opt/bitnami/mariadb/plugin/auth_pam_tool_dir /opt/bitnami/mariadb \
+    && touch /opt/bitnami/mariadb/conf/my.cnf \
+    && ln -sf /opt/bitnami/mariadb/conf/my.cnf /etc/mysql/my.cnf \
+    && rm -f /opt/bitnami/mariadb/conf/my.cnf
