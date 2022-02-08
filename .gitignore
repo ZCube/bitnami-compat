@@ -1,7 +1,9 @@
-*.tar.gz
-*.tar
-*.deb
-_install
 _Dockerfile
-archive
+_install
 _list*
+*.deb
+*.tar
+*.tar.gz
+archive
+Dockerfile
+packages.sh

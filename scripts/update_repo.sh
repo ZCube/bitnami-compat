@@ -5,10 +5,20 @@ echo $(dirname $1)
 cat ${ROOT_DIR}/scripts/Dockerfile.head > _Dockerfile
 
 rm _list*
-cat $(dirname $1)/prebuildfs/opt/bitnami/.bitnami_components.json | jq 'to_entries[] | "\(.key)/\(.value.version)"' > _list1
+cat $(dirname $1)/prebuildfs/opt/bitnami/.bitnami_components.json | jq 'to_entries[] | "\(.key)/\(.value.version)"' | tr -d "\"" > _list1
 cat $(dirname $1)/Dockerfile | grep component_unpack | awk '{print $6"/"$7}' | tr -d "\""  > _list2
 filename=$(ls _list* -l  --time-style=+""  | awk '{print $5"\t"$6}' | sort -h | tail -n 1 | awk '{print $2}')
 
+list_size1=`stat -c%s "_list1"`
+list_size2=`stat -c%s "_list2"`
+
+if [[ "$list_size1" -lt "$list_size2" ]]; then
+    filename="_list2"
+elif [[ "$list_size1" -gt "$list_size2" ]]; then
+    filename="_list1"
+elif [[ "$list_size1" -eq "$list_size2" ]]; then
+    filename="_list2"
+fi
 
 #cat $(dirname $1)/prebuildfs/opt/bitnami/.bitnami_components.json | jq 'to_entries[] | "\(.key)/\(.value.version)"' |
 #cat $(dirname $1)/Dockerfile | grep component_unpack | awk '{print $6"/"$7}' | tr -d "\""
