@@ -24,6 +24,18 @@ RUN apt-get update \
  && gem install async-http -v 0.54.0 \
  && gem install ext_monitor -v 0.1.2 \
  && gem install fluentd -v 1.14.4 \
+ && gem install fluent-config-regexp-type -v 1.0.0 \
+ && gem install fluent-plugin-concat -v 2.5.0 \
+ && gem install fluent-plugin-detect-exceptions -v 0.0.14 \
+ && gem install fluent-plugin-elasticsearch -v 5.1.4 \
+ && gem install fluent-plugin-grafana-loki -v 1.2.18 \
+ && gem install fluent-plugin-kafka -v 0.17.3 \
+ && gem install fluent-plugin-kubernetes_metadata_filter -v 2.9.4 \
+ && gem install fluent-plugin-multi-format-parser -v 1.0.0 \
+ && gem install fluent-plugin-prometheus -v 2.0.2 \
+ && gem install fluent-plugin-rewrite-tag-filter -v 2.4.0 \
+ && gem install fluent-plugin-s3 -v 1.6.1 \
+ && gem install fluent-plugin-systemd -v 1.0.5 \
  && wget -O /tmp/jemalloc-4.5.0.tar.bz2 https://github.com/jemalloc/jemalloc/releases/download/4.5.0/jemalloc-4.5.0.tar.bz2 \
  && cd /tmp && tar -xjf jemalloc-4.5.0.tar.bz2 && cd jemalloc-4.5.0/ \
  && ./configure && make \
