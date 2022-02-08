@@ -67,3 +67,6 @@
 [submodule "bitnami-docker-memcached"]
 	path = bitnami-docker-memcached
 	url = https://github.com/bitnami/bitnami-docker-memcached
+[submodule "bitnami-docker-fluentd"]
+	path = bitnami-docker-fluentd
+	url = https://github.com/bitnami/bitnami-docker-fluentd

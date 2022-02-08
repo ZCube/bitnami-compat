@@ -1,0 +1,41 @@
+# refer : https://github.com/fluent/fluentd-docker-image/blob/master/v1.14/debian/Dockerfile
+# license : Apache License 2.0
+# https://raw.githubusercontent.com/fluent/fluentd-docker-image/master/LICENSE
+
+ADD https://raw.githubusercontent.com/fluent/fluentd-docker-image/master/LICENSE /opt/bitnami/fluentd/licenses/LICENSE
+
+# Do not split this into multiple RUN!
+# Docker creates a layer for every RUN-Statement
+# therefore an 'apt-get purge' has no effect
+
+ENV GEM_HOME=/opt/bitnami/fluentd
+
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends \
+            ca-certificates \
+ && buildDeps=" \
+      make gcc g++ libc-dev \
+      wget bzip2 gnupg dirmngr \
+    " \
+ && apt-get install -y --no-install-recommends $buildDeps \
+ && echo 'gem: --no-document' >> /etc/gemrc \
+ && gem install oj -v 3.10.18 \
+ && gem install json -v 2.4.1 \
+ && gem install async-http -v 0.54.0 \
+ && gem install ext_monitor -v 0.1.2 \
+ && gem install fluentd -v 1.14.4 \
+ && wget -O /tmp/jemalloc-4.5.0.tar.bz2 https://github.com/jemalloc/jemalloc/releases/download/4.5.0/jemalloc-4.5.0.tar.bz2 \
+ && cd /tmp && tar -xjf jemalloc-4.5.0.tar.bz2 && cd jemalloc-4.5.0/ \
+ && ./configure && make \
+ && mv lib/libjemalloc.so.2 /usr/lib \
+ && apt-get purge -y --auto-remove \
+                  -o APT::AutoRemove::RecommendsImportant=false \
+                  $buildDeps \
+ && rm -rf /var/lib/apt/lists/* \
+ && rm -rf /tmp/* /var/tmp/* /usr/lib/ruby/gems/*/cache/*.gem /usr/lib/ruby/gems/2.*/gems/fluentd-*/test
+
+RUN mkdir -p /opt/bitnami/fluentd/bin \
+    && mkdir -p /opt/bitnami/fluentd/sbin \
+    && mkdir -p /opt/bitnami/fluentd/lib \
+    && mkdir -p /etc/fluent/ \
+    && ln -sf /opt/bitnami/fluentd/conf/fluentd.conf           /etc/fluent/fluentd.conf

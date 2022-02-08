@@ -28,6 +28,7 @@ This images uses Bitnami's script. Binaries refer to the official Docker or offi
   * [bitnami/kafka](https://github.com/bitnami/bitnami-docker-kafka)
   * [bitnami/keycloak](https://github.com/bitnami/bitnami-docker-keycloak)
   * [bitnami/memcached](https://github.com/bitnami/bitnami-docker-memcached)
+  * [bitnami/fluentd](https://github.com/bitnami/bitnami-docker-fluentd)
 
 ## Supported tags
 
@@ -70,6 +71,7 @@ This images uses Bitnami's script. Binaries refer to the official Docker or offi
 * kafka : [`3`, `3-debian-10`, `3.1.0`, `3.1.0-debian-10`, `3.1.0-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fkafka)
 * keycloak : [`16`, `16-debian-10`, `16.1.1`, `16.1.1-debian-10`, `16.1.1-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fkeycloak)
 * memcached : [`1`, `1-debian-10`, `1.6.13`, `1.6.13-debian-10`, `1.6.13-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fmemcached)
+* fluentd : [`1`, `1-debian-10`, `1.14.4`, `1.14.4-debian-10`, `1.14.4-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Ffluentd)
 
 # TL;DR
 from

@@ -290,6 +290,13 @@ jobs:
            REVISION: "0"
            OS_NAME: "linux"
            REPO_OWNER: "bitnami"
+         - APP: "fluentd"
+           OS_FLAVOUR: "debian-10"
+           VERSION_MAJOR: "1"
+           VERSION: "1.14.4"
+           REVISION: "0"
+           OS_NAME: "linux"
+           REPO_OWNER: "bitnami"
     steps:
       - name: Checkout
         uses: actions/checkout@v2
