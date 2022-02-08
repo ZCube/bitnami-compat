@@ -64,3 +64,6 @@
 [submodule "bitnami-docker-keycloak"]
 	path = bitnami-docker-keycloak
 	url = https://github.com/bitnami/bitnami-docker-keycloak
+[submodule "bitnami-docker-memcached"]
+	path = bitnami-docker-memcached
+	url = https://github.com/bitnami/bitnami-docker-memcached

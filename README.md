@@ -27,6 +27,7 @@ This images uses Bitnami's script. Binaries refer to the official Docker or offi
   * [bitnami/elasticsearch](https://github.com/bitnami/bitnami-docker-elasticsearch)
   * [bitnami/kafka](https://github.com/bitnami/bitnami-docker-kafka)
   * [bitnami/keycloak](https://github.com/bitnami/bitnami-docker-keycloak)
+  * [bitnami/memcached](https://github.com/bitnami/bitnami-docker-memcached)
 
 ## Supported tags
 
@@ -68,6 +69,7 @@ This images uses Bitnami's script. Binaries refer to the official Docker or offi
 * kafka : [`2`, `2-debian-10`, `2.8.1`, `2.8.1-debian-10`, `2.8.1-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fkafka)
 * kafka : [`3`, `3-debian-10`, `3.1.0`, `3.1.0-debian-10`, `3.1.0-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fkafka)
 * keycloak : [`16`, `16-debian-10`, `16.1.1`, `16.1.1-debian-10`, `16.1.1-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fkeycloak)
+* memcached : [`1`, `1-debian-10`, `1.6.13`, `1.6.13-debian-10`, `1.6.13-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fmemcached)
 
 # TL;DR
 from
