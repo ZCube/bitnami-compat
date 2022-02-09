@@ -7,6 +7,7 @@ This images uses Bitnami's script. Binaries refer to the official Docker or offi
 ## Supported bitnami docker list
   * [bitnami/bitnami-shell](https://github.com/bitnami/bitnami-docker-bitnami-shell)
   * [bitnami/mariadb](https://github.com/bitnami/bitnami-docker-mariadb)
+  * [bitnami/mariadb-galera](https://github.com/bitnami/bitnami-docker-mariadb-galera)
   * [bitnami/rabbitmq](https://github.com/bitnami/bitnami-docker-rabbitmq)
   * [bitnami/minio](https://github.com/bitnami/bitnami-docker-minio)
   * [bitnami/minio-client](https://github.com/bitnami/bitnami-docker-minio-client)
@@ -44,6 +45,10 @@ This images uses Bitnami's script. Binaries refer to the official Docker or offi
 * mariadb : [`10.4`, `10.4-debian-10`, `10.4.22`, `10.4.22-debian-10`, `10.4.22-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fmariadb)
 * mariadb : [`10.5`, `10.5-debian-10`, `10.5.13`, `10.5.13-debian-10`, `10.5.13-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fmariadb)
 * mariadb : [`10.6`, `10.6-debian-10`, `10.6.5`, `10.6.5-debian-10`, `10.6.5-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fmariadb)
+* mariadb-galera : [`10.3`, `10.3-debian-10`, `10.3.32`, `10.3.32-debian-10`, `10.3.32-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fmariadb-galera)
+* mariadb-galera : [`10.4`, `10.4-debian-10`, `10.4.22`, `10.4.22-debian-10`, `10.4.22-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fmariadb-galera)
+* mariadb-galera : [`10.5`, `10.5-debian-10`, `10.5.13`, `10.5.13-debian-10`, `10.5.13-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fmariadb-galera)
+* mariadb-galera : [`10.6`, `10.6-debian-10`, `10.6.5`, `10.6.5-debian-10`, `10.6.5-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fmariadb-galera)
 * rabbitmq : [`3.9`, `3.9-debian-10`, `3.9.13`, `3.9.13-debian-10`, `3.9.13-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Frabbitmq)
 * minio : [`2022`, `2022-debian-10`, `2022.1.8`, `2022.1.8-debian-10`, `2022.1.8-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fminio)
 * minio-client : [`2022`, `2022-debian-10`, `2022.1.25`, `2022.1.25-debian-10`, `2022.1.25-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fminio-client)
