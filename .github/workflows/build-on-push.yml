@@ -2,7 +2,7 @@ name: Build on Push
 on: [push]
 
 env:
-  REGISTRY: ghcr.io
+  REGISTRY: ghcr.io 
 
 jobs:
   build-bitnami-compat:
