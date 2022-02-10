@@ -94,6 +94,35 @@ image:
   tag: 11.14.0-debian-10
 ```
 
+## How to add new image
+
+Example : mariadb/10.6.5-3
+
+1. Add submodule
+  ```
+  git add submodule https://github.com/bitnami/bitnami-docker-mariadb
+  ```
+
+2. Create directories and check filelist
+  ```
+  ./scripts/create.sh
+  ```
+  * Check file list on archive/mariadb-10.6.5-3-linux-amd64-debian-10
+
+3. Write build scripts
+  * bash/mariadb/10.6.5-3/install.sh
+  * docker/mariadb/10.6.5-3/Dockerfile.from
+  * docker/mariadb/10.6.5-3/Dockerfile.install
+  * golang/mariadb/10.6.5-3/install.sh
+
+4. Apply and test
+  ```bash
+  ./scripts/updates_with_checkout.sh 
+  cd bitnami-docker-mariadb/10.6/debian-10
+  docker build . -t bitnami-test
+  docker run --rm -ti bitnami-test
+  ```
+
 ## License
 
 Licensed under the Apache License, Version 2.0 (the "License");
