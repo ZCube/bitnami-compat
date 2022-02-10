@@ -383,4 +383,4 @@ jobs:
           cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ steps.repository.outputs.lowercase }}/cache/${{ matrix.APP }}:${{ matrix.VERSION }}
           cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ steps.repository.outputs.lowercase }}/cache/${{ matrix.APP }}:${{ matrix.VERSION }}
           labels: ${{ steps.meta.outputs.labels }}
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64,linux/arm64,linux/arm/v7
