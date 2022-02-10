@@ -51,6 +51,7 @@ RUN set -ex; \
 	apt-get update; \
 	apt-get install -y \
 		"mariadb-server=$MARIADB_VERSION" \
+		galera-4 \
 # mariadb-backup is installed at the same time so that `mysql-common` is only installed once from just mariadb repos
 		mariadb-backup \
 		socat \
@@ -85,6 +86,8 @@ RUN mkdir -p /opt/bitnami/mariadb/bin \
     && ln -s /usr/sbin/my*                         /opt/bitnami/mariadb/sbin/ \
     && ln -s /usr/bin/maria*                       /opt/bitnami/mariadb/bin/ \
     && ln -s /usr/sbin/maria*                      /opt/bitnami/mariadb/sbin/ \
+    && ln -sf /usr/lib/galera/*.so                 /opt/bitnami/mariadb/lib/ \
+    && ln -sf /usr/bin/galera*                     /opt/bitnami/mariadb/bin/ \
     && cp -rf /usr/lib/mysql/plugin/               /opt/bitnami/mariadb/plugin/ \
     && cp -rf /usr/share/mysql/                    /opt/bitnami/mariadb/share/ \
     && rm -rf /var/lib/dpkg/alternatives/my.cnf \
