@@ -33,3 +33,5 @@ ADD https://raw.githubusercontent.com/keycloak/keycloak-containers/main/server/t
 ADD https://raw.githubusercontent.com/keycloak/keycloak-containers/main/server/tools/databases/mssql/module.xml    /opt/bitnami/keycloak/modules/system/layers/keycloak/com/microsoft/sqlserver/jdbc/main/
 
 RUN sed "s/JDBC_MYSQL_VERSION/$JDBC_MYSQL_VERSION/" /opt/bitnami/keycloak/modules/system/layers/keycloak/com/mysql/jdbc/main/module.xml_ > /opt/bitnami/keycloak/modules/system/layers/keycloak/com/mysql/jdbc/main/module.xml
+
+RUN chown 1001:1001 -R /opt/bitnami/keycloak
