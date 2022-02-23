@@ -2,7 +2,7 @@
 ## What is Bitnami-Compat?
 Build bitnami docker images for amd64 + arm64. (just workaround. not equal.)
 
-This images uses Bitnami's script. Binaries refer to the official Docker or official distribution binaries of the software or Docker recipes for Docker.
+These images use Bitnami's scripts. Binaries refer to the official Docker or official distribution binaries of the software or Docker recipes for Docker.
 
 ## Supported bitnami docker list
   * [bitnami/bitnami-shell](https://github.com/bitnami/bitnami-docker-bitnami-shell)
@@ -94,17 +94,18 @@ image:
   tag: 11.14.0-debian-10
 ```
 
-## How to add new image
+## How to add a new image
 
 Example : mariadb/10.6.5-3
 
 1. Add submodule
   ```
-  git add submodule https://github.com/bitnami/bitnami-docker-mariadb
+  git submodule add https://github.com/bitnami/bitnami-docker-mariadb
   ```
 
 2. Create directories and check filelist
   ```
+  chmod +x scripts/create.sh
   ./scripts/create.sh
   ```
   * Check file list on archive/mariadb-10.6.5-3-linux-amd64-debian-10
@@ -119,7 +120,10 @@ Example : mariadb/10.6.5-3
   ```bash
   ./scripts/updates_with_checkout.sh 
   cd bitnami-docker-mariadb/10.6/debian-10
-  docker build . -t bitnami-test
+  docker buildx create --name multiarchbuilder
+  docker buildx inspect multiarchbuilder --bootstrap
+  docker buildx use multiarchbuilder
+  docker buildx build --platform linux/amd64,linux/arm64 -t bitnami-test .
   docker run --rm -ti bitnami-test
   ```
 
