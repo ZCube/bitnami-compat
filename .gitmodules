@@ -73,3 +73,6 @@
 [submodule "bitnami-docker-mariadb-galera"]
 	path = bitnami-docker-mariadb-galera
 	url = https://github.com/bitnami/bitnami-docker-mariadb-galera
+[submodule "bitnami-docker-mysql"]
+	path = bitnami-docker-mysql
+	url = https://github.com/bitnami/bitnami-docker-mysql
