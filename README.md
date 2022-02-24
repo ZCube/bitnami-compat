@@ -4,34 +4,6 @@ Build bitnami docker images for amd64 + arm64. (just workaround. not equal.)
 
 These images use Bitnami's scripts. Binaries refer to the official Docker or official distribution binaries of the software or Docker recipes for Docker.
 
-## Supported bitnami docker list
-  * [bitnami/bitnami-shell](https://github.com/bitnami/bitnami-docker-bitnami-shell)
-  * [bitnami/mariadb](https://github.com/bitnami/bitnami-docker-mariadb)
-  * [bitnami/mariadb-galera](https://github.com/bitnami/bitnami-docker-mariadb-galera)
-  * [bitnami/mysql](https://github.com/bitnami/bitnami-docker-mysql)
-  * [bitnami/rabbitmq](https://github.com/bitnami/bitnami-docker-rabbitmq)
-  * [bitnami/minio](https://github.com/bitnami/bitnami-docker-minio)
-  * [bitnami/minio-client](https://github.com/bitnami/bitnami-docker-minio-client)
-  * [bitnami/consul](https://github.com/bitnami/bitnami-docker-consul)
-  * [bitnami/postgresql](https://github.com/bitnami/bitnami-docker-postgresql)
-  * [bitnami/consul-exporter](https://github.com/bitnami/bitnami-docker-consul-exporter)
-  * [bitnami/mysqld-exporter](https://github.com/bitnami/bitnami-docker-mysqld-exporter)
-  * [bitnami/etcd](https://github.com/bitnami/bitnami-docker-etcd)
-  * [bitnami/cert-manager](https://github.com/bitnami/bitnami-docker-cert-manager)
-  * [bitnami/acmesolver](https://github.com/bitnami/bitnami-docker-acmesolver)
-  * [bitnami/cert-manager-webhook](https://github.com/bitnami/bitnami-docker-cert-manager-webhook)
-  * [bitnami/cainjector](https://github.com/bitnami/bitnami-docker-cainjector)
-  * [bitnami/redis](https://github.com/bitnami/bitnami-docker-redis)
-  * [bitnami/redis-sentinel](https://github.com/bitnami/bitnami-docker-redis-sentinel)
-  * [bitnami/redis-exporter](https://github.com/bitnami/bitnami-docker-redis-exporter)
-  * [bitnami/redis-cluster](https://github.com/bitnami/bitnami-docker-redis-cluster)
-  * [bitnami/tomcat](https://github.com/bitnami/bitnami-docker-tomcat)
-  * [bitnami/elasticsearch](https://github.com/bitnami/bitnami-docker-elasticsearch)
-  * [bitnami/kafka](https://github.com/bitnami/bitnami-docker-kafka)
-  * [bitnami/keycloak](https://github.com/bitnami/bitnami-docker-keycloak)
-  * [bitnami/memcached](https://github.com/bitnami/bitnami-docker-memcached)
-  * [bitnami/fluentd](https://github.com/bitnami/bitnami-docker-fluentd)
-
 ## Supported tags
 
 * etcd : [`3`, `3-debian-10`, `3.5.1`, `3.5.1-debian-10`, `3.5.1-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fetcd)
@@ -79,6 +51,7 @@ These images use Bitnami's scripts. Binaries refer to the official Docker or off
 * keycloak : [`16`, `16-debian-10`, `16.1.1`, `16.1.1-debian-10`, `16.1.1-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fkeycloak)
 * memcached : [`1`, `1-debian-10`, `1.6.13`, `1.6.13-debian-10`, `1.6.13-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fmemcached)
 * fluentd : [`1`, `1-debian-10`, `1.14.4`, `1.14.4-debian-10`, `1.14.4-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Ffluentd)
+* jmx-exporter : [`0`, `0-debian-10`, `0.16.1`, `0.16.1-debian-10`, `0.16.1-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fjmx-exporter)
 
 # TL;DR
 from

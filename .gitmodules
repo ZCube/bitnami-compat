@@ -76,3 +76,6 @@
 [submodule "bitnami-docker-mysql"]
 	path = bitnami-docker-mysql
 	url = https://github.com/bitnami/bitnami-docker-mysql
+[submodule "bitnami-docker-jmx-exporter"]
+	path = bitnami-docker-jmx-exporter
+	url = https://github.com/bitnami/bitnami-docker-jmx-exporter

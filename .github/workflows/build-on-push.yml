@@ -332,6 +332,13 @@ jobs:
            REVISION: "0"
            OS_NAME: "linux"
            REPO_OWNER: "bitnami"
+         - APP: "jmx-exporter"
+           OS_FLAVOUR: "debian-10"
+           VERSION_MAJOR: "0"
+           VERSION: "0.16.1"
+           REVISION: "0"
+           OS_NAME: "linux"
+           REPO_OWNER: "bitnami"
     steps:
       - name: Checkout
         uses: actions/checkout@v2
