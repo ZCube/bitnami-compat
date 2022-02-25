@@ -4,7 +4,7 @@ Build bitnami docker images for amd64 + arm64. (just workaround. not equal.)
 
 These images use Bitnami's scripts. Binaries refer to the official Docker or official distribution binaries of the software or Docker recipes for Docker.
 
-## Supported tags
+## Supported images and tags
 
 * etcd : [`3`, `3-debian-10`, `3.5.1`, `3.5.1-debian-10`, `3.5.1-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fetcd)
 * bitnami-shell : [`10`, `10-debian-10`, `10`, `10-debian-10`, `10-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fbitnami-shell)
@@ -52,6 +52,9 @@ These images use Bitnami's scripts. Binaries refer to the official Docker or off
 * memcached : [`1`, `1-debian-10`, `1.6.13`, `1.6.13-debian-10`, `1.6.13-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fmemcached)
 * fluentd : [`1`, `1-debian-10`, `1.14.4`, `1.14.4-debian-10`, `1.14.4-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Ffluentd)
 * jmx-exporter : [`0`, `0-debian-10`, `0.16.1`, `0.16.1-debian-10`, `0.16.1-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fjmx-exporter)
+* zookeeper : [`3.5`, `3.5-debian-10`, `3.5.9`, `3.5.9-debian-10`, `3.5.9-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fzookeeper)
+* zookeeper : [`3.6`, `3.6-debian-10`, `3.6.3`, `3.6.3-debian-10`, `3.6.3-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fzookeeper)
+* zookeeper : [`3.7`, `3.7-debian-10`, `3.7.0`, `3.7.0-debian-10`, `3.7.0-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fzookeeper)
 
 # TL;DR
 from

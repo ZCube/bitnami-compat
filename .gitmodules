@@ -79,3 +79,6 @@
 [submodule "bitnami-docker-jmx-exporter"]
 	path = bitnami-docker-jmx-exporter
 	url = https://github.com/bitnami/bitnami-docker-jmx-exporter
+[submodule "bitnami-docker-zookeeper"]
+	path = bitnami-docker-zookeeper
+	url = https://github.com/bitnami/bitnami-docker-zookeeper
