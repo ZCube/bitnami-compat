@@ -4,6 +4,10 @@
 
 RUN install_packages gnupg
 
+# pub   rsa4096 2019-05-28 [SC] [expires: 2024-05-26]
+#       2069 1EEC 3521 6C63 CAF6  6CE1 6564 08E3 90CF B1F5
+# uid           [ unknown] MongoDB 4.4 Release Signing Key <packaging@mongodb.com>
+
 ARG GPG_KEYS=20691EEC35216C63CAF66CE1656408E390CFB1F5
 
 RUN set -ex; \

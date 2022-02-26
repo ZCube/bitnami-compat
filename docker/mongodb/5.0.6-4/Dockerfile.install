@@ -4,7 +4,11 @@
 
 RUN install_packages gnupg
 
-ARG GPG_KEYS=B42F6819007F00F88E364FD4036A9C25BF357DD4
+# pub   rsa4096 2021-02-16 [SC] [expires: 2026-02-15]
+#       F567 9A22 2C64 7C87 527C  2F8C B00A 0BD1 E2C6 3C11
+# uid           [ unknown] MongoDB 5.0 Release Signing Key <packaging@mongodb.com>
+
+ARG GPG_KEYS=F5679A222C647C87527C2F8CB00A0BD1E2C63C11
 
 RUN set -ex; \
 	export GNUPGHOME="$(mktemp -d)"; \
