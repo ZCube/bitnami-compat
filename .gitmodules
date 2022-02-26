@@ -85,3 +85,6 @@
 [submodule "bitnami-docker-mongodb"]
 	path = bitnami-docker-mongodb
 	url = https://github.com/bitnami/bitnami-docker-mongodb
+[submodule "bitnami-docker-nginx"]
+	path = bitnami-docker-nginx
+	url = https://github.com/bitnami/bitnami-docker-nginx
