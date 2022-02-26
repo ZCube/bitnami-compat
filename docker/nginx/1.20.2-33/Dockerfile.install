@@ -115,8 +115,8 @@ RUN set -x \
 COPY --from=nginx /opt/bitnami/nginx/conf/ /opt/bitnami/nginx/conf/
 
 RUN mkdir -p /opt/bitnami/nginx/sbin \
-    mkdir -p /opt/bitnami/nginx/logs \
-    rm -rf /opt/bitnami/nginx/conf/bitnami \
+    && mkdir -p /opt/bitnami/nginx/logs \
+    && rm -rf /opt/bitnami/nginx/conf/bitnami \
     && ln -s /usr/sbin/nginx                     /opt/bitnami/nginx/sbin/ \
 	&& ln -s /usr/lib/nginx/modules              /opt/bitnami/nginx/ \
 	&& ln -s /usr/share/nginx/html               /opt/bitnami/nginx/ \
