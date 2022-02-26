@@ -82,3 +82,6 @@
 [submodule "bitnami-docker-zookeeper"]
 	path = bitnami-docker-zookeeper
 	url = https://github.com/bitnami/bitnami-docker-zookeeper
+[submodule "bitnami-docker-mongodb"]
+	path = bitnami-docker-mongodb
+	url = https://github.com/bitnami/bitnami-docker-mongodb

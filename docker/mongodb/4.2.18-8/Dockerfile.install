@@ -1,0 +1,55 @@
+# refer : https://github.com/docker-library/mongo
+# license : Apache-2.0 License
+# https://github.com/docker-library/mongo/blob/master/LICENSE
+
+RUN install_packages gnupg
+
+RUN set -ex; \
+	export GNUPGHOME="$(mktemp -d)"; \
+	set -- 'E162F504A20CDF15827F718D4B7C549A058F8B6B'; \
+	for key; do \
+		gpg --batch --keyserver keyserver.ubuntu.com --recv-keys "$key"; \
+	done; \
+	gpg --batch --export "$@" > /etc/apt/trusted.gpg.d/mongodb.gpg; \
+	command -v gpgconf && gpgconf --kill all || :; \
+	rm -r "$GNUPGHOME" \
+	apt-key list
+
+# Allow build-time overrides (eg. to build image with MongoDB Enterprise version)
+# Options for MONGO_PACKAGE: mongodb-org OR mongodb-enterprise
+# Options for MONGO_REPO: repo.mongodb.org OR repo.mongodb.com
+# Example: docker build --build-arg MONGO_PACKAGE=mongodb-enterprise --build-arg MONGO_REPO=repo.mongodb.com .
+ARG MONGO_PACKAGE=mongodb-org
+ARG MONGO_REPO=repo.mongodb.org
+ENV MONGO_PACKAGE=${MONGO_PACKAGE} MONGO_REPO=${MONGO_REPO}
+
+ENV MONGO_MAJOR 4.2
+RUN echo "deb [ signed-by=/etc/apt/trusted.gpg.d/mongodb.gpg ] http://$MONGO_REPO/apt/debian buster/${MONGO_PACKAGE%-unstable}/$MONGO_MAJOR multiverse" | tee "/etc/apt/sources.list.d/${MONGO_PACKAGE%-unstable}.list"
+
+# http://docs.mongodb.org/master/release-notes/4.2/
+ENV MONGO_VERSION 4.2.18
+# 01/04/2022, https://github.com/mongodb/mongo/tree/f65ce5e25c0b26a00d091a4d24eec1a8b3a4c016
+
+RUN set -x \
+# installing "mongodb-enterprise" pulls in "tzdata" which prompts for input
+	&& export DEBIAN_FRONTEND=noninteractive \
+	&& apt-get update \
+# starting with MongoDB 4.3 (and backported to 4.0 and 4.2 *and* 3.6??), the postinst for server includes an unconditional "systemctl daemon-reload" (and we don't have anything for "systemctl" to talk to leading to dbus errors and failed package installs)
+	&& ln -s /bin/true /usr/local/bin/systemctl \
+	&& apt-get install -y \
+		${MONGO_PACKAGE}=$MONGO_VERSION \
+		${MONGO_PACKAGE}-server=$MONGO_VERSION \
+		${MONGO_PACKAGE}-shell=$MONGO_VERSION \
+		${MONGO_PACKAGE}-mongos=$MONGO_VERSION \
+		${MONGO_PACKAGE}-tools=$MONGO_VERSION \
+	&& rm -f /usr/local/bin/systemctl \
+	&& rm -rf /var/lib/apt/lists/* \
+	&& rm -rf /var/lib/mongodb \
+	&& mv /etc/mongod.conf /etc/mongod.conf.orig
+
+RUN mkdir -p /opt/bitnami/mongodb/bin \
+    && ln -s /usr/bin/install_compass            /opt/bitnami/mongodb/bin/ \
+    && ln -s /usr/bin/bsondump                   /opt/bitnami/mongodb/bin/ \
+    && ln -s /usr/bin/mongo*                     /opt/bitnami/mongodb/bin/ \
+    && rm -rf /etc/mysql/mongodb.cnf \
+    && chown 1001:1001 -R /opt/bitnami/mongodb
