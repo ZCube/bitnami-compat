@@ -57,7 +57,7 @@ These images use Bitnami's scripts. Binaries refer to the official Docker or off
 * zookeeper : [`3.7`, `3.7-debian-10`, `3.7.0`, `3.7.0-debian-10`, `3.7.0-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fzookeeper)
 * mongodb : [`4.2`, `4.2-debian-10`, `4.2.18`, `4.2.18-debian-10`, `4.2.18-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fmongodb)
 * mongodb : [`4.4`, `4.4-debian-10`, `4.4.12`, `4.4.12-debian-10`, `4.4.12-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fmongodb)
-* mongodb : [`5.0`, `5.0-debian-10`, `5.0.6`, `5.0.6-debian-10`, `5.0.6-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fmongodb) (not working)
+* mongodb : [`5.0`, `5.0-debian-10`, `5.0.6`, `5.0.6-debian-10`, `5.0.6-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fmongodb) (MongoDB 5.0+ requires ARMv8.2-A or higher or a CPU with AVX support)
 
 # TL;DR
 from
