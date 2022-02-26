@@ -55,9 +55,9 @@ These images use Bitnami's scripts. Binaries refer to the official Docker or off
 * zookeeper : [`3.5`, `3.5-debian-10`, `3.5.9`, `3.5.9-debian-10`, `3.5.9-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fzookeeper)
 * zookeeper : [`3.6`, `3.6-debian-10`, `3.6.3`, `3.6.3-debian-10`, `3.6.3-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fzookeeper)
 * zookeeper : [`3.7`, `3.7-debian-10`, `3.7.0`, `3.7.0-debian-10`, `3.7.0-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fzookeeper)
-* mongodb : [`4.2`, `4.2-debian-10`, `4.2.18`, `4.2.18-debian-10`, `4.2.18-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fmongodb)
-* mongodb : [`4.4`, `4.4-debian-10`, `4.4.12`, `4.4.12-debian-10`, `4.4.12-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fmongodb)
-* mongodb : [`5.0`, `5.0-debian-10`, `5.0.6`, `5.0.6-debian-10`, `5.0.6-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fmongodb)
+* mongodb : [`4.2`, `4.2-debian-10`, `4.2.18`, `4.2.18-debian-10`, `4.2.18-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fmongodb) (not debian. ubuntu:bionic)
+* mongodb : [`4.4`, `4.4-debian-10`, `4.4.12`, `4.4.12-debian-10`, `4.4.12-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fmongodb) (not debian. ubuntu:bionic)
+* mongodb : [`5.0`, `5.0-debian-10`, `5.0.6`, `5.0.6-debian-10`, `5.0.6-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fmongodb) (not debian. ubuntu:bionic)
 
 # TL;DR
 from
