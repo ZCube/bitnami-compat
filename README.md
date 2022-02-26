@@ -58,6 +58,8 @@ These images use Bitnami's scripts. Binaries refer to the official Docker or off
 * mongodb : [`4.2`, `4.2-debian-10`, `4.2.18`, `4.2.18-debian-10`, `4.2.18-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fmongodb)
 * mongodb : [`4.4`, `4.4-debian-10`, `4.4.12`, `4.4.12-debian-10`, `4.4.12-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fmongodb)
 * mongodb : [`5.0`, `5.0-debian-10`, `5.0.6`, `5.0.6-debian-10`, `5.0.6-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fmongodb) (MongoDB 5.0+ requires ARMv8.2-A or higher or a CPU with AVX support)
+* nginx : [`1.20`, `1.20-debian-10`, `1.20.2`, `1.20.2-debian-10`, `1.20.2-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fnginx)
+* nginx : [`1.21`, `1.21-debian-10`, `1.21.6`, `1.21.6-debian-10`, `1.21.6-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fnginx)
 
 # TL;DR
 from

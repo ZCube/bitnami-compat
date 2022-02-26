@@ -381,6 +381,20 @@ jobs:
            REVISION: "0"
            OS_NAME: "linux"
            REPO_OWNER: "bitnami"
+         - APP: "nginx"
+           OS_FLAVOUR: "debian-10"
+           VERSION_MAJOR: "1.20"
+           VERSION: "1.20.2"
+           REVISION: "0"
+           OS_NAME: "linux"
+           REPO_OWNER: "bitnami"
+         - APP: "nginx"
+           OS_FLAVOUR: "debian-10"
+           VERSION_MAJOR: "1.21"
+           VERSION: "1.21.6"
+           REVISION: "0"
+           OS_NAME: "linux"
+           REPO_OWNER: "bitnami"
     steps:
       - name: Checkout
         uses: actions/checkout@v2
