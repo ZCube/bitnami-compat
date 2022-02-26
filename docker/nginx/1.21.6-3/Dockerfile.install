@@ -112,10 +112,11 @@ RUN set -x \
 # create a docker-entrypoint.d directory
     && mkdir /docker-entrypoint.d
 
+COPY --from=nginx /opt/bitnami/nginx/conf/ /opt/bitnami/nginx/conf/
+
 RUN mkdir -p /opt/bitnami/nginx/sbin \
     mkdir -p /opt/bitnami/nginx/logs \
     && ln -s /usr/sbin/nginx                     /opt/bitnami/nginx/sbin/ \
 	&& ln -s /usr/lib/nginx/modules              /opt/bitnami/nginx/ \
 	&& ln -s /usr/share/nginx/html               /opt/bitnami/nginx/ \
-    && rm -rf /etc/mysql/nginx.cnf \
     && chown 1001:1001 -R /opt/bitnami/nginx
