@@ -2,7 +2,7 @@
 # license : The 2-Clause BSD License
 # https://github.com/nginxinc/docker-nginx/blob/master/LICENSE
 
-RUN install_packages gnupg mmdblookup
+RUN install_packages gnupg
 
 ARG GPG_KEYS=573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62
 
