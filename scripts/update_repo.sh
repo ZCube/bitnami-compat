@@ -2,12 +2,13 @@
 export ROOT_DIR=$(realpath "$(dirname $0)/..")
 sed -i 's/amd64/${TARGETARCH}/g' $1
 echo $1
-echo $(dirname $1)
+export package_dir=$(dirname $1)
+echo ${package_dir}
 cat ${ROOT_DIR}/scripts/Dockerfile.head > _Dockerfile
 
 rm _list*
-cat $(dirname $1)/prebuildfs/opt/bitnami/.bitnami_components.json | jq 'to_entries[] | "\(.key)/\(.value.version)"' | tr -d "\"" > _list1
-cat $(dirname $1)/Dockerfile | grep component_unpack | awk '{print $6"/"$7}' | tr -d "\""  > _list2
+cat ${package_dir}/prebuildfs/opt/bitnami/.bitnami_components.json | jq 'to_entries[] | "\(.key)/\(.value.version)"' | tr -d "\"" > _list1
+cat ${package_dir}/Dockerfile | grep component_unpack | awk '{print $6"/"$7}' | tr -d "\""  > _list2
 filename=$(ls _list* -l  --time-style=+""  | awk '{print $5"\t"$6}' | sort -h | tail -n 1 | awk '{print $2}')
 
 list_size1=`stat -c%s "_list1"`
@@ -40,13 +41,13 @@ if test -f "${ROOT_DIR}/patches/${packages[i]}/${versions[i]}/docker/Dockerfile.
 fi
 done
 
-cat $(dirname $1)/Dockerfile >> _Dockerfile
+cat ${package_dir}/Dockerfile >> _Dockerfile
 
-cat /dev/null > $(dirname $1)/packages.sh
+cat /dev/null > ${package_dir}/packages.sh
 for (( i=0; i<${#packages[@]}; i++ )); do
 echo "${packages[i]}/${versions[i]}" 
 if test -f "${ROOT_DIR}/patches/${packages[i]}/${versions[i]}/golang/install.sh"; then
-    cat "${ROOT_DIR}/patches/${packages[i]}/${versions[i]}/golang/install.sh" >> $(dirname $1)/packages.sh
+    cat "${ROOT_DIR}/patches/${packages[i]}/${versions[i]}/golang/install.sh" >> ${package_dir}/packages.sh
 fi
 done
 
@@ -65,14 +66,14 @@ sed -i 's/RUN \. \/opt\/bitnami\/scripts\/libcomponent.sh/#RUN . \/opt\/bitnami\
 
 sed '/RUN apt-get update && apt-get upgrade -y && \\/e cat _install' -i _Dockerfile
 
-cp -f _Dockerfile $(dirname $1)/Dockerfile
+cp -f _Dockerfile ${package_dir}/Dockerfile
 
 # 3. bash
 for (( i=0; i<${#packages[@]}; i++ )); do
 echo "${packages[i]}/${versions[i]}" 
 if test -f "${ROOT_DIR}/patches/${packages[i]}/${versions[i]}/bash/install.sh"; then
-    if test -d "$2"; then
-        pushd $2
+    if test -d "${package_dir}"; then
+        pushd ${package_dir}
             bash "${ROOT_DIR}/patches/${packages[i]}/${versions[i]}/bash/install.sh"
         popd
     fi
