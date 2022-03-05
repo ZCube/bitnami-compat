@@ -1,0 +1,59 @@
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Submodule init
+        shell: bash
+        run: git submodule init
+      - name: Checkout bitnami recipe
+        shell: bash
+        run: git submodule update bitnami-docker-${{ matrix.APP }}
+      # - name: Checkout bitnami recipe
+      #   uses: actions/checkout@v2
+      #   with:
+      #     repository: ${{ matrix.REPO_OWNER }}/bitnami-docker-${{ matrix.APP }}
+      #     path: 'bitnami-docker-${{ matrix.APP }}'
+      #     ref: master
+      - name: Set up QEMU dependency
+        uses: docker/setup-qemu-action@v1
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Log in to the container registry
+        uses: docker/login-action@v1
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Extract lowercase repository name
+        uses: ASzc/change-string-case-action@v1
+        with:
+          string: ${{ github.repository }}
+        id: repository
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v3
+        with:
+          tags: |
+            type=raw,value=${{ matrix.VERSION_MAJOR }}
+            type=raw,value=${{ matrix.VERSION_MAJOR }}-${{ matrix.OS_FLAVOUR }}
+            type=raw,value=${{ matrix.VERSION }}
+            type=raw,value=${{ matrix.VERSION }}-${{ matrix.OS_FLAVOUR }}
+            type=raw,value=${{ matrix.VERSION }}-${{ matrix.OS_FLAVOUR }}-r${{ matrix.REVISION }}
+          images: ${{ env.REGISTRY }}/${{ steps.repository.outputs.lowercase }}/${{ matrix.APP }}
+      # https://stackoverflow.com/questions/58033366/how-to-get-the-current-branch-within-github-actions
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
+      - name: Update Dockerfile OS_ARCH
+        shell: bash
+        run: ./scripts/update.sh
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: bitnami-docker-${{ matrix.APP }}/${{ matrix.VERSION_MAJOR }}/${{ matrix.OS_FLAVOUR }}
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ steps.repository.outputs.lowercase }}/cache/${{ matrix.APP }}:${{ matrix.VERSION }}
+          cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ steps.repository.outputs.lowercase }}/cache/${{ matrix.APP }}:${{ matrix.VERSION }}
+          labels: ${{ steps.meta.outputs.labels }}
+          platforms: linux/amd64,linux/arm64

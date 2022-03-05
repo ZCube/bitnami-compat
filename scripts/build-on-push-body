@@ -1,0 +1,7 @@
+         - APP: "{{{APP}}}"
+           OS_FLAVOUR: "debian-10"
+           VERSION_MAJOR: "{{{VERSION_MAJOR}}}"
+           VERSION: "{{{VERSION}}}"
+           REVISION: "0"
+           OS_NAME: "linux"
+           REPO_OWNER: "bitnami"
