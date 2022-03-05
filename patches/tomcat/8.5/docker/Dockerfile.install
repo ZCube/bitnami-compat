@@ -1,7 +1,7 @@
 RUN install_packages wget libtcnative-1
 
-ENV TOMCAT_MAJOR 8
-ENV TOMCAT_VERSION 8.5.75
+ENV TOMCAT_MAJOR {{{VERSION_MAJOR}}}
+ENV TOMCAT_VERSION {{{VERSION}}}
 
 RUN mkdir -p /opt/bitnami \
     && cd /opt/bitnami \

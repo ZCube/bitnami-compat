@@ -25,19 +25,31 @@ fi
 # Prepare directories
 export versions=( $(cat ${filename} | awk -F'/' '{print $2}' | sed -E -e 's/-([0-9]+)//g') )
 export versions_with_revision=( $(cat ${filename} | awk -F'/' '{print $2}') )
+export versions_major_minor=( $(cat ${filename} | awk -F'/' '{print $2}' | sed -E -e 's/-([0-9]+)//g' | sed -E -e 's/\.([^.]+)$//g') )
+export versions_major=( $(cat ${filename} | awk -F'/' '{print $2}' | sed -E -e 's/-([0-9]+)//g' | sed -E -e 's/\.([^.]+)$//g' | sed -E -e 's/\.([^.]+)$//g') )
 export packages=( $(cat ${filename} | awk -F'/' '{print $1}') )
 
-
-mkdir -p patches/${packages[i]}/${versions[i]}/golang
-mkdir -p patches/${packages[i]}/${versions[i]}/docker
-mkdir -p patches/${packages[i]}/${versions[i]}/bash
+# template version
+# | sed -E -e "s/\{\{\{VERSION\}\}\}/${versions[i]}/g"
+# | sed -E -e "s/\{\{\{VERSION_MAJOR_MINOR\}\}\}/${versions_major_minor[i]}/g"
+# | sed -E -e "s/\{\{\{VERSION_MAJOR\}\}\}/${versions_major[i]}/g"
 
 # Dockerfile
 cat ${ROOT_DIR}/scripts/Dockerfile.head > _Dockerfile
 for (( i=0; i<${#packages[@]}; i++ )); do
-echo "${packages[i]}/${versions[i]}" 
+echo "${packages[i]}/${versions[i]}"
 if test -f "${ROOT_DIR}/patches/${packages[i]}/${versions[i]}/docker/Dockerfile.from"; then
-    cat "${ROOT_DIR}/patches/${packages[i]}/${versions[i]}/docker/Dockerfile.from" >> _Dockerfile
+    cat "${ROOT_DIR}/patches/${packages[i]}/${versions[i]}/docker/Dockerfile.from" | \
+    sed -E -e "s/\{\{\{VERSION\}\}\}/${versions[i]}/g" | sed -E -e "s/\{\{\{VERSION_MAJOR_MINOR\}\}\}/${versions_major_minor[i]}/g" | sed -E -e "s/\{\{\{VERSION_MAJOR\}\}\}/${versions_major[i]}/g" \
+     >> _Dockerfile
+elif test -f "${ROOT_DIR}/patches/${packages[i]}/${versions_major_minor[i]}/docker/Dockerfile.from"; then
+    cat "${ROOT_DIR}/patches/${packages[i]}/${versions_major_minor[i]}/docker/Dockerfile.from" | \
+    sed -E -e "s/\{\{\{VERSION\}\}\}/${versions[i]}/g" | sed -E -e "s/\{\{\{VERSION_MAJOR_MINOR\}\}\}/${versions_major_minor[i]}/g" | sed -E -e "s/\{\{\{VERSION_MAJOR\}\}\}/${versions_major[i]}/g" \
+     >> _Dockerfile
+elif test -f "${ROOT_DIR}/patches/${packages[i]}/${versions_major[i]}/docker/Dockerfile.from"; then
+    cat "${ROOT_DIR}/patches/${packages[i]}/${versions_major[i]}/docker/Dockerfile.from" | \
+    sed -E -e "s/\{\{\{VERSION\}\}\}/${versions[i]}/g" | sed -E -e "s/\{\{\{VERSION_MAJOR_MINOR\}\}\}/${versions_major_minor[i]}/g" | sed -E -e "s/\{\{\{VERSION_MAJOR\}\}\}/${versions_major[i]}/g" \
+     >> _Dockerfile
 fi
 done
 
@@ -47,7 +59,17 @@ cat /dev/null > ${package_dir}/packages.sh
 for (( i=0; i<${#packages[@]}; i++ )); do
 echo "${packages[i]}/${versions[i]}" 
 if test -f "${ROOT_DIR}/patches/${packages[i]}/${versions[i]}/golang/install.sh"; then
-    cat "${ROOT_DIR}/patches/${packages[i]}/${versions[i]}/golang/install.sh" >> ${package_dir}/packages.sh
+    cat "${ROOT_DIR}/patches/${packages[i]}/${versions[i]}/golang/install.sh"  | \
+    sed -E -e "s/\{\{\{VERSION\}\}\}/${versions[i]}/g" | sed -E -e "s/\{\{\{VERSION_MAJOR_MINOR\}\}\}/${versions_major_minor[i]}/g" | sed -E -e "s/\{\{\{VERSION_MAJOR\}\}\}/${versions_major[i]}/g" \
+    >> ${package_dir}/packages.sh
+elif test -f "${ROOT_DIR}/patches/${packages[i]}/${versions_major_minor[i]}/golang/install.sh"; then
+    cat "${ROOT_DIR}/patches/${packages[i]}/${versions_major_minor[i]}/golang/install.sh"  | \
+    sed -E -e "s/\{\{\{VERSION\}\}\}/${versions[i]}/g" | sed -E -e "s/\{\{\{VERSION_MAJOR_MINOR\}\}\}/${versions_major_minor[i]}/g" | sed -E -e "s/\{\{\{VERSION_MAJOR\}\}\}/${versions_major[i]}/g" \
+    >> ${package_dir}/packages.sh
+elif test -f "${ROOT_DIR}/patches/${packages[i]}/${versions_major[i]}/golang/install.sh"; then
+    cat "${ROOT_DIR}/patches/${packages[i]}/${versions_major[i]}/golang/install.sh"  | \
+    sed -E -e "s/\{\{\{VERSION\}\}\}/${versions[i]}/g" | sed -E -e "s/\{\{\{VERSION_MAJOR_MINOR\}\}\}/${versions_major_minor[i]}/g" | sed -E -e "s/\{\{\{VERSION_MAJOR\}\}\}/${versions_major[i]}/g" \
+    >> ${package_dir}/packages.sh
 fi
 done
 
@@ -57,7 +79,17 @@ echo "COPY --from=golang-builder /opt/bitnami/ /opt/bitnami/" > _install
 for (( i=0; i<${#packages[@]}; i++ )); do
 echo "${packages[i]}/${versions[i]}" 
 if test -f "${ROOT_DIR}/patches/${packages[i]}/${versions[i]}/docker/Dockerfile.install"; then
-    cat "${ROOT_DIR}/patches/${packages[i]}/${versions[i]}/docker/Dockerfile.install" >> _install
+    cat "${ROOT_DIR}/patches/${packages[i]}/${versions[i]}/docker/Dockerfile.install"  | \
+    sed -E -e "s/\{\{\{VERSION\}\}\}/${versions[i]}/g" | sed -E -e "s/\{\{\{VERSION_MAJOR_MINOR\}\}\}/${versions_major_minor[i]}/g" | sed -E -e "s/\{\{\{VERSION_MAJOR\}\}\}/${versions_major[i]}/g" \
+    >> _install
+elif test -f "${ROOT_DIR}/patches/${packages[i]}/${versions_major_minor[i]}/docker/Dockerfile.install"; then
+    cat "${ROOT_DIR}/patches/${packages[i]}/${versions_major_minor[i]}/docker/Dockerfile.install"  | \
+    sed -E -e "s/\{\{\{VERSION\}\}\}/${versions[i]}/g" | sed -E -e "s/\{\{\{VERSION_MAJOR_MINOR\}\}\}/${versions_major_minor[i]}/g" | sed -E -e "s/\{\{\{VERSION_MAJOR\}\}\}/${versions_major[i]}/g" \
+    >> _install
+elif test -f "${ROOT_DIR}/patches/${packages[i]}/${versions_major[i]}/docker/Dockerfile.install"; then
+    cat "${ROOT_DIR}/patches/${packages[i]}/${versions_major[i]}/docker/Dockerfile.install"  | \
+    sed -E -e "s/\{\{\{VERSION\}\}\}/${versions[i]}/g" | sed -E -e "s/\{\{\{VERSION_MAJOR_MINOR\}\}\}/${versions_major_minor[i]}/g" | sed -E -e "s/\{\{\{VERSION_MAJOR\}\}\}/${versions_major[i]}/g" \
+    >> _install
 fi
 done
 
@@ -70,11 +102,28 @@ cp -f _Dockerfile ${package_dir}/Dockerfile
 
 # 3. bash
 for (( i=0; i<${#packages[@]}; i++ )); do
-echo "${packages[i]}/${versions[i]}" 
+echo "${packages[i]}/${versions[i]}"
+export PACKAGE=${packages[i]}
+export VERSION=${versions[i]}
+export VERSION_MAJOR_MINOR=${versions_major_minor[i]}
+export VERSION_MAJOR=${versions_major[i]}
+
 if test -f "${ROOT_DIR}/patches/${packages[i]}/${versions[i]}/bash/install.sh"; then
     if test -d "${package_dir}"; then
         pushd ${package_dir}
             bash "${ROOT_DIR}/patches/${packages[i]}/${versions[i]}/bash/install.sh"
+        popd
+    fi
+elif test -f "${ROOT_DIR}/patches/${packages[i]}/${versions_major_minor[i]}/bash/install.sh"; then
+    if test -d "${package_dir}"; then
+        pushd ${package_dir}
+            bash "${ROOT_DIR}/patches/${packages[i]}/${versions_major_minor[i]}/bash/install.sh"
+        popd
+    fi
+elif test -f "${ROOT_DIR}/patches/${packages[i]}/${versions_major[i]}/bash/install.sh"; then
+    if test -d "${package_dir}"; then
+        pushd ${package_dir}
+            bash "${ROOT_DIR}/patches/${packages[i]}/${versions_major[i]}/bash/install.sh"
         popd
     fi
 fi
