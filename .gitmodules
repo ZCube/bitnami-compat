@@ -88,3 +88,6 @@
 [submodule "bitnami-docker-nginx"]
 	path = bitnami-docker-nginx
 	url = https://github.com/bitnami/bitnami-docker-nginx
+[submodule "bitnami-docker-wordpress"]
+	path = bitnami-docker-wordpress
+	url = https://github.com/bitnami/bitnami-docker-wordpress

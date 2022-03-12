@@ -1,0 +1,29 @@
+RUN install_packages libaprutil1-ldap libldap-common apache2 libapache2-mod-security2 libmodsecurity3 libmodsecurity-dev
+
+COPY --from=apache /opt/bitnami/apache/conf/ /opt/bitnami/apache/conf/
+
+RUN mkdir -p /opt/bitnami/apache/bin \
+    && mkdir -p /opt/bitnami/apache/sbin \
+    && mkdir -p /opt/bitnami/apache/lib \
+    && mkdir -p /opt/bitnami/apache/conf \
+    && ln -s /usr/bin/ab                 /opt/bitnami/apache/bin/ \
+    && ln -s /usr/bin/apachectl          /opt/bitnami/apache/bin/ \
+    && ln -s /usr/bin/apr-1-config       /opt/bitnami/apache/bin/ \
+    && ln -s /usr/bin/apu-1-config       /opt/bitnami/apache/bin/ \
+    && ln -s /usr/bin/apxs               /opt/bitnami/apache/bin/ \
+    && ln -s /usr/bin/checkgid           /opt/bitnami/apache/bin/ \
+    && ln -s /usr/bin/dbmmanage          /opt/bitnami/apache/bin/ \
+    && ln -s /usr/bin/envvars            /opt/bitnami/apache/bin/ \
+    && ln -s /usr/bin/envvars-std        /opt/bitnami/apache/bin/ \
+    && ln -s /usr/bin/fcgistarter        /opt/bitnami/apache/bin/ \
+    && ln -s /usr/bin/htcacheclean       /opt/bitnami/apache/bin/ \
+    && ln -s /usr/bin/htdbm              /opt/bitnami/apache/bin/ \
+    && ln -s /usr/bin/htdigest           /opt/bitnami/apache/bin/ \
+    && ln -s /usr/bin/htpasswd           /opt/bitnami/apache/bin/ \
+    && ln -s /usr/bin/httpd              /opt/bitnami/apache/bin/ \
+    && ln -s /usr/bin/httxt2dbm          /opt/bitnami/apache/bin/ \
+    && ln -s /usr/bin/logresolve         /opt/bitnami/apache/bin/ \
+    && ln -s /usr/bin/rotatelogs         /opt/bitnami/apache/bin/ \
+    && ln -s /usr/bin/rules-updater.pl   /opt/bitnami/apache/bin/ \
+    && ln -s /usr/lib/apache2/modules    /opt/bitnami/apache/ \              
+    && chown 1001:1001 -R /opt/bitnami/apache
