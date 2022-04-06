@@ -1,6 +1,10 @@
 # bitnami-compat
 ## What is Bitnami-Compat?
-Build bitnami docker images for amd64 + arm64. (just workaround. not equal.)
+This repository builds multi-arch (`linux/amd64` + `linux/arm64`) docker images for a selection of the Bitnami repositories.
+This is a workaround for https://github.com/bitnami/charts/issues/7305.
+The images do not automatically receive security patches.
+This repository is considered a proof of concept only.
+Use at your own risk.
 
 These images use Bitnami's scripts. Binaries refer to the official Docker or official distribution binaries of the software or Docker recipes for Docker.
 
