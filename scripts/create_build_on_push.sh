@@ -4,12 +4,17 @@ echo $ROOT_DIR
 
 export packages=( $(find bitnami-docker-* -type f ! -name "archive" ! -name  ".git" -name "Dockerfile" | grep "debian-10" | sed -E 's/.*bitnami-docker-([^/]+)\/.*/\1/') )
 export versions_major=( $(find bitnami-docker-* -type f ! -name "archive" ! -name  ".git" -name "Dockerfile" | grep "debian-10" | sed -E 's/.*bitnami-docker-[^/]+\/([^/]+)\/.*/\1/') )
-export versions=( $(find bitnami-docker-* -type f ! -name "archive" ! -name  ".git" -name "Dockerfile" | xargs -I "{}" -n 1 cat {} | grep BITNAMI_IMAGE_VERSION= | sed -E 's/.*="([0-9.]+)-debian.*/\1/') )
+export versions=( $(find bitnami-docker-* -type f ! -name "archive" ! -name  ".git" -name "Dockerfile" | xargs -I "{}" -n 1 cat {} | grep -E '(BITNAMI_IMAGE_VERSION|APP_VERSION)=' | sed -E 's/.*="([0-9\.]+)(.*)?/\1/') )
 
 # TODO: use template engine.
 echo ${#packages[@]}
 echo ${#versions_major[@]}
 echo ${#versions[@]}
+
+
+echo ${packages[*]}
+echo ${versions_major[*]}
+echo ${versions[*]}
 
 if [[  ${#packages[@]} == ${#versions_major[@]} &&  ${#packages[@]} == ${#versions[@]}  ]]; then
     cat ${ROOT_DIR}/scripts/build-on-push-header > ${ROOT_DIR}/.github/workflows/build-on-push.yml
