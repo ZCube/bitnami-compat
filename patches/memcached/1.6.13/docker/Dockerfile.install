@@ -28,10 +28,12 @@ RUN set -x \
 	&& rm -rf /var/lib/apt/lists/* \
 	\
 	&& wget -O memcached.tar.gz "https://memcached.org/files/memcached-$MEMCACHED_VERSION.tar.gz" \
-	\ # && echo "$MEMCACHED_SHA1  memcached.tar.gz" | sha1sum -c - \
+	&& wget -O memcached.tar.gz.sha1 "https://memcached.org/files/memcached-$MEMCACHED_VERSION.tar.gz.sha1" \
+	&& cat memcached.tar.gz.sha1 | sha1sum -c - \
 	&& mkdir -p /usr/src/memcached \
 	&& tar -xzf memcached.tar.gz -C /usr/src/memcached --strip-components=1 \
 	&& rm memcached.tar.gz \
+	&& rm memcached.tar.gz.sha1 \
 	\
 	&& cd /usr/src/memcached \
 	\
