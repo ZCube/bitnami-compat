@@ -1,7 +1,7 @@
 RUN install_packages wget 
 
-ENV KEYCLOAK_MAJOR 16
-ENV KEYCLOAK_VERSION 16.1.1
+ENV KEYCLOAK_MAJOR {{{VERSION_MAJOR}}}
+ENV KEYCLOAK_VERSION {{{VERSION}}}
 
 RUN mkdir -p /opt/bitnami \
     && cd /opt/bitnami \

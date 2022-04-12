@@ -1,4 +1,4 @@
-ENV JMX_EXPORTER_VERSION 0.16.1
+ENV JMX_EXPORTER_VERSION {{{VERSION}}}
 RUN install_packages curl tar \
  && mkdir -p /opt/bitnami/jmx-exporter \
  && curl -L -o /opt/bitnami/jmx-exporter/jmx_prometheus_httpserver.jar https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_httpserver/${JMX_EXPORTER_VERSION}/jmx_prometheus_httpserver-${JMX_EXPORTER_VERSION}-jar-with-dependencies.jar \

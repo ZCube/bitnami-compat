@@ -1,1 +1,1 @@
-FROM bitnami/apache:2.4.52 AS apache
+FROM bitnami/apache:{{{VERSION}}} AS apache

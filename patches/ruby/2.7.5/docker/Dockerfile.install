@@ -4,13 +4,13 @@
 
 RUN install_packages gnupg2 curl
 
-ENV RUBY_VERSION 2.7.5
+ENV RUBY_VERSION {{{VERSION}}}
 
 ENV PATH=/usr/local/rvm/bin:$PATH
 
 ENV LANG C.UTF-8
-ENV RUBY_MAJOR 2.7
-ENV RUBY_VERSION 2.7.5
+ENV RUBY_MAJOR {{{VERSION_MAJOR_MINOR}}}
+ENV RUBY_VERSION {{{VERSION}}}
 ENV RUBY_DOWNLOAD_SHA256 d216d95190eaacf3bf165303747b02ff13f10b6cfab67a9031b502a49512b516
 
 # some of ruby's build scripts are written in ruby

@@ -16,10 +16,10 @@ RUN set -ex; \
 	rm -rf "$GNUPGHOME"; \
 	apt-key list
 
-ENV PG_MAJOR 11
+ENV PG_MAJOR {{{VERSION_MAJOR}}}
 ENV PATH $PATH:/usr/lib/postgresql/$PG_MAJOR/bin
 
-ENV PG_VERSION 11.15-1.pgdg100+1
+ENV PG_VERSION {{{VERSION_MAJOR_MINOR}}}-1.pgdg100+1
 ENV PG_EXTENSIONS postgresql-$PG_MAJOR-pgaudit postgresql-$PG_MAJOR-orafce postgresql-$PG_MAJOR-auto-failover postgresql-$PG_MAJOR-pljava postgresql-$PG_MAJOR-postgis-3
 
 RUN set -ex; \

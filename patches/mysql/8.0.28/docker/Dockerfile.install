@@ -7,7 +7,7 @@ RUN mkdir -p /opt/bitnami/mysql/bin \
     && ln -sf /usr/sbin/my*                         /opt/bitnami/mysql/sbin/ \
     && ln -sf /usr/sbin/my*                         /opt/bitnami/mysql/bin/ \
     && cp -rf /usr/lib64/mysql/plugin/               /opt/bitnami/mysql/lib/plugin/ \
-    && cp -rf /usr/share/mysql-8.0/                    /opt/bitnami/mysql/share/mysql-8.0/ \
+    && cp -rf /usr/share/mysql-{{{VERSION_MAJOR_MINOR}}}/                    /opt/bitnami/mysql/share/mysql-{{{VERSION_MAJOR_MINOR}}}/ \
     && rm -rf /var/lib/dpkg/alternatives/my.cnf \
     && rm -rf /etc/mysql/my.cnf \
     && rm -rf /etc/mysql/mysql.cnf \

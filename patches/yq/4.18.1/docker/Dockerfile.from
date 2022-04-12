@@ -1,1 +1,1 @@
-FROM mikefarah/yq:4.18.1 AS yq
+FROM mikefarah/yq:{{{VERSION}}} AS yq

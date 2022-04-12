@@ -2,7 +2,7 @@
 
 RUN install_packages wget
 
-ENV ELASTICSEARCH_VERSION 7.16.3
+ENV ELASTICSEARCH_VERSION {{{VERSION}}}
 
 ENV ES_JAVA_HOME=/opt/bitnami/java
 

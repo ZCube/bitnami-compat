@@ -1,6 +1,6 @@
 RUN install_packages wget
 
-ENV ZOOKEEPER_VERSION 3.7.0
+ENV ZOOKEEPER_VERSION {{{VERSION}}}
 
 RUN mkdir -p /opt/bitnami \
     && cd /opt/bitnami \

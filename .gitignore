@@ -7,3 +7,4 @@ _list*
 archive
 Dockerfile
 packages.sh
+*.orig

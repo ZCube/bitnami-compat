@@ -1,1 +1,1 @@
-FROM oliver006/redis_exporter:v1.34.1 AS redis-exporter
+FROM oliver006/redis_exporter:v{{{VERSION}}} AS redis-exporter

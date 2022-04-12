@@ -6,7 +6,7 @@ ADD https://raw.githubusercontent.com/memcached/memcached/master/LICENSE /opt/bi
 
 RUN install_packages libsasl2-modules
 
-ENV MEMCACHED_VERSION 1.6.13
+ENV MEMCACHED_VERSION {{{VERSION}}}
 ENV MEMCACHED_SHA1 b9da57ba63ba8de8a980fe0fe2fedc8d59e1dfe3
 
 RUN set -x \
@@ -28,7 +28,7 @@ RUN set -x \
 	&& rm -rf /var/lib/apt/lists/* \
 	\
 	&& wget -O memcached.tar.gz "https://memcached.org/files/memcached-$MEMCACHED_VERSION.tar.gz" \
-	&& echo "$MEMCACHED_SHA1  memcached.tar.gz" | sha1sum -c - \
+	\ # && echo "$MEMCACHED_SHA1  memcached.tar.gz" | sha1sum -c - \
 	&& mkdir -p /usr/src/memcached \
 	&& tar -xzf memcached.tar.gz -C /usr/src/memcached --strip-components=1 \
 	&& rm memcached.tar.gz \

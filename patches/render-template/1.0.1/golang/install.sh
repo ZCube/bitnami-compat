@@ -1,8 +1,7 @@
 #!/bin/bash
 export PACKAGE=render-template
 export TARGET_DIR=common
-export VERSION=1.0.1
-export REF=v1.0.1
+export REF=v${VERSION}
 export CGO_ENABLED=0 
 rm -rf ${PACKAGE} || true
 mkdir -p ${PACKAGE}

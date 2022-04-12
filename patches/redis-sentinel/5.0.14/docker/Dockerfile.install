@@ -1,9 +1,9 @@
-# refer : https://github.com/docker-library/redis/blob/master/5.0/Dockerfile
+# refer : https://github.com/docker-library/redis/blob/master/{{{VERSION_MAJOR_MINOR}}}/Dockerfile
 # license : BSD 3-Clause "New" or "Revised" License
 # https://github.com/docker-library/redis/blob/master/LICENSE
 
-ENV REDIS_VERSION 5.0.14
-ENV REDIS_DOWNLOAD_URL http://download.redis.io/releases/redis-5.0.14.tar.gz
+ENV REDIS_VERSION {{{VERSION}}}
+ENV REDIS_DOWNLOAD_URL http://download.redis.io/releases/redis-{{{VERSION}}}.tar.gz
 ENV REDIS_DOWNLOAD_SHA 3ea5024766d983249e80d4aa9457c897a9f079957d0fb1f35682df233f997f32
 
 RUN mkdir -p /opt/bitnami/redis-sentinel/etc \

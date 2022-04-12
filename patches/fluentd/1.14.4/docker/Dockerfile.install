@@ -1,4 +1,4 @@
-# refer : https://github.com/fluent/fluentd-docker-image/blob/master/v1.14/debian/Dockerfile
+# refer : https://github.com/fluent/fluentd-docker-image/blob/master/v{{{VERSION_MAJOR_MINOR}}}/debian/Dockerfile
 # license : Apache License 2.0
 # https://raw.githubusercontent.com/fluent/fluentd-docker-image/master/LICENSE
 
@@ -23,7 +23,7 @@ RUN apt-get update \
  && gem install json -v 2.4.1 \
  && gem install async-http -v 0.54.0 \
  && gem install ext_monitor -v 0.1.2 \
- && gem install fluentd -v 1.14.4 \
+ && gem install fluentd -v {{{VERSION}}} \
  && gem install fluent-config-regexp-type -v 1.0.0 \
  && gem install fluent-plugin-concat -v 2.5.0 \
  && gem install fluent-plugin-detect-exceptions -v 0.0.14 \

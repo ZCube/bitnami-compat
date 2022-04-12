@@ -1,1 +1,1 @@
-FROM bitnami/nginx:1.21.6 AS nginx
+FROM bitnami/nginx:{{{VERSION}}} AS nginx
