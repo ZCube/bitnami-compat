@@ -1,6 +1,7 @@
 #!/bin/bash
 export PACKAGE=wait-for-port
 export TARGET_DIR=common
+export VERSION={{{VERSION}}}
 export REF=v${VERSION}
 export CGO_ENABLED=0 
 rm -rf ${PACKAGE} || true

@@ -1,7 +1,8 @@
 #!/bin/bash
 export PACKAGE=gosu
 export TARGET_DIR=common
-export REF=${VERSION_MAJOR_MINOR}
+export VERSION={{{VERSION}}}
+export REF={{{VERSION_MAJOR_MINOR}}}
 export CGO_ENABLED=0 
 rm -rf ${PACKAGE} || true
 mkdir -p ${PACKAGE}
