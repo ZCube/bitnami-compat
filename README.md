@@ -67,7 +67,9 @@ These images use Bitnami's scripts. Binaries refer to the official Docker or off
 * wordpress : [`5`, `5-debian-10`, `5.9.1`, `5.9.1-debian-10`, `5.9.1-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fwordpress)
 * zookeeper : [`3.5`, `3.5-debian-10`, `3.5.9`, `3.5.9-debian-10`, `3.5.9-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fzookeeper)
 * zookeeper : [`3.6`, `3.6-debian-10`, `3.6.3`, `3.6.3-debian-10`, `3.6.3-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fzookeeper)
-* zookeeper : [`3.7`, `3.7-debian-10`, `3.7.0`, `3.7.0-debian-10`, `3.7.0-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fzookeeper)
+* zookeeper : [`3.7`, `3.7-debian-10`, `3.7.1`, `3.7.1-debian-10`, `3.7.1-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fzookeeper)
+* zookeeper : [`3.8`, `3.8-debian-10`, `3.8.0`, `3.8.0-debian-10`, `3.8.0-debian-10-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fzookeeper)
+
 # TL;DR
 from
 ```
