@@ -87,12 +87,14 @@ RUN set -eux; \
 	openssl version; \
 	\
 	OTP_SOURCE_URL="https://github.com/erlang/otp/releases/download/OTP-$OTP_VERSION/otp_src_$OTP_VERSION.tar.gz"; \
+	OTP_SHA256_URL="https://github.com/erlang/otp/releases/download/OTP-$OTP_VERSION/SHA256.txt"; \
 	OTP_PATH="/usr/local/src/otp-$OTP_VERSION"; \
 	\
 # Download, verify & extract OTP_SOURCE
 	mkdir -p "$OTP_PATH"; \
 	wget --progress dot:giga --output-document "$OTP_PATH.tar.gz" "$OTP_SOURCE_URL"; \
-	echo "$OTP_SOURCE_SHA256 *$OTP_PATH.tar.gz" | sha256sum --check --strict -; \
+	wget --progress dot:giga --output-document "SHA256.txt" "$OTP_SHA256_URL"; \
+	cat SHA256.txt | grep "$OTP_PATH.tar.gz" | sha256sum --check --strict -; \
 	tar --extract --file "$OTP_PATH.tar.gz" --directory "$OTP_PATH" --strip-components 1; \
 	\
 # Configure Erlang/OTP for compilation, disable unused features & applications
