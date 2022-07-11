@@ -157,6 +157,13 @@ jobs:
            REVISION: "0"
            OS_NAME: "linux"
            REPO_OWNER: "bitnami"
+         - APP: "mariadb"
+           OS_FLAVOUR: "debian-11"
+           VERSION_MAJOR: "10.8"
+           VERSION: "10.8.3"
+           REVISION: "0"
+           OS_NAME: "linux"
+           REPO_OWNER: "bitnami"
          - APP: "mariadb-galera"
            OS_FLAVOUR: "debian-11"
            VERSION_MAJOR: "10.5"
@@ -175,6 +182,13 @@ jobs:
            OS_FLAVOUR: "debian-11"
            VERSION_MAJOR: "10.7"
            VERSION: "10.7.4"
+           REVISION: "0"
+           OS_NAME: "linux"
+           REPO_OWNER: "bitnami"
+         - APP: "mariadb-galera"
+           OS_FLAVOUR: "debian-11"
+           VERSION_MAJOR: "10.8"
+           VERSION: "10.8.3"
            REVISION: "0"
            OS_NAME: "linux"
            REPO_OWNER: "bitnami"
@@ -483,13 +497,18 @@ jobs:
         shell: bash
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         id: extract_branch
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.17
       - name: Update Dockerfile OS_ARCH
         shell: bash
-        run: ./scripts/update.sh
+        run: go run main.go generate
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
           context: bitnami-docker-${{ matrix.APP }}/${{ matrix.VERSION_MAJOR }}/${{ matrix.OS_FLAVOUR }}
+          file: {context}/Dockerfile.arm64
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ steps.repository.outputs.lowercase }}/cache/${{ matrix.APP }}:${{ matrix.VERSION }}
