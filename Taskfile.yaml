@@ -21,3 +21,7 @@ tasks:
     cmds:
       - go install github.com/cosmtrek/air@latest
 
+  permission:
+    desc: chmod +x *.sh
+    cmds:
+      - find ./patches/ | grep "\.sh$" | xargs -I {} git update-index --chmod=+x {}

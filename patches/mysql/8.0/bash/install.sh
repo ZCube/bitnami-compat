@@ -1,5 +1,5 @@
 #!/bin/bash
-sed -i "s/docker\.io\/bitnami\/minideb:buster/docker.io\/mysql:${VERSION}-oracle/g" Dockerfile.arm64
+sed -i "s/docker\.io\/bitnami\/minideb:bullseye/docker.io\/mysql:${VERSION}-oracle/g" Dockerfile.arm64
 sed -i "s/apt-get update -qq/microdnf update -y/g" prebuildfs/usr/sbin/install_packages
 sed -i "s/apt-get install -y --no-install-recommends/microdnf install -y/g" prebuildfs/usr/sbin/install_packages
 sed -i "s/rm -r \/var\/lib\/apt\/lists \/var\/cache\/apt\/archives/microdnf clean all/g" prebuildfs/usr/sbin/install_packages
