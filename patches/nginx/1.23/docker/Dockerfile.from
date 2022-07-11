@@ -1,0 +1,1 @@
+FROM bitnami/nginx:{{{VERSION}}} AS nginx

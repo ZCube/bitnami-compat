@@ -1,0 +1,9 @@
+RUN install_packages curl unzip zip
+
+RUN curl -fsSL "https://get.sdkman.io" | bash \
+    && bash -c ". $HOME/.sdkman/bin/sdkman-init.sh \
+    && sdk install java {{{VERSION_MAJOR_MINOR}}}.3-tem" \
+    && mkdir -p /opt/bitnami \
+    && ln -sf $HOME/.sdkman/candidates/java/current /opt/bitnami/java
+
+ENV JAVA_HOME=$HOME/.sdkman/candidates/java/current

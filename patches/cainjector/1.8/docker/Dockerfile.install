@@ -1,0 +1,2 @@
+ADD https://raw.githubusercontent.com/jetstack/cert-manager/master/LICENSE /opt/bitnami/cainjector/licenses/LICENSE
+COPY --from=cainjector /app/cmd/cainjector/cainjector /opt/bitnami/cainjector/bin/cainjector

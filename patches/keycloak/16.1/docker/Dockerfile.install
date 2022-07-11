@@ -1,0 +1,37 @@
+RUN install_packages wget 
+
+ENV KEYCLOAK_MAJOR {{{VERSION_MAJOR}}}
+ENV KEYCLOAK_VERSION {{{VERSION}}}
+
+RUN mkdir -p /opt/bitnami \
+    && cd /opt/bitnami \
+    && wget https://github.com/keycloak/keycloak/releases/download/${KEYCLOAK_VERSION}/keycloak-${KEYCLOAK_VERSION}.tar.gz \
+    && wget https://github.com/keycloak/keycloak/releases/download/${KEYCLOAK_VERSION}/keycloak-${KEYCLOAK_VERSION}.tar.gz.sha1 \
+    && echo $(cat keycloak-${KEYCLOAK_VERSION}.tar.gz.sha1) keycloak-${KEYCLOAK_VERSION}.tar.gz | sha1sum --check - \
+    && tar -xzf keycloak-${KEYCLOAK_VERSION}.tar.gz \
+    && mv keycloak-${KEYCLOAK_VERSION}/ keycloak \
+    && rm -rf keycloak-${KEYCLOAK_VERSION}.tar.gz* \
+    && chown 1001:1001 -R /opt/bitnami/keycloak
+
+# reference : https://github.com/keycloak/keycloak-containers/blob/main/server/Dockerfile
+# License : Apache 2.0
+
+ENV JDBC_POSTGRES_VERSION 42.3.3
+ENV JDBC_MYSQL_VERSION 8.0.22
+ENV JDBC_MARIADB_VERSION 2.5.4
+ENV JDBC_MSSQL_VERSION 10.2.1.jre11
+
+ADD https://repo1.maven.org/maven2/mysql/mysql-connector-java/${JDBC_MYSQL_VERSION}/mysql-connector-java-${JDBC_MYSQL_VERSION}.jar          /opt/bitnami/keycloak/modules/system/layers/keycloak/com/mysql/jdbc/main/
+ADD https://repo1.maven.org/maven2/org/postgresql/postgresql/$JDBC_POSTGRES_VERSION/postgresql-$JDBC_POSTGRES_VERSION.jar                   /opt/bitnami/keycloak/modules/system/layers/keycloak/org/postgresql/jdbc/main/postgres-jdbc.jar
+ADD https://repo1.maven.org/maven2/org/mariadb/jdbc/mariadb-java-client/$JDBC_MARIADB_VERSION/mariadb-java-client-$JDBC_MARIADB_VERSION.jar /opt/bitnami/keycloak/modules/system/layers/keycloak/org/mariadb/jdbc/main/mariadb-jdbc.jar
+ADD https://repo1.maven.org/maven2/com/microsoft/sqlserver/mssql-jdbc/$JDBC_MSSQL_VERSION/mssql-jdbc-$JDBC_MSSQL_VERSION.jar                /opt/bitnami/keycloak/modules/system/layers/keycloak/com/microsoft/sqlserver/jdbc/main/mssql-jdbc.jar
+
+ADD https://raw.githubusercontent.com/keycloak/keycloak-containers/main/server/tools/databases/mysql/module.xml    /opt/bitnami/keycloak/modules/system/layers/keycloak/com/mysql/jdbc/main/module.xml_
+ADD https://raw.githubusercontent.com/keycloak/keycloak-containers/main/server/tools/databases/postgres/module.xml /opt/bitnami/keycloak/modules/system/layers/keycloak/org/postgresql/jdbc/main/
+ADD https://raw.githubusercontent.com/keycloak/keycloak-containers/main/server/tools/databases/mariadb/module.xml  /opt/bitnami/keycloak/modules/system/layers/keycloak/org/mariadb/jdbc/main/
+ADD https://raw.githubusercontent.com/keycloak/keycloak-containers/main/server/tools/databases/oracle/module.xml   /opt/bitnami/keycloak/modules/system/layers/keycloak/com/oracle/jdbc/main/   
+ADD https://raw.githubusercontent.com/keycloak/keycloak-containers/main/server/tools/databases/mssql/module.xml    /opt/bitnami/keycloak/modules/system/layers/keycloak/com/microsoft/sqlserver/jdbc/main/
+
+RUN sed "s/JDBC_MYSQL_VERSION/$JDBC_MYSQL_VERSION/" /opt/bitnami/keycloak/modules/system/layers/keycloak/com/mysql/jdbc/main/module.xml_ > /opt/bitnami/keycloak/modules/system/layers/keycloak/com/mysql/jdbc/main/module.xml
+
+RUN chown 1001:1001 -R /opt/bitnami/keycloak

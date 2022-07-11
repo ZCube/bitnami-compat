@@ -1,0 +1,1 @@
+FROM prom/mysqld-exporter:v{{{VERSION}}} AS mysqld-exporter

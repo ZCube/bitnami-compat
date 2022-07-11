@@ -1,0 +1,23 @@
+# https://taskfile.dev
+
+version: '3'
+
+tasks:
+  install:tools:
+    desc: Install all optional cli tools
+    dir: scripts
+    cmds:
+      - task: install:cobracli
+      - task: install:air
+    silent: true
+
+  install:cobracli:
+    desc: Install cobra-cli
+    cmds:
+      - go install github.com/spf13/cobra-cli@latest
+
+  install:air:
+    desc: Install a hot reloader. Watch for file changes and automatically rebuilds binary
+    cmds:
+      - go install github.com/cosmtrek/air@latest
+

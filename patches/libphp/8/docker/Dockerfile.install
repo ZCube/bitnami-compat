@@ -1,0 +1,1 @@
+RUN install_packages libphp-embed libapache2-mod-php

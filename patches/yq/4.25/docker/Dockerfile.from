@@ -1,0 +1,1 @@
+FROM mikefarah/yq:{{{VERSION}}} AS yq

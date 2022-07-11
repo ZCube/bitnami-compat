@@ -1,0 +1,2 @@
+ADD https://raw.githubusercontent.com/jetstack/cert-manager/master/LICENSE /opt/bitnami/acmesolver/licenses/LICENSE
+COPY --from=acmesolver /app/cmd/acmesolver/acmesolver /opt/bitnami/acmesolver/bin/acmesolver

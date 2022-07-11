@@ -1,0 +1,2 @@
+ADD https://raw.githubusercontent.com/consul/consul/master/LICENSE-AGPLv3.txt /opt/bitnami/consul/licenses/LICENSE-AGPLv3.txt
+COPY --from=consul /bin/consul /opt/bitnami/consul/bin/consul

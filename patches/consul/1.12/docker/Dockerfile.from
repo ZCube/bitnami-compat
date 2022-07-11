@@ -1,0 +1,1 @@
+FROM consul:{{{VERSION}}} AS consul

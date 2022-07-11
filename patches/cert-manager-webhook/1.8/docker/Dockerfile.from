@@ -1,0 +1,1 @@
+FROM quay.io/jetstack/cert-manager-webhook:v{{{VERSION}}} AS cert-manager-webhook

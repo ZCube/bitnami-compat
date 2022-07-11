@@ -1,0 +1,53 @@
+# refer : https://github.com/fluent/fluentd-docker-image/blob/master/v{{{VERSION_MAJOR_MINOR}}}/debian/Dockerfile
+# license : Apache License 2.0
+# https://raw.githubusercontent.com/fluent/fluentd-docker-image/master/LICENSE
+
+ADD https://raw.githubusercontent.com/fluent/fluentd-docker-image/master/LICENSE /opt/bitnami/fluentd/licenses/LICENSE
+
+# Do not split this into multiple RUN!
+# Docker creates a layer for every RUN-Statement
+# therefore an 'apt-get purge' has no effect
+
+ENV GEM_HOME=/opt/bitnami/fluentd
+
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends \
+            ca-certificates \
+ && buildDeps=" \
+      make gcc g++ libc-dev \
+      wget bzip2 gnupg dirmngr \
+    " \
+ && apt-get install -y --no-install-recommends $buildDeps \
+ && echo 'gem: --no-document' >> /etc/gemrc \
+ && gem install oj -v 3.10.18 \
+ && gem install json -v 2.4.1 \
+ && gem install async-http -v 0.54.0 \
+ && gem install fluentd -v {{{VERSION}}} \
+ && gem install fluent-config-regexp-type -v 1.0.0 \
+ && gem install fluent-plugin-concat -v 2.5.0 \
+ && gem install fluent-plugin-parser-cri -v 0.1.1 \
+ && gem install fluent-plugin-detect-exceptions -v 0.0.14 \
+ && gem install fluent-plugin-elasticsearch -v 5.1.4 \
+ && gem install fluent-plugin-grafana-loki -v 1.2.18 \
+ && gem install fluent-plugin-kafka -v 0.17.3 \
+ && gem install fluent-plugin-kubernetes_metadata_filter -v 2.9.4 \
+ && gem install fluent-plugin-multi-format-parser -v 1.0.0 \
+ && gem install fluent-plugin-prometheus -v 2.0.2 \
+ && gem install fluent-plugin-rewrite-tag-filter -v 2.4.0 \
+ && gem install fluent-plugin-s3 -v 1.6.1 \
+ && gem install fluent-plugin-systemd -v 1.0.5 \
+ && wget -O /tmp/jemalloc-5.3.0.tar.bz2 https://github.com/jemalloc/jemalloc/releases/download/5.3.0/jemalloc-5.3.0.tar.bz2 \
+ && cd /tmp && tar -xjf jemalloc-5.3.0.tar.bz2 && cd jemalloc-5.3.0/ \
+ && ./configure && make \
+ && mv lib/libjemalloc.so.2 /usr/lib \
+ && apt-get purge -y --auto-remove \
+                  -o APT::AutoRemove::RecommendsImportant=false \
+                  $buildDeps \
+ && rm -rf /var/lib/apt/lists/* \
+ && rm -rf /tmp/* /var/tmp/* /usr/lib/ruby/gems/*/cache/*.gem /usr/lib/ruby/gems/2.*/gems/fluentd-*/test
+
+RUN mkdir -p /opt/bitnami/fluentd/bin \
+    && mkdir -p /opt/bitnami/fluentd/sbin \
+    && mkdir -p /opt/bitnami/fluentd/lib \
+    && mkdir -p /etc/fluent/ \
+    && ln -sf /opt/bitnami/fluentd/conf/fluentd.conf           /etc/fluent/fluentd.conf

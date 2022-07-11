@@ -1,0 +1,1 @@
+FROM oliver006/redis_exporter:v{{{VERSION}}} AS redis-exporter

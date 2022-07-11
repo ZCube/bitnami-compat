@@ -1,0 +1,1 @@
+FROM prom/consul-exporter:v{{{VERSION}}} AS consul-exporter

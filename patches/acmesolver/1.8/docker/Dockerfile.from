@@ -1,0 +1,1 @@
+FROM quay.io/jetstack/cert-manager-acmesolver:v{{{VERSION}}} AS acmesolver
