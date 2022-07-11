@@ -25,3 +25,10 @@ tasks:
     desc: chmod +x *.sh
     cmds:
       - find ./patches/ | grep "\.sh$" | xargs -I {} git update-index --chmod=+x {}
+
+  generate:
+    desc: chmod +x *.sh
+    cmds:
+      - go run main.go generate
+      - go run main.go generateWorkflow
+      - go run main.go generateReadme
