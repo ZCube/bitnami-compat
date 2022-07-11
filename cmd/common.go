@@ -331,6 +331,10 @@ func PatchDockerfile(appInfo *AppInfo) {
 						"\n\nRUN apt-get update && apt-get upgrade -y && \\")
 			}
 
+			if strings.Contains(originalDockerfileString, "bullseye") &&
+				strings.Contains(originalDockerfileString, "buster") {
+				log.Panic(errors.New("buster + bullseye"))
+			}
 			newDockerfile.Write([]byte(originalDockerfileString))
 		}
 		ioutil.WriteFile(filepath.Join(appInfo.Path, "Dockerfile.arm64"), newDockerfile.Bytes(), 0644)

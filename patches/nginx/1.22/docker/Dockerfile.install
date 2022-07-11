@@ -16,11 +16,11 @@ RUN set -ex; \
 	rm -fr "$GNUPGHOME"; \
 	apt-key list
 
-RUN echo "deb [ signed-by=/etc/apt/trusted.gpg.d/nginx.gpg ] https://nginx.org/packages/mainline/debian/ buster nginx" | tee "/etc/apt/sources.list.d/nginx.list"
+RUN echo "deb [ signed-by=/etc/apt/trusted.gpg.d/nginx.gpg ] https://nginx.org/packages/mainline/debian/ bullseye nginx" | tee "/etc/apt/sources.list.d/nginx.list"
 
 ENV NGINX_VERSION   {{{VERSION}}}
 ENV NJS_VERSION     0.7.2
-ENV PKG_RELEASE     {{{VERSION_MAJOR}}}~buster
+ENV PKG_RELEASE     {{{VERSION_MAJOR}}}~bullseye
 
 RUN set -x \
 # create nginx user/group first, to be consistent throughout docker variants
