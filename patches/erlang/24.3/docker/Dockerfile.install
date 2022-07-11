@@ -94,7 +94,7 @@ RUN set -eux; \
 	mkdir -p "$OTP_PATH"; \
 	wget --progress dot:giga --output-document "$OTP_PATH.tar.gz" "$OTP_SOURCE_URL"; \
 	wget --progress dot:giga --output-document "SHA256.txt" "$OTP_SHA256_URL"; \
-	cat SHA256.txt | grep "$OTP_PATH.tar.gz" | sha256sum --check --strict -; \
+	cat SHA256.txt | grep "otp-$OTP_VERSION.tar.gz" | sha256sum --check --strict -; \
 	tar --extract --file "$OTP_PATH.tar.gz" --directory "$OTP_PATH" --strip-components 1; \
 	\
 # Configure Erlang/OTP for compilation, disable unused features & applications

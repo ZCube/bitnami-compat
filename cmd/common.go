@@ -355,6 +355,7 @@ func PatchDockerfile(appInfo *AppInfo) {
 			if patch.BashPatch != "" {
 				args = []string{
 					"run", "--rm",
+					"-e", fmt.Sprintf("PACKAGE=%v", patch.PackageInfo.Name),
 					"-e", fmt.Sprintf("VERSION=%v.%v.%v", version.Major(), version.Minor(), version.Patch()),
 					"-e", fmt.Sprintf("VERSION_MAJOR_MINOR:%v.%v", version.Major(), version.Minor()),
 					"-e", fmt.Sprintf("VERSION_MAJOR=%v", version.Major()),
