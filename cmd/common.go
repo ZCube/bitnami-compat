@@ -317,10 +317,19 @@ func PatchDockerfile(appInfo *AppInfo) {
 				"RUN . /opt/bitnami/scripts/libcomponent.sh ",
 				"# RUN . /opt/bitnami/scripts/libcomponent.sh ")
 
-			originalDockerfileString = strings.ReplaceAll(originalDockerfileString,
-				"RUN apt-get update && apt-get upgrade -y && \\",
-				string(dockerfileInstallBuilder.Bytes())+
-					"\n\nRUN apt-get update && apt-get upgrade -y && \\")
+			if golangBuilder.Len() > 0 {
+				originalDockerfileString = strings.ReplaceAll(originalDockerfileString,
+					"RUN apt-get update && apt-get upgrade -y && \\",
+					"COPY --from=golang-builder /opt/bitnami/ /opt/bitnami/ \n"+
+						string(dockerfileInstallBuilder.Bytes())+
+						"\n\nRUN apt-get update && apt-get upgrade -y && \\")
+
+			} else {
+				originalDockerfileString = strings.ReplaceAll(originalDockerfileString,
+					"RUN apt-get update && apt-get upgrade -y && \\",
+					string(dockerfileInstallBuilder.Bytes())+
+						"\n\nRUN apt-get update && apt-get upgrade -y && \\")
+			}
 
 			newDockerfile.Write([]byte(originalDockerfileString))
 		}
