@@ -5,7 +5,7 @@
 ENV REDIS_VERSION {{{VERSION}}}
 ENV REDIS_DOWNLOAD_URL http://download.redis.io/releases/redis-{{{VERSION}}}.tar.gz
 ENV REDIS_DOWNLOAD_SHA 5b2b8b7a50111ef395bf1c1d5be11e6e167ac018125055daa8b5c2317ae131ab
-http://download.redis.io/redis-stable.tar.gz.SHA256SUM
+
 RUN mkdir -p /opt/bitnami/redis/etc \
     && mkdir -p /opt/bitnami/redis/licenses
 
@@ -27,7 +27,7 @@ RUN set -eux; \
 	\
 	wget -O redis.tar.gz "$REDIS_DOWNLOAD_URL"; \
 	wget -O README.md "https://raw.githubusercontent.com/redis/redis-hashes/master/README"; \
-	cat README.md | grep {{{VERSION}}} | grep sha256 | awk '{print $4,$2}' | sha256sum -c -; \
+	cat README.md | grep {{{VERSION}}} | grep sha256 | awk '{print $4,"redis.tar.gz"}' | sha256sum -c -; \
 	mkdir -p /usr/src/redis; \
 	tar -xzf redis.tar.gz -C /usr/src/redis --strip-components=1; \
 	rm redis.tar.gz; \

@@ -27,7 +27,7 @@ RUN set -eux; \
 	\
 	wget -O redis.tar.gz "$REDIS_DOWNLOAD_URL"; \
 	wget -O README.md "https://raw.githubusercontent.com/redis/redis-hashes/master/README"; \
-	cat README.md | grep {{{VERSION}}} | grep sha256 | awk '{print $4,$2}' | sha256sum -c -; \
+	cat README.md | grep {{{VERSION}}} | grep sha256 | awk '{print $4,"redis.tar.gz"}' | sha256sum -c -; \
 	mkdir -p /usr/src/redis; \
 	tar -xzf redis.tar.gz -C /usr/src/redis --strip-components=1; \
 	rm redis.tar.gz; \
