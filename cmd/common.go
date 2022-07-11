@@ -335,6 +335,10 @@ func PatchDockerfile(appInfo *AppInfo) {
 				strings.Contains(originalDockerfileString, "buster") {
 				log.Panic(errors.New("buster + bullseye"))
 			}
+			if strings.Contains(originalDockerfileString, "bullseye") &&
+				strings.Contains(originalDockerfileString, "pgdg100") {
+				log.Panic(errors.New("buster + bullseye"))
+			}
 			newDockerfile.Write([]byte(originalDockerfileString))
 		}
 		ioutil.WriteFile(filepath.Join(appInfo.Path, "Dockerfile.arm64"), newDockerfile.Bytes(), 0644)
