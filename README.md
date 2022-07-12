@@ -57,7 +57,7 @@ These images use Bitnami's scripts. Binaries refer to the official Docker or off
 * redis : [`7.0`, `7.0-debian-11`, `7.0.2`, `7.0.2-debian-11`, `7.0.2-debian-11-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fredis)
 * redis-cluster : [`6.0`, `6.0-debian-11`, `6.0.16`, `6.0.16-debian-11`, `6.0.16-debian-11-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fredis-cluster)
 * redis-cluster : [`6.2`, `6.2-debian-11`, `6.2.7`, `6.2.7-debian-11`, `6.2.7-debian-11-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fredis-cluster)
-* redis-cluster : [`7.0`, `7.0-debian-11`, `7.0.2`, `7.0.2-debian-11`, `7.0.2-debian-11-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fredis-cluster)
+* redis-cluster : [`7.0`, `7.0-debian-11`, `7.0.3`, `7.0.3-debian-11`, `7.0.3-debian-11-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fredis-cluster)
 * redis-exporter : [`1`, `1-debian-11`, `1.43.0`, `1.43.0-debian-11`, `1.43.0-debian-11-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fredis-exporter)
 * redis-sentinel : [`6.0`, `6.0-debian-11`, `6.0.16`, `6.0.16-debian-11`, `6.0.16-debian-11-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fredis-sentinel)
 * redis-sentinel : [`6.2`, `6.2-debian-11`, `6.2.7`, `6.2.7-debian-11`, `6.2.7-debian-11-r0`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fredis-sentinel)

@@ -350,7 +350,7 @@ jobs:
          - APP: "redis-cluster"
            OS_FLAVOUR: "debian-11"
            VERSION_MAJOR: "7.0"
-           VERSION: "7.0.2"
+           VERSION: "7.0.3"
            REVISION: "0"
            OS_NAME: "linux"
            REPO_OWNER: "bitnami"
