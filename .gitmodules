@@ -91,3 +91,9 @@
 [submodule "bitnami-docker-wordpress"]
 	path = bitnami-docker-wordpress
 	url = https://github.com/bitnami/bitnami-docker-wordpress
+[submodule "bitnami-docker-postgresql-repmgr"]
+	path = bitnami-docker-postgresql-repmgr
+	url = https://github.com/bitnami/bitnami-docker-postgresql-repmgr
+[submodule "bitnami-docker-pgpool"]
+	path = bitnami-docker-pgpool
+	url = https://github.com/bitnami/bitnami-docker-pgpool

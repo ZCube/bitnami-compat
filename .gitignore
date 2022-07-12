@@ -8,3 +8,4 @@ archive
 Dockerfile
 packages.sh
 *.orig
+*.exe
