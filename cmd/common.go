@@ -60,8 +60,10 @@ type PatchInfo struct {
 	DockerInstallPatch string
 }
 
-func ReplaceVersion(data string, packageInfo PackageInfo) string {
+func ReplaceVersion(data string, appInfo *AppInfo, packageInfo *PackageInfo) string {
 	version := packageInfo.Version
+	data = strings.ReplaceAll(data, "{{{OS_FLAVOUR}}}", appInfo.OS_Flavour)
+	data = strings.ReplaceAll(data, "{{{VERSION_ORIGINAL}}}", version.Original())
 	data = strings.ReplaceAll(data, "{{{VERSION}}}", fmt.Sprintf("%v.%v.%v", version.Major(), version.Minor(), version.Patch()))
 	data = strings.ReplaceAll(data, "{{{VERSION_MAJOR_MINOR}}}", fmt.Sprintf("%v.%v", version.Major(), version.Minor()))
 	data = strings.ReplaceAll(data, "{{{VERSION_MAJOR}}}", fmt.Sprintf("%v", version.Major()))
@@ -271,7 +273,7 @@ func PatchDockerfile(appInfo *AppInfo) {
 					log.Panic(err)
 				}
 				golangBuildString := string(golangBuild)
-				golangBuildString = ReplaceVersion(golangBuildString, patch.PackageInfo)
+				golangBuildString = ReplaceVersion(golangBuildString, appInfo, &patch.PackageInfo)
 
 				golangBuilder.Write([]byte(golangBuildString))
 				golangBuilder.Write([]byte("\n\n"))
@@ -283,7 +285,7 @@ func PatchDockerfile(appInfo *AppInfo) {
 					log.Panic(err)
 				}
 				dockerFromPatchString := string(dockerFromPatch)
-				dockerFromPatchString = ReplaceVersion(dockerFromPatchString, patch.PackageInfo)
+				dockerFromPatchString = ReplaceVersion(dockerFromPatchString, appInfo, &patch.PackageInfo)
 
 				dockerfileFromBuilder.Write([]byte(dockerFromPatchString))
 				dockerfileFromBuilder.Write([]byte("\n\n"))
@@ -295,7 +297,7 @@ func PatchDockerfile(appInfo *AppInfo) {
 					log.Panic(err)
 				}
 				dockerInstallPatchString := string(dockerInstallPatch)
-				dockerInstallPatchString = ReplaceVersion(dockerInstallPatchString, patch.PackageInfo)
+				dockerInstallPatchString = ReplaceVersion(dockerInstallPatchString, appInfo, &patch.PackageInfo)
 
 				dockerfileInstallBuilder.Write([]byte(dockerInstallPatchString))
 				dockerfileInstallBuilder.Write([]byte("\n\n"))
