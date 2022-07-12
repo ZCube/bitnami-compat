@@ -103,7 +103,7 @@ RUN mkdir -p /opt/bitnami/common/bin \
     && mkdir -p /opt/bitnami/postgresql/share \
 	&& mkdir -p /opt/bitnami/repmgr/bin \
     && mkdir -p /opt/bitnami/repmgr/sbin \
-	&& ln -sf /usr/lib/libnss_wrapper.so                /opt/bitnami/common/lib/ \
+	&& ln -sf $(find /usr/lib/*linux-gnu | grep libnss_wrapper.so)    /opt/bitnami/common/lib/ \
     && ln -sf /usr/bin/pg_*                             /opt/bitnami/postgresql/bin/ \
 	&& ln -sf /usr/lib/postgresql/$PG_MAJOR/bin/*       /opt/bitnami/postgresql/bin/ \
 	&& ln -sf /usr/lib/postgresql/$PG_MAJOR/lib/*       /opt/bitnami/postgresql/lib/ \
@@ -111,4 +111,5 @@ RUN mkdir -p /opt/bitnami/common/bin \
     && ln -sf /usr/share/postgresql/$PG_MAJOR/*         /opt/bitnami/postgresql/share/ \
     && ln -sf /usr/bin/repmgr*                          /opt/bitnami/repmgr/bin/ \
 	&& ln -sf /usr/lib/postgresql/$PG_MAJOR/bin/repmgr* /opt/bitnami/repmgr/bin/ \
+	&& deluser postgres \
     && chown 1001:4096 -R /var/run/postgresql /var/lib/postgresql /var/log/postgresql
