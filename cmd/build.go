@@ -23,6 +23,7 @@ package cmd
 
 import (
 	"fmt"
+	"io/ioutil"
 	"log"
 	"os"
 	"os/exec"
@@ -31,6 +32,7 @@ import (
 
 	"github.com/bmatcuk/doublestar/v4"
 	"github.com/spf13/cobra"
+	"gopkg.in/yaml.v3"
 )
 
 var tag string
@@ -43,6 +45,17 @@ var buildCmd = &cobra.Command{
 	Short: "build",
 	Long:  `build`,
 	Run: func(cmd *cobra.Command, args []string) {
+		buf, err := ioutil.ReadFile("config.yaml")
+		if err != nil {
+			log.Panic(err)
+		}
+
+		p := &Config{}
+		err = yaml.Unmarshal(buf, p)
+		if err != nil {
+			log.Fatalf("Unmarshal: %v", err)
+		}
+
 		fmt.Println(cmd.Flag("docker").Value.String())
 		docker := cmd.Flag("docker").Value.String()
 		fmt.Println(cacheFrom)
@@ -90,10 +103,10 @@ var buildCmd = &cobra.Command{
 
 						version := strings.Split(strings.ReplaceAll(appInfo.Path, "\\", "/"), "/")[1]
 						versionSemver := fmt.Sprintf("%v.%v.%v", appInfo.Version.Major(), appInfo.Version.Minor(), appInfo.Version.Patch())
-						args = append(args, "-t", fmt.Sprintf("%v/%v:%v-%v-r%v", tag, appInfo.Name, version, appInfo.OS_Flavour, 0))
+						args = append(args, "-t", fmt.Sprintf("%v/%v:%v-%v-r%v", tag, appInfo.Name, version, appInfo.OS_Flavour, p.Revision))
 						args = append(args, "-t", fmt.Sprintf("%v/%v:%v-%v", tag, appInfo.Name, version, appInfo.OS_Flavour))
 						args = append(args, "-t", fmt.Sprintf("%v/%v:%v", tag, appInfo.Name, version))
-						args = append(args, "-t", fmt.Sprintf("%v/%v:%v-%v-r%v", tag, appInfo.Name, versionSemver, appInfo.OS_Flavour, 0))
+						args = append(args, "-t", fmt.Sprintf("%v/%v:%v-%v-r%v", tag, appInfo.Name, versionSemver, appInfo.OS_Flavour, p.Revision))
 						args = append(args, "-t", fmt.Sprintf("%v/%v:%v-%v", tag, appInfo.Name, versionSemver, appInfo.OS_Flavour))
 						args = append(args, "-t", fmt.Sprintf("%v/%v:%v", tag, appInfo.Name, versionSemver))
 

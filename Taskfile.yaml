@@ -32,13 +32,15 @@ tasks:
       - go run main.go generate
       - go run main.go generateWorkflow
       - go run main.go generateReadme
+      - git add .github/workflows/build-on-push.yml
+      - git add README.md
 
   upgrade:
     desc: upgrade all bitnami submodules
     cmds:
       - find  -maxdepth 1 -type d | grep bitnami-docker | xargs -I "{}" /bin/bash -c 'cd {} && git checkout master && git pull'
       - find  -maxdepth 1 -type d | grep bitnami-docker | xargs -I "{}" /bin/bash -c 'git add {}'
+      - go run main.go revisionUp
+      - git add config.yaml
       - task: generate
-      - git add README.md
-      - git add .github/workflows/build-on-push.yml
 

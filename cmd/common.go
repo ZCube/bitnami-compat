@@ -38,6 +38,10 @@ import (
 	"github.com/bmatcuk/doublestar/v4"
 )
 
+type Config struct {
+	Revision uint64 `yaml:"revision"`
+}
+
 type PackageInfo struct {
 	Name    string
 	Version *semver.Version

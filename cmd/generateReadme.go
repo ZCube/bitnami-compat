@@ -31,6 +31,7 @@ import (
 	"github.com/bmatcuk/doublestar/v4"
 	"github.com/cbroglie/mustache"
 	"github.com/spf13/cobra"
+	"gopkg.in/yaml.v3"
 )
 
 // generateReadmeCmd represents the generateReadme command
@@ -40,6 +41,17 @@ var generateReadmeCmd = &cobra.Command{
 	Long:  `generateReadme`,
 	Run: func(cmd *cobra.Command, args []string) {
 		var err error
+		buf, err := ioutil.ReadFile("config.yaml")
+		if err != nil {
+			log.Panic(err)
+		}
+
+		p := &Config{}
+		err = yaml.Unmarshal(buf, p)
+		if err != nil {
+			log.Fatalf("Unmarshal: %v", err)
+		}
+
 		READMEHeader, err := ioutil.ReadFile("scripts/README-header.md")
 		if err != nil {
 			log.Panic(err)
@@ -100,7 +112,7 @@ var generateReadmeCmd = &cobra.Command{
 							"VERSION_MAJOR": version,
 							"OS_FLAVOUR":    appInfo.OS_Flavour,
 							"OS_NAME":       appInfo.OS_Name,
-							"REVISION":      fmt.Sprint(0),
+							"REVISION":      fmt.Sprint(p.Revision),
 						})
 					if err != nil {
 						log.Panic(err)

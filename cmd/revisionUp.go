@@ -25,17 +25,17 @@ import (
 	"io/ioutil"
 	"log"
 
-	"github.com/bmatcuk/doublestar/v4"
 	"github.com/spf13/cobra"
 	"gopkg.in/yaml.v3"
 )
 
-// generateCmd represents the generate command
-var generateCmd = &cobra.Command{
-	Use:   "generate",
-	Short: "generate dockerfile for arm64",
-	Long:  `generate dockerfile for arm64`,
+// revisionUpCmd represents the revisionUp command
+var revisionUpCmd = &cobra.Command{
+	Use:   "revisionUp",
+	Short: "revisionUp",
+	Long:  `revisionUp`,
 	Run: func(cmd *cobra.Command, args []string) {
+
 		buf, err := ioutil.ReadFile("config.yaml")
 		if err != nil {
 			log.Panic(err)
@@ -47,20 +47,30 @@ var generateCmd = &cobra.Command{
 			log.Fatalf("Unmarshal: %v", err)
 		}
 
-		dockerfiles, err := doublestar.FilepathGlob("bitnami-docker-*/**/Dockerfile")
+		p.Revision = p.Revision + 1
 
+		bytes, err := yaml.Marshal(p)
 		if err != nil {
-			log.Panic(err)
+			log.Fatalf("Marshal: %v", err)
 		}
 
-		for i := range dockerfiles {
-			if appInfo, err := InspectDockerfile(dockerfiles[i]); err == nil {
-				PatchDockerfile(appInfo)
-			}
+		err = ioutil.WriteFile("config.yaml", bytes, 0644)
+		if err != nil {
+			log.Panic(err)
 		}
 	},
 }
 
 func init() {
-	rootCmd.AddCommand(generateCmd)
+	rootCmd.AddCommand(revisionUpCmd)
+
+	// Here you will define your flags and configuration settings.
+
+	// Cobra supports Persistent Flags which will work for this command
+	// and all subcommands, e.g.:
+	// revisionUpCmd.PersistentFlags().String("foo", "", "A help for foo")
+
+	// Cobra supports local flags which will only run when this command
+	// is called directly, e.g.:
+	// revisionUpCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
