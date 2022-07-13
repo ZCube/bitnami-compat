@@ -29,7 +29,7 @@ tasks:
   generate:
     desc: chmod +x *.sh
     cmds:
-      - docker run --rm -t --entrypoint="" -v $PWD:/work -w /work bitnami/git /bin/bash -c 'find bitnami-dockers -maxdepth 1 -type d | grep bitnami-docker | xargs -I "{}" /bin/bash -c "cd {} && git checkout ."'
+      - docker run --rm -t --entrypoint="" -v ${PWD}:/work -w /work bitnami/git /bin/bash -c 'find bitnami-dockers -maxdepth 1 -type d | grep bitnami-docker- | xargs -I "{}" /bin/bash -c "cd {} && git checkout ."'
       - go run main.go generate
       - go run main.go generateWorkflow
       - go run main.go generateReadme
@@ -39,8 +39,9 @@ tasks:
   upgrade:
     desc: upgrade all bitnami submodules
     cmds:
-      - docker run --rm -t --entrypoint="" -v $PWD:/work -w /work bitnami/git /bin/bash -c 'find bitnami-dockers -maxdepth 1 -type d | grep bitnami-docker | xargs -I "{}" /bin/bash -c "cd {} && git checkout master && git pull"'
-      - docker run --rm -t --entrypoint="" -v $PWD:/work -w /work bitnami/git /bin/bash -c 'find bitnami-dockers -maxdepth 1 -type d | grep bitnami-docker | xargs -I "{}" /bin/bash -c "git add {}"'
+      - docker run --rm -t --entrypoint="" -v ${PWD}:/work -w /work bitnami/git /bin/bash -c 'find bitnami-dockers -maxdepth 1 -type d | grep bitnami-docker- | xargs -I "{}" /bin/bash -c "cd {} && git checkout ."'
+      - docker run --rm -t --entrypoint="" -v ${PWD}:/work -w /work bitnami/git /bin/bash -c 'find bitnami-dockers -maxdepth 1 -type d | grep bitnami-docker- | xargs -I "{}" /bin/bash -c "cd {} && echo {} && git checkout master && git pull"'
+      - docker run --rm -t --entrypoint="" -v ${PWD}:/work -w /work bitnami/git /bin/bash -c 'find bitnami-dockers -maxdepth 1 -type d | grep bitnami-docker- | xargs -I "{}" /bin/bash -c "git add {}"'
       - go run main.go revisionUp
       - git add config.yaml
       - task: generate
