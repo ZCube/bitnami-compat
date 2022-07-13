@@ -104,7 +104,7 @@ var generateWorkflowCmd = &cobra.Command{
 				if patchFound {
 					fmt.Println(fmt.Sprintf("(o) %v:%v", appInfo.Name, appInfo.Version.Original()))
 					buildOnPushBodyString := string(buildOnPushBody)
-					version := strings.Split(strings.ReplaceAll(appInfo.Path, "\\", "/"), "/")[1]
+					version := strings.Split(strings.ReplaceAll(appInfo.Path, "\\", "/"), "/")[2]
 					buildOnPushBodyString, err = mustache.Render(buildOnPushBodyString,
 						map[string]string{
 							"APP":           appInfo.Name,

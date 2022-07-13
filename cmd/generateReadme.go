@@ -104,7 +104,7 @@ var generateReadmeCmd = &cobra.Command{
 				if patchFound {
 					fmt.Println(fmt.Sprintf("(o) %v:%v", appInfo.Name, appInfo.Version.Original()))
 					READMEBodyString := string(READMEBody)
-					version := strings.Split(strings.ReplaceAll(appInfo.Path, "\\", "/"), "/")[1]
+					version := strings.Split(strings.ReplaceAll(appInfo.Path, "\\", "/"), "/")[2]
 					READMEBodyString, err = mustache.Render(READMEBodyString,
 						map[string]string{
 							"APP":           appInfo.Name,
