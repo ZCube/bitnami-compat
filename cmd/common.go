@@ -174,7 +174,8 @@ func InspectDockerfile(path string) (*AppInfo, error) {
 		[]PackageInfo{},
 	}
 
-	appInfo.Name = strings.Split(strings.Split(strings.Join(strings.Split(path, "-")[2:], "-"), "/")[0], "\\")[0]
+	packageNameRegex, _ := regexp.Compile("bitnami-docker-([^/\\\\]*)")
+	appInfo.Name = packageNameRegex.FindStringSubmatch(path)[1]
 
 	// packages
 	packagesRegex, _ := regexp.Compile("component_unpack \"([^\"]*)\" \"([^\"]*)\"")
