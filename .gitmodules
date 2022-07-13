@@ -1,99 +1,99 @@
 [submodule "bitnami-docker-bitnami-shell"]
-	path = bitnami-docker-bitnami-shell
+	path = bitnami-dockers/bitnami-docker-bitnami-shell
 	url = https://github.com/bitnami/bitnami-docker-bitnami-shell
 [submodule "bitnami-docker-minio-client"]
-	path = bitnami-docker-minio-client
+	path = bitnami-dockers/bitnami-docker-minio-client
 	url = https://github.com/bitnami/bitnami-docker-minio-client
 [submodule "bitnami-docker-redis-cluster"]
-	path = bitnami-docker-redis-cluster
+	path = bitnami-dockers/bitnami-docker-redis-cluster
 	url = https://github.com/bitnami/bitnami-docker-redis-cluster
 [submodule "bitnami-docker-consul-exporter"]
-	path = bitnami-docker-consul-exporter
+	path = bitnami-dockers/bitnami-docker-consul-exporter
 	url = https://github.com/bitnami/bitnami-docker-consul-exporter
 [submodule "bitnami-docker-mysqld-exporter"]
-	path = bitnami-docker-mysqld-exporter
+	path = bitnami-dockers/bitnami-docker-mysqld-exporter
 	url = https://github.com/bitnami/bitnami-docker-mysqld-exporter
 [submodule "bitnami-docker-redis-exporter"]
-	path = bitnami-docker-redis-exporter
+	path = bitnami-dockers/bitnami-docker-redis-exporter
 	url = https://github.com/bitnami/bitnami-docker-redis-exporter
 [submodule "bitnami-docker-acmesolver"]
-	path = bitnami-docker-acmesolver
+	path = bitnami-dockers/bitnami-docker-acmesolver
 	url = https://github.com/bitnami/bitnami-docker-acmesolver
 [submodule "bitnami-docker-cainjector"]
-	path = bitnami-docker-cainjector
+	path = bitnami-dockers/bitnami-docker-cainjector
 	url = https://github.com/bitnami/bitnami-docker-cainjector
 [submodule "bitnami-docker-consul"]
-	path = bitnami-docker-consul
+	path = bitnami-dockers/bitnami-docker-consul
 	url = https://github.com/bitnami/bitnami-docker-consul
 [submodule "bitnami-docker-elasticsearch"]
-	path = bitnami-docker-elasticsearch
+	path = bitnami-dockers/bitnami-docker-elasticsearch
 	url = https://github.com/bitnami/bitnami-docker-elasticsearch
 [submodule "bitnami-docker-etcd"]
-	path = bitnami-docker-etcd
+	path = bitnami-dockers/bitnami-docker-etcd
 	url = https://github.com/bitnami/bitnami-docker-etcd
 [submodule "bitnami-docker-kafka"]
-	path = bitnami-docker-kafka
+	path = bitnami-dockers/bitnami-docker-kafka
 	url = https://github.com/bitnami/bitnami-docker-kafka
 [submodule "bitnami-docker-mariadb"]
-	path = bitnami-docker-mariadb
+	path = bitnami-dockers/bitnami-docker-mariadb
 	url = https://github.com/bitnami/bitnami-docker-mariadb
 [submodule "bitnami-docker-minio"]
-	path = bitnami-docker-minio
+	path = bitnami-dockers/bitnami-docker-minio
 	url = https://github.com/bitnami/bitnami-docker-minio
 [submodule "bitnami-docker-postgresql"]
-	path = bitnami-docker-postgresql
+	path = bitnami-dockers/bitnami-docker-postgresql
 	url = https://github.com/bitnami/bitnami-docker-postgresql
 [submodule "bitnami-docker-rabbitmq"]
-	path = bitnami-docker-rabbitmq
+	path = bitnami-dockers/bitnami-docker-rabbitmq
 	url = https://github.com/bitnami/bitnami-docker-rabbitmq
 [submodule "bitnami-docker-redis"]
-	path = bitnami-docker-redis
+	path = bitnami-dockers/bitnami-docker-redis
 	url = https://github.com/bitnami/bitnami-docker-redis
 [submodule "bitnami-docker-tomcat"]
-	path = bitnami-docker-tomcat
+	path = bitnami-dockers/bitnami-docker-tomcat
 	url = https://github.com/bitnami/bitnami-docker-tomcat
 [submodule "bitnami-docker-cert-manager-webhook"]
-	path = bitnami-docker-cert-manager-webhook
+	path = bitnami-dockers/bitnami-docker-cert-manager-webhook
 	url = https://github.com/bitnami/bitnami-docker-cert-manager-webhook
 [submodule "bitnami-docker-cert-manager"]
-	path = bitnami-docker-cert-manager
+	path = bitnami-dockers/bitnami-docker-cert-manager
 	url = https://github.com/bitnami/bitnami-docker-cert-manager
 [submodule "bitnami-docker-redis-sentinel"]
-	path = bitnami-docker-redis-sentinel
+	path = bitnami-dockers/bitnami-docker-redis-sentinel
 	url = https://github.com/bitnami/bitnami-docker-redis-sentinel
 [submodule "bitnami-docker-keycloak"]
-	path = bitnami-docker-keycloak
+	path = bitnami-dockers/bitnami-docker-keycloak
 	url = https://github.com/bitnami/bitnami-docker-keycloak
 [submodule "bitnami-docker-memcached"]
-	path = bitnami-docker-memcached
+	path = bitnami-dockers/bitnami-docker-memcached
 	url = https://github.com/bitnami/bitnami-docker-memcached
 [submodule "bitnami-docker-fluentd"]
-	path = bitnami-docker-fluentd
+	path = bitnami-dockers/bitnami-docker-fluentd
 	url = https://github.com/bitnami/bitnami-docker-fluentd
 [submodule "bitnami-docker-mariadb-galera"]
-	path = bitnami-docker-mariadb-galera
+	path = bitnami-dockers/bitnami-docker-mariadb-galera
 	url = https://github.com/bitnami/bitnami-docker-mariadb-galera
 [submodule "bitnami-docker-mysql"]
-	path = bitnami-docker-mysql
+	path = bitnami-dockers/bitnami-docker-mysql
 	url = https://github.com/bitnami/bitnami-docker-mysql
 [submodule "bitnami-docker-jmx-exporter"]
-	path = bitnami-docker-jmx-exporter
+	path = bitnami-dockers/bitnami-docker-jmx-exporter
 	url = https://github.com/bitnami/bitnami-docker-jmx-exporter
 [submodule "bitnami-docker-zookeeper"]
-	path = bitnami-docker-zookeeper
+	path = bitnami-dockers/bitnami-docker-zookeeper
 	url = https://github.com/bitnami/bitnami-docker-zookeeper
 [submodule "bitnami-docker-mongodb"]
-	path = bitnami-docker-mongodb
+	path = bitnami-dockers/bitnami-docker-mongodb
 	url = https://github.com/bitnami/bitnami-docker-mongodb
 [submodule "bitnami-docker-nginx"]
-	path = bitnami-docker-nginx
+	path = bitnami-dockers/bitnami-docker-nginx
 	url = https://github.com/bitnami/bitnami-docker-nginx
 [submodule "bitnami-docker-wordpress"]
-	path = bitnami-docker-wordpress
+	path = bitnami-dockers/bitnami-docker-wordpress
 	url = https://github.com/bitnami/bitnami-docker-wordpress
 [submodule "bitnami-docker-postgresql-repmgr"]
-	path = bitnami-docker-postgresql-repmgr
+	path = bitnami-dockers/bitnami-docker-postgresql-repmgr
 	url = https://github.com/bitnami/bitnami-docker-postgresql-repmgr
 [submodule "bitnami-docker-pgpool"]
-	path = bitnami-docker-pgpool
+	path = bitnami-dockers/bitnami-docker-pgpool
 	url = https://github.com/bitnami/bitnami-docker-pgpool

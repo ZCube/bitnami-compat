@@ -47,7 +47,7 @@ var generateCmd = &cobra.Command{
 			log.Fatalf("Unmarshal: %v", err)
 		}
 
-		dockerfiles, err := doublestar.FilepathGlob("bitnami-docker-*/**/Dockerfile")
+		dockerfiles, err := doublestar.FilepathGlob("bitnami-dockers/bitnami-docker-*/**/Dockerfile")
 
 		if err != nil {
 			log.Panic(err)

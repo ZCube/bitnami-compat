@@ -54,8 +54,8 @@
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
-          context: bitnami-docker-${{ matrix.APP }}/${{ matrix.VERSION_MAJOR }}/${{ matrix.OS_FLAVOUR }}
-          file: bitnami-docker-${{ matrix.APP }}/${{ matrix.VERSION_MAJOR }}/${{ matrix.OS_FLAVOUR }}/Dockerfile.arm64
+          context: bitnami-dockers/bitnami-docker-${{ matrix.APP }}/${{ matrix.VERSION_MAJOR }}/${{ matrix.OS_FLAVOUR }}
+          file: bitnami-dockers/bitnami-docker-${{ matrix.APP }}/${{ matrix.VERSION_MAJOR }}/${{ matrix.OS_FLAVOUR }}/Dockerfile.arm64
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ steps.repository.outputs.lowercase }}/cache/${{ matrix.APP }}:${{ matrix.VERSION }}

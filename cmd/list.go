@@ -35,7 +35,7 @@ var listCmd = &cobra.Command{
 	Short: "list bitnami dockerfiles",
 	Long:  `list bitnami dockerfiles`,
 	Run: func(cmd *cobra.Command, args []string) {
-		dockerfiles, err := doublestar.FilepathGlob("bitnami-docker-*/**/Dockerfile")
+		dockerfiles, err := doublestar.FilepathGlob("bitnami-dockers/bitnami-docker-*/**/Dockerfile")
 
 		if err != nil {
 			log.Panic(err)

@@ -62,7 +62,7 @@ var buildCmd = &cobra.Command{
 		fmt.Println(cacheTo)
 		fmt.Println(tag)
 
-		dockerfiles, err := doublestar.FilepathGlob(fmt.Sprintf("bitnami-docker-%v/**/Dockerfile", docker))
+		dockerfiles, err := doublestar.FilepathGlob(fmt.Sprintf("bitnami-dockers/bitnami-docker-%v/**/Dockerfile", docker))
 		if err != nil {
 			log.Panic(err)
 		}

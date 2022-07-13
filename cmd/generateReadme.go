@@ -74,7 +74,7 @@ var generateReadmeCmd = &cobra.Command{
 			log.Panic(err)
 		}
 
-		dockerfiles, err := doublestar.FilepathGlob("bitnami-docker-*/**/Dockerfile")
+		dockerfiles, err := doublestar.FilepathGlob("bitnami-dockers/bitnami-docker-*/**/Dockerfile")
 
 		if err != nil {
 			log.Panic(err)
