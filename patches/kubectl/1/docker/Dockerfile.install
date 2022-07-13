@@ -1,0 +1,7 @@
+RUN install_packages apt-transport-https ca-certificates curl && \
+    curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg && \
+    echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | tee /etc/apt/sources.list.d/kubernetes.list && \
+    install_packages kubectl={{{VERSION}}}-00 && \
+    mkdir -p /opt/bitnami/kubectl/bin && \
+	ln -sf $(which kubectl)    /opt/bitnami/kubectl/bin/ && \
+    kubectl version

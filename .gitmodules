@@ -97,3 +97,6 @@
 [submodule "bitnami-docker-pgpool"]
 	path = bitnami-dockers/bitnami-docker-pgpool
 	url = https://github.com/bitnami/bitnami-docker-pgpool
+[submodule "bitnami-dockers/bitnami-docker-kubectl"]
+	path = bitnami-dockers/bitnami-docker-kubectl
+	url = https://github.com/bitnami/bitnami-docker-kubectl

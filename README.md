@@ -30,6 +30,7 @@
 |fluentd|Dockerfile|https://github.com/fluent/fluentd-docker-image|
 |jmx-exporter|Install|https://repo1.maven.org/maven2/io/prometheus/jmx|
 |kafka|Install|https://downloads.apache.org/kafka|
+|kubectl|Install|https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/|
 |keycloak|Dockerfile|https://github.com/keycloak/keycloak-containers|
 |mariadb|Dockerfile|https://github.com/MariaDB/mariadb-docker|
 |mariadb-galera|Dockerfile|https://github.com/MariaDB/mariadb-docker|
@@ -71,6 +72,9 @@
 * kafka : [`3.1`, `3.1-debian-11`, `3.1.1`, `3.1.1-debian-11`, `3.1.1-debian-11-r10`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fkafka)
 * kafka : [`3.2`, `3.2-debian-11`, `3.2.0`, `3.2.0-debian-11`, `3.2.0-debian-11-r10`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fkafka)
 * keycloak : [`18`, `18-debian-11`, `18.0.2`, `18.0.2-debian-11`, `18.0.2-debian-11-r10`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fkeycloak)
+* kubectl : [`1.22`, `1.22-debian-11`, `1.22.11`, `1.22.11-debian-11`, `1.22.11-debian-11-r10`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fkubectl)
+* kubectl : [`1.23`, `1.23-debian-11`, `1.23.8`, `1.23.8-debian-11`, `1.23.8-debian-11-r10`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fkubectl)
+* kubectl : [`1.24`, `1.24-debian-11`, `1.24.2`, `1.24.2-debian-11`, `1.24.2-debian-11-r10`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fkubectl)
 * mariadb : [`10.5`, `10.5-debian-11`, `10.5.16`, `10.5.16-debian-11`, `10.5.16-debian-11-r10`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fmariadb)
 * mariadb : [`10.6`, `10.6-debian-11`, `10.6.8`, `10.6.8-debian-11`, `10.6.8-debian-11-r10`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fmariadb)
 * mariadb : [`10.7`, `10.7-debian-11`, `10.7.4`, `10.7.4-debian-11`, `10.7.4-debian-11-r10`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fmariadb)

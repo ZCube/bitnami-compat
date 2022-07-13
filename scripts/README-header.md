@@ -30,6 +30,7 @@
 |fluentd|Dockerfile|https://github.com/fluent/fluentd-docker-image|
 |jmx-exporter|Install|https://repo1.maven.org/maven2/io/prometheus/jmx|
 |kafka|Install|https://downloads.apache.org/kafka|
+|kubectl|Install|https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/|
 |keycloak|Dockerfile|https://github.com/keycloak/keycloak-containers|
 |mariadb|Dockerfile|https://github.com/MariaDB/mariadb-docker|
 |mariadb-galera|Dockerfile|https://github.com/MariaDB/mariadb-docker|
