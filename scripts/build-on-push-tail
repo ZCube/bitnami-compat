@@ -6,13 +6,7 @@
         run: git submodule init
       - name: Checkout bitnami recipe
         shell: bash
-        run: git submodule update bitnami-docker-${{ matrix.APP }}
-      # - name: Checkout bitnami recipe
-      #   uses: actions/checkout@v2
-      #   with:
-      #     repository: ${{ matrix.REPO_OWNER }}/bitnami-docker-${{ matrix.APP }}
-      #     path: 'bitnami-docker-${{ matrix.APP }}'
-      #     ref: master
+        run: git submodule update bitnami-dockers/bitnami-docker-${{ matrix.APP }}
       - name: Set up QEMU dependency
         uses: docker/setup-qemu-action@v1
       - name: Set up Docker Buildx
