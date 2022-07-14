@@ -63,6 +63,7 @@ var revisionUpCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(revisionUpCmd)
+	revisionUpCmd.PersistentFlags().StringVar(&app, "app", "", "app")
 
 	// Here you will define your flags and configuration settings.
 

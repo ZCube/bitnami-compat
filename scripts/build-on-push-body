@@ -1,7 +1,4 @@
          - APP: "{{{APP}}}"
            OS_FLAVOUR: "{{{OS_FLAVOUR}}}"
-           VERSION_MAJOR: "{{{VERSION_MAJOR}}}"
-           VERSION: "{{{VERSION}}}"
-           REVISION: "{{{REVISION}}}"
            OS_NAME: "{{{OS_NAME}}}"
            REPO_OWNER: "bitnami"

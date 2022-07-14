@@ -44,15 +44,6 @@
           go-version: 1.17
       - name: Update Dockerfile OS_ARCH
         shell: bash
-        run: go run main.go generate
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v2
-        with:
-          context: bitnami-dockers/bitnami-docker-${{ matrix.APP }}/${{ matrix.VERSION_MAJOR }}/${{ matrix.OS_FLAVOUR }}
-          file: bitnami-dockers/bitnami-docker-${{ matrix.APP }}/${{ matrix.VERSION_MAJOR }}/${{ matrix.OS_FLAVOUR }}/Dockerfile.arm64
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ steps.repository.outputs.lowercase }}/cache/${{ matrix.APP }}:${{ matrix.VERSION }}
-          cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ steps.repository.outputs.lowercase }}/cache/${{ matrix.APP }}:${{ matrix.VERSION }}
-          labels: ${{ steps.meta.outputs.labels }}
-          platforms: linux/amd64,linux/arm64
+        run: |
+          go run main.go generate --app=${{ matrix.APP }}
+          go run main.go build --app=${{ matrix.APP }} --cache-from --cache-to --push --platforms=linux/amd64,linux/arm64

@@ -254,6 +254,9 @@ func PatchDockerfile(appInfo *AppInfo) {
 				break
 			}
 		}
+		if len(patchs) == 0 {
+			patchFound = len(patchs) == 0
+		}
 	} else {
 		patchFound = len(patchs) == 0
 	}

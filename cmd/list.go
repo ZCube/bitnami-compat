@@ -35,8 +35,13 @@ var listCmd = &cobra.Command{
 	Short: "list bitnami dockerfiles",
 	Long:  `list bitnami dockerfiles`,
 	Run: func(cmd *cobra.Command, args []string) {
-		dockerfiles, err := doublestar.FilepathGlob("bitnami-dockers/bitnami-docker-*/**/Dockerfile")
-
+		var err error
+		var dockerfiles []string
+		if len(app) > 0 {
+			dockerfiles, err = doublestar.FilepathGlob(fmt.Sprintf("bitnami-dockers/bitnami-docker-%v/**/Dockerfile", app))
+		} else {
+			dockerfiles, err = doublestar.FilepathGlob(fmt.Sprintf("bitnami-dockers/bitnami-docker-*/**/Dockerfile"))
+		}
 		if err != nil {
 			log.Panic(err)
 		}
@@ -58,6 +63,9 @@ var listCmd = &cobra.Command{
 							break
 						}
 					}
+					if len(patchs) == 0 {
+						patchFound = len(patchs) == 0
+					}
 				} else {
 					patchFound = len(patchs) == 0
 				}
@@ -75,6 +83,9 @@ var listCmd = &cobra.Command{
 							fmt.Println(fmt.Sprintf(" * %v.%v patch needed", patch.PackageInfo.Name, patch.PackageInfo.Version.Original()))
 						}
 					}
+					if len(patchs) == 0 {
+						patchFound = len(patchs) == 0
+					}
 				}
 			}
 		}
@@ -83,4 +94,5 @@ var listCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(listCmd)
+	listCmd.PersistentFlags().StringVar(&app, "app", "", "app")
 }

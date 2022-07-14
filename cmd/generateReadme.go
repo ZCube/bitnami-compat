@@ -74,8 +74,12 @@ var generateReadmeCmd = &cobra.Command{
 			log.Panic(err)
 		}
 
-		dockerfiles, err := doublestar.FilepathGlob("bitnami-dockers/bitnami-docker-*/**/Dockerfile")
-
+		var dockerfiles []string
+		if len(app) > 0 {
+			dockerfiles, err = doublestar.FilepathGlob(fmt.Sprintf("bitnami-dockers/bitnami-docker-%v/**/Dockerfile", app))
+		} else {
+			dockerfiles, err = doublestar.FilepathGlob(fmt.Sprintf("bitnami-dockers/bitnami-docker-*/**/Dockerfile"))
+		}
 		if err != nil {
 			log.Panic(err)
 		}
@@ -97,6 +101,9 @@ var generateReadmeCmd = &cobra.Command{
 							break
 						}
 					}
+					if len(patchs) == 0 {
+						patchFound = len(patchs) == 0
+					}
 				} else {
 					patchFound = len(patchs) == 0
 				}
@@ -104,7 +111,14 @@ var generateReadmeCmd = &cobra.Command{
 				if patchFound {
 					fmt.Println(fmt.Sprintf("(o) %v:%v", appInfo.Name, appInfo.Version.Original()))
 					READMEBodyString := string(READMEBody)
-					version := strings.Split(strings.ReplaceAll(appInfo.Path, "\\", "/"), "/")[2]
+
+					var version string
+					for _, path := range strings.Split(strings.ReplaceAll(appInfo.Path, "\\", "/"), "/") {
+						if path == appInfo.OS_Flavour {
+							break
+						}
+						version = path
+					}
 					READMEBodyString, err = mustache.Render(READMEBodyString,
 						map[string]string{
 							"APP":           appInfo.Name,
@@ -139,6 +153,7 @@ var generateReadmeCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(generateReadmeCmd)
+	generateReadmeCmd.PersistentFlags().StringVar(&app, "app", "", "app")
 
 	// Here you will define your flags and configuration settings.
 

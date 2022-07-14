@@ -56,6 +56,7 @@
 ## Supported images and tags
 
 * acmesolver : [`1`, `1-debian-11`, `1.8.2`, `1.8.2-debian-11`, `1.8.2-debian-11-r11`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Facmesolver)
+* bitnami-shell : [`11`, `11-debian-11`, `11`, `11-debian-11`, `11-debian-11-r11`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fbitnami-shell)
 * cainjector : [`1`, `1-debian-11`, `1.8.2`, `1.8.2-debian-11`, `1.8.2-debian-11-r11`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fcainjector)
 * cert-manager : [`1`, `1-debian-11`, `1.8.2`, `1.8.2-debian-11`, `1.8.2-debian-11-r11`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fcert-manager)
 * cert-manager-webhook : [`1`, `1-debian-11`, `1.8.2`, `1.8.2-debian-11`, `1.8.2-debian-11-r11`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fcert-manager-webhook)

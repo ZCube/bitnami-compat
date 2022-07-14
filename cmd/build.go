@@ -36,8 +36,11 @@ import (
 )
 
 var tag string
-var cacheFrom string
-var cacheTo string
+var cacheFrom bool
+var cacheTo bool
+var push bool
+var platforms string
+var app string
 
 // buildCmd represents the build command
 var buildCmd = &cobra.Command{
@@ -56,13 +59,12 @@ var buildCmd = &cobra.Command{
 			log.Fatalf("Unmarshal: %v", err)
 		}
 
-		fmt.Println(cmd.Flag("docker").Value.String())
-		docker := cmd.Flag("docker").Value.String()
-		fmt.Println(cacheFrom)
-		fmt.Println(cacheTo)
-		fmt.Println(tag)
-
-		dockerfiles, err := doublestar.FilepathGlob(fmt.Sprintf("bitnami-dockers/bitnami-docker-%v/**/Dockerfile", docker))
+		var dockerfiles []string
+		if len(app) > 0 {
+			dockerfiles, err = doublestar.FilepathGlob(fmt.Sprintf("bitnami-dockers/bitnami-docker-%v/**/Dockerfile", app))
+		} else {
+			dockerfiles, err = doublestar.FilepathGlob(fmt.Sprintf("bitnami-dockers/bitnami-docker-*/**/Dockerfile"))
+		}
 		if err != nil {
 			log.Panic(err)
 		}
@@ -90,6 +92,9 @@ var buildCmd = &cobra.Command{
 							break
 						}
 					}
+					if len(patchs) == 0 {
+						patchFound = len(patchs) == 0
+					}
 				} else {
 					patchFound = len(patchs) == 0
 				}
@@ -101,7 +106,13 @@ var buildCmd = &cobra.Command{
 							"buildx", "build",
 						}
 
-						version := strings.Split(strings.ReplaceAll(appInfo.Path, "\\", "/"), "/")[1]
+						var version string
+						for _, path := range strings.Split(strings.ReplaceAll(appInfo.Path, "\\", "/"), "/") {
+							if path == appInfo.OS_Flavour {
+								break
+							}
+							version = path
+						}
 						versionSemver := fmt.Sprintf("%v.%v.%v", appInfo.Version.Major(), appInfo.Version.Minor(), appInfo.Version.Patch())
 						args = append(args, "-t", fmt.Sprintf("%v/%v:%v-%v-r%v", tag, appInfo.Name, version, appInfo.OS_Flavour, p.Revision))
 						args = append(args, "-t", fmt.Sprintf("%v/%v:%v-%v", tag, appInfo.Name, version, appInfo.OS_Flavour))
@@ -110,10 +121,21 @@ var buildCmd = &cobra.Command{
 						args = append(args, "-t", fmt.Sprintf("%v/%v:%v-%v", tag, appInfo.Name, versionSemver, appInfo.OS_Flavour))
 						args = append(args, "-t", fmt.Sprintf("%v/%v:%v", tag, appInfo.Name, versionSemver))
 
+						if cacheFrom {
+							args = append(args, "--cache-from", fmt.Sprintf("type=registry,ref=%v/%v/%v:%v", tag, "cache", appInfo.Name, versionSemver))
+						}
+						if cacheTo {
+							args = append(args, "--cache-to", fmt.Sprintf("type=registry,ref=%v/%v/%v:%v", tag, "cache", appInfo.Name, versionSemver))
+						}
+
 						args = append(args,
 							"-f", fmt.Sprintf(filepath.Join(wd, filepath.Dir(dockerfiles[i]), "Dockerfile.arm64")),
 							fmt.Sprintf(filepath.Join(wd, filepath.Dir(dockerfiles[i]))),
 						)
+
+						if len(platforms) > 0 {
+							args = append(args, "--platform", platforms)
+						}
 
 						fmt.Println(args)
 
@@ -132,10 +154,12 @@ var buildCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(buildCmd)
-	buildCmd.PersistentFlags().String("docker", "", "docker")
-	buildCmd.PersistentFlags().StringVar(&cacheFrom, "cache-from", "", "cache-from")
-	buildCmd.PersistentFlags().StringVar(&cacheTo, "cache-to", "", "cache-to")
+	buildCmd.PersistentFlags().StringVar(&app, "app", "", "app")
+	buildCmd.PersistentFlags().BoolVar(&cacheFrom, "cache-from", true, "cache-from")
+	buildCmd.PersistentFlags().BoolVar(&cacheTo, "cache-to", false, "cache-to")
 	buildCmd.PersistentFlags().StringVarP(&tag, "tag", "t", "ghcr.io/zcube/bitnami-compat", "tag")
+	buildCmd.PersistentFlags().BoolVar(&push, "push", false, "push")
+	buildCmd.PersistentFlags().StringVar(&platforms, "platforms", "linux/amd64", "platforms")
 
 	// Here you will define your flags and configuration settings.
 

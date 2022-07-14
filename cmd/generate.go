@@ -22,6 +22,7 @@ THE SOFTWARE.
 package cmd
 
 import (
+	"fmt"
 	"io/ioutil"
 	"log"
 
@@ -47,8 +48,12 @@ var generateCmd = &cobra.Command{
 			log.Fatalf("Unmarshal: %v", err)
 		}
 
-		dockerfiles, err := doublestar.FilepathGlob("bitnami-dockers/bitnami-docker-*/**/Dockerfile")
-
+		var dockerfiles []string
+		if len(app) > 0 {
+			dockerfiles, err = doublestar.FilepathGlob(fmt.Sprintf("bitnami-dockers/bitnami-docker-%v/**/Dockerfile", app))
+		} else {
+			dockerfiles, err = doublestar.FilepathGlob(fmt.Sprintf("bitnami-dockers/bitnami-docker-*/**/Dockerfile"))
+		}
 		if err != nil {
 			log.Panic(err)
 		}
@@ -63,4 +68,5 @@ var generateCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(generateCmd)
+	generateCmd.PersistentFlags().StringVar(&app, "app", "", "app")
 }
