@@ -84,6 +84,7 @@ var generateWorkflowCmd = &cobra.Command{
 			log.Panic(err)
 		}
 
+		rendered := map[string]bool{}
 		for i := range dockerfiles {
 			if appInfo, err := InspectDockerfile(dockerfiles[i]); err == nil {
 				// fmt.Println(appInfo.Dependencies)
@@ -110,6 +111,11 @@ var generateWorkflowCmd = &cobra.Command{
 
 				if patchFound {
 					fmt.Println(fmt.Sprintf("(o) %v:%v", appInfo.Name, appInfo.Version.Original()))
+
+					if rendered[appInfo.Name] {
+						continue
+					}
+
 					buildOnPushBodyString := string(buildOnPushBody)
 
 					var version string
@@ -136,6 +142,7 @@ var generateWorkflowCmd = &cobra.Command{
 					if err != nil {
 						log.Panic(err)
 					}
+					rendered[appInfo.Name] = true
 				}
 			}
 		}

@@ -1,10 +1,10 @@
-name: Build on Push
+name: Build
 on:
   push:
   workflow_dispatch:
   schedule:
-    - cron: '10 0 * * 5'
-    - cron: '10 3 * * 5' # trigger for failed jobs
+    - cron: '0 1 * * 5'
+    - cron: '0 4 * * 5' # trigger for failed jobs
 
 env:
   REGISTRY: ghcr.io
