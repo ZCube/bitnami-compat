@@ -1,0 +1,1 @@
+FROM minio/mc:MC_VERSIONSTRING AS minio-client

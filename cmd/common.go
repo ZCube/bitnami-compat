@@ -71,6 +71,8 @@ func ReplaceVersion(data string, appInfo *AppInfo, packageInfo *PackageInfo) str
 	data = strings.ReplaceAll(data, "{{{VERSION}}}", fmt.Sprintf("%v.%v.%v", version.Major(), version.Minor(), version.Patch()))
 	data = strings.ReplaceAll(data, "{{{VERSION_MAJOR_MINOR}}}", fmt.Sprintf("%v.%v", version.Major(), version.Minor()))
 	data = strings.ReplaceAll(data, "{{{VERSION_MAJOR}}}", fmt.Sprintf("%v", version.Major()))
+	data = strings.ReplaceAll(data, "{{{VERSION_MINIOR}}}", fmt.Sprintf("%v", version.Minor()))
+	data = strings.ReplaceAll(data, "{{{VERSION_PATCH}}}", fmt.Sprintf("%v", version.Patch()))
 	return data
 }
 
@@ -369,6 +371,8 @@ func PatchDockerfile(appInfo *AppInfo) {
 					"-e", fmt.Sprintf("VERSION=%v.%v.%v", version.Major(), version.Minor(), version.Patch()),
 					"-e", fmt.Sprintf("VERSION_MAJOR_MINOR:%v.%v", version.Major(), version.Minor()),
 					"-e", fmt.Sprintf("VERSION_MAJOR=%v", version.Major()),
+					"-e", fmt.Sprintf("VERSION_MINOR=%v", version.Minor()),
+					"-e", fmt.Sprintf("VERSION_PATCH=%v", version.Patch()),
 					"-v", fmt.Sprintf("%v:/work", filepath.Join(wd, appInfo.Path)),
 				}
 				args = append(args, "-v", fmt.Sprintf("%v:/work/bash", filepath.Join(wd, filepath.Dir(patch.BashPatch))))

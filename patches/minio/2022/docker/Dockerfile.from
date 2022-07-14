@@ -1,0 +1,1 @@
+FROM minio/minio:MINIO_VERSIONSTRING AS minio
