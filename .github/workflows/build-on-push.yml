@@ -1,5 +1,7 @@
 name: Build on Push
-on: [push]
+on:
+  push:
+  workflow_call:
 
 env:
   REGISTRY: ghcr.io
