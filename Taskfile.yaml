@@ -30,7 +30,7 @@ tasks:
     desc: chmod +x *.sh
     cmds:
       - git submodule update --init --recursive --checkout -f
-      - task: permission
+      # - task: permission
       - go run main.go generate
       - go run main.go generateWorkflow
       - go run main.go generateReadme
@@ -51,6 +51,6 @@ tasks:
       - git submodule update --init --recursive --checkout -f --remote
       - go run main.go revisionUp
       - git add config.yaml
-      - task: generate
+      # - task: generate
       - git commit -am "Update"
       - git push
