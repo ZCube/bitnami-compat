@@ -91,7 +91,7 @@ var buildCmd = &cobra.Command{
 						}
 					}
 				} else {
-					patchFound = false
+					patchFound = len(patchs) == 0
 				}
 
 				if patchFound {
@@ -121,7 +121,7 @@ var buildCmd = &cobra.Command{
 						cmd.Stdout = os.Stdout
 						cmd.Stderr = os.Stderr
 						if err := cmd.Run(); err != nil {
-							fmt.Println(err)
+							log.Panic(err)
 						}
 					}
 				}

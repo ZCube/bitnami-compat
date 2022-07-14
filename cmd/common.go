@@ -255,7 +255,7 @@ func PatchDockerfile(appInfo *AppInfo) {
 			}
 		}
 	} else {
-		patchFound = false
+		patchFound = len(patchs) == 0
 	}
 
 	var golangBuilder bytes.Buffer
@@ -377,7 +377,7 @@ func PatchDockerfile(appInfo *AppInfo) {
 				cmd.Stdout = os.Stdout
 				cmd.Stderr = os.Stderr
 				if err := cmd.Run(); err != nil {
-					fmt.Println(err)
+					log.Panic(err)
 				}
 			}
 		}

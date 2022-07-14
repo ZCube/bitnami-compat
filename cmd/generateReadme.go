@@ -98,7 +98,7 @@ var generateReadmeCmd = &cobra.Command{
 						}
 					}
 				} else {
-					patchFound = false
+					patchFound = len(patchs) == 0
 				}
 
 				if patchFound {
