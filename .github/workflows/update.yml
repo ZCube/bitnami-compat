@@ -22,3 +22,5 @@ jobs:
           git config --global user.email "noreply@github.com"
           git commit -am "Automated Update"
           git push
+          go run main.go list
+
