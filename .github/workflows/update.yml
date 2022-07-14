@@ -1,0 +1,23 @@
+name: cron
+on:
+  schedule:
+    - cron: '0 0 * * 5'
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.17
+      - name: Update module
+        run: |
+          sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /usr/local/bin
+          task upgrade
+          git config --global user.name "GitHub Action"
+          git config --global user.email "noreply@github.com"
+          git commit -am "Automated Update"
+          git push
