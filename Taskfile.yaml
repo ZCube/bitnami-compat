@@ -44,3 +44,13 @@ tasks:
       - git add config.yaml
       - task: generate
 
+
+  push:
+    desc: upgrade all bitnami submodules
+    cmds:
+      - git submodule update --init --recursive --checkout -f --remote
+      - go run main.go revisionUp
+      - git add config.yaml
+      - task: generate
+      - git commit -am "Update"
+      - git push
