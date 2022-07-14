@@ -274,7 +274,7 @@ func PatchDockerfile(appInfo *AppInfo) {
 			log.Panic(err)
 		}
 		for _, patch := range patchs {
-			fmt.Println(patch)
+			fmt.Println("  ", patch)
 			if patch.GolangBuild != "" {
 				golangBuild, err := ioutil.ReadFile(patch.GolangBuild)
 				if err != nil {

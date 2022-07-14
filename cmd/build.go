@@ -35,12 +35,15 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-var tag string
-var cacheFrom bool
-var cacheTo bool
-var push bool
-var platforms string
-var app string
+var (
+	tag       string
+	cacheFrom bool
+	cacheTo   bool
+	push      bool
+	pull      bool
+	platforms string
+	app       string
+)
 
 // buildCmd represents the build command
 var buildCmd = &cobra.Command{
@@ -122,15 +125,19 @@ var buildCmd = &cobra.Command{
 						args = append(args, "-t", fmt.Sprintf("%v/%v:%v", tag, appInfo.Name, versionSemver))
 
 						if cacheFrom {
-							args = append(args, "--cache-from", fmt.Sprintf("type=registry,ref=%v/%v/%v:%v", tag, "cache", appInfo.Name, versionSemver))
+							args = append(args, "--cache-from", fmt.Sprintf("type=registry,ref=%v/%v/%v:%v", tag, "cache", appInfo.Name, version))
 						}
 
 						if cacheTo {
-							args = append(args, "--cache-to", fmt.Sprintf("type=registry,ref=%v/%v/%v:%v", tag, "cache", appInfo.Name, versionSemver))
+							args = append(args, "--cache-to", fmt.Sprintf("type=registry,ref=%v/%v/%v:%v", tag, "cache", appInfo.Name, version))
 						}
 
 						if push {
 							args = append(args, "--push")
+						}
+
+						if pull {
+							args = append(args, "--pull")
 						}
 
 						args = append(args,
@@ -164,6 +171,7 @@ func init() {
 	buildCmd.PersistentFlags().BoolVar(&cacheTo, "cache-to", false, "cache-to")
 	buildCmd.PersistentFlags().StringVarP(&tag, "tag", "t", "ghcr.io/zcube/bitnami-compat", "tag")
 	buildCmd.PersistentFlags().BoolVar(&push, "push", false, "push")
+	buildCmd.PersistentFlags().BoolVar(&push, "pull", true, "pull")
 	buildCmd.PersistentFlags().StringVar(&platforms, "platforms", "linux/amd64", "platforms")
 
 	// Here you will define your flags and configuration settings.
