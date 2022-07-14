@@ -24,12 +24,13 @@ tasks:
   permission:
     desc: chmod +x *.sh
     cmds:
-      - find ./patches/ | grep "\.sh$" | xargs -I {} git update-index --chmod=+x {}
+      - docker run --rm -t --entrypoint="" -v ${PWD}:/work -w /work bitnami/git /bin/bash -c 'find ./patches/ | grep "\.sh$" | xargs -I {} git update-index --chmod=+x {}'
 
   generate:
     desc: chmod +x *.sh
     cmds:
       - git submodule update --init --recursive --checkout -f
+      - task: permission
       - go run main.go generate
       - go run main.go generateWorkflow
       - go run main.go generateReadme
@@ -43,7 +44,6 @@ tasks:
       - go run main.go revisionUp
       - git add config.yaml
       - task: generate
-
 
   push:
     desc: upgrade all bitnami submodules
