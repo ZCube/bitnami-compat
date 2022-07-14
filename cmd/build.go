@@ -124,8 +124,13 @@ var buildCmd = &cobra.Command{
 						if cacheFrom {
 							args = append(args, "--cache-from", fmt.Sprintf("type=registry,ref=%v/%v/%v:%v", tag, "cache", appInfo.Name, versionSemver))
 						}
+
 						if cacheTo {
 							args = append(args, "--cache-to", fmt.Sprintf("type=registry,ref=%v/%v/%v:%v", tag, "cache", appInfo.Name, versionSemver))
+						}
+
+						if push {
+							args = append(args, "--push")
 						}
 
 						args = append(args,
