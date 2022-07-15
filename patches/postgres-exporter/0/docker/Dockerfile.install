@@ -1,0 +1,2 @@
+ADD https://raw.githubusercontent.com/prometheus-community/postgres_exporter/master/LICENSE /opt/bitnami/postgres-exporter/licenses/LICENSE
+COPY --from=postgres-exporter /bin/postgres_exporter /opt/bitnami/postgres-exporter/bin/

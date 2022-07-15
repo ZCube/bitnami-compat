@@ -29,6 +29,8 @@
 ✔️  mariadb-galera
 ✔️  minio
 ✔️  mysql
+✔️  postgresql
+✔️  postgresql-ha
 ✔️  rabbitmq
 ✔️  redis
 ✔️  redis-cluster
@@ -69,15 +71,6 @@
 ❓  nginx-ingress-controller
   ❌  nginx-ingress-controller
   ✔️  nginx
-❓  postgresql
-  ✔️  postgresql
-  ✔️  bitnami-shell
-  ❌  postgres-exporter
-❓  postgresql-ha
-  ✔️  postgresql-repmgr
-  ✔️  pgpool
-  ❌  postgres-exporter
-  ✔️  bitnami-shell
 ❓  rabbitmq-cluster-operator
   ✔️  rabbitmq
   ❌  rmq-default-credential-updater

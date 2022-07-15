@@ -1,0 +1,1 @@
+FROM prometheuscommunity/postgres-exporter:v{{{VERSION}}} AS postgres-exporter

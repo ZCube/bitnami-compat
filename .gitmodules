@@ -134,3 +134,6 @@
 	path = bitnami-dockers/bitnami-docker-kubectl
 	url = https://github.com/bitnami/bitnami-docker-kubectl
     branch = master
+[submodule "bitnami-dockers/bitnami-docker-postgres-exporter"]
+	path = bitnami-dockers/bitnami-docker-postgres-exporter
+	url = https://github.com/bitnami/bitnami-docker-postgres-exporter

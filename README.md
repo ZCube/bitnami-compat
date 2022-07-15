@@ -29,6 +29,8 @@
 ✔️  mariadb-galera
 ✔️  minio
 ✔️  mysql
+✔️  postgresql
+✔️  postgresql-ha
 ✔️  rabbitmq
 ✔️  redis
 ✔️  redis-cluster
@@ -69,15 +71,6 @@
 ❓  nginx-ingress-controller
   ❌  nginx-ingress-controller
   ✔️  nginx
-❓  postgresql
-  ✔️  postgresql
-  ✔️  bitnami-shell
-  ❌  postgres-exporter
-❓  postgresql-ha
-  ✔️  postgresql-repmgr
-  ✔️  pgpool
-  ❌  postgres-exporter
-  ✔️  bitnami-shell
 ❓  rabbitmq-cluster-operator
   ✔️  rabbitmq
   ❌  rmq-default-credential-updater
@@ -171,6 +164,7 @@
 * mysqld-exporter : [`0`, `0-debian-11`, `0.14.0`, `0.14.0-debian-11`, `0.14.0-debian-11-r15`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fmysqld-exporter)
 * nginx : [`1.23`, `1.23-debian-11`, `1.23.0`, `1.23.0-debian-11`, `1.23.0-debian-11-r15`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fnginx)
 * pgpool : [`4`, `4-debian-11`, `4.3.2`, `4.3.2-debian-11`, `4.3.2-debian-11-r15`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fpgpool)
+* postgres-exporter : [`0`, `0-debian-11`, `0.10.1`, `0.10.1-debian-11`, `0.10.1-debian-11-r15`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fpostgres-exporter)
 * postgresql : [`10`, `10-debian-11`, `10.21.0`, `10.21.0-debian-11`, `10.21.0-debian-11-r15`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fpostgresql)
 * postgresql : [`11`, `11-debian-11`, `11.16.0`, `11.16.0-debian-11`, `11.16.0-debian-11-r15`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fpostgresql)
 * postgresql : [`12`, `12-debian-11`, `12.11.0`, `12.11.0-debian-11`, `12.11.0-debian-11-r15`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fpostgresql)
