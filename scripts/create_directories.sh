@@ -8,19 +8,6 @@ export versions_major=( $(cat ${package_dir}/prebuildfs/opt/bitnami/.bitnami_com
 export versions_with_revision=( $(cat ${package_dir}/prebuildfs/opt/bitnami/.bitnami_components.json | jq  -r 'to_entries[] | "\(.value.version)"') )
 export packages=( $(cat ${package_dir}/prebuildfs/opt/bitnami/.bitnami_components.json | jq  -r 'to_entries[] | "\(.key)"') )
 
-for (( i=0; i<${#packages[@]}; i++ )); do
-echo "${packages[i]}/${versions[i]}" 
-mkdir -p patches/${packages[i]}/${versions[i]}/golang
-mkdir -p patches/${packages[i]}/${versions[i]}/docker
-mkdir -p patches/${packages[i]}/${versions[i]}/bash
-mkdir -p patches/${packages[i]}/${versions_major_minor[i]}/golang
-mkdir -p patches/${packages[i]}/${versions_major_minor[i]}/docker
-mkdir -p patches/${packages[i]}/${versions_major_minor[i]}/bash
-mkdir -p patches/${packages[i]}/${versions_major[i]}/golang
-mkdir -p patches/${packages[i]}/${versions_major[i]}/docker
-mkdir -p patches/${packages[i]}/${versions_major[i]}/bash
-done
-
 # Download archives
 mkdir -p archive
 

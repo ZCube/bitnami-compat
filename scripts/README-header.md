@@ -17,6 +17,44 @@
 
 * These images use Bitnami's scripts. Binaries refer to the official Docker or official distribution binaries of the software or Docker recipes for Docker.
 
+# Usage #1
+
+* I know I can't make the images in this repository trustworthy, and I know I can't fix it. This repository is just a personal repository.
+* If you want to use the images, It is recommended not to use the image directly, but to create Dockerfile.arm64 by following the instructions below and then verify and use it.
+
+* Create Dockerfile.arm64 for bitnami-dockers
+  1. install task https://taskfile.dev/installation/
+  2. install golang https://go.dev/doc/install
+  3. clone
+  ```bash
+  git clone https://github.com/ZCube/bitnami-compat
+  cd bitnami-compat
+  task generate
+  ```
+  4. verify Dockerfile.arm64. Official images or build scripts referenced for build are listed in the table below.
+  5. build & use.
+
+* PS. Rabbitmq and fluentd builds are too long. Depending on the machine, it is best to prepare for 1-2 hours.
+
+# Usage #2
+
+* TL;DR
+
+from
+```yaml
+image:
+  registry: docker.io
+  repository: bitnami/postgresql
+  tag: 11.16.0-debian-11-r14
+```
+to
+```yaml
+image:
+  registry: ghcr.io
+  repository: zcube/bitnami-compat/postgresql
+  tag: 11.16.0-debian-11-r15
+```
+
 ## Supported bitnami charts
 
 ```

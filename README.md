@@ -17,6 +17,44 @@
 
 * These images use Bitnami's scripts. Binaries refer to the official Docker or official distribution binaries of the software or Docker recipes for Docker.
 
+# Usage #1
+
+* I know I can't make the images in this repository trustworthy, and I know I can't fix it. This repository is just a personal repository.
+* If you want to use the images, It is recommended not to use the image directly, but to create Dockerfile.arm64 by following the instructions below and then verify and use it.
+
+* Create Dockerfile.arm64 for bitnami-dockers
+  1. install task https://taskfile.dev/installation/
+  2. install golang https://go.dev/doc/install
+  3. clone
+  ```bash
+  git clone https://github.com/ZCube/bitnami-compat
+  cd bitnami-compat
+  task generate
+  ```
+  4. verify Dockerfile.arm64. Official images or build scripts referenced for build are listed in the table below.
+  5. build & use.
+
+* PS. Rabbitmq and fluentd builds are too long. Depending on the machine, it is best to prepare for 1-2 hours.
+
+# Usage #2
+
+* TL;DR
+
+from
+```yaml
+image:
+  registry: docker.io
+  repository: bitnami/postgresql
+  tag: 11.16.0-debian-11-r14
+```
+to
+```yaml
+image:
+  registry: ghcr.io
+  repository: zcube/bitnami-compat/postgresql
+  tag: 11.16.0-debian-11-r15
+```
+
 ## Supported bitnami charts
 
 ```
@@ -189,22 +227,6 @@
 * zookeeper : [`3.7`, `3.7-debian-11`, `3.7.1`, `3.7.1-debian-11`, `3.7.1-debian-11-r15`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fzookeeper)
 * zookeeper : [`3.8`, `3.8-debian-11`, `3.8.0`, `3.8.0-debian-11`, `3.8.0-debian-11-r15`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fzookeeper)
 
-# TL;DR
-from
-```yaml
-image:
-  registry: docker.io
-  repository: bitnami/postgresql
-  tag: 11.14.0-debian-10-r28
-```
-to
-```yaml
-image:
-  registry: ghcr.io
-  repository: zcube/bitnami-compat/postgresql
-  tag: 11.14.0-debian-10
-```
-
 ## Install Task
 
 * using task https://taskfile.dev/installation/
@@ -220,11 +242,17 @@ go run main.go list
 
 ```
 ...
-:heavy_check_mark: mongodb:5.0.9
-:x: mysql:5.7.38
-  :x: mysql.5.7.38-150 patch needed
-:heavy_check_mark: mysql:8.0.29
-:heavy_check_mark: mysqld-exporter:0.14.0
+✔️  mongodb:5.0.9
+✔️  mongodb-exporter:0.33.0
+❌  mysql:5.7.38
+  ❌  mysql.5.7.38-150
+✔️  mysql:8.0.29
+✔️  mysqld-exporter:0.14.0
+❌  nginx:1.21.6
+  ❌  nginx.1.21.6-153
+❌  nginx:1.22.0
+  ❌  nginx.1.22.0-153
+✔️  nginx:1.23.0
 ...
 ```
 
@@ -240,66 +268,48 @@ task upgrade
 
 ## How to add a new image
 
-Example : mariadb/10.6.5-3
+Example : mariadb/10.8
 
 1. Add submodule
   ```bash
   cd bitnami-dockers
   git submodule add https://github.com/bitnami/bitnami-docker-mariadb
+  cd ..
+  go run main.go makeDirs
   ```
 
 2. Write build scripts
-  * patches/bash/mariadb/10.6.5-3/install.sh
-  * patches/docker/mariadb/10.6.5-3/Dockerfile.from
-  * patches/docker/mariadb/10.6.5-3/Dockerfile.install
-  * patches/golang/mariadb/10.6.5-3/install.sh
+  * patches/golang/mariadb/10.8/install.sh
+  * patches/docker/mariadb/10.8/Dockerfile.from
+  * patches/docker/mariadb/10.8/Dockerfile.install
+  * patches/bash/mariadb/10.8/install.sh
 
 3. Apply and test
   ```bash
   task generate
-  cd bitnami-dockers/bitnami-docker-mariadb/10.6/debian-11
+  cd bitnami-dockers/bitnami-docker-mariadb/10.8/debian-11
   docker buildx create --name multiarchbuilder
   docker buildx inspect multiarchbuilder --bootstrap
   docker buildx use multiarchbuilder
-  docker buildx build --platform linux/amd64,linux/arm64 -t bitnami-test .
-  docker run --rm -ti bitnami-test
+  docker buildx build --platform linux/amd64,linux/arm64 -t mariadb:10.8 .
+  docker run --rm -ti mariadb:10.8
   ```
 
 ## License
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+Apache 2.0
 
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-## License for generator
+## License for generator (Golang scripts)
 
 MIT License
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+## License for patches
 
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
+check References
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
+## License for Bitnami docker scripts
+
+Apache 2.0
 
 ## Warning
 
@@ -307,8 +317,10 @@ This repository contains sources, binaries and recipes from Bitnami and other so
 
 These images are not well tested.
 
-The images do not automatically receive security patches.
+This repository is considered for personal use only. 
 
-This repository is considered a proof of concept only.
+This repository lacks support for production use.
 
-Use at your own risk.
+This repository is provided as is.
+
+It might be dangerous for production use. Use after testing

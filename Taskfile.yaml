@@ -37,6 +37,24 @@ tasks:
       - git add .github/workflows/build-on-push.yml
       - git add README.md
 
+  build:
+    desc: build
+    cmds:
+      - go run main.go build --cache-from=false --cache-to=false --push --tag=ghcr.io/zcube/bitnami-compat --platforms=linux/amd64,linux/arm64
+      # - go run main.go build --cache-from=false --cache-to=false --push --tag=ghcr.io/zcube/bitnami-compat --platforms=linux/amd64,linux/arm64 --app=bitnami-shell
+      
+  checkCharts:
+    desc: checkCharts
+    ignore_error: true
+    cmds:
+      - git clone https://github.com/bitnami/charts
+      - go run main.go checkCharts --level=1
+
+  list:
+    desc: list
+    cmds:
+      - go run main.go list
+
   upgrade:
     desc: upgrade all bitnami submodules
     cmds:
