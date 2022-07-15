@@ -1,0 +1,1 @@
+FROM prometheuscommunity/elasticsearch-exporter:v{{{VERSION}}} AS elasticsearch-exporter

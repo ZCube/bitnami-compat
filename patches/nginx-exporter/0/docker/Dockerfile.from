@@ -1,0 +1,1 @@
+FROM nginx/nginx-prometheus-exporter:{{{VERSION}}} AS nginx-exporter

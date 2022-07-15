@@ -1,0 +1,1 @@
+FROM percona/mongodb_exporter:{{{VERSION}}} AS mongodb-exporter

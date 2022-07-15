@@ -1,0 +1,1 @@
+FROM prom/memcached-exporter:v{{{VERSION}}} AS memcached-exporter

@@ -137,3 +137,24 @@
 [submodule "bitnami-dockers/bitnami-docker-postgres-exporter"]
 	path = bitnami-dockers/bitnami-docker-postgres-exporter
 	url = https://github.com/bitnami/bitnami-docker-postgres-exporter
+    branch = master
+[submodule "bitnami-dockers/bitnami-docker-elasticsearch-exporter"]
+	path = bitnami-dockers/bitnami-docker-elasticsearch-exporter
+	url = https://github.com/bitnami/bitnami-docker-elasticsearch-exporter.git
+    branch = master
+[submodule "bitnami-dockers/bitnami-docker-kafka-exporter"]
+	path = bitnami-dockers/bitnami-docker-kafka-exporter
+	url = https://github.com/bitnami/bitnami-docker-kafka-exporter.git
+    branch = master
+[submodule "bitnami-dockers/bitnami-docker-memcached-exporter"]
+	path = bitnami-dockers/bitnami-docker-memcached-exporter
+	url = https://github.com/bitnami/bitnami-docker-memcached-exporter.git
+    branch = master
+[submodule "bitnami-dockers/bitnami-docker-mongodb-exporter"]
+	path = bitnami-dockers/bitnami-docker-mongodb-exporter
+	url = https://github.com/bitnami/bitnami-docker-mongodb-exporter.git
+    branch = master
+[submodule "bitnami-dockers/bitnami-docker-nginx-exporter"]
+	path = bitnami-dockers/bitnami-docker-nginx-exporter
+	url = https://github.com/bitnami/bitnami-docker-nginx-exporter.git
+    branch = master

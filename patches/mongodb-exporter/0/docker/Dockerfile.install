@@ -1,0 +1,2 @@
+ADD https://raw.githubusercontent.com/percona/mongodb_exporter/main/LICENSE /opt/bitnami/mongodb-exporter/licenses/LICENSE
+COPY --from=mongodb-exporter /mongodb_exporter /opt/bitnami/mongodb-exporter/bin/

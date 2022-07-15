@@ -1,0 +1,1 @@
+FROM danielqsj/kafka-exporter:v{{{VERSION}}} AS kafka-exporter

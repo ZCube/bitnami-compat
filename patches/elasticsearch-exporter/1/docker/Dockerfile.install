@@ -1,0 +1,2 @@
+ADD https://raw.githubusercontent.com/prometheus-community/elasticsearch_exporter/master/LICENSE /opt/bitnami/elasticsearch-exporter/licenses/LICENSE
+COPY --from=elasticsearch-exporter /bin/elasticsearch_exporter /opt/bitnami/elasticsearch-exporter/bin/

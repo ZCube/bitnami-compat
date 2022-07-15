@@ -23,11 +23,15 @@
 ✔️  cert-manager
 ✔️  common
 ✔️  consul
+✔️  elasticsearch
 ✔️  etcd
 ✔️  fluentd
+✔️  kafka
 ✔️  mariadb
 ✔️  mariadb-galera
+✔️  memcached
 ✔️  minio
+✔️  mongodb
 ✔️  mysql
 ✔️  postgresql
 ✔️  postgresql-ha
@@ -36,41 +40,24 @@
 ✔️  redis-cluster
 ✔️  tomcat
 ✔️  zookeeper
-❓  elasticsearch
-  ✔️  elasticsearch
-  ❌  elasticsearch-exporter
-  ✔️  bitnami-shell
-  ✔️  bitnami-shell
-❓  kafka
-  ✔️  kafka
-  ✔️  kubectl
-  ✔️  bitnami-shell
-  ❌  kafka-exporter
-  ✔️  jmx-exporter
 ❓  keycloak
   ✔️  keycloak
   ❌  keycloak-config-cli
-❓  memcached
-  ✔️  memcached
-  ✔️  bitnami-shell
-  ❌  memcached-exporter
-❓  mongodb
-  ✔️  mongodb
-  ✔️  nginx
-  ✔️  kubectl
-  ✔️  bitnami-shell
-  ❌  mongodb-exporter
 ❓  mongodb-sharded
   ❌  mongodb-sharded
   ✔️  bitnami-shell
-  ❌  mongodb-exporter
+  ✔️  mongodb-exporter
 ❓  nginx
   ✔️  nginx
   ❌  git
-  ❌  nginx-exporter
+  ✔️  nginx-exporter
 ❓  nginx-ingress-controller
   ❌  nginx-ingress-controller
   ✔️  nginx
+❓  nginx-intel
+  ❌  nginx-intel
+  ❌  git
+  ✔️  nginx-exporter
 ❓  rabbitmq-cluster-operator
   ✔️  rabbitmq
   ❌  rmq-default-credential-updater
@@ -83,7 +70,7 @@
 ❓  wordpress-intel
   ❌  wordpress-intel
   ✔️  bitnami-shell
-  ❌  nginx-exporter
+  ✔️  nginx-exporter
 ```
 ## Binary References
 

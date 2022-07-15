@@ -1,0 +1,2 @@
+ADD https://raw.githubusercontent.com/prometheus/memcached_exporter/master/LICENSE /opt/bitnami/memcached-exporter/licenses/LICENSE
+COPY --from=memcached-exporter /bin/memcached_exporter /opt/bitnami/memcached-exporter/bin/
