@@ -31,6 +31,7 @@ import (
 	"strings"
 
 	"github.com/bmatcuk/doublestar/v4"
+	"github.com/kyokomi/emoji/v2"
 	"github.com/spf13/cobra"
 	"gopkg.in/yaml.v3"
 )
@@ -78,9 +79,9 @@ var buildCmd = &cobra.Command{
 		}
 
 		for i := range dockerfiles {
-			fmt.Println(dockerfiles[i])
+			emoji.Println(dockerfiles[i])
 			if appInfo, err := InspectDockerfile(dockerfiles[i]); err == nil {
-				// fmt.Println(appInfo.Dependencies)
+				// emoji.Println(appInfo.Dependencies)
 
 				patchFound := false
 				var err error
@@ -149,7 +150,7 @@ var buildCmd = &cobra.Command{
 							args = append(args, "--platform", platforms)
 						}
 
-						fmt.Println(args)
+						emoji.Println(args)
 
 						cmd := exec.Command("docker", args...)
 						cmd.Stdout = os.Stdout

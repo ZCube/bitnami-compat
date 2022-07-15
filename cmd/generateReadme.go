@@ -30,6 +30,7 @@ import (
 
 	"github.com/bmatcuk/doublestar/v4"
 	"github.com/cbroglie/mustache"
+	"github.com/kyokomi/emoji/v2"
 	"github.com/spf13/cobra"
 	"gopkg.in/yaml.v3"
 )
@@ -86,7 +87,7 @@ var generateReadmeCmd = &cobra.Command{
 
 		for i := range dockerfiles {
 			if appInfo, err := InspectDockerfile(dockerfiles[i]); err == nil {
-				// fmt.Println(appInfo.Dependencies)
+				// emoji.Println(appInfo.Dependencies)
 
 				patchFound := false
 				var err error
@@ -109,7 +110,7 @@ var generateReadmeCmd = &cobra.Command{
 				}
 
 				if patchFound {
-					fmt.Println(fmt.Sprintf("(o) %v:%v", appInfo.Name, appInfo.Version.Original()))
+					emoji.Println(fmt.Sprintf(":heavy_check_mark: %v:%v", appInfo.Name, appInfo.Version.Original()))
 					READMEBodyString := string(READMEBody)
 
 					var version string

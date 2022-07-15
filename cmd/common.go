@@ -36,6 +36,7 @@ import (
 
 	"github.com/Masterminds/semver"
 	"github.com/bmatcuk/doublestar/v4"
+	"github.com/kyokomi/emoji/v2"
 )
 
 type Config struct {
@@ -269,14 +270,14 @@ func PatchDockerfile(appInfo *AppInfo) {
 	var newDockerfile bytes.Buffer
 
 	if patchFound {
-		fmt.Println(fmt.Sprintf("(o) %v:%v patch", appInfo.Name, appInfo.Version.Original()))
+		emoji.Println(fmt.Sprintf(":heavy_check_mark: %v:%v patch", appInfo.Name, appInfo.Version.Original()))
 
 		originalDockerfile, err := ioutil.ReadFile(filepath.Join(appInfo.Path, "Dockerfile"))
 		if err != nil {
 			log.Panic(err)
 		}
 		for _, patch := range patchs {
-			fmt.Println("  ", patch)
+			emoji.Println("  ", patch)
 			if patch.GolangBuild != "" {
 				golangBuild, err := ioutil.ReadFile(patch.GolangBuild)
 				if err != nil {

@@ -26,6 +26,7 @@ import (
 	"log"
 
 	"github.com/bmatcuk/doublestar/v4"
+	"github.com/kyokomi/emoji/v2"
 	"github.com/spf13/cobra"
 )
 
@@ -48,7 +49,7 @@ var listCmd = &cobra.Command{
 
 		for i := range dockerfiles {
 			if appInfo, err := InspectDockerfile(dockerfiles[i]); err == nil {
-				// fmt.Println(appInfo.Dependencies)
+				// emoji.Println(appInfo.Dependencies)
 
 				patchFound := false
 				var err error
@@ -71,16 +72,16 @@ var listCmd = &cobra.Command{
 				}
 
 				if patchFound {
-					fmt.Println(fmt.Sprintf("(o) %v:%v", appInfo.Name, appInfo.Version.Original()))
+					emoji.Println(fmt.Sprintf(":heavy_check_mark: %v:%v", appInfo.Name, appInfo.Version.Original()))
 				} else {
-					fmt.Println(fmt.Sprintf("(x) %v:%v", appInfo.Name, appInfo.Version.Original()))
+					emoji.Println(fmt.Sprintf(":x: %v:%v", appInfo.Name, appInfo.Version.Original()))
 					for _, patch := range patchs {
 						patchFound = (patch.BashPatch != "" ||
 							patch.DockerFromPatch != "" ||
 							patch.DockerInstallPatch != "" ||
 							patch.GolangBuild != "")
 						if !patchFound {
-							fmt.Println(fmt.Sprintf(" * %v.%v patch needed", patch.PackageInfo.Name, patch.PackageInfo.Version.Original()))
+							emoji.Println(fmt.Sprintf("  :x: %v.%v", patch.PackageInfo.Name, patch.PackageInfo.Version.Original()))
 						}
 					}
 					if len(patchs) == 0 {

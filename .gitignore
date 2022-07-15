@@ -9,3 +9,4 @@ Dockerfile
 packages.sh
 *.orig
 *.exe
+/charts

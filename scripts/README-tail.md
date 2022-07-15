@@ -30,11 +30,11 @@ go run main.go list
 
 ```
 ...
-(o) mongodb:5.0.9
-(x) mysql:5.7.38
- * mysql.5.7.38-150 patch needed
-(o) mysql:8.0.29
-(o) mysqld-exporter:0.14.0
+:heavy_check_mark: mongodb:5.0.9
+:x: mysql:5.7.38
+  :x: mysql.5.7.38-150 patch needed
+:heavy_check_mark: mysql:8.0.29
+:heavy_check_mark: mysqld-exporter:0.14.0
 ...
 ```
 

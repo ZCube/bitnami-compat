@@ -16,6 +16,7 @@ require (
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/hoisie/mustache v0.0.0-20160804235033-6375acf62c69 // indirect
 	github.com/inconshreveable/mousetrap v1.0.0 // indirect
+	github.com/kyokomi/emoji/v2 v2.2.9 // indirect
 	github.com/magiconair/properties v1.8.6 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/pelletier/go-toml v1.9.5 // indirect

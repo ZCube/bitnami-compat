@@ -17,6 +17,81 @@
 
 * These images use Bitnami's scripts. Binaries refer to the official Docker or official distribution binaries of the software or Docker recipes for Docker.
 
+## Supported bitnami charts
+
+```
+✔️  cert-manager
+✔️  common
+✔️  consul
+✔️  etcd
+✔️  fluentd
+✔️  mariadb
+✔️  mariadb-galera
+✔️  minio
+✔️  mysql
+✔️  rabbitmq
+✔️  redis
+✔️  redis-cluster
+✔️  tomcat
+✔️  zookeeper
+❓  elasticsearch
+  ✔️  elasticsearch
+  ❌  elasticsearch-exporter
+  ✔️  bitnami-shell
+  ✔️  bitnami-shell
+❓  kafka
+  ✔️  kafka
+  ✔️  kubectl
+  ✔️  bitnami-shell
+  ❌  kafka-exporter
+  ✔️  jmx-exporter
+❓  keycloak
+  ✔️  keycloak
+  ❌  keycloak-config-cli
+❓  memcached
+  ✔️  memcached
+  ✔️  bitnami-shell
+  ❌  memcached-exporter
+❓  mongodb
+  ✔️  mongodb
+  ✔️  nginx
+  ✔️  kubectl
+  ✔️  bitnami-shell
+  ❌  mongodb-exporter
+❓  mongodb-sharded
+  ❌  mongodb-sharded
+  ✔️  bitnami-shell
+  ❌  mongodb-exporter
+❓  nginx
+  ✔️  nginx
+  ❌  git
+  ❌  nginx-exporter
+❓  nginx-ingress-controller
+  ❌  nginx-ingress-controller
+  ✔️  nginx
+❓  postgresql
+  ✔️  postgresql
+  ✔️  bitnami-shell
+  ❌  postgres-exporter
+❓  postgresql-ha
+  ✔️  postgresql-repmgr
+  ✔️  pgpool
+  ❌  postgres-exporter
+  ✔️  bitnami-shell
+❓  rabbitmq-cluster-operator
+  ✔️  rabbitmq
+  ❌  rmq-default-credential-updater
+  ❌  rabbitmq-cluster-operator
+  ❌  rmq-messaging-topology-operator
+❓  wordpress
+  ✔️  wordpress
+  ✔️  bitnami-shell
+  ❌  apache-exporter
+❓  wordpress-intel
+  ❌  wordpress-intel
+  ✔️  bitnami-shell
+  ❌  nginx-exporter
+```
 ## Binary References
 
 |Package|Type|Reference|Base|
