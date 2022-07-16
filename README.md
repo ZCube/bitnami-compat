@@ -76,6 +76,7 @@ image:
 ✔️  rabbitmq
 ✔️  redis
 ✔️  redis-cluster
+✔️  sealed-secrets
 ✔️  tomcat
 ✔️  zookeeper
 ❓  keycloak
@@ -218,6 +219,7 @@ image:
 * redis-sentinel : [`6.0`, `6.0-debian-11`, `6.0.16`, `6.0.16-debian-11`, `6.0.16-debian-11-r15`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fredis-sentinel)
 * redis-sentinel : [`6.2`, `6.2-debian-11`, `6.2.7`, `6.2.7-debian-11`, `6.2.7-debian-11-r15`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fredis-sentinel)
 * redis-sentinel : [`7.0`, `7.0-debian-11`, `7.0.3`, `7.0.3-debian-11`, `7.0.3-debian-11-r15`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fredis-sentinel)
+* sealed-secrets : [`0`, `0-scratch`, `0.18.1`, `0.18.1-scratch`, `0.18.1-scratch-r15`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fsealed-secrets)
 * tomcat : [`10`, `10-debian-11`, `10.0.22`, `10.0.22-debian-11`, `10.0.22-debian-11-r15`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Ftomcat)
 * tomcat : [`8.5`, `8.5-debian-11`, `8.5.81`, `8.5.81-debian-11`, `8.5.81-debian-11-r15`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Ftomcat)
 * tomcat : [`9.0`, `9.0-debian-11`, `9.0.64`, `9.0.64-debian-11`, `9.0.64-debian-11-r15`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Ftomcat)
