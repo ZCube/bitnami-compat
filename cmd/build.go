@@ -160,6 +160,8 @@ var buildCmd = &cobra.Command{
 						}
 					}
 				}
+			} else {
+				log.Panic(err)
 			}
 		}
 	},

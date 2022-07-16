@@ -26,6 +26,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"log"
 	"os"
@@ -36,6 +37,7 @@ import (
 
 	"github.com/Masterminds/semver"
 	"github.com/bmatcuk/doublestar/v4"
+	"github.com/go-git/go-git/v5"
 	"github.com/kyokomi/emoji/v2"
 )
 
@@ -63,6 +65,28 @@ type PatchInfo struct {
 	GolangBuild        string
 	DockerFromPatch    string
 	DockerInstallPatch string
+}
+
+func getTags(r *git.Repository) ([]string, error) {
+	tags := []string{}
+
+	iter, err := r.Tags()
+	if err != nil {
+		return nil, err
+	}
+
+	for {
+		ref, err := iter.Next()
+		if errors.Is(err, io.EOF) {
+			break
+		}
+		if err != nil {
+			return nil, err
+		}
+		tags = append(tags, ref.Name().Short())
+
+	}
+	return tags, nil
 }
 
 func ReplaceVersion(data string, appInfo *AppInfo, packageInfo *PackageInfo) string {
@@ -132,22 +156,56 @@ func InspectDockerfile(path string) (*AppInfo, error) {
 	versionRegex, _ := regexp.Compile("(BITNAMI_IMAGE_VERSION|APP_VERSION)=\"([^\"]*)\"")
 	versionSubmatchGroup := versionRegex.FindStringSubmatch(dockerfileString)
 
-	if len(versionSubmatchGroup) != 3 {
-		return nil, errors.New("version not found")
-	}
+	packageNameRegex, _ := regexp.Compile("bitnami-docker-([^/\\\\]*)")
+	appInfoName := packageNameRegex.FindStringSubmatch(path)[1]
 
-	appVersion, err := semver.NewVersion(strings.Split(versionSubmatchGroup[2], "-debian")[0])
-	if err != nil {
-		return nil, err
+	var appVersion *semver.Version
+	var OS_Arch string
+	var OS_Flavour string
+	var OS_Name string
+
+	if len(versionSubmatchGroup) != 3 {
+		r, err := git.PlainOpen(".")
+
+		if err != nil {
+			return nil, err
+		}
+		worktree, err := r.Worktree()
+		if err != nil {
+			return nil, err
+		}
+		submodule, err := worktree.Submodule(fmt.Sprintf("bitnami-dockers/bitnami-docker-%v", appInfoName))
+		if err != nil {
+			return nil, err
+		}
+		r2, err := submodule.Repository()
+		if err != nil {
+			return nil, err
+		}
+		tags, err := getTags(r2)
+		if err != nil {
+			return nil, err
+		}
+		if len(tags) == 0 {
+			return nil, errors.New("version not found")
+		}
+		removeRevision := strings.Split(tags[len(tags)-1], "-r")[0]
+		version := strings.Split(removeRevision, "-")[0]
+		OS_Flavour = strings.Split(removeRevision, "-")[1]
+		appVersion, err = semver.NewVersion(version)
+		if err != nil {
+			return nil, err
+		}
+	} else {
+		appVersion, err = semver.NewVersion(strings.Split(versionSubmatchGroup[2], "-debian")[0])
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	// os
 	osRegex, _ := regexp.Compile("(OS_ARCH|OS_FLAVOUR|OS_NAME)=\"([^\"]*)\"")
 	osSubmatchsGroup := osRegex.FindAllStringSubmatch(dockerfileString, -1)
-
-	var OS_Arch string
-	var OS_Flavour string
-	var OS_Name string
 
 	for _, groups := range osSubmatchsGroup {
 		if len(groups) != 3 {
@@ -168,6 +226,7 @@ func InspectDockerfile(path string) (*AppInfo, error) {
 
 	appInfo := &AppInfo{
 		PackageInfo{
+			Name:    appInfoName,
 			Version: appVersion,
 		},
 		OS_Arch,
@@ -176,9 +235,6 @@ func InspectDockerfile(path string) (*AppInfo, error) {
 		filepath.Dir(path),
 		[]PackageInfo{},
 	}
-
-	packageNameRegex, _ := regexp.Compile("bitnami-docker-([^/\\\\]*)")
-	appInfo.Name = packageNameRegex.FindStringSubmatch(path)[1]
 
 	// packages
 	packagesRegex, _ := regexp.Compile("component_unpack \"([^\"]*)\" \"([^\"]*)\"")
@@ -330,18 +386,28 @@ func PatchDockerfile(appInfo *AppInfo) {
 				"RUN . /opt/bitnami/scripts/libcomponent.sh ",
 				"# RUN . /opt/bitnami/scripts/libcomponent.sh ")
 
+			seperators := []string{
+				"RUN apt-get update && apt-get upgrade -y && \\",
+				"FROM scratch",
+			}
+			var seperator string
+			for _, v := range seperators {
+				if strings.Contains(originalDockerfileString, v) {
+					seperator = v
+				}
+			}
 			if golangBuilder.Len() > 0 {
 				originalDockerfileString = strings.ReplaceAll(originalDockerfileString,
-					"RUN apt-get update && apt-get upgrade -y && \\",
+					seperator,
 					"COPY --from=golang-builder /opt/bitnami/ /opt/bitnami/ \n"+
 						string(dockerfileInstallBuilder.Bytes())+
-						"\n\nRUN apt-get update && apt-get upgrade -y && \\")
+						"\n\n"+seperator)
 
 			} else {
 				originalDockerfileString = strings.ReplaceAll(originalDockerfileString,
-					"RUN apt-get update && apt-get upgrade -y && \\",
+					seperator,
 					string(dockerfileInstallBuilder.Bytes())+
-						"\n\nRUN apt-get update && apt-get upgrade -y && \\")
+						"\n\n"+seperator)
 			}
 
 			if strings.Contains(originalDockerfileString, "bullseye") &&

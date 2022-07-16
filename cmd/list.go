@@ -88,6 +88,8 @@ var listCmd = &cobra.Command{
 						patchFound = len(patchs) == 0
 					}
 				}
+			} else {
+				log.Panic(err)
 			}
 		}
 	},

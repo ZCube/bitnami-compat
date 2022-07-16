@@ -61,6 +61,8 @@ var generateCmd = &cobra.Command{
 		for i := range dockerfiles {
 			if appInfo, err := InspectDockerfile(dockerfiles[i]); err == nil {
 				PatchDockerfile(appInfo)
+			} else {
+				log.Panic(err)
 			}
 		}
 	},

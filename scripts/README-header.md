@@ -76,6 +76,7 @@ image:
 ✔️  rabbitmq
 ✔️  redis
 ✔️  redis-cluster
+✔️  sealed-secrets
 ✔️  tomcat
 ✔️  zookeeper
 ❓  keycloak
