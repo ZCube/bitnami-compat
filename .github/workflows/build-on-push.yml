@@ -173,7 +173,7 @@ jobs:
            REPO_OWNER: "bitnami"
          - APP: "sealed-secrets"
            OS_FLAVOUR: "scratch"
-           OS_NAME: "linux"
+           OS_NAME: ""
            REPO_OWNER: "bitnami"
          - APP: "tomcat"
            OS_FLAVOUR: "debian-11"
