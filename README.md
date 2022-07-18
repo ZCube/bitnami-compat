@@ -293,8 +293,8 @@ Example : mariadb/10.8
   docker buildx create --name multiarchbuilder
   docker buildx inspect multiarchbuilder --bootstrap
   docker buildx use multiarchbuilder
-  docker buildx build --platform linux/amd64,linux/arm64 -t mariadb:10.8 .
-  docker run --rm -ti mariadb:10.8
+  docker buildx build --platform linux/amd64,linux/arm64 -t testimage . -f Dockerfile.arm64
+  docker run --rm -ti testimage
   ```
 
 ## License
