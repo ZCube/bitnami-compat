@@ -235,4 +235,4 @@ jobs:
         shell: bash
         run: |
           go run main.go generate --app=${{ matrix.APP }}
-          go run main.go build --app=${{ matrix.APP }} --cache-from --cache-to --push --platforms=linux/amd64,linux/arm64
+          go run main.go build --app=${{ matrix.APP }} --tag=${{ env.REGISTRY }}/${{ steps.repository.outputs.lowercase }} --cache-from --cache-to --push --platforms=linux/amd64,linux/arm64
