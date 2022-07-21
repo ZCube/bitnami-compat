@@ -65,6 +65,7 @@ image:
 ✔️  etcd
 ✔️  fluentd
 ✔️  kafka
+✔️  keycloak
 ✔️  mariadb
 ✔️  mariadb-galera
 ✔️  memcached
@@ -79,9 +80,6 @@ image:
 ✔️  sealed-secrets
 ✔️  tomcat
 ✔️  zookeeper
-❓  keycloak
-  ✔️  keycloak
-  ❌  keycloak-config-cli
 ❓  mongodb-sharded
   ❌  mongodb-sharded
   ✔️  bitnami-shell

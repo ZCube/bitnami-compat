@@ -162,3 +162,6 @@
 	path = bitnami-dockers/bitnami-docker-sealed-secrets
 	url = https://github.com/bitnami/bitnami-docker-sealed-secrets
 	branch = master
+[submodule "bitnami-dockers/bitnami-docker-keycloak-config-cli"]
+	path = bitnami-dockers/bitnami-docker-keycloak-config-cli
+	url = https://github.com/bitnami/bitnami-docker-keycloak-config-cli

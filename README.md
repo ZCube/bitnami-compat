@@ -65,6 +65,7 @@ image:
 ✔️  etcd
 ✔️  fluentd
 ✔️  kafka
+✔️  keycloak
 ✔️  mariadb
 ✔️  mariadb-galera
 ✔️  memcached
@@ -79,9 +80,6 @@ image:
 ✔️  sealed-secrets
 ✔️  tomcat
 ✔️  zookeeper
-❓  keycloak
-  ✔️  keycloak
-  ❌  keycloak-config-cli
 ❓  mongodb-sharded
   ❌  mongodb-sharded
   ✔️  bitnami-shell
@@ -171,6 +169,7 @@ image:
 * kafka : [`3.2`, `3.2-debian-11`, `3.2.0`, `3.2.0-debian-11`, `3.2.0-debian-11-r16`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fkafka)
 * kafka-exporter : [`1`, `1-debian-11`, `1.4.2`, `1.4.2-debian-11`, `1.4.2-debian-11-r16`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fkafka-exporter)
 * keycloak : [`18`, `18-debian-11`, `18.0.2`, `18.0.2-debian-11`, `18.0.2-debian-11-r16`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fkeycloak)
+* keycloak-config-cli : [`5`, `5-debian-11`, `5.2.1`, `5.2.1-debian-11`, `5.2.1-debian-11-r16`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fkeycloak-config-cli)
 * kubectl : [`1.22`, `1.22-debian-11`, `1.22.11`, `1.22.11-debian-11`, `1.22.11-debian-11-r16`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fkubectl)
 * kubectl : [`1.23`, `1.23-debian-11`, `1.23.8`, `1.23.8-debian-11`, `1.23.8-debian-11-r16`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fkubectl)
 * kubectl : [`1.24`, `1.24-debian-11`, `1.24.2`, `1.24.2-debian-11`, `1.24.2-debian-11-r16`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fkubectl)
