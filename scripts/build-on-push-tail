@@ -26,12 +26,12 @@
         id: meta
         uses: docker/metadata-action@v3
         with:
-          tags: |
-            type=raw,value=${{ matrix.VERSION_MAJOR }}
-            type=raw,value=${{ matrix.VERSION_MAJOR }}-${{ matrix.OS_FLAVOUR }}
-            type=raw,value=${{ matrix.VERSION }}
-            type=raw,value=${{ matrix.VERSION }}-${{ matrix.OS_FLAVOUR }}
-            type=raw,value=${{ matrix.VERSION }}-${{ matrix.OS_FLAVOUR }}-r${{ matrix.REVISION }}
+          # tags: |
+          #   type=raw,value=${{ matrix.VERSION_MAJOR }}
+          #   type=raw,value=${{ matrix.VERSION_MAJOR }}-${{ matrix.OS_FLAVOUR }}
+          #   type=raw,value=${{ matrix.VERSION }}
+          #   type=raw,value=${{ matrix.VERSION }}-${{ matrix.OS_FLAVOUR }}
+          #   type=raw,value=${{ matrix.VERSION }}-${{ matrix.OS_FLAVOUR }}-r${{ matrix.REVISION }}
           images: ${{ env.REGISTRY }}/${{ steps.repository.outputs.lowercase }}/${{ matrix.APP }}
       # https://stackoverflow.com/questions/58033366/how-to-get-the-current-branch-within-github-actions
       - name: Extract branch name

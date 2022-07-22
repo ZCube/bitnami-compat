@@ -1,4 +1,2 @@
          - APP: "{{{APP}}}"
-           OS_FLAVOUR: "{{{OS_FLAVOUR}}}"
-           OS_NAME: "{{{OS_NAME}}}"
            REPO_OWNER: "bitnami"
