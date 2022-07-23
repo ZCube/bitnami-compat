@@ -67,6 +67,12 @@ Example : mariadb/10.8
   docker run --rm -ti testimage
   ```
 
+## Recommneded Images for Bitnami Charts
+
+|Charts|Image|Reason|
+|------|-----|------|
+|thanos|docker.io/thanosio/thanos:v0.27.0|Official images are compatible.|
+
 ## License
 
 Apache 2.0
