@@ -34,4 +34,6 @@ ADD https://raw.githubusercontent.com/keycloak/keycloak-containers/main/server/t
 
 RUN sed "s/JDBC_MYSQL_VERSION/$JDBC_MYSQL_VERSION/" /opt/bitnami/keycloak/modules/system/layers/keycloak/com/mysql/jdbc/main/module.xml_ > /opt/bitnami/keycloak/modules/system/layers/keycloak/com/mysql/jdbc/main/module.xml
 
+ADD https://github.com/aerogear/keycloak-metrics-spi/releases/download/2.5.3/keycloak-metrics-spi-2.5.3.jar        /opt/bitnami/keycloak/providers/
+
 RUN chown 1001:1001 -R /opt/bitnami/keycloak
