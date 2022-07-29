@@ -25,6 +25,8 @@ jobs:
         include:
          - APP: "acmesolver"
            REPO_OWNER: "bitnami"
+         - APP: "apache"
+           REPO_OWNER: "bitnami"
          - APP: "bitnami-shell"
            REPO_OWNER: "bitnami"
          - APP: "cainjector"
@@ -44,6 +46,8 @@ jobs:
          - APP: "etcd"
            REPO_OWNER: "bitnami"
          - APP: "fluentd"
+           REPO_OWNER: "bitnami"
+         - APP: "java"
            REPO_OWNER: "bitnami"
          - APP: "jmx-exporter"
            REPO_OWNER: "bitnami"
@@ -73,6 +77,8 @@ jobs:
            REPO_OWNER: "bitnami"
          - APP: "mongodb-exporter"
            REPO_OWNER: "bitnami"
+         - APP: "mongodb-sharded"
+           REPO_OWNER: "bitnami"
          - APP: "mysql"
            REPO_OWNER: "bitnami"
          - APP: "mysqld-exporter"
@@ -82,6 +88,8 @@ jobs:
          - APP: "nginx-exporter"
            REPO_OWNER: "bitnami"
          - APP: "pgpool"
+           REPO_OWNER: "bitnami"
+         - APP: "php-fpm"
            REPO_OWNER: "bitnami"
          - APP: "postgres-exporter"
            REPO_OWNER: "bitnami"
@@ -99,11 +107,15 @@ jobs:
            REPO_OWNER: "bitnami"
          - APP: "redis-sentinel"
            REPO_OWNER: "bitnami"
+         - APP: "ruby"
+           REPO_OWNER: "bitnami"
          - APP: "sealed-secrets"
            REPO_OWNER: "bitnami"
          - APP: "tomcat"
            REPO_OWNER: "bitnami"
          - APP: "wordpress"
+           REPO_OWNER: "bitnami"
+         - APP: "wordpress-nginx"
            REPO_OWNER: "bitnami"
          - APP: "zookeeper"
            REPO_OWNER: "bitnami"
@@ -115,7 +127,7 @@ jobs:
         run: git submodule init
       - name: Checkout bitnami recipe
         shell: bash
-        run: git submodule update bitnami-dockers/bitnami-docker-${{ matrix.APP }}
+        run: git submodule update containers
       - name: Set up QEMU dependency
         uses: docker/setup-qemu-action@v1
       - name: Set up Docker Buildx
