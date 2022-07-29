@@ -59,7 +59,7 @@ tasks:
     desc: upgrade all bitnami submodules
     cmds:
       - git submodule update --init --recursive --checkout -f --remote
-      - git add bitnami-dockers/bitnami-docker-*
+      - git add containers
       - go run main.go revisionUp
       - git add config.yaml
       - task: generate

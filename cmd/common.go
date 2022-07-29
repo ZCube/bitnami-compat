@@ -33,6 +33,7 @@ import (
 	"os/exec"
 	"path/filepath"
 	"regexp"
+	"runtime"
 	"strings"
 
 	"github.com/Masterminds/semver"
@@ -156,50 +157,38 @@ func InspectDockerfile(path string) (*AppInfo, error) {
 	versionRegex, _ := regexp.Compile("(BITNAMI_IMAGE_VERSION|APP_VERSION)=\"([^\"]*)\"")
 	versionSubmatchGroup := versionRegex.FindStringSubmatch(dockerfileString)
 
-	packageNameRegex, _ := regexp.Compile("bitnami-docker-([^/\\\\]*)")
-	appInfoName := packageNameRegex.FindStringSubmatch(path)[1]
+	packageNameRegex, _ := regexp.Compile("containers\\/bitnami\\/([^/\\\\]*)")
+	appInfoName := packageNameRegex.FindStringSubmatch(strings.ReplaceAll(path, "\\", "/"))[1]
 
 	var appVersion *semver.Version
 	var OS_Arch string
 	var OS_Flavour string
 	var OS_Name string
 
-	if len(versionSubmatchGroup) != 3 {
-		r, err := git.PlainOpen(".")
+	// from
+	fromRegex, _ := regexp.Compile("FROM (.*)")
+	fromSubmatchGroups := fromRegex.FindAllStringSubmatch(dockerfileString, -1)
 
-		if err != nil {
-			return nil, err
-		}
-		worktree, err := r.Worktree()
-		if err != nil {
-			return nil, err
-		}
-		submodule, err := worktree.Submodule(fmt.Sprintf("bitnami-dockers/bitnami-docker-%v", appInfoName))
-		if err != nil {
-			return nil, err
-		}
-		r2, err := submodule.Repository()
-		if err != nil {
-			return nil, err
-		}
-		tags, err := getTags(r2)
-		if err != nil {
-			return nil, err
-		}
-		if len(tags) == 0 {
-			return nil, errors.New("version not found")
-		}
-		removeRevision := strings.Split(tags[len(tags)-1], "-r")[0]
-		version := strings.Split(removeRevision, "-")[0]
-		OS_Flavour = strings.Split(removeRevision, "-")[1]
-		appVersion, err = semver.NewVersion(version)
-		if err != nil {
-			return nil, err
-		}
-	} else {
-		appVersion, err = semver.NewVersion(strings.Split(versionSubmatchGroup[2], "-debian")[0])
-		if err != nil {
-			return nil, err
+	if len(fromSubmatchGroups) > 0 {
+		groups := fromSubmatchGroups[len(fromSubmatchGroups)-1]
+		switch groups[1] {
+		case "scratch":
+			OS_Arch = runtime.GOARCH
+			OS_Flavour = "scratch"
+			OS_Name = "linux"
+			break
+		case "bitnami/minideb:buster":
+		case "docker.io/bitnami/minideb:buster":
+			OS_Arch = runtime.GOARCH
+			OS_Flavour = "debian-10"
+			OS_Name = "linux"
+			break
+		case "bitnami/minideb:bullseye":
+		case "docker.io/bitnami/minideb:bullseye":
+			OS_Arch = runtime.GOARCH
+			OS_Flavour = "debian-11"
+			OS_Name = "linux"
+			break
 		}
 	}
 
@@ -226,8 +215,7 @@ func InspectDockerfile(path string) (*AppInfo, error) {
 
 	appInfo := &AppInfo{
 		PackageInfo{
-			Name:    appInfoName,
-			Version: appVersion,
+			Name: appInfoName,
 		},
 		OS_Arch,
 		OS_Flavour,
@@ -286,6 +274,25 @@ func InspectDockerfile(path string) (*AppInfo, error) {
 	} else if len(packages1) == len(packages2) {
 		appInfo.Dependencies = packages1
 	}
+
+	if len(versionSubmatchGroup) != 3 {
+		if len(appInfo.Dependencies) == 1 {
+			appVersion = appInfo.Dependencies[0].Version
+		} else {
+			for _, p := range appInfo.Dependencies {
+				fmt.Println(p.Name, p.Name == appInfoName)
+			}
+			fmt.Println(appInfo.OS_Flavour, appInfo.OS_Arch)
+			return nil, errors.New("unknown version")
+		}
+	} else {
+		appVersion, err = semver.NewVersion(strings.Split(versionSubmatchGroup[2], "-debian")[0])
+		if err != nil {
+			return nil, err
+		}
+	}
+	appInfo.Version = appVersion
+
 	return appInfo, nil
 }
 
