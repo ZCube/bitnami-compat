@@ -33,6 +33,7 @@ import (
 	"github.com/bmatcuk/doublestar/v4"
 	"github.com/kyokomi/emoji/v2"
 	"github.com/spf13/cobra"
+	"golang.org/x/exp/slices"
 	"gopkg.in/yaml.v3"
 )
 
@@ -81,7 +82,9 @@ var buildCmd = &cobra.Command{
 		for i := range dockerfiles {
 			emoji.Println(dockerfiles[i])
 			if appInfo, err := InspectDockerfile(dockerfiles[i]); err == nil {
-				// emoji.Println(appInfo.Dependencies)
+				if slices.Contains(p.Ignores, appInfo.Name) {
+					continue
+				}
 
 				patchFound := false
 				var err error

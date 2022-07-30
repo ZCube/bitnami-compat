@@ -43,7 +43,8 @@ import (
 )
 
 type Config struct {
-	Revision uint64 `yaml:"revision"`
+	Revision uint64   `yaml:"revision"`
+	Ignores  []string `yaml:"ignores"`
 }
 
 type PackageInfo struct {

@@ -23,11 +23,14 @@ package cmd
 
 import (
 	"fmt"
+	"io/ioutil"
 	"log"
 
 	"github.com/bmatcuk/doublestar/v4"
 	"github.com/kyokomi/emoji/v2"
 	"github.com/spf13/cobra"
+	"golang.org/x/exp/slices"
+	"gopkg.in/yaml.v3"
 )
 
 // listCmd represents the list command
@@ -37,6 +40,17 @@ var listCmd = &cobra.Command{
 	Long:  `list bitnami dockerfiles`,
 	Run: func(cmd *cobra.Command, args []string) {
 		var err error
+		buf, err := ioutil.ReadFile("config.yaml")
+		if err != nil {
+			log.Panic(err)
+		}
+
+		p := &Config{}
+		err = yaml.Unmarshal(buf, p)
+		if err != nil {
+			log.Fatalf("Unmarshal: %v", err)
+		}
+
 		var dockerfiles []string
 		if len(app) > 0 {
 			dockerfiles, err = doublestar.FilepathGlob(fmt.Sprintf("containers/bitnami/%v/**/Dockerfile", app))
@@ -49,8 +63,6 @@ var listCmd = &cobra.Command{
 
 		for i := range dockerfiles {
 			if appInfo, err := InspectDockerfile(dockerfiles[i]); err == nil {
-				// emoji.Println(appInfo.Dependencies)
-
 				patchFound := false
 				var err error
 				var patchs []PatchInfo
@@ -69,6 +81,10 @@ var listCmd = &cobra.Command{
 					}
 				} else {
 					patchFound = len(patchs) == 0
+				}
+
+				if slices.Contains(p.Ignores, appInfo.Name) {
+					patchFound = false
 				}
 
 				if patchFound {

@@ -28,6 +28,7 @@ import (
 
 	"github.com/bmatcuk/doublestar/v4"
 	"github.com/spf13/cobra"
+	"golang.org/x/exp/slices"
 	"gopkg.in/yaml.v3"
 )
 
@@ -60,6 +61,9 @@ var generateCmd = &cobra.Command{
 
 		for i := range dockerfiles {
 			if appInfo, err := InspectDockerfile(dockerfiles[i]); err == nil {
+				if slices.Contains(p.Ignores, appInfo.Name) {
+					continue
+				}
 				PatchDockerfile(appInfo)
 			} else {
 				log.Panic(err)

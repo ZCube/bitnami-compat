@@ -25,8 +25,6 @@ jobs:
         include:
          - APP: "acmesolver"
            REPO_OWNER: "bitnami"
-         - APP: "apache"
-           REPO_OWNER: "bitnami"
          - APP: "bitnami-shell"
            REPO_OWNER: "bitnami"
          - APP: "cainjector"
@@ -89,8 +87,6 @@ jobs:
            REPO_OWNER: "bitnami"
          - APP: "pgpool"
            REPO_OWNER: "bitnami"
-         - APP: "php-fpm"
-           REPO_OWNER: "bitnami"
          - APP: "postgres-exporter"
            REPO_OWNER: "bitnami"
          - APP: "postgresql"
@@ -106,8 +102,6 @@ jobs:
          - APP: "redis-exporter"
            REPO_OWNER: "bitnami"
          - APP: "redis-sentinel"
-           REPO_OWNER: "bitnami"
-         - APP: "ruby"
            REPO_OWNER: "bitnami"
          - APP: "sealed-secrets"
            REPO_OWNER: "bitnami"
@@ -162,7 +156,7 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v2
         with:
-          go-version: 1.17
+          go-version: 1.18
       - name: Update Dockerfile OS_ARCH
         shell: bash
         run: |

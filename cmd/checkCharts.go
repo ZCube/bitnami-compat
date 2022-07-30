@@ -31,6 +31,8 @@ import (
 	"github.com/bmatcuk/doublestar/v4"
 	"github.com/kyokomi/emoji/v2"
 	"github.com/spf13/cobra"
+	"golang.org/x/exp/slices"
+	"gopkg.in/yaml.v3"
 )
 
 var level int
@@ -42,6 +44,17 @@ var checkChartsCmd = &cobra.Command{
 	Long:  `checkCharts`,
 	Run: func(cmd *cobra.Command, args []string) {
 		var err error
+		buf, err := ioutil.ReadFile("config.yaml")
+		if err != nil {
+			log.Panic(err)
+		}
+
+		p := &Config{}
+		err = yaml.Unmarshal(buf, p)
+		if err != nil {
+			log.Fatalf("Unmarshal: %v", err)
+		}
+
 		var dockerfiles []string
 		dockerfiles, err = doublestar.FilepathGlob(fmt.Sprintf("containers/bitnami/*/**/Dockerfile"))
 		if err != nil {
@@ -51,7 +64,9 @@ var checkChartsCmd = &cobra.Command{
 		rendered := map[string]bool{}
 		for i := range dockerfiles {
 			if appInfo, err := InspectDockerfile(dockerfiles[i]); err == nil {
-				// emoji.Println(appInfo.Dependencies)
+				if slices.Contains(p.Ignores, appInfo.Name) {
+					continue
+				}
 
 				patchFound := false
 				var err error

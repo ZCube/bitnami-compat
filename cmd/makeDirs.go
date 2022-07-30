@@ -23,6 +23,7 @@ package cmd
 
 import (
 	"fmt"
+	"io/ioutil"
 	"log"
 	"os"
 	"path/filepath"
@@ -30,6 +31,8 @@ import (
 
 	"github.com/bmatcuk/doublestar/v4"
 	"github.com/spf13/cobra"
+	"golang.org/x/exp/slices"
+	"gopkg.in/yaml.v3"
 )
 
 // makeDirsCmd represents the makeDirs command
@@ -39,6 +42,17 @@ var makeDirsCmd = &cobra.Command{
 	Long:  `makeDirs`,
 	Run: func(cmd *cobra.Command, args []string) {
 		var err error
+		buf, err := ioutil.ReadFile("config.yaml")
+		if err != nil {
+			log.Panic(err)
+		}
+
+		p := &Config{}
+		err = yaml.Unmarshal(buf, p)
+		if err != nil {
+			log.Fatalf("Unmarshal: %v", err)
+		}
+
 		var dockerfiles []string
 		if len(app) > 0 {
 			dockerfiles, err = doublestar.FilepathGlob(fmt.Sprintf("containers/bitnami/%v/**/Dockerfile", app))
@@ -51,6 +65,10 @@ var makeDirsCmd = &cobra.Command{
 
 		for i := range dockerfiles {
 			if appInfo, err := InspectDockerfile(dockerfiles[i]); err == nil {
+				if slices.Contains(p.Ignores, appInfo.Name) {
+					continue
+				}
+
 				var version string
 				for _, path := range strings.Split(strings.ReplaceAll(appInfo.Path, "\\", "/"), "/") {
 					if path == appInfo.OS_Flavour {

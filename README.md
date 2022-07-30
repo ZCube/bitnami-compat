@@ -150,7 +150,6 @@ image:
 ## Supported images and tags
 
 * acmesolver : [`1`, `1-debian-11`, `1.9.1`, `1.9.1-debian-11`, `1.9.1-debian-11-r19`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Facmesolver)
-* apache : [`2.4`, `2.4-debian-11`, `2.4.54`, `2.4.54-debian-11`, `2.4.54-debian-11-r19`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fapache)
 * bitnami-shell : [`11`, `11-debian-11`, `11`, `11-debian-11`, `11-debian-11-r19`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fbitnami-shell)
 * cainjector : [`1`, `1-debian-11`, `1.9.1`, `1.9.1-debian-11`, `1.9.1-debian-11-r19`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fcainjector)
 * cert-manager : [`1`, `1-debian-11`, `1.9.1`, `1.9.1-debian-11`, `1.9.1-debian-11-r19`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fcert-manager)
@@ -198,9 +197,6 @@ image:
 * nginx : [`1.23`, `1.23-debian-11`, `1.23.1`, `1.23.1-debian-11`, `1.23.1-debian-11-r19`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fnginx)
 * nginx-exporter : [`0`, `0-debian-11`, `0.10.0`, `0.10.0-debian-11`, `0.10.0-debian-11-r19`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fnginx-exporter)
 * pgpool : [`4`, `4-debian-11`, `4.3.2`, `4.3.2-debian-11`, `4.3.2-debian-11-r19`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fpgpool)
-* php-fpm : [`7.4`, `7.4-debian-11`, `7.4.30`, `7.4.30-debian-11`, `7.4.30-debian-11-r19`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fphp-fpm)
-* php-fpm : [`8.0`, `8.0-debian-11`, `8.0.21`, `8.0.21-debian-11`, `8.0.21-debian-11-r19`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fphp-fpm)
-* php-fpm : [`8.1`, `8.1-debian-11`, `8.1.8`, `8.1.8-debian-11`, `8.1.8-debian-11-r19`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fphp-fpm)
 * postgres-exporter : [`0`, `0-debian-11`, `0.10.1`, `0.10.1-debian-11`, `0.10.1-debian-11-r19`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fpostgres-exporter)
 * postgresql : [`10`, `10-debian-11`, `10.21.0`, `10.21.0-debian-11`, `10.21.0-debian-11-r19`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fpostgresql)
 * postgresql : [`11`, `11-debian-11`, `11.16.0`, `11.16.0-debian-11`, `11.16.0-debian-11-r19`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fpostgresql)
@@ -221,8 +217,6 @@ image:
 * redis-exporter : [`1`, `1-debian-11`, `1.43.0`, `1.43.0-debian-11`, `1.43.0-debian-11-r19`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fredis-exporter)
 * redis-sentinel : [`6.2`, `6.2-debian-11`, `6.2.7`, `6.2.7-debian-11`, `6.2.7-debian-11-r19`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fredis-sentinel)
 * redis-sentinel : [`7.0`, `7.0-debian-11`, `7.0.4`, `7.0.4-debian-11`, `7.0.4-debian-11-r19`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fredis-sentinel)
-* ruby : [`2.7`, `2.7-debian-11`, `2.7.6`, `2.7.6-debian-11`, `2.7.6-debian-11-r19`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fruby)
-* ruby : [`3.1`, `3.1-debian-11`, `3.1.2`, `3.1.2-debian-11`, `3.1.2-debian-11-r19`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fruby)
 * sealed-secrets : [`0`, `0-scratch`, `0.18.1-1`, `0.18.1-1-scratch`, `0.18.1-1-scratch-r19`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fsealed-secrets)
 * tomcat : [`10`, `10-debian-11`, `10.0.23`, `10.0.23-debian-11`, `10.0.23-debian-11-r19`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Ftomcat)
 * tomcat : [`8.5`, `8.5-debian-11`, `8.5.81`, `8.5.81-debian-11`, `8.5.81-debian-11-r19`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Ftomcat)

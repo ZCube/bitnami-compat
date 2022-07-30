@@ -32,6 +32,7 @@ import (
 	"github.com/cbroglie/mustache"
 	"github.com/kyokomi/emoji/v2"
 	"github.com/spf13/cobra"
+	"golang.org/x/exp/slices"
 	"gopkg.in/yaml.v3"
 )
 
@@ -87,7 +88,9 @@ var generateReadmeCmd = &cobra.Command{
 
 		for i := range dockerfiles {
 			if appInfo, err := InspectDockerfile(dockerfiles[i]); err == nil {
-				// emoji.Println(appInfo.Dependencies)
+				if slices.Contains(p.Ignores, appInfo.Name) {
+					continue
+				}
 
 				patchFound := false
 				var err error
