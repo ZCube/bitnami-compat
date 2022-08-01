@@ -165,8 +165,4 @@ jobs:
       - name: Push To Docker Hub
         shell: bash
         run: |
-          skopeo copy --all --dest-creds=zcube:${{ secrets.DOCKER_HUB_KEY }} docker://${{ env.REGISTRY }}/${{ steps.repository.outputs.lowercase }}/${{ matrix.APP }} docker://zcube/bitnami-compat-${{ matrix.APP }}:${{ matrix.VERSION_MAJOR }}
-          skopeo copy --all --dest-creds=zcube:${{ secrets.DOCKER_HUB_KEY }} docker://${{ env.REGISTRY }}/${{ steps.repository.outputs.lowercase }}/${{ matrix.APP }} docker://zcube/bitnami-compat-${{ matrix.APP }}:${{ matrix.VERSION_MAJOR }}-${{ matrix.OS_FLAVOUR }}
-          skopeo copy --all --dest-creds=zcube:${{ secrets.DOCKER_HUB_KEY }} docker://${{ env.REGISTRY }}/${{ steps.repository.outputs.lowercase }}/${{ matrix.APP }} docker://zcube/bitnami-compat-${{ matrix.APP }}:${{ matrix.VERSION }}
-          skopeo copy --all --dest-creds=zcube:${{ secrets.DOCKER_HUB_KEY }} docker://${{ env.REGISTRY }}/${{ steps.repository.outputs.lowercase }}/${{ matrix.APP }} docker://zcube/bitnami-compat-${{ matrix.APP }}:${{ matrix.VERSION }}-${{ matrix.OS_FLAVOUR }}
-          skopeo copy --all --dest-creds=zcube:${{ secrets.DOCKER_HUB_KEY }} docker://${{ env.REGISTRY }}/${{ steps.repository.outputs.lowercase }}/${{ matrix.APP }} docker://zcube/bitnami-compat-${{ matrix.APP }}:${{ matrix.VERSION }}-${{ matrix.OS_FLAVOUR }}-r${{ matrix.REVISION }}
+          go run main.go push --app=${{ matrix.APP }} --tag=${{ env.REGISTRY }}/${{ steps.repository.outputs.lowercase }} --tag-to docker.io/zcube/bitnami-compat- --dest-creds=zcube:${{ secrets.DOCKER_HUB_KEY }}
