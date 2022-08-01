@@ -52,7 +52,7 @@
         run: |
           go run main.go generate --app=${{ matrix.APP }}
           go run main.go build --app=${{ matrix.APP }} --tag=${{ env.REGISTRY }}/${{ steps.repository.outputs.lowercase }}/,docker.io/zcube/bitnami-compat- --cache-from --cache-to --push --platforms=linux/amd64,linux/arm64
-      # - name: Push To Docker Hub
-      #   shell: bash
-      #   run: |
-      #     go run main.go push --app=${{ matrix.APP }} --tag=${{ env.REGISTRY }}/${{ steps.repository.outputs.lowercase }} --tag-to docker.io/zcube/bitnami-compat- --dest-creds=zcube:${{ secrets.DOCKER_HUB_KEY }}
+      - name: Push To Docker Hub
+        shell: bash
+        run: |
+          go run main.go push --app=${{ matrix.APP }} --tag=${{ env.REGISTRY }}/${{ steps.repository.outputs.lowercase }}/ --tag-to docker.io/zcube/bitnami-compat- --dest-creds=zcube:${{ secrets.DOCKER_HUB_KEY }}
