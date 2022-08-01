@@ -157,7 +157,7 @@ var pushCmd = &cobra.Command{
 				args = []string{
 					"copy", "--all",
 					"--dest-creds", destCreds,
-					fmt.Sprintf("docker://%v/%v:%v-%v-r%v", tag, appInfo.Name, versionSemver, appInfo.OS_Flavour, p.Revision),
+					fmt.Sprintf("docker://%v%v:%v-%v-r%v", tag, appInfo.Name, versionSemver, appInfo.OS_Flavour, p.Revision),
 				}
 
 				dests := []string{
