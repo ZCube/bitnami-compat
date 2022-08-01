@@ -114,7 +114,7 @@ var pushCmd = &cobra.Command{
 						args = []string{
 							"copy", "--all",
 							"--dest-creds", destCreds,
-							fmt.Sprintf("docker://%v/%v:%v-%v-r%v", tag, appInfo.Name, versionSemver, appInfo.OS_Flavour, p.Revision),
+							fmt.Sprintf("docker://%v%v:%v-%v-r%v", tag, appInfo.Name, versionSemver, appInfo.OS_Flavour, p.Revision),
 						}
 
 						dests := []string{
@@ -187,7 +187,7 @@ var pushCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(pushCmd)
 	pushCmd.PersistentFlags().StringVar(&app, "app", "", "app")
-	pushCmd.PersistentFlags().StringVarP(&tag, "tag", "t", "ghcr.io/zcube/bitnami-compat", "tag")
+	pushCmd.PersistentFlags().StringVarP(&tag, "tag", "t", "ghcr.io/zcube/bitnami-compat/", "tag")
 	pushCmd.PersistentFlags().StringVar(&tagTo, "tag-to", "docker.io/zcube/bitnami-compat-", "tag-to")
 	pushCmd.PersistentFlags().StringVar(&destCreds, "dest-creds", "", "dest-creds")
 

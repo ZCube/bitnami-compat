@@ -121,19 +121,22 @@ var buildCmd = &cobra.Command{
 							version = path
 						}
 						versionSemver := fmt.Sprintf("%v.%v.%v", appInfo.Version.Major(), appInfo.Version.Minor(), appInfo.Version.Patch())
-						args = append(args, "-t", fmt.Sprintf("%v/%v:%v-%v-r%v", tag, appInfo.Name, version, appInfo.OS_Flavour, p.Revision))
-						args = append(args, "-t", fmt.Sprintf("%v/%v:%v-%v", tag, appInfo.Name, version, appInfo.OS_Flavour))
-						args = append(args, "-t", fmt.Sprintf("%v/%v:%v", tag, appInfo.Name, version))
-						args = append(args, "-t", fmt.Sprintf("%v/%v:%v-%v-r%v", tag, appInfo.Name, versionSemver, appInfo.OS_Flavour, p.Revision))
-						args = append(args, "-t", fmt.Sprintf("%v/%v:%v-%v", tag, appInfo.Name, versionSemver, appInfo.OS_Flavour))
-						args = append(args, "-t", fmt.Sprintf("%v/%v:%v", tag, appInfo.Name, versionSemver))
+						tags := strings.Split(tag, ",")
+						for _, tag_ := range tags {
+							args = append(args, "-t", fmt.Sprintf("%v%v:%v-%v-r%v", tag_, appInfo.Name, version, appInfo.OS_Flavour, p.Revision))
+							args = append(args, "-t", fmt.Sprintf("%v%v:%v-%v", tag_, appInfo.Name, version, appInfo.OS_Flavour))
+							args = append(args, "-t", fmt.Sprintf("%v%v:%v", tag_, appInfo.Name, version))
+							args = append(args, "-t", fmt.Sprintf("%v%v:%v-%v-r%v", tag_, appInfo.Name, versionSemver, appInfo.OS_Flavour, p.Revision))
+							args = append(args, "-t", fmt.Sprintf("%v%v:%v-%v", tag_, appInfo.Name, versionSemver, appInfo.OS_Flavour))
+							args = append(args, "-t", fmt.Sprintf("%v%v:%v", tag_, appInfo.Name, versionSemver))
+						}
 
 						if cacheFrom {
-							args = append(args, "--cache-from", fmt.Sprintf("type=registry,ref=%v/%v/%v:%v", tag, "cache", appInfo.Name, version))
+							args = append(args, "--cache-from", fmt.Sprintf("type=registry,ref=%v%v/%v:%v", tags[0], "cache", appInfo.Name, version))
 						}
 
 						if cacheTo {
-							args = append(args, "--cache-to", fmt.Sprintf("type=registry,ref=%v/%v/%v:%v", tag, "cache", appInfo.Name, version))
+							args = append(args, "--cache-to", fmt.Sprintf("type=registry,ref=%v%v/%v:%v", tags[0], "cache", appInfo.Name, version))
 						}
 
 						if push {
@@ -175,7 +178,7 @@ func init() {
 	buildCmd.PersistentFlags().StringVar(&app, "app", "", "app")
 	buildCmd.PersistentFlags().BoolVar(&cacheFrom, "cache-from", true, "cache-from")
 	buildCmd.PersistentFlags().BoolVar(&cacheTo, "cache-to", false, "cache-to")
-	buildCmd.PersistentFlags().StringVarP(&tag, "tag", "t", "ghcr.io/zcube/bitnami-compat", "tag")
+	buildCmd.PersistentFlags().StringVarP(&tag, "tag", "t", "ghcr.io/zcube/bitnami-compat/", "tag")
 	buildCmd.PersistentFlags().BoolVar(&push, "push", false, "push")
 	buildCmd.PersistentFlags().BoolVar(&pull, "pull", true, "pull")
 	buildCmd.PersistentFlags().StringVar(&platforms, "platforms", "linux/amd64", "platforms")
