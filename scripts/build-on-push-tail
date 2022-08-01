@@ -42,8 +42,16 @@
         uses: actions/setup-go@v2
         with:
           go-version: 1.18
-      - name: Update Dockerfile OS_ARCH
+      - name: Build Docker Image And Push To GHCR
         shell: bash
         run: |
           go run main.go generate --app=${{ matrix.APP }}
           go run main.go build --app=${{ matrix.APP }} --tag=${{ env.REGISTRY }}/${{ steps.repository.outputs.lowercase }} --cache-from --cache-to --push --platforms=linux/amd64,linux/arm64
+      - name: Push To Docker Hub
+        shell: bash
+        run: |
+          skopeo copy --all --dest-creds=zcube:${{ secrets.DOCKER_HUB_KEY }} docker://${{ env.REGISTRY }}/${{ steps.repository.outputs.lowercase }}/${{ matrix.APP }} docker://zcube/bitnami-compat-${{ matrix.APP }}:${{ matrix.VERSION_MAJOR }}
+          skopeo copy --all --dest-creds=zcube:${{ secrets.DOCKER_HUB_KEY }} docker://${{ env.REGISTRY }}/${{ steps.repository.outputs.lowercase }}/${{ matrix.APP }} docker://zcube/bitnami-compat-${{ matrix.APP }}:${{ matrix.VERSION_MAJOR }}-${{ matrix.OS_FLAVOUR }}
+          skopeo copy --all --dest-creds=zcube:${{ secrets.DOCKER_HUB_KEY }} docker://${{ env.REGISTRY }}/${{ steps.repository.outputs.lowercase }}/${{ matrix.APP }} docker://zcube/bitnami-compat-${{ matrix.APP }}:${{ matrix.VERSION }}
+          skopeo copy --all --dest-creds=zcube:${{ secrets.DOCKER_HUB_KEY }} docker://${{ env.REGISTRY }}/${{ steps.repository.outputs.lowercase }}/${{ matrix.APP }} docker://zcube/bitnami-compat-${{ matrix.APP }}:${{ matrix.VERSION }}-${{ matrix.OS_FLAVOUR }}
+          skopeo copy --all --dest-creds=zcube:${{ secrets.DOCKER_HUB_KEY }} docker://${{ env.REGISTRY }}/${{ steps.repository.outputs.lowercase }}/${{ matrix.APP }} docker://zcube/bitnami-compat-${{ matrix.APP }}:${{ matrix.VERSION }}-${{ matrix.OS_FLAVOUR }}-r${{ matrix.REVISION }}
