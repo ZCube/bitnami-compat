@@ -66,6 +66,9 @@ var pushCmd = &cobra.Command{
 			log.Panic(err)
 		}
 
+		var lastAppInfo *AppInfo
+		lastAppInfo = nil
+
 		for i := range dockerfiles {
 			emoji.Println(dockerfiles[i])
 			if appInfo, err := InspectDockerfile(dockerfiles[i]); err == nil {
@@ -136,10 +139,46 @@ var pushCmd = &cobra.Command{
 								log.Panic(err)
 							}
 						}
+
+						lastAppInfo = appInfo
 					}
 				}
 			} else {
 				log.Panic(err)
+			}
+		}
+		if lastAppInfo != nil {
+			appInfo := lastAppInfo
+
+			var args []string
+			{
+				versionSemver := fmt.Sprintf("%v.%v.%v", appInfo.Version.Major(), appInfo.Version.Minor(), appInfo.Version.Patch())
+
+				args = []string{
+					"copy", "--all",
+					"--dest-creds", destCreds,
+					fmt.Sprintf("docker://%v/%v:%v-%v-r%v", tag, appInfo.Name, versionSemver, appInfo.OS_Flavour, p.Revision),
+				}
+
+				dests := []string{
+					fmt.Sprintf("docker://%v%v:latest", tagTo, appInfo.Name),
+				}
+
+				for _, dest := range dests {
+					args_ := slices.Clone(args)
+					args_ = append(args_, dest)
+
+					emoji.Println(args_)
+
+					cmd := exec.Command("skopeo", args_...)
+					cmd.Stdout = os.Stdout
+					cmd.Stderr = os.Stderr
+					if err := cmd.Run(); err != nil {
+						log.Panic(err)
+					}
+				}
+
+				lastAppInfo = appInfo
 			}
 		}
 	},
