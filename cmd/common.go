@@ -100,6 +100,7 @@ func ReplaceVersion(data string, appInfo *AppInfo, packageInfo *PackageInfo) str
 	data = strings.ReplaceAll(data, "{{{VERSION_MAJOR}}}", fmt.Sprintf("%v", version.Major()))
 	data = strings.ReplaceAll(data, "{{{VERSION_MINIOR}}}", fmt.Sprintf("%v", version.Minor()))
 	data = strings.ReplaceAll(data, "{{{VERSION_PATCH}}}", fmt.Sprintf("%v", version.Patch()))
+	data = strings.ReplaceAll(data, "{{{VERSION_PRERELEASE}}}", fmt.Sprintf("%v", version.Prerelease()))
 	return data
 }
 
