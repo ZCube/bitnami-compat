@@ -71,19 +71,17 @@ image:
 ✔️  memcached
 ✔️  minio
 ✔️  mongodb
+✔️  mongodb-sharded
 ✔️  mysql
 ✔️  postgresql
 ✔️  postgresql-ha
 ✔️  rabbitmq
+✔️  rabbitmq-cluster-operator
 ✔️  redis
 ✔️  redis-cluster
 ✔️  sealed-secrets
 ✔️  tomcat
 ✔️  zookeeper
-❓  mongodb-sharded
-  ❌  mongodb-sharded
-  ✔️  bitnami-shell
-  ✔️  mongodb-exporter
 ❓  nginx
   ✔️  nginx
   ❌  git
@@ -95,11 +93,6 @@ image:
   ❌  nginx-intel
   ❌  git
   ✔️  nginx-exporter
-❓  rabbitmq-cluster-operator
-  ✔️  rabbitmq
-  ❌  rmq-default-credential-updater
-  ❌  rabbitmq-cluster-operator
-  ❌  rmq-messaging-topology-operator
 ❓  wordpress
   ✔️  wordpress
   ✔️  bitnami-shell

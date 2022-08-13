@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 export PACKAGE=ini-file
 export TARGET_DIR=common
 export VERSION={{{VERSION}}}

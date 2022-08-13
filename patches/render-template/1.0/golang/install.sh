@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 export PACKAGE=render-template
 export TARGET_DIR=common
 export VERSION={{{VERSION}}}

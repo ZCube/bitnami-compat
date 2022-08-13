@@ -71,19 +71,17 @@ image:
 ✔️  memcached
 ✔️  minio
 ✔️  mongodb
+✔️  mongodb-sharded
 ✔️  mysql
 ✔️  postgresql
 ✔️  postgresql-ha
 ✔️  rabbitmq
+✔️  rabbitmq-cluster-operator
 ✔️  redis
 ✔️  redis-cluster
 ✔️  sealed-secrets
 ✔️  tomcat
 ✔️  zookeeper
-❓  mongodb-sharded
-  ❌  mongodb-sharded
-  ✔️  bitnami-shell
-  ✔️  mongodb-exporter
 ❓  nginx
   ✔️  nginx
   ❌  git
@@ -95,11 +93,6 @@ image:
   ❌  nginx-intel
   ❌  git
   ✔️  nginx-exporter
-❓  rabbitmq-cluster-operator
-  ✔️  rabbitmq
-  ❌  rmq-default-credential-updater
-  ❌  rabbitmq-cluster-operator
-  ❌  rmq-messaging-topology-operator
 ❓  wordpress
   ✔️  wordpress
   ✔️  bitnami-shell
@@ -150,7 +143,7 @@ image:
 ## Supported images and tags
 
 * acmesolver : [`1`, `1-debian-11`, `1.9.1`, `1.9.1-debian-11`, `1.9.1-debian-11-r21`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Facmesolver)
-* bitnami-shell : [`11`, `11-debian-11`, `11`, `11-debian-11`, `11-debian-11-r21`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fbitnami-shell)
+* bitnami-shell : [`11`, `11-debian-11`, `11.0.0`, `11.0.0-debian-11`, `11.0.0-debian-11-r21`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fbitnami-shell)
 * cainjector : [`1`, `1-debian-11`, `1.9.1`, `1.9.1-debian-11`, `1.9.1-debian-11-r21`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fcainjector)
 * cert-manager : [`1`, `1-debian-11`, `1.9.1`, `1.9.1-debian-11`, `1.9.1-debian-11-r21`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fcert-manager)
 * cert-manager-webhook : [`1`, `1-debian-11`, `1.9.1`, `1.9.1-debian-11`, `1.9.1-debian-11-r21`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fcert-manager-webhook)
@@ -164,9 +157,9 @@ image:
 * etcd : [`3.5`, `3.5-debian-11`, `3.5.4`, `3.5.4-debian-11`, `3.5.4-debian-11-r21`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fetcd)
 * fluentd : [`1`, `1-debian-11`, `1.15.1`, `1.15.1-debian-11`, `1.15.1-debian-11-r21`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Ffluentd)
 * java : [`1.8`, `1.8-debian-11`, `1.8.345`, `1.8.345-debian-11`, `1.8.345-debian-11-r21`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fjava)
-* java : [`11`, `11-debian-11`, `11.0.15-1`, `11.0.15-1-debian-11`, `11.0.15-1-debian-11-r21`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fjava)
-* java : [`17`, `17-debian-11`, `17.0.4-8`, `17.0.4-8-debian-11`, `17.0.4-8-debian-11-r21`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fjava)
-* java : [`18`, `18-debian-11`, `18.0.1-1`, `18.0.1-1-debian-11`, `18.0.1-1-debian-11-r21`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fjava)
+* java : [`11`, `11-debian-11`, `11.0.15`, `11.0.15-debian-11`, `11.0.15-debian-11-r21`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fjava)
+* java : [`17`, `17-debian-11`, `17.0.4`, `17.0.4-debian-11`, `17.0.4-debian-11-r21`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fjava)
+* java : [`18`, `18-debian-11`, `18.0.1`, `18.0.1-debian-11`, `18.0.1-debian-11-r21`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fjava)
 * jmx-exporter : [`0`, `0-debian-11`, `0.17.0`, `0.17.0-debian-11`, `0.17.0-debian-11-r21`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fjmx-exporter)
 * kafka : [`3.0`, `3.0-debian-11`, `3.0.1`, `3.0.1-debian-11`, `3.0.1-debian-11-r21`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fkafka)
 * kafka : [`3.1`, `3.1-debian-11`, `3.1.1`, `3.1.1-debian-11`, `3.1.1-debian-11-r21`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fkafka)
@@ -210,6 +203,7 @@ image:
 * postgresql-repmgr : [`14`, `14-debian-11`, `14.5.0`, `14.5.0-debian-11`, `14.5.0-debian-11-r21`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fpostgresql-repmgr)
 * rabbitmq : [`3.10`, `3.10-debian-11`, `3.10.7`, `3.10.7-debian-11`, `3.10.7-debian-11-r21`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Frabbitmq)
 * rabbitmq : [`3.9`, `3.9-debian-11`, `3.9.22`, `3.9.22-debian-11`, `3.9.22-debian-11-r21`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Frabbitmq)
+* rabbitmq-cluster-operator : [`1`, `1-scratch`, `1.14.0`, `1.14.0-scratch`, `1.14.0-scratch-r21`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Frabbitmq-cluster-operator)
 * redis : [`6.2`, `6.2-debian-11`, `6.2.7`, `6.2.7-debian-11`, `6.2.7-debian-11-r21`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fredis)
 * redis : [`7.0`, `7.0-debian-11`, `7.0.4`, `7.0.4-debian-11`, `7.0.4-debian-11-r21`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fredis)
 * redis-cluster : [`6.2`, `6.2-debian-11`, `6.2.7`, `6.2.7-debian-11`, `6.2.7-debian-11-r21`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fredis-cluster)
@@ -217,7 +211,9 @@ image:
 * redis-exporter : [`1`, `1-debian-11`, `1.43.0`, `1.43.0-debian-11`, `1.43.0-debian-11-r21`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fredis-exporter)
 * redis-sentinel : [`6.2`, `6.2-debian-11`, `6.2.7`, `6.2.7-debian-11`, `6.2.7-debian-11-r21`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fredis-sentinel)
 * redis-sentinel : [`7.0`, `7.0-debian-11`, `7.0.4`, `7.0.4-debian-11`, `7.0.4-debian-11-r21`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fredis-sentinel)
-* sealed-secrets : [`0`, `0-scratch`, `0.18.1-2`, `0.18.1-2-scratch`, `0.18.1-2-scratch-r21`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fsealed-secrets)
+* rmq-default-credential-updater : [`1`, `1-scratch`, `1.0.2`, `1.0.2-scratch`, `1.0.2-scratch-r21`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Frmq-default-credential-updater)
+* rmq-messaging-topology-operator : [`1`, `1-scratch`, `1.7.1`, `1.7.1-scratch`, `1.7.1-scratch-r21`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Frmq-messaging-topology-operator)
+* sealed-secrets : [`0`, `0-scratch`, `0.18.1`, `0.18.1-scratch`, `0.18.1-scratch-r21`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fsealed-secrets)
 * tomcat : [`10`, `10-debian-11`, `10.0.23`, `10.0.23-debian-11`, `10.0.23-debian-11-r21`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Ftomcat)
 * tomcat : [`8.5`, `8.5-debian-11`, `8.5.81`, `8.5.81-debian-11`, `8.5.81-debian-11-r21`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Ftomcat)
 * tomcat : [`9.0`, `9.0-debian-11`, `9.0.65`, `9.0.65-debian-11`, `9.0.65-debian-11-r21`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Ftomcat)

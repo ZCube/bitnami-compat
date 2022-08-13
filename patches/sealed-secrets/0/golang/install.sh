@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 export PACKAGE=sealed-secrets
 export TARGET_DIR=sealed-secrets
 export VERSION={{{VERSION}}}

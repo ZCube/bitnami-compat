@@ -279,7 +279,11 @@ func InspectDockerfile(path string) (*AppInfo, error) {
 
 	if len(versionSubmatchGroup) != 3 {
 		if len(appInfo.Dependencies) == 1 {
-			appVersion = appInfo.Dependencies[0].Version
+			appVersionString := appInfo.Dependencies[0].Version.String()
+			appVersion, err = semver.NewVersion(appVersionString)
+			if err != nil {
+				return nil, err
+			}
 		} else {
 			for _, p := range appInfo.Dependencies {
 				fmt.Println(p.Name, p.Name == appInfoName)
@@ -289,6 +293,13 @@ func InspectDockerfile(path string) (*AppInfo, error) {
 		}
 	} else {
 		appVersion, err = semver.NewVersion(strings.Split(versionSubmatchGroup[2], "-debian")[0])
+		if err != nil {
+			return nil, err
+		}
+	}
+	if appVersion != nil {
+		appVersionString := fmt.Sprintf("%v.%v.%v", appVersion.Major(), appVersion.Minor(), appVersion.Patch())
+		appVersion, err = semver.NewVersion(appVersionString)
 		if err != nil {
 			return nil, err
 		}
