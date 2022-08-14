@@ -1,1 +1,3 @@
 RUN install_packages libphp-embed libapache2-mod-php
+
+RUN cp -rfL /usr/lib/apache2/modules/libphp$(php -v | grep ^PHP | cut -d' ' -f2 | cut -d'.' -f1).$(php -v | grep ^PHP | cut -d' ' -f2 | cut -d'.' -f2).so /usr/lib/apache2/modules/libphp$(php -v | grep ^PHP | cut -d' ' -f2 | cut -d'.' -f1).so

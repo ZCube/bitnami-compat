@@ -6,24 +6,47 @@ RUN mkdir -p /opt/bitnami/apache/bin \
     && mkdir -p /opt/bitnami/apache/sbin \
     && mkdir -p /opt/bitnami/apache/lib \
     && mkdir -p /opt/bitnami/apache/conf \
-    && ln -s /usr/bin/ab                 /opt/bitnami/apache/bin/ \
-    && ln -s /usr/bin/apachectl          /opt/bitnami/apache/bin/ \
-    && ln -s /usr/bin/apr-1-config       /opt/bitnami/apache/bin/ \
-    && ln -s /usr/bin/apu-1-config       /opt/bitnami/apache/bin/ \
-    && ln -s /usr/bin/apxs               /opt/bitnami/apache/bin/ \
-    && ln -s /usr/bin/checkgid           /opt/bitnami/apache/bin/ \
-    && ln -s /usr/bin/dbmmanage          /opt/bitnami/apache/bin/ \
-    && ln -s /usr/bin/envvars            /opt/bitnami/apache/bin/ \
-    && ln -s /usr/bin/envvars-std        /opt/bitnami/apache/bin/ \
-    && ln -s /usr/bin/fcgistarter        /opt/bitnami/apache/bin/ \
-    && ln -s /usr/bin/htcacheclean       /opt/bitnami/apache/bin/ \
-    && ln -s /usr/bin/htdbm              /opt/bitnami/apache/bin/ \
-    && ln -s /usr/bin/htdigest           /opt/bitnami/apache/bin/ \
-    && ln -s /usr/bin/htpasswd           /opt/bitnami/apache/bin/ \
-    && ln -s /usr/bin/httpd              /opt/bitnami/apache/bin/ \
-    && ln -s /usr/bin/httxt2dbm          /opt/bitnami/apache/bin/ \
-    && ln -s /usr/bin/logresolve         /opt/bitnami/apache/bin/ \
-    && ln -s /usr/bin/rotatelogs         /opt/bitnami/apache/bin/ \
-    && ln -s /usr/bin/rules-updater.pl   /opt/bitnami/apache/bin/ \
-    && ln -s /usr/lib/apache2/modules    /opt/bitnami/apache/ \              
+    && ln -sf /usr/bin/ab                 /opt/bitnami/apache/bin/ \
+    && ln -sf /usr/bin/apachectl          /opt/bitnami/apache/bin/ \
+    && ln -sf /usr/bin/apr-1-config       /opt/bitnami/apache/bin/ \
+    && ln -sf /usr/bin/apu-1-config       /opt/bitnami/apache/bin/ \
+    && ln -sf /usr/bin/apxs               /opt/bitnami/apache/bin/ \
+    && ln -sf /usr/bin/checkgid           /opt/bitnami/apache/bin/ \
+    && ln -sf /usr/bin/dbmmanage          /opt/bitnami/apache/bin/ \
+    && ln -sf /usr/bin/envvars            /opt/bitnami/apache/bin/ \
+    && ln -sf /usr/bin/envvars-std        /opt/bitnami/apache/bin/ \
+    && ln -sf /usr/bin/fcgistarter        /opt/bitnami/apache/bin/ \
+    && ln -sf /usr/bin/htcacheclean       /opt/bitnami/apache/bin/ \
+    && ln -sf /usr/bin/htdbm              /opt/bitnami/apache/bin/ \
+    && ln -sf /usr/bin/htdigest           /opt/bitnami/apache/bin/ \
+    && ln -sf /usr/bin/htpasswd           /opt/bitnami/apache/bin/ \
+    && ln -sf /usr/bin/httpd              /opt/bitnami/apache/bin/ \
+    && ln -sf /usr/bin/httxt2dbm          /opt/bitnami/apache/bin/ \
+    && ln -sf /usr/bin/logresolve         /opt/bitnami/apache/bin/ \
+    && ln -sf /usr/bin/rotatelogs         /opt/bitnami/apache/bin/ \
+    && ln -sf /usr/bin/rules-updater.pl   /opt/bitnami/apache/bin/ \
+    && ln -sf /usr/sbin/ab                /opt/bitnami/apache/bin/ \
+    && ln -sf /usr/sbin/apachectl         /opt/bitnami/apache/bin/ \
+    && ln -sf /usr/sbin/apr-1-config      /opt/bitnami/apache/bin/ \
+    && ln -sf /usr/sbin/apu-1-config      /opt/bitnami/apache/bin/ \
+    && ln -sf /usr/sbin/apxs              /opt/bitnami/apache/bin/ \
+    && ln -sf /usr/sbin/checkgid          /opt/bitnami/apache/bin/ \
+    && ln -sf /usr/sbin/dbmmanage         /opt/bitnami/apache/bin/ \
+    && ln -sf /usr/sbin/envvars           /opt/bitnami/apache/bin/ \
+    && ln -sf /usr/sbin/envvars-std       /opt/bitnami/apache/bin/ \
+    && ln -sf /usr/sbin/fcgistarter       /opt/bitnami/apache/bin/ \
+    && ln -sf /usr/sbin/htcacheclean      /opt/bitnami/apache/bin/ \
+    && ln -sf /usr/sbin/htdbm             /opt/bitnami/apache/bin/ \
+    && ln -sf /usr/sbin/htdigest          /opt/bitnami/apache/bin/ \
+    && ln -sf /usr/sbin/htpasswd          /opt/bitnami/apache/bin/ \
+    && ln -sf /usr/sbin/httpd             /opt/bitnami/apache/bin/ \
+    && ln -sf /usr/sbin/httxt2dbm         /opt/bitnami/apache/bin/ \
+    && ln -sf /usr/sbin/logresolve        /opt/bitnami/apache/bin/ \
+    && ln -sf /usr/sbin/rotatelogs        /opt/bitnami/apache/bin/ \
+    && ln -sf /usr/sbin/rules-updater.pl  /opt/bitnami/apache/bin/ \
+    && ln -sf /usr/sbin/apache2           /opt/bitnami/apache/bin/httpd \
+    && ln -sf /usr/lib/apache2/modules    /opt/bitnami/apache/ \              
+    && sed -i 's,^\(LoadModule log_config_module modules/mod_log_config.so\),#\1,g' /opt/bitnami/apache/conf/httpd.conf \
+    && sed -i 's,^\(LoadModule version_module modules/mod_version.so\),#\1,g' /opt/bitnami/apache/conf/httpd.conf \
+    && sed -i 's,^\(LoadModule unixd_module modules/mod_unixd.so\),#\1,g' /opt/bitnami/apache/conf/httpd.conf \
     && chown 1001:1001 -R /opt/bitnami/apache

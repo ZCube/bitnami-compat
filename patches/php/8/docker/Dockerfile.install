@@ -1,13 +1,21 @@
-RUN install_packages php curl php-pear composer
+RUN install_packages php curl php-pear composer php-mysql php-pgsql php-fpm
+
+RUN ln -sf /usr/sbin/php-fpm$(php -v | grep ^PHP | cut -d' ' -f2 | cut -d'.' -f1).$(php -v | grep ^PHP | cut -d' ' -f2 | cut -d'.' -f2) /usr/sbin/php-fpm
 
 RUN mkdir -p /opt/bitnami/php/bin \
     && mkdir -p /opt/bitnami/php/sbin \
     && mkdir -p /opt/bitnami/php/lib \
     && mkdir -p /opt/bitnami/php/etc \
-    && ln -s /usr/bin/php*                           /opt/bitnami/php/bin/ \
-    && ln -s /usr/bin/pear*                          /opt/bitnami/php/bin/ \
-    && ln -s /usr/bin/phar*                          /opt/bitnami/php/bin/ \
-    && ln -s /usr/bin/composer*                      /opt/bitnami/php/bin/ \
+    && mkdir -p /opt/bitnami/php/lib/php/extensions/ \
+    && ln -s /usr/bin/php*                                        /opt/bitnami/php/bin/ \
+    && ln -s /usr/bin/pear*                                       /opt/bitnami/php/bin/ \
+    && ln -s /usr/bin/phar*                                       /opt/bitnami/php/bin/ \
+    && ln -s /usr/bin/composer*                                   /opt/bitnami/php/bin/ \
+    && ln -sf /usr/sbin/php*                                      /opt/bitnami/php/sbin/ \
+    && ln -sf /usr/sbin/pear*                                     /opt/bitnami/php/sbin/ \
+    && ln -sf /usr/sbin/phar*                                     /opt/bitnami/php/sbin/ \
+    && ln -sf /usr/sbin/composer*                                 /opt/bitnami/php/sbin/ \
+    && ln -sf $(php -r 'echo ini_get("extension_dir");')/*        /opt/bitnami/php/lib/php/extensions/ \
     && chown 1001:1001 -R /opt/bitnami/php
 
 RUN cd /tmp \

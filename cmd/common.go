@@ -266,7 +266,21 @@ func InspectDockerfile(path string) (*AppInfo, error) {
 		if err != nil {
 			return nil, err
 		}
+		// packageVersionString := fmt.Sprintf("%v.%v.%v", packageInfo.Version.Major(), packageInfo.Version.Minor(), packageInfo.Version.Patch())
+		// packageVersion, err := semver.NewVersion(packageVersionString)
+		// if err != nil {
+		// 	return nil, err
+		// }
+		// packageInfo.Version = packageVersion
 		packages2 = append(packages2, packageInfo)
+	}
+
+	for _, p1 := range packages1 {
+		for _, p2 := range packages2 {
+			if p1.Name == p2.Name {
+				p1.Version = p2.Version
+			}
+		}
 	}
 
 	if len(packages1) < len(packages2) {
@@ -465,7 +479,7 @@ func PatchDockerfile(appInfo *AppInfo) {
 					"run", "--rm",
 					"-e", fmt.Sprintf("PACKAGE=%v", patch.PackageInfo.Name),
 					"-e", fmt.Sprintf("VERSION=%v.%v.%v", version.Major(), version.Minor(), version.Patch()),
-					"-e", fmt.Sprintf("VERSION_MAJOR_MINOR:%v.%v", version.Major(), version.Minor()),
+					"-e", fmt.Sprintf("VERSION_MAJOR_MINOR=%v.%v", version.Major(), version.Minor()),
 					"-e", fmt.Sprintf("VERSION_MAJOR=%v", version.Major()),
 					"-e", fmt.Sprintf("VERSION_MINOR=%v", version.Minor()),
 					"-e", fmt.Sprintf("VERSION_PATCH=%v", version.Patch()),
