@@ -473,6 +473,11 @@ func PatchDockerfile(appInfo *AppInfo) {
 				log.Panic(err)
 			}
 
+			err = os.Chmod(filepath.Join(wd, patch.BashPatch), 0755)
+			if err != nil {
+				log.Panic(err)
+			}
+
 			var args []string
 			if patch.BashPatch != "" {
 				args = []string{
