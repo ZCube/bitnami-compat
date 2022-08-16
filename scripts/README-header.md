@@ -5,7 +5,7 @@
 [![Build](https://github.com/ZCube/bitnami-compat/actions/workflows/build-on-push.yml/badge.svg)](https://github.com/ZCube/bitnami-compat/actions/workflows/build-on-push.yml)
 ## What is Bitnami-Compat?
 
-* This repository builds multi-arch (`linux/amd64` + `linux/arm64`) docker images for a selection of the Bitnami repositories.
+* This repository builds multi-arch (`linux/amd64` + `linux/arm64`) docker images for some bitnami charts.
 
 * This is a workaround for https://github.com/bitnami/charts/issues/7305.
 
@@ -13,11 +13,11 @@
 
   * I don't have time to test every images and I haven't built the infrastructure to test them.
   * In other words, this repository has no release management process and no support for it.
-  * This repository is mainly maintained for use on my Raspberry Pi cluster.
+  * This repository is maintained for my homelab.
 
 * These images use Bitnami's scripts. Binaries refer to the official Docker or official distribution binaries of the software or Docker recipes for Docker.
 
-# Usage #1
+## Usage #1
 
 * I know I can't make the images in this repository trustworthy, and I know I can't fix it. This repository is just a personal repository.
 * If you want to use the images, It is recommended not to use the image directly, but to create Dockerfile.arm64 by following the instructions below and then verify and use it.
@@ -36,7 +36,7 @@
 
 * PS. Rabbitmq and fluentd builds are too long. Depending on the machine, it is best to prepare for 1-2 hours.
 
-# Usage #2
+## Usage #2
 
 * TL;DR
 
@@ -73,6 +73,7 @@ image:
 ✔️  mongodb
 ✔️  mongodb-sharded
 ✔️  mysql
+✔️  nginx
 ✔️  postgresql
 ✔️  postgresql-ha
 ✔️  rabbitmq
@@ -81,27 +82,27 @@ image:
 ✔️  redis-cluster
 ✔️  sealed-secrets
 ✔️  tomcat
+✔️  wordpress
 ✔️  zookeeper
-❓  nginx
-  ✔️  nginx
-  ❌  git
-  ✔️  nginx-exporter
+❓  apache
+  ❌  apache
+  ✔️  git
+  ✔️  apache-exporter
 ❓  nginx-ingress-controller
   ❌  nginx-ingress-controller
   ✔️  nginx
 ❓  nginx-intel
   ❌  nginx-intel
-  ❌  git
+  ✔️  git
   ✔️  nginx-exporter
-❓  wordpress
-  ✔️  wordpress
-  ✔️  bitnami-shell
-  ❌  apache-exporter
 ❓  wordpress-intel
   ❌  wordpress-intel
   ✔️  bitnami-shell
   ✔️  nginx-exporter
 ```
+
+* For wordpress-intel charts, try using wordpress-nginx instead of wordpress-intel images.
+
 ## Binary References
 
 |Package|Type|Reference|Base|

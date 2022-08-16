@@ -25,6 +25,8 @@ jobs:
         include:
          - APP: "acmesolver"
            REPO_OWNER: "bitnami"
+         - APP: "apache-exporter"
+           REPO_OWNER: "bitnami"
          - APP: "bitnami-shell"
            REPO_OWNER: "bitnami"
          - APP: "cainjector"
@@ -44,6 +46,8 @@ jobs:
          - APP: "etcd"
            REPO_OWNER: "bitnami"
          - APP: "fluentd"
+           REPO_OWNER: "bitnami"
+         - APP: "git"
            REPO_OWNER: "bitnami"
          - APP: "java"
            REPO_OWNER: "bitnami"

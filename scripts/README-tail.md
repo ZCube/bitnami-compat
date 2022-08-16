@@ -77,15 +77,15 @@ Example : mariadb/10.8
 
 Apache 2.0
 
-## License for generator (Golang scripts)
+### License for generator (Golang scripts)
 
 MIT License
 
-## License for patches
+### License for patches
 
 check References
 
-## License for Bitnami docker scripts
+### License for Bitnami docker scripts
 
 Apache 2.0
 

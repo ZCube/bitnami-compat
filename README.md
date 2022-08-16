@@ -5,7 +5,7 @@
 [![Build](https://github.com/ZCube/bitnami-compat/actions/workflows/build-on-push.yml/badge.svg)](https://github.com/ZCube/bitnami-compat/actions/workflows/build-on-push.yml)
 ## What is Bitnami-Compat?
 
-* This repository builds multi-arch (`linux/amd64` + `linux/arm64`) docker images for a selection of the Bitnami repositories.
+* This repository builds multi-arch (`linux/amd64` + `linux/arm64`) docker images for some bitnami charts.
 
 * This is a workaround for https://github.com/bitnami/charts/issues/7305.
 
@@ -13,11 +13,11 @@
 
   * I don't have time to test every images and I haven't built the infrastructure to test them.
   * In other words, this repository has no release management process and no support for it.
-  * This repository is mainly maintained for use on my Raspberry Pi cluster.
+  * This repository is maintained for my homelab.
 
 * These images use Bitnami's scripts. Binaries refer to the official Docker or official distribution binaries of the software or Docker recipes for Docker.
 
-# Usage #1
+## Usage #1
 
 * I know I can't make the images in this repository trustworthy, and I know I can't fix it. This repository is just a personal repository.
 * If you want to use the images, It is recommended not to use the image directly, but to create Dockerfile.arm64 by following the instructions below and then verify and use it.
@@ -36,7 +36,7 @@
 
 * PS. Rabbitmq and fluentd builds are too long. Depending on the machine, it is best to prepare for 1-2 hours.
 
-# Usage #2
+## Usage #2
 
 * TL;DR
 
@@ -73,6 +73,7 @@ image:
 ✔️  mongodb
 ✔️  mongodb-sharded
 ✔️  mysql
+✔️  nginx
 ✔️  postgresql
 ✔️  postgresql-ha
 ✔️  rabbitmq
@@ -81,27 +82,27 @@ image:
 ✔️  redis-cluster
 ✔️  sealed-secrets
 ✔️  tomcat
+✔️  wordpress
 ✔️  zookeeper
-❓  nginx
-  ✔️  nginx
-  ❌  git
-  ✔️  nginx-exporter
+❓  apache
+  ❌  apache
+  ✔️  git
+  ✔️  apache-exporter
 ❓  nginx-ingress-controller
   ❌  nginx-ingress-controller
   ✔️  nginx
 ❓  nginx-intel
   ❌  nginx-intel
-  ❌  git
+  ✔️  git
   ✔️  nginx-exporter
-❓  wordpress
-  ✔️  wordpress
-  ✔️  bitnami-shell
-  ❌  apache-exporter
 ❓  wordpress-intel
   ❌  wordpress-intel
   ✔️  bitnami-shell
   ✔️  nginx-exporter
 ```
+
+* For wordpress-intel charts, try using wordpress-nginx instead of wordpress-intel images.
+
 ## Binary References
 
 |Package|Type|Reference|Base|
@@ -143,6 +144,7 @@ image:
 ## Supported images and tags
 
 * acmesolver : [`1`, `1-debian-11`, `1.9.1`, `1.9.1-debian-11`, `1.9.1-debian-11-r21`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Facmesolver)
+* apache-exporter : [`0`, `0-debian-11`, `0.11.0`, `0.11.0-debian-11`, `0.11.0-debian-11-r21`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fapache-exporter)
 * bitnami-shell : [`11`, `11-debian-11`, `11.0.0`, `11.0.0-debian-11`, `11.0.0-debian-11-r21`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fbitnami-shell)
 * cainjector : [`1`, `1-debian-11`, `1.9.1`, `1.9.1-debian-11`, `1.9.1-debian-11-r21`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fcainjector)
 * cert-manager : [`1`, `1-debian-11`, `1.9.1`, `1.9.1-debian-11`, `1.9.1-debian-11-r21`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fcert-manager)
@@ -156,6 +158,7 @@ image:
 * etcd : [`3.4`, `3.4-debian-11`, `3.4.20`, `3.4.20-debian-11`, `3.4.20-debian-11-r21`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fetcd)
 * etcd : [`3.5`, `3.5-debian-11`, `3.5.4`, `3.5.4-debian-11`, `3.5.4-debian-11-r21`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fetcd)
 * fluentd : [`1`, `1-debian-11`, `1.15.1`, `1.15.1-debian-11`, `1.15.1-debian-11-r21`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Ffluentd)
+* git : [`2`, `2-debian-11`, `2.37.2`, `2.37.2-debian-11`, `2.37.2-debian-11-r21`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fgit)
 * java : [`1.8`, `1.8-debian-11`, `1.8.345`, `1.8.345-debian-11`, `1.8.345-debian-11-r21`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fjava)
 * java : [`11`, `11-debian-11`, `11.0.15`, `11.0.15-debian-11`, `11.0.15-debian-11-r21`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fjava)
 * java : [`17`, `17-debian-11`, `17.0.4`, `17.0.4-debian-11`, `17.0.4-debian-11-r21`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fjava)
@@ -301,15 +304,15 @@ Example : mariadb/10.8
 
 Apache 2.0
 
-## License for generator (Golang scripts)
+### License for generator (Golang scripts)
 
 MIT License
 
-## License for patches
+### License for patches
 
 check References
 
-## License for Bitnami docker scripts
+### License for Bitnami docker scripts
 
 Apache 2.0
 
