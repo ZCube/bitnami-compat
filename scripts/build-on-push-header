@@ -4,7 +4,6 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '0 1 * * 5'
-    - cron: '0 4 * * 5' # trigger for failed jobs
 
 env:
   REGISTRY: ghcr.io

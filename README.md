@@ -3,6 +3,7 @@
 [![Inactively Maintained](https://img.shields.io/badge/Maintenance%20Level-Inactively%20Maintained-yellowgreen.svg)](https://gist.github.com/cheerfulstoic/d107229326a01ff0f333a1d3476e068d)
 [![Update bitnami-dockers](https://github.com/ZCube/bitnami-compat/actions/workflows/update.yml/badge.svg)](https://github.com/ZCube/bitnami-compat/actions/workflows/update.yml)
 [![Build](https://github.com/ZCube/bitnami-compat/actions/workflows/build-on-push.yml/badge.svg)](https://github.com/ZCube/bitnami-compat/actions/workflows/build-on-push.yml)
+
 ## What is Bitnami-Compat?
 
 * This repository builds multi-arch (`linux/amd64` + `linux/arm64`) docker images for some bitnami charts.
@@ -16,6 +17,10 @@
   * This repository is maintained for my homelab.
 
 * These images use Bitnami's scripts. Binaries refer to the official Docker or official distribution binaries of the software or Docker recipes for Docker.
+
+## Update bitnami-dockers schedule
+
+* Every friday.
 
 ## Usage #1
 
@@ -299,6 +304,19 @@ Example : mariadb/10.8
 |Charts|Image|Reason|
 |------|-----|------|
 |thanos|docker.io/thanosio/thanos:v0.27.0|Official images are compatible.|
+
+## Todo list
+
+* [ ] Trivy scan.
+* [ ] Minimal tests. ( like : kubectl version --client=true, docker compose up )
+* [ ] Add Release branches & tags. ( weekly?, monthly? )
+* [ ] Faster build for multistaged images.
+* [ ] Split app patches and components patches.
+* [ ] Render Dockerfile.arm64 to repository.
+* [ ] Get an Arm64 machine for build and testing.
+* [ ] Remove unused apps.
+* [ ] Improve Readme template.
+* [ ] Add docker labels for notice.
 
 ## License
 

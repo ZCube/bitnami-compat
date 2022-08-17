@@ -3,6 +3,7 @@
 [![Inactively Maintained](https://img.shields.io/badge/Maintenance%20Level-Inactively%20Maintained-yellowgreen.svg)](https://gist.github.com/cheerfulstoic/d107229326a01ff0f333a1d3476e068d)
 [![Update bitnami-dockers](https://github.com/ZCube/bitnami-compat/actions/workflows/update.yml/badge.svg)](https://github.com/ZCube/bitnami-compat/actions/workflows/update.yml)
 [![Build](https://github.com/ZCube/bitnami-compat/actions/workflows/build-on-push.yml/badge.svg)](https://github.com/ZCube/bitnami-compat/actions/workflows/build-on-push.yml)
+
 ## What is Bitnami-Compat?
 
 * This repository builds multi-arch (`linux/amd64` + `linux/arm64`) docker images for some bitnami charts.
@@ -16,6 +17,10 @@
   * This repository is maintained for my homelab.
 
 * These images use Bitnami's scripts. Binaries refer to the official Docker or official distribution binaries of the software or Docker recipes for Docker.
+
+## Update bitnami-dockers schedule
+
+* Every friday.
 
 ## Usage #1
 

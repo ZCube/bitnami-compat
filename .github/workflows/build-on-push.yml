@@ -4,7 +4,6 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '0 1 * * 5'
-    - cron: '0 4 * * 5' # trigger for failed jobs
 
 env:
   REGISTRY: ghcr.io
@@ -176,7 +175,18 @@ jobs:
         shell: bash
         run: |
           go run main.go generate --app=${{ matrix.APP }}
-          go run main.go build --app=${{ matrix.APP }} --tag=${{ env.REGISTRY }}/${{ steps.repository.outputs.lowercase }}/,docker.io/zcube/bitnami-compat- --cache-from --cache-to --push --platforms=linux/amd64,linux/arm64
+          set -euo pipefail
+          n=0
+          until [ "$n" -ge 5 ] # retry 5 times
+          do
+            go run main.go build --app=${{ matrix.APP }} --tag=${{ env.REGISTRY }}/${{ steps.repository.outputs.lowercase }}/,docker.io/zcube/bitnami-compat- --cache-from --cache-to --push --platforms=linux/amd64,linux/arm64 && break
+            n=$((n+1)) 
+            sleep 15
+          done
+          if [ "$n" -ge 5 ]; then
+            echo "Failed after 5 attempts!"
+            exit 1
+          fi
       - name: Push To Docker Hub
         shell: bash
         run: |
