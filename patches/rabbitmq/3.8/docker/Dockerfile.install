@@ -48,4 +48,5 @@ RUN set -eux; \
 	\
 	apt-mark auto '.*' > /dev/null; \
 	apt-mark manual $savedAptMark; \
-	apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false;
+	apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
+    mkdir -p "$RABBITMQ_HOME/etc/rabbitmq"
