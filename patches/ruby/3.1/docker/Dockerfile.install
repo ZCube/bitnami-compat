@@ -27,10 +27,11 @@ RUN set -eux; \
 		dpkg-dev \
 		libgdbm-dev \
 		zlib1g-dev \
-        build-essential \
-        autoconf \
-        automake \
+		build-essential \
+		autoconf \
+		automake \
 		ruby \
+		wget \
 	; \
 	rm -rf /var/lib/apt/lists/*; \
 	\

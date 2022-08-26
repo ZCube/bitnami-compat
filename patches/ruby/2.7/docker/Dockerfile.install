@@ -26,10 +26,12 @@ RUN set -eux; \
 		bison \
 		dpkg-dev \
 		libgdbm-dev \
-        build-essential \
-        autoconf \
-        automake \
+		zlib1g-dev \
+		build-essential \
+		autoconf \
+		automake \
 		ruby \
+		wget \
 	; \
 	rm -rf /var/lib/apt/lists/*; \
 	\
