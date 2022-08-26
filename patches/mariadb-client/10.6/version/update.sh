@@ -27,5 +27,5 @@ echo "deb ${REPOSITORY}" > /etc/apt/sources.list.d/mariadb.list; \
 apt -qq update
 
 export VERSION_ORIGINAL=$(apt-cache policy mariadb-client | grep Candidate | awk '{print $2}' | cut  -d ':' -f2 | cut  -d '+' -f1)
-cat ${VERSION_DIR}.bitnami_components.json | jq -M --arg VERSION_ORIGINAL "$VERSION_ORIGINAL" '."mysql-client".version = $VERSION_ORIGINAL' > /tmp/components.json
+cat ${VERSION_DIR}.bitnami_components.json | jq -M --arg VERSION_ORIGINAL "$VERSION_ORIGINAL" '."mariadb-client".version = $VERSION_ORIGINAL' > /tmp/components.json
 cp -rf /tmp/components.json ${VERSION_DIR}.bitnami_components.json
