@@ -114,9 +114,6 @@ RUN mkdir -p /opt/bitnami/common/bin \
     && chown 1001:4096 -R /var/run/postgresql /var/lib/postgresql /var/log/postgresql \
     && chown 1001:4096 -R /etc/pgpool2
 
-RUN cd /tmp \
- && curl -LO https://downloads.bitnami.com/files/stacksmith/pgpool-{{{VERSION_ORIGINAL}}}-linux-amd64-{{{OS_FLAVOUR}}}.tar.gz \
- && tar -xzf pgpool-{{{VERSION_ORIGINAL}}}-linux-amd64-{{{OS_FLAVOUR}}}.tar.gz -C /tmp --strip-components=1 \
- && cp -rf /tmp/files/pgpool/etc/* /opt/bitnami/pgpool/etc/ \
- && chown 1001:1001 -R /opt/bitnami/pgpool \
- && rm -rf /tmp/*
+COPY --from=bitnami/pgpool:{{{VERSION_MAJOR}}} /opt/bitnami/pgpool/etc/ /opt/bitnami/pgpool/etc/
+
+RUN chown 1001:1001 -R /opt/bitnami/pgpool
