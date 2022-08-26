@@ -67,6 +67,7 @@ type PatchInfo struct {
 	GolangBuild        string
 	DockerFromPatch    string
 	DockerInstallPatch string
+	VersionUpdate      string
 }
 
 func getTags(r *git.Repository) ([]string, error) {
@@ -138,6 +139,7 @@ func FindPatchs(appInfo *AppInfo) ([]PatchInfo, error) {
 			GolangBuild:        FindPatchFile(packageInfo, "golang/install.sh"),
 			DockerFromPatch:    FindPatchFile(packageInfo, "docker/Dockerfile.from"),
 			DockerInstallPatch: FindPatchFile(packageInfo, "docker/Dockerfile.install"),
+			VersionUpdate:      FindPatchFile(packageInfo, "version/update.sh"),
 		}
 		patchInfo.PackageInfo = packageInfo
 
@@ -369,6 +371,65 @@ func PatchDockerfile(appInfo *AppInfo) {
 	var newDockerfile bytes.Buffer
 
 	if patchFound {
+		for i, patch := range patchs {
+			version := patch.PackageInfo.Version
+
+			if patch.VersionUpdate != "" {
+				var args []string
+
+				err = os.Chmod(filepath.Join(wd, filepath.Dir(patch.VersionUpdate)), 0755)
+				if err != nil {
+					log.Panic(err)
+				}
+
+				err = os.Chmod(filepath.Join(wd, patch.VersionUpdate), 0755)
+				if err != nil {
+					log.Panic(err)
+				}
+
+				args = []string{
+					"run", "--rm",
+					"-e", fmt.Sprintf("PACKAGE=%v", patch.PackageInfo.Name),
+					"-e", fmt.Sprintf("VERSION=%v.%v.%v", version.Major(), version.Minor(), version.Patch()),
+					"-e", fmt.Sprintf("VERSION_MAJOR_MINOR=%v.%v", version.Major(), version.Minor()),
+					"-e", fmt.Sprintf("VERSION_MAJOR=%v", version.Major()),
+					"-e", fmt.Sprintf("VERSION_MINOR=%v", version.Minor()),
+					"-e", fmt.Sprintf("VERSION_PATCH=%v", version.Patch()),
+					"-e", fmt.Sprintf("VERSION_DIR=%v", "/work/prebuildfs/opt/bitnami/"),
+					"-v", fmt.Sprintf("%v:/work", filepath.Join(wd, appInfo.Path)),
+				}
+				args = append(args, "-v", fmt.Sprintf("%v:/work/bash", filepath.Join(wd, filepath.Dir(patch.VersionUpdate))))
+
+				args = append(args,
+					"-w", "/work", "debian:bullseye-slim", "/bin/bash", "-c", strings.ReplaceAll(filepath.Join("bash", filepath.Base(patch.VersionUpdate)), "\\", "/"))
+
+				cmd := exec.Command("docker", args...)
+				cmd.Stdout = os.Stdout
+				cmd.Stderr = os.Stderr
+				if err := cmd.Run(); err != nil {
+					log.Panic(err)
+				}
+
+				bitnamiComponentsBytes, err := ioutil.ReadFile(filepath.Join(appInfo.Path, "prebuildfs", "opt", "bitnami", ".bitnami_components.json"))
+				if err != nil {
+					log.Panic(err)
+				}
+				var bitnamiComponents map[string]interface{}
+
+				err = json.Unmarshal(bitnamiComponentsBytes, &bitnamiComponents)
+				if err != nil {
+					log.Println(err)
+					log.Panic(err)
+				}
+
+				NewVersion, err := semver.NewVersion(bitnamiComponents[patch.PackageInfo.Name].(map[string]interface{})["version"].(string))
+				if err != nil {
+					log.Panic(err)
+				}
+				patchs[i].PackageInfo.Version = NewVersion
+			}
+		}
+
 		emoji.Println(fmt.Sprintf(":heavy_check_mark: %v:%v patch", appInfo.Name, appInfo.Version.Original()))
 
 		originalDockerfile, err := ioutil.ReadFile(filepath.Join(appInfo.Path, "Dockerfile"))
@@ -468,18 +529,19 @@ func PatchDockerfile(appInfo *AppInfo) {
 		for _, patch := range patchs {
 			version := patch.PackageInfo.Version
 
-			err = os.Chmod(filepath.Join(wd, filepath.Dir(patch.BashPatch)), 0755)
-			if err != nil {
-				log.Panic(err)
-			}
-
-			err = os.Chmod(filepath.Join(wd, patch.BashPatch), 0755)
-			if err != nil {
-				log.Panic(err)
-			}
-
-			var args []string
 			if patch.BashPatch != "" {
+				var args []string
+
+				err = os.Chmod(filepath.Join(wd, filepath.Dir(patch.BashPatch)), 0755)
+				if err != nil {
+					log.Panic(err)
+				}
+
+				err = os.Chmod(filepath.Join(wd, patch.BashPatch), 0755)
+				if err != nil {
+					log.Panic(err)
+				}
+
 				args = []string{
 					"run", "--rm",
 					"-e", fmt.Sprintf("PACKAGE=%v", patch.PackageInfo.Name),
