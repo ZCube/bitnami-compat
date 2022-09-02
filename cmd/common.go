@@ -40,6 +40,7 @@ import (
 	"github.com/bmatcuk/doublestar/v4"
 	"github.com/go-git/go-git/v5"
 	"github.com/kyokomi/emoji/v2"
+	"github.com/moby/buildkit/frontend/dockerfile/parser"
 )
 
 type Config struct {
@@ -149,6 +150,105 @@ func FindPatchs(appInfo *AppInfo) ([]PatchInfo, error) {
 	return patchInfos, nil
 }
 
+func packageSearch(n *parser.Node) {
+	switch strings.ToLower(n.Value) {
+	case "run":
+		{
+			command := n.Next.Value
+			{
+				packagesRegex, _ := regexp.Compile("component_unpack \"([^\"]*)\" \"([^\"]*)\"")
+				packageSubmatchGroups := packagesRegex.FindAllStringSubmatch(command, -1)
+
+				for _, groups := range packageSubmatchGroups {
+					if len(groups) != 3 {
+						log.Fatal("parse error")
+					}
+					packageName := groups[1]
+					packageVersion, err := semver.NewVersion(groups[2])
+					if err != nil {
+						log.Fatal("parse error")
+					}
+					fmt.Println(packageName, packageVersion)
+				}
+			}
+
+			{
+				packagesRegex, _ := regexp.Compile("-f ([^ ]*)-([0-9]+.[0-9]+.[0-9]+-[^ ]+)-linux-[^ ]*[.]tar[.]gz \\]")
+				packageSubmatchGroups := packagesRegex.FindAllStringSubmatch(command, -1)
+
+				for _, groups := range packageSubmatchGroups {
+					if len(groups) != 3 {
+						log.Fatal("parse error")
+					}
+					packageName := groups[1]
+					packageVersion, err := semver.NewVersion(groups[2])
+					if err != nil {
+						log.Fatal("parse error")
+					}
+					fmt.Println(packageName, packageVersion)
+				}
+			}
+		}
+	}
+}
+
+type PackageInstallCommand struct {
+	Command        string
+	PackageName    string
+	PackageVersion *semver.Version
+}
+
+func packageInstallCommandSearch(n *parser.Node, a []PackageInstallCommand) []PackageInstallCommand {
+	switch strings.ToLower(n.Value) {
+	case "run":
+		{
+			command := n.Next.Value
+			{
+				packagesRegex, _ := regexp.Compile("component_unpack \"([^\"]*)\" \"([^\"]*)\"")
+				packageSubmatchGroups := packagesRegex.FindAllStringSubmatch(command, -1)
+
+				for _, groups := range packageSubmatchGroups {
+					if len(groups) != 3 {
+						log.Fatal("parse error")
+					}
+					packageName := groups[1]
+					packageVersion, err := semver.NewVersion(groups[2])
+					if err != nil {
+						log.Fatal("parse error")
+					}
+					a = append(a, PackageInstallCommand{
+						Command:        command,
+						PackageName:    packageName,
+						PackageVersion: packageVersion,
+					})
+				}
+			}
+
+			{
+				packagesRegex, _ := regexp.Compile("-f ([^ ]*)-([0-9]+.[0-9]+.[0-9]+-[^ ]+)-linux-[^ ]*[.]tar[.]gz \\]")
+				packageSubmatchGroups := packagesRegex.FindAllStringSubmatch(command, -1)
+
+				for _, groups := range packageSubmatchGroups {
+					if len(groups) != 3 {
+						log.Fatal("parse error")
+					}
+					packageName := groups[1]
+					packageVersion, err := semver.NewVersion(groups[2])
+					if err != nil {
+						log.Fatal("parse error")
+					}
+					a = append(a, PackageInstallCommand{
+						Command:        command,
+						PackageName:    packageName,
+						PackageVersion: packageVersion,
+					})
+				}
+			}
+		}
+	}
+	return a
+}
+
 func InspectDockerfile(path string) (*AppInfo, error) {
 	dockerfile, err := ioutil.ReadFile(path)
 	if err != nil {
@@ -156,6 +256,18 @@ func InspectDockerfile(path string) (*AppInfo, error) {
 	}
 
 	dockerfileString := string(dockerfile)
+
+	dockerfileBuffer := bytes.NewBufferString(dockerfileString)
+
+	result, err := parser.Parse(dockerfileBuffer)
+	if err != nil {
+		return nil, err
+	}
+	ast := result.AST
+	nodes := []*parser.Node{ast}
+	if ast.Children != nil {
+		nodes = append(nodes, ast.Children...)
+	}
 
 	// version
 	versionRegex, _ := regexp.Compile("(BITNAMI_IMAGE_VERSION|APP_VERSION)=\"([^\"]*)\"")
@@ -229,23 +341,44 @@ func InspectDockerfile(path string) (*AppInfo, error) {
 	}
 
 	// packages
-	packagesRegex, _ := regexp.Compile("component_unpack \"([^\"]*)\" \"([^\"]*)\"")
-	packageSubmatchGroups := packagesRegex.FindAllStringSubmatch(dockerfileString, -1)
-
 	packages1 := []PackageInfo{}
-	for _, groups := range packageSubmatchGroups {
-		if len(groups) != 3 {
-			return nil, errors.New("version not found")
+	{
+		packagesRegex, _ := regexp.Compile("component_unpack \"([^\"]*)\" \"([^\"]*)\"")
+		packageSubmatchGroups := packagesRegex.FindAllStringSubmatch(dockerfileString, -1)
+
+		for _, groups := range packageSubmatchGroups {
+			if len(groups) != 3 {
+				return nil, errors.New("version not found")
+			}
+			packageName := groups[1]
+			packageVersion, err := semver.NewVersion(groups[2])
+			if err != nil {
+				return nil, err
+			}
+			packages1 = append(packages1, PackageInfo{
+				Name:    packageName,
+				Version: packageVersion,
+			})
 		}
-		packageName := groups[1]
-		packageVersion, err := semver.NewVersion(groups[2])
-		if err != nil {
-			return nil, err
+	}
+	if len(packages1) == 0 {
+		packagesRegex, _ := regexp.Compile(" -f ([^ ]*)-([0-9]+.[0-9]+.[0-9]+-[0-9]+)-linux-[^ ]*[.]tar[.]gz \\]")
+		packageSubmatchGroups := packagesRegex.FindAllStringSubmatch(dockerfileString, -1)
+
+		for _, groups := range packageSubmatchGroups {
+			if len(groups) != 3 {
+				return nil, errors.New("version not found")
+			}
+			packageName := groups[1]
+			packageVersion, err := semver.NewVersion(groups[2])
+			if err != nil {
+				return nil, err
+			}
+			packages1 = append(packages1, PackageInfo{
+				Name:    packageName,
+				Version: packageVersion,
+			})
 		}
-		packages1 = append(packages1, PackageInfo{
-			Name:    packageName,
-			Version: packageVersion,
-		})
 	}
 
 	bitnamiComponentsBytes, err := ioutil.ReadFile(filepath.Join(filepath.Dir(path), "prebuildfs", "opt", "bitnami", ".bitnami_components.json"))
@@ -436,6 +569,24 @@ func PatchDockerfile(appInfo *AppInfo) {
 		if err != nil {
 			log.Panic(err)
 		}
+
+		dockerfileBuffer := bytes.NewBuffer(originalDockerfile)
+
+		result, err := parser.Parse(dockerfileBuffer)
+		if err != nil {
+			log.Panic(err)
+		}
+		ast := result.AST
+		nodes := []*parser.Node{ast}
+		if ast.Children != nil {
+			nodes = append(nodes, ast.Children...)
+		}
+
+		packageInstallCommands := []PackageInstallCommand{}
+		for _, n := range nodes {
+			packageInstallCommands = packageInstallCommandSearch(n, packageInstallCommands)
+		}
+
 		for _, patch := range patchs {
 			emoji.Println("  ", patch)
 			if patch.GolangBuild != "" {
@@ -489,6 +640,17 @@ func PatchDockerfile(appInfo *AppInfo) {
 			originalDockerfileString = strings.ReplaceAll(originalDockerfileString,
 				"RUN . /opt/bitnami/scripts/libcomponent.sh ",
 				"# RUN . /opt/bitnami/scripts/libcomponent.sh ")
+
+			// sampleRegexp := regexp.MustCompile(`RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && .*tar.gz$`)
+			// result := sampleRegexp.ReplaceAllString(originalDockerfileString, "# $0")
+			// fmt.Println(string(result))
+
+			for _, installCmd := range packageInstallCommands {
+				fmt.Println(strings.ReplaceAll(installCmd.Command, "    ", " \\\n   "))
+				originalDockerfileString = strings.ReplaceAll(originalDockerfileString,
+					strings.ReplaceAll(installCmd.Command, "    ", " \\\n   "),
+					fmt.Sprintf("echo install %v %v", installCmd.PackageName, installCmd.PackageVersion.String()))
+			}
 
 			seperators := []string{
 				"RUN apt-get update && apt-get upgrade -y && \\",

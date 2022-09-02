@@ -1,0 +1,1 @@
+COPY --from=bitnami/wordpress:{{{VERSION_MAJOR}}} /opt/bitnami/wordpress/ /opt/bitnami/wordpress/

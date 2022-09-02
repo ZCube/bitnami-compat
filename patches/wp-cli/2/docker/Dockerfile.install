@@ -1,0 +1,1 @@
+COPY --from=bitnami/wordpress:{{{VERSION_MAJOR}}} /opt/bitnami/wp-cli/ /opt/bitnami/wp-cli/
