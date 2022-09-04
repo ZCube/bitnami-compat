@@ -108,4 +108,5 @@ RUN mkdir -p /opt/bitnami/common/bin \
     && ln -sf /usr/sbin/pg_*                           /opt/bitnami/postgresql/sbin/ \
     && ln -sf /usr/share/postgresql/$PG_MAJOR/*        /opt/bitnami/postgresql/share/ \
 	&& deluser postgres \
+    && chmod 1777 /var/run/postgresql \
     && chown 1001:4096 -R /var/run/postgresql /var/lib/postgresql /var/log/postgresql
