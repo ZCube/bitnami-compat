@@ -646,7 +646,7 @@ func PatchDockerfile(appInfo *AppInfo) {
 			// fmt.Println(string(result))
 
 			for _, installCmd := range packageInstallCommands {
-				fmt.Println(strings.ReplaceAll(installCmd.Command, "    ", " \\\n   "))
+				// fmt.Println(strings.ReplaceAll(installCmd.Command, "    ", " \\\n   "))
 				originalDockerfileString = strings.ReplaceAll(originalDockerfileString,
 					strings.ReplaceAll(installCmd.Command, "    ", " \\\n   "),
 					fmt.Sprintf("echo install %v %v", installCmd.PackageName, installCmd.PackageVersion.String()))
