@@ -114,6 +114,8 @@ jobs:
            REPO_OWNER: "bitnami"
          - APP: "sealed-secrets"
            REPO_OWNER: "bitnami"
+         - APP: "solr"
+           REPO_OWNER: "bitnami"
          - APP: "tomcat"
            REPO_OWNER: "bitnami"
          - APP: "wordpress"

@@ -86,6 +86,7 @@ image:
 ✔️  redis
 ✔️  redis-cluster
 ✔️  sealed-secrets
+✔️  solr
 ✔️  tomcat
 ✔️  wordpress
 ✔️  zookeeper
@@ -219,6 +220,8 @@ image:
 * rmq-default-credential-updater : [`1`, `1-scratch`, `1.0.2`, `1.0.2-scratch`, `1.0.2-scratch-r27`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Frmq-default-credential-updater)
 * rmq-messaging-topology-operator : [`1`, `1-scratch`, `1.8.0`, `1.8.0-scratch`, `1.8.0-scratch-r27`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Frmq-messaging-topology-operator)
 * sealed-secrets : [`0`, `0-scratch`, `0.18.2`, `0.18.2-scratch`, `0.18.2-scratch-r27`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fsealed-secrets)
+* solr : [`8`, `8-debian-11`, `8.11.2`, `8.11.2-debian-11`, `8.11.2-debian-11-r27`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fsolr)
+* solr : [`9`, `9-debian-11`, `9.0.0`, `9.0.0-debian-11`, `9.0.0-debian-11-r27`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fsolr)
 * tomcat : [`10`, `10-debian-11`, `10.0.23`, `10.0.23-debian-11`, `10.0.23-debian-11-r27`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Ftomcat)
 * tomcat : [`8.5`, `8.5-debian-11`, `8.5.82`, `8.5.82-debian-11`, `8.5.82-debian-11-r27`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Ftomcat)
 * tomcat : [`9.0`, `9.0-debian-11`, `9.0.65`, `9.0.65-debian-11`, `9.0.65-debian-11-r27`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Ftomcat)

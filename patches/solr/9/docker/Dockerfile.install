@@ -1,0 +1,14 @@
+RUN install_packages wget
+
+ENV SOLR_MAJOR {{{VERSION_MAJOR}}}
+ENV SOLR_VERSION {{{VERSION}}}
+
+RUN mkdir -p /opt/bitnami \
+    && cd /opt/bitnami \
+    && wget https://downloads.apache.org/solr/solr/${SOLR_VERSION}/solr-${SOLR_VERSION}.tgz \
+    && wget https://downloads.apache.org/solr/solr/${SOLR_VERSION}/solr-${SOLR_VERSION}.tgz.sha512 \
+    && echo $(cat solr-${SOLR_VERSION}.tgz.sha512) | sha512sum --check - \
+    && tar -xzf solr-${SOLR_VERSION}.tgz \
+    && mv solr-${SOLR_VERSION}/ solr \
+    && rm -rf solr-${SOLR_VERSION}.tgz* \
+    && chown 1001:1001 -R /opt/bitnami/solr

@@ -1,4 +1,4 @@
-FROM golang:1.17-bullseye AS golang-builder
+FROM golang:1.19-bullseye AS golang-builder
 
 RUN mkdir -p /opt/bitnami
 

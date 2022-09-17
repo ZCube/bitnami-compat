@@ -86,6 +86,7 @@ image:
 ✔️  redis
 ✔️  redis-cluster
 ✔️  sealed-secrets
+✔️  solr
 ✔️  tomcat
 ✔️  wordpress
 ✔️  zookeeper
