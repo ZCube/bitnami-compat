@@ -5,8 +5,8 @@ ENV TOMCAT_VERSION {{{VERSION}}}
 
 RUN mkdir -p /opt/bitnami \
     && cd /opt/bitnami \
-    && wget https://downloads.apache.org/tomcat/tomcat-${TOMCAT_MAJOR}/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz \
-    && wget https://downloads.apache.org/tomcat/tomcat-${TOMCAT_MAJOR}/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz.sha512 \
+    && wget https://archive.apache.org/dist/tomcat/tomcat-${TOMCAT_MAJOR}/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz \
+    && wget https://archive.apache.org/dist/tomcat/tomcat-${TOMCAT_MAJOR}/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz.sha512 \
     && echo $(cat apache-tomcat-${TOMCAT_VERSION}.tar.gz.sha512) | sha512sum --check - \
     && tar -xzf apache-tomcat-${TOMCAT_VERSION}.tar.gz \
     && mv apache-tomcat-${TOMCAT_VERSION}/ tomcat \

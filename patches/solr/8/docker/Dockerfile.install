@@ -5,8 +5,8 @@ ENV SOLR_VERSION {{{VERSION}}}
 
 RUN mkdir -p /opt/bitnami \
     && cd /opt/bitnami \
-    && wget https://downloads.apache.org/lucene/solr/${SOLR_VERSION}/solr-${SOLR_VERSION}.zip \
-    && wget https://downloads.apache.org/lucene/solr/${SOLR_VERSION}/solr-${SOLR_VERSION}.zip.sha512 \
+    && wget https://archive.apache.org/dist/lucene/solr/${SOLR_VERSION}/solr-${SOLR_VERSION}.zip \
+    && wget https://archive.apache.org/dist/lucene/solr/${SOLR_VERSION}/solr-${SOLR_VERSION}.zip.sha512 \
     && echo $(cat solr-${SOLR_VERSION}.zip.sha512) | sha512sum --check - \
     && unzip solr-${SOLR_VERSION}.zip \
     && mv solr-${SOLR_VERSION}/ solr \

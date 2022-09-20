@@ -5,8 +5,8 @@ ENV SOLR_VERSION {{{VERSION}}}
 
 RUN mkdir -p /opt/bitnami \
     && cd /opt/bitnami \
-    && wget https://downloads.apache.org/solr/solr/${SOLR_VERSION}/solr-${SOLR_VERSION}.tgz \
-    && wget https://downloads.apache.org/solr/solr/${SOLR_VERSION}/solr-${SOLR_VERSION}.tgz.sha512 \
+    && wget https://archive.apache.org/dist/solr/solr/${SOLR_VERSION}/solr-${SOLR_VERSION}.tgz \
+    && wget https://archive.apache.org/dist/solr/solr/${SOLR_VERSION}/solr-${SOLR_VERSION}.tgz.sha512 \
     && echo $(cat solr-${SOLR_VERSION}.tgz.sha512) | sha512sum --check - \
     && tar -xzf solr-${SOLR_VERSION}.tgz \
     && mv solr-${SOLR_VERSION}/ solr \
