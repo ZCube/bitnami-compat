@@ -72,6 +72,7 @@ Example : mariadb/10.8
 |Charts|Image|Reason|
 |------|-----|------|
 |thanos|docker.io/thanosio/thanos:v0.27.0|Official images are compatible.|
+|external-dns|registry.k8s.io/external-dns/external-dns:v0.12.2|Official images are compatible.|
 
 ## Todo list
 
