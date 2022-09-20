@@ -299,15 +299,18 @@ Example : mariadb/10.8
   docker run --rm -ti testimage
   ```
 
-## Recommneded Images for Bitnami Charts
+## Compatible Images for Bitnami Charts
 
-|Charts|Image|Reason|
+* Recommended for production use.
+
+|Charts|Image|Status|
 |------|-----|------|
 |thanos|docker.io/thanosio/thanos:v0.27.0|Official images are compatible.|
 |external-dns|registry.k8s.io/external-dns/external-dns:v0.12.2|Official images are compatible.|
 
 ## Todo list
 
+* [ ] Version check tool for compatible images.
 * [ ] Trivy scan.
 * [ ] Minimal tests. ( like : kubectl version --client=true, docker compose up )
 * [ ] Add Release branches & tags. ( weekly?, monthly? )
