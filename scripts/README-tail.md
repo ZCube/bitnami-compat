@@ -78,6 +78,7 @@ Example : mariadb/10.8
 
 ## Todo list
 
+* [ ] Create Containers manifest.
 * [ ] Version check tool for compatible images.
 * [ ] Trivy scan.
 * [ ] Minimal tests. ( like : kubectl version --client=true, docker compose up )

@@ -1,0 +1,2 @@
+ADD https://raw.githubusercontent.com/kubernetes-sigs/external-dns/master/LICENSE /opt/bitnami/external-dns/licenses/LICENSE
+COPY --from=registry.k8s.io/external-dns/external-dns:v{{{VERSION}}} /bin/external-dns /opt/bitnami/external-dns/bin/external-dns

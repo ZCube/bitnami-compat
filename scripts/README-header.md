@@ -68,6 +68,7 @@ image:
 ✔️  consul
 ✔️  elasticsearch
 ✔️  etcd
+✔️  external-dns
 ✔️  fluentd
 ✔️  kafka
 ✔️  keycloak
@@ -87,6 +88,7 @@ image:
 ✔️  redis-cluster
 ✔️  sealed-secrets
 ✔️  solr
+✔️  thanos
 ✔️  tomcat
 ✔️  wordpress
 ✔️  zookeeper

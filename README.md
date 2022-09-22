@@ -68,6 +68,7 @@ image:
 ✔️  consul
 ✔️  elasticsearch
 ✔️  etcd
+✔️  external-dns
 ✔️  fluentd
 ✔️  kafka
 ✔️  keycloak
@@ -87,6 +88,7 @@ image:
 ✔️  redis-cluster
 ✔️  sealed-secrets
 ✔️  solr
+✔️  thanos
 ✔️  tomcat
 ✔️  wordpress
 ✔️  zookeeper
@@ -162,6 +164,7 @@ image:
 * etcd : [`3.3`, `3.3-debian-11`, `3.3.27`, `3.3.27-debian-11`, `3.3.27-debian-11-r27`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fetcd)
 * etcd : [`3.4`, `3.4-debian-11`, `3.4.21`, `3.4.21-debian-11`, `3.4.21-debian-11-r27`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fetcd)
 * etcd : [`3.5`, `3.5-debian-11`, `3.5.5`, `3.5.5-debian-11`, `3.5.5-debian-11-r27`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fetcd)
+* external-dns : [`0`, `0-debian-11`, `0.12.2`, `0.12.2-debian-11`, `0.12.2-debian-11-r27`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fexternal-dns)
 * fluentd : [`1`, `1-debian-11`, `1.15.2`, `1.15.2-debian-11`, `1.15.2-debian-11-r27`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Ffluentd)
 * git : [`2`, `2-debian-11`, `2.37.3`, `2.37.3-debian-11`, `2.37.3-debian-11-r27`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fgit)
 * java : [`1.8`, `1.8-debian-11`, `1.8.345`, `1.8.345-debian-11`, `1.8.345-debian-11-r27`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fjava)
@@ -222,6 +225,7 @@ image:
 * sealed-secrets : [`0`, `0-scratch`, `0.18.2`, `0.18.2-scratch`, `0.18.2-scratch-r27`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fsealed-secrets)
 * solr : [`8`, `8-debian-11`, `8.11.2`, `8.11.2-debian-11`, `8.11.2-debian-11-r27`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fsolr)
 * solr : [`9`, `9-debian-11`, `9.0.0`, `9.0.0-debian-11`, `9.0.0-debian-11-r27`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fsolr)
+* thanos : [`0`, `0-scratch`, `0.28.0`, `0.28.0-scratch`, `0.28.0-scratch-r27`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fthanos)
 * tomcat : [`10`, `10-debian-11`, `10.0.23`, `10.0.23-debian-11`, `10.0.23-debian-11-r27`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Ftomcat)
 * tomcat : [`8.5`, `8.5-debian-11`, `8.5.82`, `8.5.82-debian-11`, `8.5.82-debian-11-r27`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Ftomcat)
 * tomcat : [`9.0`, `9.0-debian-11`, `9.0.65`, `9.0.65-debian-11`, `9.0.65-debian-11-r27`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Ftomcat)
@@ -310,6 +314,7 @@ Example : mariadb/10.8
 
 ## Todo list
 
+* [ ] Create Containers manifest.
 * [ ] Version check tool for compatible images.
 * [ ] Trivy scan.
 * [ ] Minimal tests. ( like : kubectl version --client=true, docker compose up )
