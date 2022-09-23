@@ -41,6 +41,7 @@ import (
 	"github.com/go-git/go-git/v5"
 	"github.com/kyokomi/emoji/v2"
 	"github.com/moby/buildkit/frontend/dockerfile/parser"
+	"gopkg.in/yaml.v3"
 )
 
 type Config struct {
@@ -460,6 +461,17 @@ func InspectDockerfile(path string) (*AppInfo, error) {
 
 func PatchDockerfile(appInfo *AppInfo) {
 	var err error
+	buf, err := ioutil.ReadFile("config.yaml")
+	if err != nil {
+		log.Panic(err)
+	}
+
+	p := &Config{}
+	err = yaml.Unmarshal(buf, p)
+	if err != nil {
+		log.Fatalf("Unmarshal: %v", err)
+	}
+
 	wd, err := os.Getwd()
 	if err != nil {
 		log.Panic(err)
@@ -652,6 +664,27 @@ func PatchDockerfile(appInfo *AppInfo) {
 					fmt.Sprintf("echo install %v %v", installCmd.PackageName, installCmd.PackageVersion.String()))
 			}
 
+			versionSemver := fmt.Sprintf("%v.%v.%v", appInfo.Version.Major(), appInfo.Version.Minor(), appInfo.Version.Patch())
+			replaceVars := map[string]string{
+				"org.opencontainers.image.authors":     "https://github.com/ZCube/bitnami-compat",
+				"org.opencontainers.image.description": "Application repackaged by ZCube for arm64 compatible, originaly Bitnami",
+				"org.opencontainers.image.ref.name":    fmt.Sprintf("%v-%v-r%v", versionSemver, appInfo.OS_Flavour, p.Revision),
+				"org.opencontainers.image.source":      "https://github.com/ZCube/bitnami-compat",
+				"org.opencontainers.image.vendor":      "ZCube",
+				"APP_VERSION":                          versionSemver,
+			}
+
+			{
+				varsRegexp := regexp.MustCompile(`([^ \t]+)[ \t]*=[ \t]*"([^"]*)"`)
+				vars := varsRegexp.FindAllStringSubmatch(originalDockerfileString, -1)
+				for i, _ := range vars {
+					if _, ok := replaceVars[vars[i][1]]; ok {
+						originalDockerfileString = strings.ReplaceAll(originalDockerfileString,
+							vars[i][0],
+							fmt.Sprintf("%v=\"%v\"", vars[i][1], replaceVars[vars[i][1]]))
+					}
+				}
+			}
 			seperators := []string{
 				"RUN apt-get update && apt-get upgrade -y && \\",
 				"FROM scratch",
