@@ -685,7 +685,9 @@ func PatchDockerfile(appInfo *AppInfo) {
 					}
 				}
 			}
+
 			seperators := []string{
+				"RUN apt-get autoremove --purge -y ",
 				"RUN apt-get update && apt-get upgrade -y && \\",
 				"FROM scratch",
 			}
@@ -703,10 +705,10 @@ func PatchDockerfile(appInfo *AppInfo) {
 						"\n\n"+seperator)
 
 			} else {
-				originalDockerfileString = strings.ReplaceAll(originalDockerfileString,
+				originalDockerfileString = strings.Replace(originalDockerfileString,
 					seperator,
 					string(dockerfileInstallBuilder.Bytes())+
-						"\n\n"+seperator)
+						"\n\n"+seperator, 1)
 			}
 
 			if strings.Contains(originalDockerfileString, "bullseye") &&
