@@ -177,6 +177,7 @@ image:
 * kafka : [`3.2`, `3.2-debian-11`, `3.2.3`, `3.2.3-debian-11`, `3.2.3-debian-11-r29`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fkafka)
 * kafka-exporter : [`1`, `1-debian-11`, `1.6.0`, `1.6.0-debian-11`, `1.6.0-debian-11-r29`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fkafka-exporter)
 * keycloak : [`18`, `18-debian-11`, `18.0.2`, `18.0.2-debian-11`, `18.0.2-debian-11-r29`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fkeycloak)
+* keycloak : [`19`, `19-debian-11`, `19.0.2`, `19.0.2-debian-11`, `19.0.2-debian-11-r29`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fkeycloak)
 * keycloak-config-cli : [`5`, `5-debian-11`, `5.3.1`, `5.3.1-debian-11`, `5.3.1-debian-11-r29`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fkeycloak-config-cli)
 * kubectl : [`1.22`, `1.22-debian-11`, `1.22.15`, `1.22.15-debian-11`, `1.22.15-debian-11-r29`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fkubectl)
 * kubectl : [`1.23`, `1.23-debian-11`, `1.23.12`, `1.23.12-debian-11`, `1.23.12-debian-11-r29`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fkubectl)
