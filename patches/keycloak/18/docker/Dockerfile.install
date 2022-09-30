@@ -10,8 +10,7 @@ RUN mkdir -p /opt/bitnami \
     && echo $(cat keycloak-${KEYCLOAK_VERSION}.tar.gz.sha1) keycloak-${KEYCLOAK_VERSION}.tar.gz | sha1sum --check - \
     && tar -xzf keycloak-${KEYCLOAK_VERSION}.tar.gz \
     && mv keycloak-${KEYCLOAK_VERSION}/ keycloak \
-    && rm -rf keycloak-${KEYCLOAK_VERSION}.tar.gz* \
-    && chown 1001:1001 -R /opt/bitnami/keycloak
+    && rm -rf keycloak-${KEYCLOAK_VERSION}.tar.gz*
 
 # reference : https://github.com/keycloak/keycloak-containers/blob/main/server/Dockerfile
 # License : Apache 2.0
