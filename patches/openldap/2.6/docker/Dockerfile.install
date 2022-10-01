@@ -1,0 +1,116 @@
+ENV OPENLDAP_DOWNLOAD_URL https://openldap.org/software/download/OpenLDAP/openldap-release/openldap-{{{VERSION}}}.tgz
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN mkdir -p /opt/bitnami/openldap/etc \
+    && mkdir -p /opt/bitnami/openldap/licenses
+
+RUN set -eux; \
+	\
+	apt-get update; \
+	apt-get install -y --no-install-recommends \
+		ca-certificates \
+        krb5-kdc-ldap \
+        libcrack2 \
+        libsasl2-modules \
+        libsasl2-modules-db \
+        libsasl2-modules-gssapi-mit \
+        libsasl2-modules-ldap \
+        libsasl2-modules-otp \
+        libsasl2-modules-sql \
+        libwrap0 \
+        openssl \
+        unixodbc \
+	; \
+	savedAptMark="$(apt-mark showmanual)"; \
+	apt-get update; \
+	apt-get install -y --no-install-recommends \
+		ca-certificates \
+		wget \
+		\
+		dpkg-dev \
+		build-essential \
+        groff-base \
+		libc6-dev \
+		libssl-dev \
+        libcrack2-dev \
+        libevent-dev \
+        libltdl-dev \
+        libsasl2-dev \
+        libwrap0-dev \
+        unixodbc-dev \
+		make \
+	; \
+	rm -rf /var/lib/apt/lists/*; \
+	\
+	curl -LO "$OPENLDAP_DOWNLOAD_URL"; \
+	mkdir -p /usr/src/openldap; \
+	tar -xzf openldap-{{{VERSION}}}.tgz -C /usr/src/openldap --strip-components=1; \
+	rm openldap-{{{VERSION}}}.tgz; \
+	\
+    cd /usr/src/openldap; \
+    ./configure \
+        --prefix=/usr \
+        --libexecdir=/usr/lib \
+        --sysconfdir=/etc \
+        --mandir=/usr/share/man \
+        # --localstatedir=/opt/bitnami/openldap/var/run/openldap \
+        --localstatedir=/var/run \
+        --enable-asyncmeta=mod \
+        --enable-balancer=yes \
+        --enable-crypt \
+        --enable-dnssrv=mod \
+        --enable-dynamic \
+        --enable-ldap=mod \
+        --enable-lload=mod \
+        --enable-mdb=yes \
+        --enable-meta=mod \
+        --enable-modules \
+        --enable-monitor=yes \
+        --enable-null=mod \
+        --enable-overlays=mod \
+        --enable-passwd=mod \
+        --enable-relay=mod \
+        --enable-slapd \
+        --enable-sock=mod \
+        --enable-spasswd \
+        --enable-sql=mod \
+        --with-cyrus-sasl \
+		--with-systemd=no \
+        --with-tls=openssl \
+	; \
+    \
+    make install; \
+	\
+	apt-mark auto '.*' > /dev/null; \
+	[ -z "$savedAptMark" ] || apt-mark manual $savedAptMark > /dev/null; \
+	find /usr/local -type f -executable -exec ldd '{}' ';' \
+		| awk '/=>/ { print $(NF-1) }' \
+		| sort -u \
+		| xargs -r dpkg-query --search \
+		| cut -d: -f1 \
+		| sort -u \
+		| xargs -r apt-mark manual \
+	; \
+	apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false;
+
+
+RUN mkdir -p /opt/bitnami/openldap/bin \
+    && mkdir -p /opt/bitnami/openldap/sbin \
+    && mkdir -p /opt/bitnami/openldap/lib \
+    && mkdir -p /opt/bitnami/openldap/conf \
+    && mkdir -p /opt/bitnami/openldap/var/run \
+    && mkdir -p /opt/bitnami/openldap/share \
+    && mkdir -p /bitnami/openldap/slapd.d \
+    && ln -s /usr/bin/ldap*                 /opt/bitnami/openldap/bin/ \
+    && ln -sf /usr/lib/slap*                /opt/bitnami/openldap/sbin/ \
+    && ln -sf /usr/sbin/slap*                /opt/bitnami/openldap/sbin/ \
+    && ln -s /usr/lib/openldap              /opt/bitnami/openldap/lib/
+    # && ln -s /etc/openldap/ldap.conf        /opt/bitnami/openldap/etc/ \
+    # && ln -s /etc/openldap/schema           /opt/bitnami/openldap/etc/ \
+    # && ln -s /etc/openldap/slapd.ldif       /opt/bitnami/openldap/share/ \
+    # && ln -s /bitnami/openldap/slapd.d      /etc/openldap/ \
+    # && chmod 664 /etc/openldap/slapd.ldif \
+    # && chmod 664 /etc/openldap/ldap.conf
+
+COPY --from=bitnami/openldap:{{{VERSION}}} /opt/bitnami/openldap/share /opt/bitnami/openldap/share
+COPY --from=bitnami/openldap:{{{VERSION}}} /opt/bitnami/openldap/etc /opt/bitnami/openldap/etc

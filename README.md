@@ -204,6 +204,7 @@ image:
 * mysqld-exporter : [`0`, `0-debian-11`, `0.14.0`, `0.14.0-debian-11`, `0.14.0-debian-11-r29`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fmysqld-exporter)
 * nginx : [`1.23`, `1.23-debian-11`, `1.23.1`, `1.23.1-debian-11`, `1.23.1-debian-11-r29`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fnginx)
 * nginx-exporter : [`0`, `0-debian-11`, `0.11.0`, `0.11.0-debian-11`, `0.11.0-debian-11-r29`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fnginx-exporter)
+* openldap : [`2.6`, `2.6-debian-11`, `2.6.3`, `2.6.3-debian-11`, `2.6.3-debian-11-r29`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fopenldap)
 * pgpool : [`4`, `4-debian-11`, `4.3.3`, `4.3.3-debian-11`, `4.3.3-debian-11-r29`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fpgpool)
 * postgres-exporter : [`0`, `0-debian-11`, `0.11.1`, `0.11.1-debian-11`, `0.11.1-debian-11-r29`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fpostgres-exporter)
 * postgresql : [`10`, `10-debian-11`, `10.22.0`, `10.22.0-debian-11`, `10.22.0-debian-11-r29`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fpostgresql)

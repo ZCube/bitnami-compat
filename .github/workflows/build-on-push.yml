@@ -90,6 +90,8 @@ jobs:
            REPO_OWNER: "bitnami"
          - APP: "nginx-exporter"
            REPO_OWNER: "bitnami"
+         - APP: "openldap"
+           REPO_OWNER: "bitnami"
          - APP: "pgpool"
            REPO_OWNER: "bitnami"
          - APP: "postgres-exporter"
