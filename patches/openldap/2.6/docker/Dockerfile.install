@@ -1,8 +1,15 @@
+# Reference #1 : https://github.com/tiredofit/docker-openldap/blob/2.6/Dockerfile
+# License #1 : MIT License
+# Reference #2 : https://github.com/osixia/docker-openldap/blob/master/image/Dockerfile
+# License #2 : MIT License
+
 ENV OPENLDAP_DOWNLOAD_URL https://openldap.org/software/download/OpenLDAP/openldap-release/openldap-{{{VERSION}}}.tgz
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN mkdir -p /opt/bitnami/openldap/etc \
     && mkdir -p /opt/bitnami/openldap/licenses
+
+ADD https://github.com/openldap/openldap/blob/master/LICENSE /opt/bitnami/openldap/licenses/LICENSE
 
 RUN set -eux; \
 	\
@@ -10,6 +17,7 @@ RUN set -eux; \
 	apt-get install -y --no-install-recommends \
 		ca-certificates \
         krb5-kdc-ldap \
+        libargon2-1 \
         libcrack2 \
         libsasl2-modules \
         libsasl2-modules-db \
@@ -32,6 +40,7 @@ RUN set -eux; \
         groff-base \
 		libc6-dev \
 		libssl-dev \
+        libargon2-dev \
         libcrack2-dev \
         libevent-dev \
         libltdl-dev \
@@ -55,6 +64,8 @@ RUN set -eux; \
         --mandir=/usr/share/man \
         # --localstatedir=/opt/bitnami/openldap/var/run/openldap \
         --localstatedir=/var/run \
+		--with-systemd=no \
+        --enable-argon2 \
         --enable-asyncmeta=mod \
         --enable-balancer=yes \
         --enable-crypt \
@@ -75,7 +86,6 @@ RUN set -eux; \
         --enable-spasswd \
         --enable-sql=mod \
         --with-cyrus-sasl \
-		--with-systemd=no \
         --with-tls=openssl \
 	; \
     \
