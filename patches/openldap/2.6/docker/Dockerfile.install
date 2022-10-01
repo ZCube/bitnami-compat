@@ -62,8 +62,8 @@ RUN set -eux; \
         --libexecdir=/usr/lib \
         --sysconfdir=/etc \
         --mandir=/usr/share/man \
-        # --localstatedir=/opt/bitnami/openldap/var/run/openldap \
-        --localstatedir=/var/run \
+        --localstatedir=/opt/bitnami/openldap/var/run \
+        # --localstatedir=/var/run \
 		--with-systemd=no \
         --enable-argon2 \
         --enable-asyncmeta=mod \
