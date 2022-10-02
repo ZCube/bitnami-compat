@@ -12,13 +12,14 @@ RUN mkdir -p /opt/bitnami/openldap/etc \
 ADD https://github.com/openldap/openldap/blob/master/LICENSE /opt/bitnami/openldap/licenses/LICENSE
 
 RUN set -eux; \
-	\
-	apt-get update; \
-	apt-get install -y --no-install-recommends \
-		ca-certificates \
+    \
+    apt-get update; \
+    apt-get install -y --no-install-recommends \
+        ca-certificates \
         krb5-kdc-ldap \
         libargon2-1 \
         libcrack2 \
+        librad0 \
         libsasl2-modules \
         libsasl2-modules-db \
         libsasl2-modules-gssapi-mit \
@@ -28,34 +29,36 @@ RUN set -eux; \
         libwrap0 \
         openssl \
         unixodbc \
-	; \
-	savedAptMark="$(apt-mark showmanual)"; \
-	apt-get update; \
-	apt-get install -y --no-install-recommends \
-		ca-certificates \
-		wget \
-		\
-		dpkg-dev \
-		build-essential \
+    ; \
+    savedAptMark="$(apt-mark showmanual)"; \
+    apt-get update; \
+    apt-get install -y --no-install-recommends \
+        ca-certificates \
+        wget \
+        build-essential \
+        dpkg-dev \
         groff-base \
-		libc6-dev \
-		libssl-dev \
         libargon2-dev \
+        libc6-dev \
         libcrack2-dev \
         libevent-dev \
+        libkrb5-dev \
         libltdl-dev \
         libsasl2-dev \
+        libssl-dev \
         libwrap0-dev \
+        heimdal-multidev \
+        make \
+        radlib-dev \
         unixodbc-dev \
-		make \
-	; \
-	rm -rf /var/lib/apt/lists/*; \
-	\
-	curl -LO "$OPENLDAP_DOWNLOAD_URL"; \
-	mkdir -p /usr/src/openldap; \
-	tar -xzf openldap-{{{VERSION}}}.tgz -C /usr/src/openldap --strip-components=1; \
-	rm openldap-{{{VERSION}}}.tgz; \
-	\
+    ; \
+    rm -rf /var/lib/apt/lists/*; \
+    \
+    curl -LO "$OPENLDAP_DOWNLOAD_URL"; \
+    mkdir -p /usr/src/openldap; \
+    tar -xzf openldap-{{{VERSION}}}.tgz -C /usr/src/openldap --strip-components=1; \
+    rm openldap-{{{VERSION}}}.tgz; \
+    \
     cd /usr/src/openldap; \
     ./configure \
         --prefix=/usr \
@@ -64,7 +67,7 @@ RUN set -eux; \
         --mandir=/usr/share/man \
         --localstatedir=/opt/bitnami/openldap/var/run \
         # --localstatedir=/var/run \
-		--with-systemd=no \
+        --with-systemd=no \
         --enable-argon2 \
         --enable-asyncmeta=mod \
         --enable-balancer=yes \
@@ -87,21 +90,31 @@ RUN set -eux; \
         --enable-sql=mod \
         --with-cyrus-sasl \
         --with-tls=openssl \
-	; \
+    ; \
     \
     make install; \
-	\
-	apt-mark auto '.*' > /dev/null; \
-	[ -z "$savedAptMark" ] || apt-mark manual $savedAptMark > /dev/null; \
-	find /usr/local -type f -executable -exec ldd '{}' ';' \
-		| awk '/=>/ { print $(NF-1) }' \
-		| sort -u \
-		| xargs -r dpkg-query --search \
-		| cut -d: -f1 \
-		| sort -u \
-		| xargs -r apt-mark manual \
-	; \
-	apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false;
+    \
+    make DESTDIR="" prefix=/usr libexecdir=/usr/lib -C contrib/slapd-modules/autogroup install; \
+    make DESTDIR="" prefix=/usr libexecdir=/usr/lib -C contrib/slapd-modules/lastbind install; \
+    make DESTDIR="" prefix=/usr libexecdir=/usr/lib -C contrib/slapd-modules/passwd/pbkdf2 install; \
+    make DESTDIR="" prefix=/usr libexecdir=/usr/lib -C contrib/slapd-modules/passwd/sha2 install; \
+    make DESTDIR="" prefix=/usr libexecdir=/usr/lib -C contrib/slapd-modules/passwd/totp install; \
+    mkdir -p /usr/etc/openldap; \
+    make DESTDIR="" prefix=/usr libexecdir=/usr/lib -C contrib/slapd-modules/ppm install; \
+    export C_INCLUDE_PATH=/usr/include/heimdal ; \
+    make DESTDIR="" prefix=/usr libexecdir=/usr/lib -C contrib/slapd-modules/smbk5pwd install; \
+    \
+    apt-mark auto '.*' > /dev/null; \
+    [ -z "$savedAptMark" ] || apt-mark manual $savedAptMark > /dev/null; \
+    find /usr/local -type f -executable -exec ldd '{}' ';' \
+        | awk '/=>/ { print $(NF-1) }' \
+        | sort -u \
+        | xargs -r dpkg-query --search \
+        | cut -d: -f1 \
+        | sort -u \
+        | xargs -r apt-mark manual \
+    ; \
+    apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false;
 
 
 RUN mkdir -p /opt/bitnami/openldap/bin \
