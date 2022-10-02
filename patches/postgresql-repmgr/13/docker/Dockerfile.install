@@ -113,4 +113,5 @@ RUN mkdir -p /opt/bitnami/common/bin \
 	&& ln -sf /usr/lib/postgresql/$PG_MAJOR/bin/repmgr* /opt/bitnami/repmgr/bin/ \
 	&& deluser postgres \
     && chmod 1777 /var/run/postgresql \
+    && sed -E -i "s/775/777/g" /usr/lib/tmpfiles.d/postgresql-common.conf \
     && chown 1001:4096 -R /var/run/postgresql /var/lib/postgresql /var/log/postgresql
