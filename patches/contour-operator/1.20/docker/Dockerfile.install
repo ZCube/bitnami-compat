@@ -1,0 +1,4 @@
+# REFERENCE : https://github.com/projectcontour/contour-operator
+# LICENSE : Apache-2.0 license
+
+COPY --from=ghcr.io/projectcontour/contour-operator:v{{{VERSION}}} /contour-operator /opt/bitnami/contour-operator/bin/

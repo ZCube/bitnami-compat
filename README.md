@@ -66,6 +66,8 @@ image:
 ✔️  cert-manager
 ✔️  common
 ✔️  consul
+✔️  contour
+✔️  contour-operator
 ✔️  elasticsearch
 ✔️  etcd
 ✔️  external-dns
@@ -159,8 +161,18 @@ image:
 * cert-manager-webhook : [`1`, `1-debian-11`, `1.9.1`, `1.9.1-debian-11`, `1.9.1-debian-11-r29`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fcert-manager-webhook)
 * consul : [`1`, `1-debian-11`, `1.13.2`, `1.13.2-debian-11`, `1.13.2-debian-11-r29`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fconsul)
 * consul-exporter : [`0`, `0-debian-11`, `0.8.0`, `0.8.0-debian-11`, `0.8.0-debian-11-r29`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fconsul-exporter)
+* contour : [`1.20`, `1.20-debian-11`, `1.20.2`, `1.20.2-debian-11`, `1.20.2-debian-11-r29`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fcontour)
+* contour : [`1.21`, `1.21-debian-11`, `1.21.1`, `1.21.1-debian-11`, `1.21.1-debian-11-r29`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fcontour)
+* contour : [`1.22`, `1.22-debian-11`, `1.22.1`, `1.22.1-debian-11`, `1.22.1-debian-11-r29`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fcontour)
+* contour-operator : [`1.20`, `1.20-scratch`, `1.20.2`, `1.20.2-scratch`, `1.20.2-scratch-r29`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fcontour-operator)
+* contour-operator : [`1.21`, `1.21-scratch`, `1.21.1`, `1.21.1-scratch`, `1.21.1-scratch-r29`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fcontour-operator)
+* contour-operator : [`1.22`, `1.22-scratch`, `1.22.1`, `1.22.1-scratch`, `1.22.1-scratch-r29`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fcontour-operator)
 * elasticsearch : [`7`, `7-debian-11`, `7.17.6`, `7.17.6-debian-11`, `7.17.6-debian-11-r29`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Felasticsearch)
 * elasticsearch-exporter : [`1`, `1-debian-11`, `1.5.0`, `1.5.0-debian-11`, `1.5.0-debian-11-r29`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Felasticsearch-exporter)
+* envoy : [`1.20`, `1.20-debian-11`, `1.20.7`, `1.20.7-debian-11`, `1.20.7-debian-11-r29`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fenvoy)
+* envoy : [`1.21`, `1.21-debian-11`, `1.21.5`, `1.21.5-debian-11`, `1.21.5-debian-11-r29`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fenvoy)
+* envoy : [`1.22`, `1.22-debian-11`, `1.22.5`, `1.22.5-debian-11`, `1.22.5-debian-11-r29`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fenvoy)
+* envoy : [`1.23`, `1.23-debian-11`, `1.23.1`, `1.23.1-debian-11`, `1.23.1-debian-11-r29`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fenvoy)
 * etcd : [`3.3`, `3.3-debian-11`, `3.3.27`, `3.3.27-debian-11`, `3.3.27-debian-11-r29`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fetcd)
 * etcd : [`3.4`, `3.4-debian-11`, `3.4.21`, `3.4.21-debian-11`, `3.4.21-debian-11-r29`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fetcd)
 * etcd : [`3.5`, `3.5-debian-11`, `3.5.5`, `3.5.5-debian-11`, `3.5.5-debian-11-r29`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fetcd)

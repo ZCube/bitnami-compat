@@ -110,7 +110,7 @@ var buildCmd = &cobra.Command{
 					var args []string
 					{
 						args = []string{
-							"buildx", "build",
+							"buildx", "build", "--progress=plain",
 						}
 
 						var version string

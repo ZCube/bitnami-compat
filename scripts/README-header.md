@@ -66,6 +66,8 @@ image:
 ✔️  cert-manager
 ✔️  common
 ✔️  consul
+✔️  contour
+✔️  contour-operator
 ✔️  elasticsearch
 ✔️  etcd
 ✔️  external-dns
