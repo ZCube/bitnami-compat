@@ -78,3 +78,7 @@
             echo "Failed after 5 attempts!"
             exit 1
           fi
+      - name: Trivy
+        shell: bash
+        run: |
+          go run main.go trivy --app=${{ matrix.APP }} --tag=${{ env.REGISTRY }}/${{ steps.repository.outputs.lowercase }}/

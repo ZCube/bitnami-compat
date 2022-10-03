@@ -80,7 +80,7 @@ Example : mariadb/10.8
 
 * [ ] Create Containers manifest.
 * [ ] Version check tool for compatible images.
-* [ ] Trivy scan.
+* [*] Trivy scan.
 * [ ] Minimal tests. ( like : kubectl version --client=true, docker compose up )
 * [ ] Add Release branches & tags. ( weekly?, monthly? )
 * [ ] Faster build for multistaged images.
@@ -89,7 +89,7 @@ Example : mariadb/10.8
 * [ ] Get an Arm64 machine for build and testing.
 * [ ] Remove unused apps.
 * [ ] Improve Readme template.
-* [ ] Add docker labels for notice.
+* [*] Add docker labels for notice.
 
 ## License
 
