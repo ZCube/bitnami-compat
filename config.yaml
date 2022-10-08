@@ -3,3 +3,6 @@ ignores:
     - php-fpm
     - apache
     - ruby
+dependencies:
+    ruby:
+        - fluentd

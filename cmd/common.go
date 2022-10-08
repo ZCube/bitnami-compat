@@ -41,12 +41,14 @@ import (
 	"github.com/go-git/go-git/v5"
 	"github.com/kyokomi/emoji/v2"
 	"github.com/moby/buildkit/frontend/dockerfile/parser"
+	"golang.org/x/exp/slices"
 	"gopkg.in/yaml.v3"
 )
 
 type Config struct {
-	Revision uint64   `yaml:"revision"`
-	Ignores  []string `yaml:"ignores"`
+	Revision     uint64              `yaml:"revision"`
+	Ignores      []string            `yaml:"ignores"`
+	Dependencies map[string][]string `yaml:"dependencies"`
 }
 
 type PackageInfo struct {
@@ -261,6 +263,18 @@ func packageInstallCommandSearch(n *parser.Node, a []PackageInstallCommand) []Pa
 }
 
 func InspectDockerfile(path string) (*AppInfo, error) {
+	var err error
+	buf, err := ioutil.ReadFile("config.yaml")
+	if err != nil {
+		log.Panic(err)
+	}
+
+	p := &Config{}
+	err = yaml.Unmarshal(buf, p)
+	if err != nil {
+		log.Fatalf("Unmarshal: %v", err)
+	}
+
 	dockerfile, err := ioutil.ReadFile(path)
 	if err != nil {
 		return nil, err
@@ -419,6 +433,36 @@ func InspectDockerfile(path string) (*AppInfo, error) {
 		// }
 		// packageInfo.Version = packageVersion
 		packages2 = append(packages2, packageInfo)
+	}
+
+	{
+		packagesSorted := []PackageInfo{}
+		for k, _ := range packages2 {
+			pkgName := packages2[k].Name
+			if val, ok := p.Dependencies[pkgName]; ok {
+				idx := -1
+				for k2, _ := range packagesSorted {
+					idx = slices.Index(val, packagesSorted[k2].Name)
+					if idx >= 0 {
+						break
+					}
+				}
+				fmt.Println(packages2, packagesSorted, packages2[k].Name, idx)
+				if idx == 0 {
+					packagesSorted = append([]PackageInfo{packages2[k]}, packagesSorted...)
+				} else if idx >= 0 {
+					tmp := []PackageInfo{}
+					tmp = append(packagesSorted[0:idx], packages2[k])
+					tmp = append(tmp, packagesSorted[:idx]...)
+					packagesSorted = tmp
+				} else {
+					packagesSorted = append(packagesSorted, packages2[k])
+				}
+			} else {
+				packagesSorted = append(packagesSorted, packages2[k])
+			}
+		}
+		packages2 = packagesSorted
 	}
 
 	for _, p1 := range packages1 {
