@@ -92,17 +92,19 @@ RUN set -eux; \
         --with-tls=openssl \
     ; \
     \
-    make install; \
+    make -j install; \
     \
-    make DESTDIR="" prefix=/usr libexecdir=/usr/lib -C contrib/slapd-modules/autogroup install; \
-    make DESTDIR="" prefix=/usr libexecdir=/usr/lib -C contrib/slapd-modules/lastbind install; \
-    make DESTDIR="" prefix=/usr libexecdir=/usr/lib -C contrib/slapd-modules/passwd/pbkdf2 install; \
-    make DESTDIR="" prefix=/usr libexecdir=/usr/lib -C contrib/slapd-modules/passwd/sha2 install; \
-    make DESTDIR="" prefix=/usr libexecdir=/usr/lib -C contrib/slapd-modules/passwd/totp install; \
+    make -j DESTDIR="" prefix=/usr libexecdir=/usr/lib -C contrib/slapd-modules/autogroup install; \
+    make -j DESTDIR="" prefix=/usr libexecdir=/usr/lib -C contrib/slapd-modules/lastbind install; \
+    sed -i 's/pw-netscape.la pw-radius.la pw-apr1.la/pw-netscape.la pw-apr1.la/g' contrib/slapd-modules/passwd/Makefile; \
+    make -j DESTDIR="" prefix=/usr libexecdir=/usr/lib -C contrib/slapd-modules/passwd install-lib; \
+    make -j DESTDIR="" prefix=/usr libexecdir=/usr/lib -C contrib/slapd-modules/passwd/pbkdf2 install; \
+    make -j DESTDIR="" prefix=/usr libexecdir=/usr/lib -C contrib/slapd-modules/passwd/sha2 install; \
+    make -j DESTDIR="" prefix=/usr libexecdir=/usr/lib -C contrib/slapd-modules/passwd/totp install; \
     mkdir -p /usr/etc/openldap; \
-    make DESTDIR="" prefix=/usr libexecdir=/usr/lib -C contrib/slapd-modules/ppm install; \
+    make -j DESTDIR="" prefix=/usr libexecdir=/usr/lib -C contrib/slapd-modules/ppm install; \
     export C_INCLUDE_PATH=/usr/include/heimdal ; \
-    make DESTDIR="" prefix=/usr libexecdir=/usr/lib -C contrib/slapd-modules/smbk5pwd install; \
+    make -j DESTDIR="" prefix=/usr libexecdir=/usr/lib -C contrib/slapd-modules/smbk5pwd install; \
     \
     apt-mark auto '.*' > /dev/null; \
     [ -z "$savedAptMark" ] || apt-mark manual $savedAptMark > /dev/null; \

@@ -11,6 +11,7 @@ require (
 	github.com/moby/buildkit v0.10.4
 	github.com/spf13/cobra v1.5.0
 	github.com/spf13/viper v1.12.0
+	github.com/stevenle/topsort v0.2.0
 	golang.org/x/exp v0.0.0-20220722155223-a9213eeb770e
 	gopkg.in/yaml.v3 v3.0.0
 )

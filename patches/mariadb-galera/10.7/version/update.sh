@@ -9,7 +9,7 @@ export REPOSITORY="http://archive.mariadb.org/mariadb-${VERSION}/repo/debian/ bu
 set -ex; \
 export GNUPGHOME="$(mktemp -d)"; \
 for key in $GPG_KEYS; do \
-    gpg --batch --keyserver keyserver.ubuntu.com --recv-keys "$key"; \
+    gpg --batch --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys "$key"; \
 done; \
 gpg --batch --export $GPG_KEYS > /etc/apt/trusted.gpg.d/mariadb.gpg; \
 command -v gpgconf > /dev/null && gpgconf --kill all || :; \
