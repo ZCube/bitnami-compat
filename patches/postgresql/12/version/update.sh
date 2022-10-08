@@ -21,5 +21,5 @@ echo "${REPOSITORY}" > /etc/apt/sources.list.d/pgdg.list
 apt -qq update
 
 export VERSION_ORIGINAL=$(apt-cache policy postgresql-${VERSION_MAJOR} | grep Candidate | awk '{print $2}' | sed -E "s/(.*)[.].*$/\\1/")
-cat ${VERSION_DIR}.bitnami_components.json | jq -M --arg VERSION_ORIGINAL "$VERSION_ORIGINAL" '.mariadb.version = $VERSION_ORIGINAL' > /tmp/components.json
+cat ${VERSION_DIR}.bitnami_components.json | jq -M --arg VERSION_ORIGINAL "$VERSION_ORIGINAL" '.postgresql.version = $VERSION_ORIGINAL' > /tmp/components.json
 cp -rf /tmp/components.json ${VERSION_DIR}.bitnami_components.json
