@@ -205,6 +205,16 @@ func packageInstallCommandSearch(n *parser.Node, a []PackageInstallCommand) []Pa
 		{
 			command := n.Next.Value
 			{
+				packagesRegex, _ := regexp.Compile(`mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/`)
+				packageSubmatchGroups := packagesRegex.FindAllStringSubmatch(command, -1)
+				if len(packageSubmatchGroups) > 0 {
+					a = append(a, PackageInstallCommand{
+						Command:     command,
+						PackageName: "global",
+					})
+				}
+			}
+			{
 				packagesRegex, _ := regexp.Compile("component_unpack \"([^\"]*)\" \"([^\"]*)\"")
 				packageSubmatchGroups := packagesRegex.FindAllStringSubmatch(command, -1)
 
@@ -658,10 +668,17 @@ func PatchDockerfile(appInfo *AppInfo) {
 			// fmt.Println(string(result))
 
 			for _, installCmd := range packageInstallCommands {
+				spaces := regexp.MustCompile(`( )(   [ ]*)`)
 				// fmt.Println(strings.ReplaceAll(installCmd.Command, "    ", " \\\n   "))
-				originalDockerfileString = strings.ReplaceAll(originalDockerfileString,
-					strings.ReplaceAll(installCmd.Command, "    ", " \\\n   "),
-					fmt.Sprintf("echo install %v %v", installCmd.PackageName, installCmd.PackageVersion.String()))
+				if installCmd.PackageVersion != nil {
+					originalDockerfileString = strings.ReplaceAll(originalDockerfileString,
+						spaces.ReplaceAllString(installCmd.Command, " \\\n$2"),
+						fmt.Sprintf("echo install %v %v", installCmd.PackageName, installCmd.PackageVersion.String()))
+				} else {
+					originalDockerfileString = strings.ReplaceAll(originalDockerfileString,
+						spaces.ReplaceAllString(installCmd.Command, " \\\n$2"),
+						fmt.Sprintf("echo install %v", installCmd.PackageName))
+				}
 			}
 
 			versionSemver := fmt.Sprintf("%v.%v.%v", appInfo.Version.Major(), appInfo.Version.Minor(), appInfo.Version.Patch())
