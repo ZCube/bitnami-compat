@@ -97,4 +97,6 @@ RUN mkdir -p "$GEM_HOME" && chmod 777 "$GEM_HOME"
 RUN mkdir -p /opt/bitnami/ruby/bin \
     && mkdir -p /opt/bitnami/ruby/sbin \
     && mkdir -p /opt/bitnami/ruby/lib \
-    && ln -s /usr/local/bin/ruby                     /opt/bitnami/ruby/bin/
+    && ln -s /usr/local/bin/ruby                     /opt/bitnami/ruby/bin/ \
+    && ln -s /usr/local/bin/gem                      /opt/bitnami/ruby/bin/ \
+    && ln -s /usr/local/bin/bundle                   /opt/bitnami/ruby/bin/

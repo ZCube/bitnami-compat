@@ -1,0 +1,12 @@
+RUN install_packages python3 python3-pip python3-dev 2to3 virtualenv idle3
+
+RUN mkdir -p /opt/bitnami/python/bin \
+    && ln -sf /usr/bin/2to3            /opt/bitnami/python/bin/ \
+    && ln -sf /usr/bin/idle3           /opt/bitnami/python/bin/ \
+    && ln -sf /usr/bin/pip3            /opt/bitnami/python/bin/ \
+    && ln -sf /usr/bin/pydoc3          /opt/bitnami/python/bin/ \
+    && ln -sf /usr/bin/python3         /opt/bitnami/python/bin/ \
+    && ln -sf /usr/bin/python3-config  /opt/bitnami/python/bin/ \
+    && ln -sf /usr/bin/virtualenv      /opt/bitnami/python/bin/ \
+    && ln -sf /usr/bin/pip3            /opt/bitnami/python/bin/pip \
+    && ln -sf /usr/bin/python3         /opt/bitnami/python/bin/python

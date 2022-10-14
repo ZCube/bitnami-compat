@@ -1,0 +1,13 @@
+RUN install_packages curl ca-certificates && \
+    curl -fsSL https://deb.nodesource.com/setup_14.x | bash - && \
+    install_packages nodejs && \
+    npm i -g node-gyp yarn terser
+
+RUN mkdir -p /opt/bitnami/node/bin \
+    && ln -sf /usr/bin/node               /opt/bitnami/node/bin/ \
+    && ln -sf /usr/bin/corepack           /opt/bitnami/node/bin/ \
+    && ln -sf /usr/bin/npx                /opt/bitnami/node/bin/ \
+    && ln -sf /usr/bin/node-gyp           /opt/bitnami/node/bin/ \
+    && ln -sf /usr/bin/yarn               /opt/bitnami/node/bin/ \
+    && ln -sf /usr/bin/yarnpkg            /opt/bitnami/node/bin/ \
+    && ln -sf /usr/bin/terser             /opt/bitnami/node/bin/

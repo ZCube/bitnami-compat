@@ -366,46 +366,6 @@ func InspectDockerfile(path string) (*AppInfo, error) {
 	}
 
 	// packages
-	packages1 := []PackageInfo{}
-	{
-		packagesRegex, _ := regexp.Compile("component_unpack \"([^\"]*)\" \"([^\"]*)\"")
-		packageSubmatchGroups := packagesRegex.FindAllStringSubmatch(dockerfileString, -1)
-
-		for _, groups := range packageSubmatchGroups {
-			if len(groups) != 3 {
-				return nil, errors.New("version not found")
-			}
-			packageName := groups[1]
-			packageVersion, err := semver.NewVersion(groups[2])
-			if err != nil {
-				return nil, err
-			}
-			packages1 = append(packages1, PackageInfo{
-				Name:    packageName,
-				Version: packageVersion,
-			})
-		}
-	}
-	if len(packages1) == 0 {
-		packagesRegex, _ := regexp.Compile(" -f ([^ ]*)-([0-9]+.[0-9]+.[0-9]+-[0-9]+)-linux-[^ ]*[.]tar[.]gz \\]")
-		packageSubmatchGroups := packagesRegex.FindAllStringSubmatch(dockerfileString, -1)
-
-		for _, groups := range packageSubmatchGroups {
-			if len(groups) != 3 {
-				return nil, errors.New("version not found")
-			}
-			packageName := groups[1]
-			packageVersion, err := semver.NewVersion(groups[2])
-			if err != nil {
-				return nil, err
-			}
-			packages1 = append(packages1, PackageInfo{
-				Name:    packageName,
-				Version: packageVersion,
-			})
-		}
-	}
-
 	bitnamiComponentsBytes, err := ioutil.ReadFile(filepath.Join(filepath.Dir(path), "prebuildfs", "opt", "bitnami", ".bitnami_components.json"))
 	if err != nil {
 		return nil, err
@@ -442,18 +402,19 @@ func InspectDockerfile(path string) (*AppInfo, error) {
 			if val, ok := p.Dependencies[pkgName]; ok {
 				idx := -1
 				for k2, _ := range packagesSorted {
-					idx = slices.Index(val, packagesSorted[k2].Name)
-					if idx >= 0 {
-						break
+					if slices.Index(val, packagesSorted[k2].Name) >= 0 {
+						if idx == -1 || idx > k2 {
+							idx = k2
+						}
 					}
 				}
-				fmt.Println(packages2, packagesSorted, packages2[k].Name, idx)
 				if idx == 0 {
 					packagesSorted = append([]PackageInfo{packages2[k]}, packagesSorted...)
-				} else if idx >= 0 {
+				} else if idx > 0 {
 					tmp := []PackageInfo{}
-					tmp = append(packagesSorted[0:idx], packages2[k])
 					tmp = append(tmp, packagesSorted[:idx]...)
+					tmp = append(tmp, packages2[k])
+					tmp = append(tmp, packagesSorted[idx:]...)
 					packagesSorted = tmp
 				} else {
 					packagesSorted = append(packagesSorted, packages2[k])
@@ -465,21 +426,7 @@ func InspectDockerfile(path string) (*AppInfo, error) {
 		packages2 = packagesSorted
 	}
 
-	for _, p1 := range packages1 {
-		for _, p2 := range packages2 {
-			if p1.Name == p2.Name {
-				p1.Version = p2.Version
-			}
-		}
-	}
-
-	if len(packages1) < len(packages2) {
-		appInfo.Dependencies = packages2
-	} else if len(packages1) > len(packages2) {
-		appInfo.Dependencies = packages1
-	} else if len(packages1) == len(packages2) {
-		appInfo.Dependencies = packages1
-	}
+	appInfo.Dependencies = packages2
 
 	if len(versionSubmatchGroup) != 3 {
 		if len(appInfo.Dependencies) == 1 {

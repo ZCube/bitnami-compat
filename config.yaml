@@ -6,3 +6,11 @@ ignores:
 dependencies:
     ruby:
         - fluentd
+        - discourse
+        - python
+    node:
+        - discourse
+    python:
+        - discourse
+    brotli:
+        - discourse

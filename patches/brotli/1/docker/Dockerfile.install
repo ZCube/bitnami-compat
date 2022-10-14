@@ -1,0 +1,4 @@
+RUN install_packages brotli
+
+RUN mkdir -p /opt/bitnami/brotli/bin \
+    && ln -sf /usr/bin/brotli             /opt/bitnami/brotli/bin/
