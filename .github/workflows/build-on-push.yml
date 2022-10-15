@@ -177,7 +177,7 @@ jobs:
           n=0
           until [ "$n" -ge 5 ] # retry 5 times
           do
-            go run main.go build --app=${{ matrix.APP }} --tag=${{ env.REGISTRY }}/${ repository }/,docker.io/zcube/bitnami-compat- --cache-from --cache-to --push --platforms=linux/amd64,linux/arm64 && break
+            go run main.go build --app=${{ matrix.APP }} --tag=${{ env.REGISTRY }}/${repository}/,docker.io/zcube/bitnami-compat- --cache-from --cache-to --push --platforms=linux/amd64,linux/arm64 && break
             n=$((n+1)) 
             sleep 15
           done
@@ -193,7 +193,7 @@ jobs:
           n=0
           until [ "$n" -ge 5 ] # retry 5 times
           do
-            go run main.go push --app=${{ matrix.APP }} --tag=${{ env.REGISTRY }}/${ repository }/ --tag-to docker.io/zcube/bitnami-compat- --dest-creds=zcube:${{ secrets.DOCKER_HUB_KEY }} && break
+            go run main.go push --app=${{ matrix.APP }} --tag=${{ env.REGISTRY }}/${repository}/ --tag-to docker.io/zcube/bitnami-compat- --dest-creds=zcube:${{ secrets.DOCKER_HUB_KEY }} && break
             n=$((n+1)) 
             sleep 15
           done
@@ -205,4 +205,4 @@ jobs:
         shell: bash
         run: |
           export repository=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')
-          go run main.go trivy --app=${{ matrix.APP }} --tag=${{ env.REGISTRY }}/${ repository }/ || true
+          go run main.go trivy --app=${{ matrix.APP }} --tag=${{ env.REGISTRY }}/${repository}/ || true
