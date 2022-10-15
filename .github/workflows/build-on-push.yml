@@ -164,27 +164,6 @@ jobs:
         with:
           username: zcube
           password: ${{ secrets.DOCKER_HUB_KEY }}
-      - name: Extract lowercase repository name
-        uses: ASzc/change-string-case-action@v2
-        with:
-          string: ${{ github.repository }}
-        id: repository
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@v4
-        with:
-          # tags: |
-          #   type=raw,value=${{ matrix.VERSION_MAJOR }}
-          #   type=raw,value=${{ matrix.VERSION_MAJOR }}-${{ matrix.OS_FLAVOUR }}
-          #   type=raw,value=${{ matrix.VERSION }}
-          #   type=raw,value=${{ matrix.VERSION }}-${{ matrix.OS_FLAVOUR }}
-          #   type=raw,value=${{ matrix.VERSION }}-${{ matrix.OS_FLAVOUR }}-r${{ matrix.REVISION }}
-          images: ${{ env.REGISTRY }}/${{ steps.repository.outputs.lowercase }}/${{ matrix.APP }}
-      # https://stackoverflow.com/questions/58033366/how-to-get-the-current-branch-within-github-actions
-      # - name: Extract branch name
-      #   shell: bash
-      #   run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-      #   id: extract_branch
       - name: Set up Go
         uses: actions/setup-go@v3
         with:
@@ -192,12 +171,13 @@ jobs:
       - name: Build Docker Image And Push To GHCR And Docker Hub
         shell: bash
         run: |
+          export repository=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')
           go run main.go generate --app=${{ matrix.APP }}
           set -euo pipefail
           n=0
           until [ "$n" -ge 5 ] # retry 5 times
           do
-            go run main.go build --app=${{ matrix.APP }} --tag=${{ env.REGISTRY }}/${{ steps.repository.outputs.lowercase }}/,docker.io/zcube/bitnami-compat- --cache-from --cache-to --push --platforms=linux/amd64,linux/arm64 && break
+            go run main.go build --app=${{ matrix.APP }} --tag=${{ env.REGISTRY }}/${ repository }/,docker.io/zcube/bitnami-compat- --cache-from --cache-to --push --platforms=linux/amd64,linux/arm64 && break
             n=$((n+1)) 
             sleep 15
           done
@@ -208,11 +188,12 @@ jobs:
       - name: Push To Docker Hub
         shell: bash
         run: |
+          export repository=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')
           set -euo pipefail
           n=0
           until [ "$n" -ge 5 ] # retry 5 times
           do
-            go run main.go push --app=${{ matrix.APP }} --tag=${{ env.REGISTRY }}/${{ steps.repository.outputs.lowercase }}/ --tag-to docker.io/zcube/bitnami-compat- --dest-creds=zcube:${{ secrets.DOCKER_HUB_KEY }} && break
+            go run main.go push --app=${{ matrix.APP }} --tag=${{ env.REGISTRY }}/${ repository }/ --tag-to docker.io/zcube/bitnami-compat- --dest-creds=zcube:${{ secrets.DOCKER_HUB_KEY }} && break
             n=$((n+1)) 
             sleep 15
           done
@@ -223,4 +204,5 @@ jobs:
       - name: Trivy
         shell: bash
         run: |
-          go run main.go trivy --app=${{ matrix.APP }} --tag=${{ env.REGISTRY }}/${{ steps.repository.outputs.lowercase }}/ || true
+          export repository=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')
+          go run main.go trivy --app=${{ matrix.APP }} --tag=${{ env.REGISTRY }}/${ repository }/ || true
