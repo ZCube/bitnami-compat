@@ -1,6 +1,5 @@
 #/bin/bash
 set -e
-apt -qq update; apt -qq install -y gnupg jq ca-certificates
 
 export VERSION=${VERSION:-10.6}
 export VERSION_DIR=${VERSION_DIR:-./}

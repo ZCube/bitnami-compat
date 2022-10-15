@@ -548,7 +548,7 @@ func PatchDockerfile(appInfo *AppInfo) {
 				args = append(args, "-v", fmt.Sprintf("%v:/work/bash", filepath.Join(wd, filepath.Dir(patch.VersionUpdate))))
 
 				args = append(args,
-					"-w", "/work", "debian:bullseye-slim", "/bin/bash", "-c", strings.ReplaceAll(filepath.Join("bash", filepath.Base(patch.VersionUpdate)), "\\", "/"))
+					"-w", "/work", "ghcr.io/zcube/bitnami-compat/version", "/bin/bash", "-c", strings.ReplaceAll(filepath.Join("bash", filepath.Base(patch.VersionUpdate)), "\\", "/"))
 
 				cmd := exec.Command("docker", args...)
 				cmd.Stdout = os.Stdout

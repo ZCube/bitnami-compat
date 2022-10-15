@@ -1,16 +1,16 @@
-revision: 30
+revision: 31
 ignores:
     - php-fpm
     - apache
     - ruby
 dependencies:
-    ruby:
-        - fluentd
+    brotli:
         - discourse
-        - python
     node:
         - discourse
     python:
         - discourse
-    brotli:
+    ruby:
+        - fluentd
         - discourse
+        - python
