@@ -73,3 +73,8 @@ tasks:
       # - task: generate
       - git commit -am "Update"
       - git push
+
+  buildUtils:
+    desc: build docker utils
+    cmds:
+      - docker buildx build -f docker/Dockerfile docker -t ghcr.io/zcube/bitnami-compat/version --platform linux/amd64,linux/arm64 --push

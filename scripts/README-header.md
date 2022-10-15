@@ -153,4 +153,4 @@ image:
 
 ## Supported images and tags
 
-* :warning: For some images such as node and python, apache, the version can only match the major version.
+* :warning: For some images such as node and python, apache, java, the version can only match the major version. This is mostly the case for non-main apps, and I don't care because they're mostly dependencies for other apps.

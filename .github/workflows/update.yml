@@ -22,5 +22,7 @@ jobs:
           git config --global user.email "noreply@github.com"
           git commit -am "Automated Update"
           go run main.go list
+          git diff HEAD > diff.txt
+          cat diff.txt
           git push
 
