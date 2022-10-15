@@ -24,5 +24,6 @@ jobs:
           go run main.go list
           git diff HEAD > diff.txt
           cat diff.txt
+          git status
           git push
 
