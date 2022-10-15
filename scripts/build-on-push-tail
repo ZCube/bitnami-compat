@@ -81,15 +81,4 @@
       - name: Trivy
         shell: bash
         run: |
-          set -euo pipefail
-          n=0
-          until [ "$n" -ge 5 ] # retry 5 times
-          do
-            go run main.go trivy --app=${{ matrix.APP }} --tag=${{ env.REGISTRY }}/${{ steps.repository.outputs.lowercase }}/
-            n=$((n+1)) 
-            sleep 15
-          done
-          if [ "$n" -ge 5 ]; then
-            echo "Failed after 5 attempts!"
-            exit 1
-          fi
+          go run main.go trivy --app=${{ matrix.APP }} --tag=${{ env.REGISTRY }}/${{ steps.repository.outputs.lowercase }}/ || true
