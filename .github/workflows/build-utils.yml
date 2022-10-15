@@ -6,7 +6,7 @@ env:
   REGISTRY: ghcr.io
 
 jobs:
-  build-bitnami-compat:
+  build-utils:
     runs-on: ubuntu-latest
     if: >-
       ${{ !contains(github.event.head_commit.message, '[ci skip]') &&
@@ -34,24 +34,6 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Log in to the container registry
-        uses: docker/login-action@v2
-        with:
-          username: zcube
-          password: ${{ secrets.DOCKER_HUB_KEY }}
-      - name: Extract lowercase repository name
-        uses: ASzc/change-string-case-action@v1
-        with:
-          string: ${{ github.repository }}
-        id: repository
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@v3
-      # https://stackoverflow.com/questions/58033366/how-to-get-the-current-branch-within-github-actions
-      - name: Extract branch name
-        shell: bash
-        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-        id: extract_branch
       - name: Set up Go
         uses: actions/setup-go@v2
         with:
