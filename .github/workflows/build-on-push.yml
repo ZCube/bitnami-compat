@@ -142,7 +142,7 @@ jobs:
            REPO_OWNER: "bitnami"
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Submodule init
         shell: bash
         run: git submodule init
@@ -150,9 +150,9 @@ jobs:
         shell: bash
         run: git submodule update containers
       - name: Set up QEMU dependency
-        uses: docker/setup-qemu-action@v1
+        uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
+        uses: docker/setup-buildx-action@v2
       - name: Log in to the container registry
         uses: docker/login-action@v2
         with:
@@ -165,13 +165,13 @@ jobs:
           username: zcube
           password: ${{ secrets.DOCKER_HUB_KEY }}
       - name: Extract lowercase repository name
-        uses: ASzc/change-string-case-action@v1
+        uses: ASzc/change-string-case-action@v2
         with:
           string: ${{ github.repository }}
         id: repository
       - name: Extract metadata (tags, labels) for Docker
         id: meta
-        uses: docker/metadata-action@v3
+        uses: docker/metadata-action@v4
         with:
           # tags: |
           #   type=raw,value=${{ matrix.VERSION_MAJOR }}
@@ -181,14 +181,14 @@ jobs:
           #   type=raw,value=${{ matrix.VERSION }}-${{ matrix.OS_FLAVOUR }}-r${{ matrix.REVISION }}
           images: ${{ env.REGISTRY }}/${{ steps.repository.outputs.lowercase }}/${{ matrix.APP }}
       # https://stackoverflow.com/questions/58033366/how-to-get-the-current-branch-within-github-actions
-      - name: Extract branch name
-        shell: bash
-        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-        id: extract_branch
+      # - name: Extract branch name
+      #   shell: bash
+      #   run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+      #   id: extract_branch
       - name: Set up Go
-        uses: actions/setup-go@v2
+        uses: actions/setup-go@v3
         with:
-          go-version: 1.18
+          go-version: 1.19
       - name: Build Docker Image And Push To GHCR And Docker Hub
         shell: bash
         run: |
