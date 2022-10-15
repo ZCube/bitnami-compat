@@ -153,6 +153,7 @@ image:
 
 ## Supported images and tags
 
+* :warning: For some images such as node and python, apache, the version can only match the major version.
 * acmesolver : [`1`, `1-debian-11`, `1.9.1`, `1.9.1-debian-11`, `1.9.1-debian-11-r30`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Facmesolver)
 * apache-exporter : [`0`, `0-debian-11`, `0.11.0`, `0.11.0-debian-11`, `0.11.0-debian-11-r30`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fapache-exporter)
 * bitnami-shell : [`11`, `11-debian-11`, `11.0.0`, `11.0.0-debian-11`, `11.0.0-debian-11-r30`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fbitnami-shell)
@@ -216,6 +217,9 @@ image:
 * mysqld-exporter : [`0`, `0-debian-11`, `0.14.0`, `0.14.0-debian-11`, `0.14.0-debian-11-r30`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fmysqld-exporter)
 * nginx : [`1.23`, `1.23-debian-11`, `1.23.1`, `1.23.1-debian-11`, `1.23.1-debian-11-r30`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fnginx)
 * nginx-exporter : [`0`, `0-debian-11`, `0.11.0`, `0.11.0-debian-11`, `0.11.0-debian-11-r30`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fnginx-exporter)
+* node : [`14`, `14-debian-11`, `14.20.1`, `14.20.1-debian-11`, `14.20.1-debian-11-r30`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fnode)
+* node : [`16`, `16-debian-11`, `16.17.1`, `16.17.1-debian-11`, `16.17.1-debian-11-r30`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fnode)
+* node : [`18`, `18-debian-11`, `18.10.0`, `18.10.0-debian-11`, `18.10.0-debian-11-r30`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fnode)
 * openldap : [`2.6`, `2.6-debian-11`, `2.6.3`, `2.6.3-debian-11`, `2.6.3-debian-11-r30`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fopenldap)
 * pgpool : [`4`, `4-debian-11`, `4.3.3`, `4.3.3-debian-11`, `4.3.3-debian-11-r30`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fpgpool)
 * postgres-exporter : [`0`, `0-debian-11`, `0.11.1`, `0.11.1-debian-11`, `0.11.1-debian-11-r30`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fpostgres-exporter)
@@ -229,6 +233,10 @@ image:
 * postgresql-repmgr : [`12`, `12-debian-11`, `12.12.0`, `12.12.0-debian-11`, `12.12.0-debian-11-r30`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fpostgresql-repmgr)
 * postgresql-repmgr : [`13`, `13-debian-11`, `13.8.0`, `13.8.0-debian-11`, `13.8.0-debian-11-r30`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fpostgresql-repmgr)
 * postgresql-repmgr : [`14`, `14-debian-11`, `14.5.0`, `14.5.0-debian-11`, `14.5.0-debian-11-r30`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fpostgresql-repmgr)
+* python : [`3.10`, `3.10-debian-11`, `3.10.7`, `3.10.7-debian-11`, `3.10.7-debian-11-r30`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fpython)
+* python : [`3.7`, `3.7-debian-11`, `3.7.14`, `3.7.14-debian-11`, `3.7.14-debian-11-r30`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fpython)
+* python : [`3.8`, `3.8-debian-11`, `3.8.14`, `3.8.14-debian-11`, `3.8.14-debian-11-r30`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fpython)
+* python : [`3.9`, `3.9-debian-11`, `3.9.14`, `3.9.14-debian-11`, `3.9.14-debian-11-r30`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fpython)
 * rabbitmq : [`3.9`, `3.9-debian-11`, `3.9.23`, `3.9.23-debian-11`, `3.9.23-debian-11-r30`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Frabbitmq)
 * rabbitmq-cluster-operator : [`1`, `1-scratch`, `1.14.0`, `1.14.0-scratch`, `1.14.0-scratch-r30`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Frabbitmq-cluster-operator)
 * redis : [`6.2`, `6.2-debian-11`, `6.2.7`, `6.2.7-debian-11`, `6.2.7-debian-11-r30`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fredis)

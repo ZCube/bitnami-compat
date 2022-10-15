@@ -153,3 +153,4 @@ image:
 
 ## Supported images and tags
 
+* :warning: For some images such as node and python, apache, the version can only match the major version.
