@@ -1,5 +1,5 @@
 RUN install_packages curl ca-certificates && \
-    curl -fsSL https://deb.nodesource.com/setup_14.x | bash - && \
+    curl -fsSL https://deb.nodesource.com/setup_{{{VERSION_MAJOR}}}.x | bash - && \
     install_packages nodejs && \
     npm i -g node-gyp yarn terser
 
