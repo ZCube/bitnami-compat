@@ -9,8 +9,12 @@ ENV RUBY_VERSION {{{VERSION}}}
 ENV PATH=/usr/local/rvm/bin:$PATH
 
 ENV LANG C.UTF-8
-ENV RUBY_MAJOR {{{VERSION_MAJOR_MINOR}}}
-ENV RUBY_VERSION {{{VERSION}}}
+# ENV RUBY_MAJOR {{{VERSION_MAJOR_MINOR}}}
+# ENV RUBY_VERSION {{{VERSION}}}
+# ENV RUBY_DOWNLOAD_SHA256 ca10d017f8a1b6d247556622c841fc56b90c03b1803f87198da1e4fd3ec3bf2a
+ENV RUBY_MAJOR 3.1
+ENV RUBY_VERSION 3.1.2
+ENV RUBY_DOWNLOAD_SHA256 ca10d017f8a1b6d247556622c841fc56b90c03b1803f87198da1e4fd3ec3bf2a
 
 # some of ruby's build scripts are written in ruby
 #   we purge system ruby later to make sure our final image uses what we just built
@@ -26,15 +30,38 @@ RUN set -eux; \
 		build-essential \
 		autoconf \
 		automake \
+		ruby \
 		wget \
-		git \
 	; \
 	rm -rf /var/lib/apt/lists/*; \
 	\
-    mkdir /src; \
-    git -C /src clone https://github.com/rbenv/ruby-build.git; \
-    cd /src/ruby-build && ./install.sh; \
-    cd / && rm -fr /src; \
+	wget -O ruby.tar.xz "https://cache.ruby-lang.org/pub/ruby/${RUBY_MAJOR%-rc}/ruby-$RUBY_VERSION.tar.xz"; \
+	echo "$RUBY_DOWNLOAD_SHA256 *ruby.tar.xz" | sha256sum --check --strict; \
+	\
+	mkdir -p /usr/src/ruby; \
+	tar -xJf ruby.tar.xz -C /usr/src/ruby --strip-components=1; \
+	rm ruby.tar.xz; \
+	\
+	cd /usr/src/ruby; \
+	\
+# hack in "ENABLE_PATH_CHECK" disabling to suppress:
+#   warning: Insecure world writable dir
+	{ \
+		echo '#define ENABLE_PATH_CHECK 0'; \
+		echo; \
+		cat file.c; \
+	} > file.c.new; \
+	mv file.c.new file.c; \
+	\
+	autoconf; \
+	gnuArch="$(dpkg-architecture --query DEB_BUILD_GNU_TYPE)"; \
+	./configure \
+		--build="$gnuArch" \
+		--disable-install-doc \
+		--enable-shared \
+	; \
+	make -j "$(nproc)"; \
+	make install; \
 	\
 	apt-mark auto '.*' > /dev/null; \
 	apt-mark manual $savedAptMark > /dev/null; \
@@ -50,6 +77,7 @@ RUN set -eux; \
 	apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
 	\
 	cd /; \
+	rm -r /usr/src/ruby; \
 # verify we have no "ruby" packages installed
 	if dpkg -l | grep -i ruby; then exit 1; fi; \
 	[ "$(command -v ruby)" = '/usr/local/bin/ruby' ]; \
