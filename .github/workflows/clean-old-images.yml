@@ -138,17 +138,19 @@ jobs:
          - APP: "zookeeper"
            REPO_OWNER: "bitnami"
     steps:
-      - name: Prune Untagged Docker Images
+      - name: Prune Untagged Or Old Cache Docker Images
         uses: vlaurin/action-ghcr-prune@v0.4.0
         with:
           token: ${{ secrets.REGISTRY_PAT }}
           container: bitnami-compat/cache/${{ matrix.APP }}
-          dry-run: true
+          dry-run: false
           untagged: true
-      - name: Prune Untagged Docker Images
+          older-than: 7
+      - name: Prune Old Docker Images
         uses: vlaurin/action-ghcr-prune@v0.4.0
         with:
           token: ${{ secrets.REGISTRY_PAT }}
           container: bitnami-compat/${{ matrix.APP }}
           dry-run: true
-          untagged: true
+          untagged: false
+          older-than: 90
