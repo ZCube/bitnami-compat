@@ -16,7 +16,7 @@ ENV OPENSSL_PGP_KEY_IDS="0x8657ABB260F056B1E5190839D9C4D26D0E604491 0x5B2545DAB2
 ENV OTP_VERSION {{{VERSION}}}
 # TODO add PGP checking when the feature will be added to Erlang/OTP's build system
 # https://erlang.org/pipermail/erlang-questions/2019-January/097067.html
-ENV OTP_SOURCE_SHA256="380a77aef34ad449bf8370a380b7901364b9be23e3d25068fc5c43258bcbec11"
+ENV OTP_SOURCE_SHA256="42840c32e13a27bdb2c376d69aa22466513d441bfe5eb882de23baf8218308d3"
 
 # Install dependencies required to build Erlang/OTP from source
 # https://erlang.org/doc/installation_guide/INSTALL.html
@@ -113,6 +113,7 @@ RUN set -eux; \
 	jitFlag=; \
 	case "$dpkgArch" in \
 		amd64) jitFlag='--enable-jit' ;; \
+		arm64) jitFlag='--enable-jit' ;; \
 	esac; \
 	./configure \
 		--host="$hostArch" \
