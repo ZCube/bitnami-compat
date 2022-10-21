@@ -17,7 +17,7 @@ RUN set -ex; \
 	apt-key list
 
 ENV NGINX_VERSION   {{{VERSION}}}
-ENV NJS_VERSION     0.7.6
+ENV NJS_VERSION     0.7.7
 ENV PKG_RELEASE     {{{VERSION_MAJOR}}}~bullseye
 
 RUN set -x \
