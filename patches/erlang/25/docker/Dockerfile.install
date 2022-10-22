@@ -18,6 +18,9 @@ ENV OTP_VERSION {{{VERSION}}}
 # https://erlang.org/pipermail/erlang-questions/2019-January/097067.html
 ENV OTP_SOURCE_SHA256="42840c32e13a27bdb2c376d69aa22466513d441bfe5eb882de23baf8218308d3"
 
+ARG TARGETARCH
+ARG BUILDARCH
+
 # Install dependencies required to build Erlang/OTP from source
 # https://erlang.org/doc/installation_guide/INSTALL.html
 # autoconf: Required to configure Erlang/OTP before compiling
@@ -110,11 +113,14 @@ RUN set -eux; \
 	buildArch="$(dpkg-architecture --query DEB_BUILD_GNU_TYPE)"; \
 	dpkgArch="$(dpkg --print-architecture)"; dpkgArch="${dpkgArch##*-}"; \
 # JIT is only supported on amd64 (until 24.x+1, where it will support arm64 as well); https://github.com/erlang/otp/blob/OTP-24.0.5/erts/configure#L21694-L21709 / https://github.com/erlang/otp/pull/4869
-	jitFlag=; \
-	case "$dpkgArch" in \
-		amd64) jitFlag='--enable-jit' ;; \
-		arm64) jitFlag='--disable-jit' ;; \
-	esac; \
+	jitFlag='--disable-jit'; \
+	if [ "$BUILDARCH" = "$TARGETARCH" ]; then \
+		case "$dpkgArch" in \
+			amd64) jitFlag='--enable-jit' ;; \
+			arm64) jitFlag='--enable-jit' ;; \
+		esac; \
+	fi; \
+	echo "${jitFlag}"; \
 	./configure \
 		--host="$hostArch" \
 		--build="$buildArch" \
