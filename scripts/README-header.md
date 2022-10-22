@@ -22,6 +22,9 @@
 
 * Every friday.
 
+* :warning: Recently deleted for old images older than 30 days.
+  I think I'm using too much storage (I'm GitHub Free plan user...), so I'm cleaning it up. In the case of an old image, it may have been deleted, and in that case, a manifest unknown error occurs when docker pull is performed. Since this is a multi-arch image, the layer connected to the tag is deleted and only the manifest remains.
+
 ## Usage #1
 
 * I know I can't make the images in this repository trustworthy, and I know I can't fix it. This repository is just a personal repository.
