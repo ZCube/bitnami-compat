@@ -113,6 +113,7 @@ RUN set -eux; \
 	jitFlag=; \
 	case "$dpkgArch" in \
 		amd64) jitFlag='--enable-jit' ;; \
+		arm64) jitFlag='--disable-jit' ;; \
 	esac; \
 	./configure \
 		--host="$hostArch" \
