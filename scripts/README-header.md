@@ -1,6 +1,7 @@
 # Bitnami-Compat
 
 [![Inactively Maintained](https://img.shields.io/badge/Maintenance%20Level-Inactively%20Maintained-yellowgreen.svg)](https://gist.github.com/cheerfulstoic/d107229326a01ff0f333a1d3476e068d)
+[![Project-Stage](https://img.shields.io/badge/Project%20Stage-Experimental-yellow.svg)](https://img.shields.io/badge/Project%20Stage-Experimental-yellow.svg)
 [![Update bitnami-dockers](https://github.com/ZCube/bitnami-compat/actions/workflows/update.yml/badge.svg)](https://github.com/ZCube/bitnami-compat/actions/workflows/update.yml)
 [![Build](https://github.com/ZCube/bitnami-compat/actions/workflows/build-on-push.yml/badge.svg)](https://github.com/ZCube/bitnami-compat/actions/workflows/build-on-push.yml)
 
@@ -10,11 +11,7 @@
 
 * This is a workaround for https://github.com/bitnami/charts/issues/7305.
 
-* These images are NOT intended for production use.
-
-  * I don't have time to test every images and I haven't built the infrastructure to test them.
-  * In other words, this repository has no release management process and no support for it.
-  * This repository is maintained for my homelab.
+* This repository is maintained for my homelab.
 
 * These images use Bitnami's scripts. Binaries refer to the official Docker or official distribution binaries of the software or Docker recipes for Docker.
 
@@ -23,7 +20,7 @@
 * Every friday.
 
 * :warning: Recently deleted for old images older than 30 days.
-  I think I'm using too much storage (I'm GitHub Free plan user...), so I'm cleaning it up. In the case of an old image, it may have been deleted, and in that case, a manifest unknown error occurs when docker pull is performed. Since this is a multi-arch image, the layer connected to the tag is deleted and only the manifest remains.
+  * I think I'm using too much storage (I'm GitHub Free plan user...), so I'm cleaning it up. In the case of an old image, it may have been deleted, and in that case, a manifest unknown error occurs when docker pull is performed. Since this is a multi-arch image, the layer connected to the tag is deleted and only the manifest remains.
 
 ## Usage #1
 
@@ -71,6 +68,7 @@ image:
 ✔️  consul
 ✔️  contour
 ✔️  contour-operator
+✔️  discourse
 ✔️  elasticsearch
 ✔️  etcd
 ✔️  external-dns
@@ -85,6 +83,7 @@ image:
 ✔️  mongodb-sharded
 ✔️  mysql
 ✔️  nginx
+✔️  node
 ✔️  postgresql
 ✔️  postgresql-ha
 ✔️  rabbitmq
@@ -114,7 +113,7 @@ image:
   ✔️  nginx-exporter
 ```
 
-* For wordpress-intel charts, try using wordpress-nginx instead of wordpress-intel images.
+* For wordpress-intel charts, try using wordpress-nginx instead of wordpress-intel images. (wordpress-intel = wordpress-nginx)
 
 ## Binary References
 
@@ -159,4 +158,6 @@ image:
 * :warning: For RabbitMQ for ARM64, JIT is disabled for building on AMD64.
 
 * :warning: For some images such as node and python, apache, java, the version can only match the major version. This is mostly the case for non-main apps, and I don't care because they're mostly dependencies for other apps.
+
+* :warning: mongodb does not currently work on Raspberry Pi 4. A rebuild is required, but it is taking too long and is currently pending. 
 

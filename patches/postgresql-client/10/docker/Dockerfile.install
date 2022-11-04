@@ -19,7 +19,7 @@ RUN set -ex; \
 ENV PG_MAJOR {{{VERSION_MAJOR}}}
 ENV PATH $PATH:/usr/lib/postgresql/$PG_MAJOR/bin
 
-ENV PG_VERSION {{{VERSION_MAJOR_MINOR}}}-{{{VERSION_PRERELEASE}}}.pgdg110+{{{VERSION_PRERELEASE}}}
+ENV PG_VERSION {{{VERSION_MAJOR_MINOR}}}-{{{VERSION_PRERELEASE}}}.*
 ENV PG_EXTENSIONS postgresql-$PG_MAJOR-pgaudit postgresql-$PG_MAJOR-orafce postgresql-$PG_MAJOR-repmgr postgresql-$PG_MAJOR-pljava postgresql-$PG_MAJOR-postgis-3
 
 RUN set -ex; \

@@ -111,10 +111,6 @@ Apache 2.0
 
 This repository contains sources, binaries and recipes from Bitnami and other software. Each software has its own license.
 
-These images are not well tested.
-
-This repository is considered for personal use only. 
-
 This repository lacks support for production use.
 
 This repository is provided as is.

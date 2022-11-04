@@ -18,7 +18,7 @@ RUN set -ex; \
 
 # ENV PATH $PATH:/usr/lib/postgresql/$PG_MAJOR/bin
 
-ENV PGPOOL_VERSION {{{VERSION}}}-1.pgdg110+1
+ENV PGPOOL_VERSION {{{VERSION}}}-{{{VERSION_PRERELEASE}}}.*
 
 RUN set -ex; \
 	\
