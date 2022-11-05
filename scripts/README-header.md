@@ -2,8 +2,11 @@
 
 [![Inactively Maintained](https://img.shields.io/badge/Maintenance%20Level-Inactively%20Maintained-yellowgreen.svg)](https://gist.github.com/cheerfulstoic/d107229326a01ff0f333a1d3476e068d)
 [![Project-Stage](https://img.shields.io/badge/Project%20Stage-Experimental-yellow.svg)](https://img.shields.io/badge/Project%20Stage-Experimental-yellow.svg)
+[![Production Ready](https://img.shields.io/badge/Production%20Ready-No-red.svg)](https://img.shields.io/badge/Production%20Ready-No-red.svg)
 [![Update bitnami-dockers](https://github.com/ZCube/bitnami-compat/actions/workflows/update.yml/badge.svg)](https://github.com/ZCube/bitnami-compat/actions/workflows/update.yml)
 [![Build](https://github.com/ZCube/bitnami-compat/actions/workflows/build-on-push.yml/badge.svg)](https://github.com/ZCube/bitnami-compat/actions/workflows/build-on-push.yml)
+[![Testing](https://img.shields.io/badge/Testing-No-red.svg)](https://img.shields.io/badge/Testing-No-red.svg)
+
 
 ## What is Bitnami-Compat?
 
@@ -12,8 +15,15 @@
 * This is a workaround for https://github.com/bitnami/charts/issues/7305.
 
 * These images are NOT intended for production use.
+  * This repository cannot be stable. Changes in multiple repositories (apt, bitnami, etc...) are reflected so images can break at any time.
+  * This repository is mainly maintained for my homelab and development.
 
-* This repository is maintained for my homelab.
+* This repository does not support all bitnami images.
+  * I believe that someday bitnami will support arm64.
+  * I don't use all images from bitnami.
+  * I prefer database or other development tools, not for general apps. (e.g. wordpress, odoo, discourse, ...)
+  * For general apps, if arm64 is already supported (not for bitnami), I recommended to use it. This repository's may not reach production ready.
+  * If anyone wants to make an image patch themselves, I can help with that. Please make an issue.
 
 * These images use Bitnami's scripts. Binaries refer to the official Docker or official distribution binaries of the software or Docker recipes for Docker.
 
@@ -36,10 +46,17 @@
   ```bash
   git clone https://github.com/ZCube/bitnami-compat
   cd bitnami-compat
-  task generate
+  go run main.go generate --app=mongodb
   ```
   4. verify Dockerfile.arm64. Official images or build scripts referenced for build are listed in the table below.
   5. build & use.
+  ```
+  go run main.go build --app=mongodb --tag ghcr.io/zcube/bitnami-compat/
+  or
+  go run main.go build --app=mongodb --tag ghcr.io/zcube/bitnami-compat/ --push
+
+  docker run --rm -ti ghcr.io/zcube/bitnami-compat/mongodb/6
+  ```
 
 * PS. Rabbitmq and fluentd builds are too long. Depending on the machine, it is best to prepare for 1-2 hours.
 
