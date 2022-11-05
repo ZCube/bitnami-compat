@@ -59,7 +59,7 @@
   or
   go run main.go build --app=mongodb --tag ghcr.io/zcube/bitnami-compat/ --push
 
-  docker run --rm -ti ghcr.io/zcube/bitnami-compat/mongodb:6
+  docker run --rm -ti ghcr.io/zcube/bitnami-compat/mongodb:6.0
   ```
 
 * PS. Rabbitmq and fluentd builds are too long. Depending on the machine, it is best to prepare for 1-2 hours.
