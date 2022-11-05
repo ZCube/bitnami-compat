@@ -51,13 +51,15 @@
   go run main.go generate --app=mongodb
   ```
   4. verify Dockerfile.arm64. Official images or build scripts referenced for build are listed in the table below.
-  5. build & use.
+  5. build & use. (docker buildx needed)
   ```
   task build
-  or
+  or (current platform only)
   go run main.go build --app=mongodb --tag ghcr.io/zcube/bitnami-compat/
-  or
+  or (current platform only && push)
   go run main.go build --app=mongodb --tag ghcr.io/zcube/bitnami-compat/ --push
+  or (docker buildx needed && push)
+  go run main.go build --app=mongodb --tag ghcr.io/zcube/bitnami-compat/ --push --platforms=linux/amd64,linux/arm64 
 
   docker run --rm -ti ghcr.io/zcube/bitnami-compat/mongodb:6.0
   ```
