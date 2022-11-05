@@ -46,16 +46,20 @@
   ```bash
   git clone https://github.com/ZCube/bitnami-compat
   cd bitnami-compat
+  task generate
+  or
   go run main.go generate --app=mongodb
   ```
   4. verify Dockerfile.arm64. Official images or build scripts referenced for build are listed in the table below.
   5. build & use.
   ```
+  task build
+  or
   go run main.go build --app=mongodb --tag ghcr.io/zcube/bitnami-compat/
   or
   go run main.go build --app=mongodb --tag ghcr.io/zcube/bitnami-compat/ --push
 
-  docker run --rm -ti ghcr.io/zcube/bitnami-compat/mongodb/6
+  docker run --rm -ti ghcr.io/zcube/bitnami-compat/mongodb:6
   ```
 
 * PS. Rabbitmq and fluentd builds are too long. Depending on the machine, it is best to prepare for 1-2 hours.
