@@ -184,5 +184,5 @@ image:
 
 * :warning: For some images such as node and python, apache, java, the version can only match the major version. This is mostly the case for non-main apps, and I don't care because they're mostly dependencies for other apps.
 
-* :warning: mongodb does not currently work on Raspberry Pi 4. A rebuild is required, but it is taking too long and is currently pending. 
+* :warning: The mongodb provided by this repository does not currently work on Raspberry Pi 4. Use the image I distribute at https://github.com/ZCube/mongodb-for-armv8.0-a.
 
