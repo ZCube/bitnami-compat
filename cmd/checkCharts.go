@@ -135,7 +135,7 @@ var checkChartsCmd = &cobra.Command{
 				}
 
 				if dockerFound {
-					emoji.Println(fmt.Sprintf(":heavy_check_mark: %v", chart))
+					emoji.Println(fmt.Sprintf("* [x] %v", chart))
 				}
 			}
 		}
@@ -180,12 +180,12 @@ var checkChartsCmd = &cobra.Command{
 				}
 
 				if !dockerFoundAll && !dockerNotFoundAll && mainImage {
-					emoji.Println(fmt.Sprintf(":question: %v", chart))
+					emoji.Println(fmt.Sprintf("* [ ] %v", chart))
 					for _, groups := range repositorySubmatchGroup {
 						if !rendered[groups[2]] {
-							emoji.Println(fmt.Sprintf("  :x: %v", groups[2]))
+							emoji.Println(fmt.Sprintf("  * [ ] %v", groups[2]))
 						} else {
-							emoji.Println(fmt.Sprintf("  :heavy_check_mark: %v", groups[2]))
+							emoji.Println(fmt.Sprintf("  * [x] %v", groups[2]))
 						}
 					}
 				}
@@ -232,12 +232,12 @@ var checkChartsCmd = &cobra.Command{
 				}
 
 				if !dockerFoundAll && !dockerNotFoundAll && !mainImage {
-					emoji.Println(fmt.Sprintf(":question: %v", chart))
+					emoji.Println(fmt.Sprintf("* [ ] %v", chart))
 					for _, groups := range repositorySubmatchGroup {
 						if !rendered[groups[2]] {
-							emoji.Println(fmt.Sprintf("  :x: %v", groups[2]))
+							emoji.Println(fmt.Sprintf("  * [ ] %v", groups[2]))
 						} else {
-							emoji.Println(fmt.Sprintf("  :heavy_check_mark: %v", groups[2]))
+							emoji.Println(fmt.Sprintf("  * [x] %v", groups[2]))
 						}
 					}
 				}
@@ -274,12 +274,12 @@ var checkChartsCmd = &cobra.Command{
 				}
 
 				if !dockerFoundAll && dockerNotFoundAll {
-					emoji.Println(fmt.Sprintf(":x: %v", chart))
+					emoji.Println(fmt.Sprintf("* [ ] %v", chart))
 					for _, groups := range repositorySubmatchGroup {
 						if !rendered[groups[2]] {
-							emoji.Println(fmt.Sprintf("  :x: %v", groups[2]))
+							emoji.Println(fmt.Sprintf("  * [ ] %v", groups[2]))
 						} else {
-							emoji.Println(fmt.Sprintf("  :heavy_check_mark: %v", groups[2]))
+							emoji.Println(fmt.Sprintf("  * [x] %v", groups[2]))
 						}
 					}
 				}
