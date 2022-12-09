@@ -183,9 +183,9 @@ var checkChartsCmd = &cobra.Command{
 					emoji.Println(fmt.Sprintf("* [ ] %v", chart))
 					for _, groups := range repositorySubmatchGroup {
 						if !rendered[groups[2]] {
-							emoji.Println(fmt.Sprintf("  * [ ] %v", groups[2]))
+							emoji.Println(fmt.Sprintf("  :x: %v", groups[2]))
 						} else {
-							emoji.Println(fmt.Sprintf("  * [x] %v", groups[2]))
+							emoji.Println(fmt.Sprintf("  :heavy_check_mark: %v", groups[2]))
 						}
 					}
 				}
@@ -235,9 +235,9 @@ var checkChartsCmd = &cobra.Command{
 					emoji.Println(fmt.Sprintf("* [ ] %v", chart))
 					for _, groups := range repositorySubmatchGroup {
 						if !rendered[groups[2]] {
-							emoji.Println(fmt.Sprintf("  * [ ] %v", groups[2]))
+							emoji.Println(fmt.Sprintf("  :x: %v", groups[2]))
 						} else {
-							emoji.Println(fmt.Sprintf("  * [x] %v", groups[2]))
+							emoji.Println(fmt.Sprintf("  :heavy_check_mark: %v", groups[2]))
 						}
 					}
 				}
@@ -277,9 +277,9 @@ var checkChartsCmd = &cobra.Command{
 					emoji.Println(fmt.Sprintf("* [ ] %v", chart))
 					for _, groups := range repositorySubmatchGroup {
 						if !rendered[groups[2]] {
-							emoji.Println(fmt.Sprintf("  * [ ] %v", groups[2]))
+							emoji.Println(fmt.Sprintf("  :x: %v", groups[2]))
 						} else {
-							emoji.Println(fmt.Sprintf("  * [x] %v", groups[2]))
+							emoji.Println(fmt.Sprintf("  :heavy_check_mark: %v", groups[2]))
 						}
 					}
 				}

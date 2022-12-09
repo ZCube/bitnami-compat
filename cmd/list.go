@@ -97,7 +97,7 @@ var listCmd = &cobra.Command{
 							patch.DockerInstallPatch != "" ||
 							patch.GolangBuild != "")
 						if !patchFound {
-							emoji.Println(fmt.Sprintf("  * [ ] %v.%v", patch.PackageInfo.Name, patch.PackageInfo.Version.Original()))
+							emoji.Println(fmt.Sprintf("  :x: %v.%v", patch.PackageInfo.Name, patch.PackageInfo.Version.Original()))
 						}
 					}
 					if len(patchs) == 0 {
