@@ -56,6 +56,15 @@ type PackageInfo struct {
 	Version *semver.Version
 }
 
+type AppVersionInfo struct {
+	Name         string
+	Version      string
+	VersionMajor string
+	OsFlavour    string
+	OsName       string
+	Revision     string
+}
+
 type AppInfo struct {
 	PackageInfo
 	OS_Arch      string

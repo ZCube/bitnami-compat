@@ -27,15 +27,17 @@ tasks:
       - docker run --rm -t --entrypoint="" -v ${PWD}:/work -w /work bitnami/git /bin/bash -c 'find ./patches/ | grep "\.sh$" | xargs -I {} git update-index --chmod=+x {}'
 
   generate:
-    desc: chmod +x *.sh
+    desc: generate dockerfile, readme, workflow
     cmds:
       - git submodule update --init --recursive --checkout -f
       # - task: permission
       - go run main.go generate
       - go run main.go generateWorkflow
       - go run main.go generateReadme
+      - go run main.go generateVersionInfo
       - git add .github/workflows/build-on-push.yml
       - git add README.md
+      - git add versioninfo.yaml
 
   build:
     desc: build
