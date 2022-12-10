@@ -57,12 +57,12 @@ type PackageInfo struct {
 }
 
 type AppVersionInfo struct {
-	Name         string
-	Version      string
-	VersionMajor string
-	OsFlavour    string
-	OsName       string
-	Revision     string
+	Name         string `yaml:"name"`
+	Version      string `yaml:"version"`
+	VersionMajor string `yaml:"version_major"`
+	OsFlavour    string `yaml:"os_flavour"`
+	OsName       string `yaml:"os_name"`
+	Revision     string `yaml:"revision"`
 }
 
 type AppInfo struct {
