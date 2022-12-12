@@ -60,6 +60,7 @@ type AppVersionInfo struct {
 	Name         string `yaml:"name"`
 	Version      string `yaml:"version"`
 	VersionMajor string `yaml:"version_major"`
+	VersionFull string `yaml:"version_full"`
 	OsFlavour    string `yaml:"os_flavour"`
 	OsName       string `yaml:"os_name"`
 	Revision     string `yaml:"revision"`

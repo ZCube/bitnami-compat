@@ -105,6 +105,7 @@ var generateVersionInfoCmd = &cobra.Command{
 							Name:         appInfo.Name,
 							Version:      appInfo.Version.Original(),
 							VersionMajor: version,
+							VersionFull:  fmt.Sprintf(fmt.Sprintf("%v-%v-r%v", appInfo.Version.Original(), appInfo.OS_Flavour, p.Revision)),
 							OsFlavour:    appInfo.OS_Flavour,
 							OsName:       appInfo.OS_Name,
 							Revision:     fmt.Sprint(p.Revision),
