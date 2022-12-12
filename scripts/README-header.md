@@ -5,7 +5,7 @@
 [![Production Ready](https://img.shields.io/badge/Production%20Ready-No-red.svg)](https://img.shields.io/badge/Production%20Ready-No-red.svg)
 [![Update bitnami-dockers](https://github.com/ZCube/bitnami-compat/actions/workflows/update.yml/badge.svg)](https://github.com/ZCube/bitnami-compat/actions/workflows/update.yml)
 [![Build](https://github.com/ZCube/bitnami-compat/actions/workflows/build-on-push.yml/badge.svg)](https://github.com/ZCube/bitnami-compat/actions/workflows/build-on-push.yml)
-[![Testing](https://img.shields.io/badge/Testing-No-red.svg)](https://img.shields.io/badge/Testing-No-red.svg)
+[![Testing](https://img.shields.io/badge/Testing-not_all-yellow.svg)](https://github.com/ZCube/bitnami-compat-test)
 
 
 ## What is Bitnami-Compat?
