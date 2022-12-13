@@ -1,0 +1,31 @@
+image:
+  registry: ghcr.io
+  repository: zcube/bitnami-compat/kafka
+  tag: 3.3.1-debian-11-r41
+  digest: ""
+externalAccess:
+  autoDiscovery:
+    image:
+      registry: ghcr.io
+      repository: zcube/bitnami-compat/kubectl
+      tag: 1.25.4-debian-11-r41
+      digest: ""
+volumePermissions:
+  image:
+    registry: ghcr.io
+    repository: zcube/bitnami-compat/bitnami-shell
+    tag: 11.0.0-debian-11-r41
+    digest: ""
+metrics:
+  kafka:
+    image:
+      registry: ghcr.io
+      repository: zcube/bitnami-compat/kafka-exporter
+      tag: 1.6.0-debian-11-r41
+      digest: ""
+  jmx:
+    image:
+      registry: ghcr.io
+      repository: zcube/bitnami-compat/jmx-exporter
+      tag: 0.17.2-debian-11-r41
+      digest: ""

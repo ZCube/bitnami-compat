@@ -1,0 +1,18 @@
+contour:
+  image:
+    registry: ghcr.io
+    repository: zcube/bitnami-compat/contour
+    tag: 1.22.2-debian-11-r41
+    digest: ""
+envoy:
+  image:
+    registry: ghcr.io
+    repository: zcube/bitnami-compat/envoy
+    tag: 1.23.3-debian-11-r41
+    digest: ""
+defaultBackend:
+  image:
+    registry: ghcr.io
+    repository: zcube/bitnami-compat/nginx
+    tag: 1.23.2-debian-11-r41
+    digest: ""

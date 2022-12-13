@@ -1,0 +1,22 @@
+image:
+  registry: ghcr.io
+  repository: zcube/bitnami-compat/redis-cluster
+  tag: 7.0.5-debian-11-r41
+  digest: ""
+volumePermissions:
+  image:
+    registry: ghcr.io
+    repository: zcube/bitnami-compat/bitnami-shell
+    tag: 11.0.0-debian-11-r41
+    digest: ""
+metrics:
+  image:
+    registry: ghcr.io
+    repository: zcube/bitnami-compat/redis-exporter
+    tag: 1.45.0-debian-11-r41
+    digest: ""
+sysctlImage:
+  registry: ghcr.io
+  repository: zcube/bitnami-compat/bitnami-shell
+  tag: 11.0.0-debian-11-r41
+  digest: ""

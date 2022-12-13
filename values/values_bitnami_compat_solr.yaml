@@ -1,0 +1,11 @@
+image:
+  registry: ghcr.io
+  repository: zcube/bitnami-compat/solr
+  tag: 9.1.0-debian-11-r41
+  digest: ""
+volumePermissions:
+  image:
+    registry: ghcr.io
+    repository: zcube/bitnami-compat/bitnami-shell
+    tag: 11.0.0-debian-11-r41
+    digest: ""

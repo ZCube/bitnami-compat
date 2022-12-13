@@ -1,0 +1,11 @@
+image:
+  registry: ghcr.io
+  repository: zcube/bitnami-compat/keycloak
+  tag: 19.0.3-debian-11-r41
+  digest: ""
+keycloakConfigCli:
+  image:
+    registry: ghcr.io
+    repository: zcube/bitnami-compat/keycloak-config-cli
+    tag: 5.5.0-debian-11-r41
+    digest: ""

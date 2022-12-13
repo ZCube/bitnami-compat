@@ -1,0 +1,16 @@
+image:
+  registry: ghcr.io
+  repository: zcube/bitnami-compat/minio
+  tag: 2022.12.7-debian-11-r41
+  digest: ""
+clientImage:
+  registry: ghcr.io
+  repository: zcube/bitnami-compat/minio-client
+  tag: 2022.12.2-debian-11-r41
+  digest: ""
+volumePermissions:
+  image:
+    registry: ghcr.io
+    repository: zcube/bitnami-compat/bitnami-shell
+    tag: 11.0.0-debian-11-r41
+    digest: ""
