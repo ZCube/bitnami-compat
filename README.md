@@ -85,6 +85,8 @@ image:
   tag: 11.16.0-debian-11-r15
 ```
 
+or use https://github.com/ZCube/bitnami-compat/blob/main/values/values_bitnami_compat_postgresql.yaml
+
 ## Supported bitnami charts
 
 ```
