@@ -44,7 +44,7 @@
   2. install golang https://go.dev/doc/install
   3. clone
   ```bash
-  git clone https://github.com/ZCube/bitnami-compat
+  git clone --recursive https://github.com/ZCube/bitnami-compat
   cd bitnami-compat
   task generate
   or
@@ -84,6 +84,8 @@ image:
   repository: zcube/bitnami-compat/postgresql
   tag: 11.16.0-debian-11-r15
 ```
+
+or use https://github.com/ZCube/bitnami-compat/blob/main/values/values_bitnami_compat_postgresql.yaml
 
 ## Supported bitnami charts
 
