@@ -1,17 +1,17 @@
 image:
   registry: ghcr.io
   repository: zcube/bitnami-compat/nginx
-  tag: 1.23.2-debian-11-r41
+  tag: 1.23.3-debian-11-r44
   digest: ""
 cloneStaticSiteFromGit:
   image:
     registry: ghcr.io
     repository: zcube/bitnami-compat/git
-    tag: 2.38.1-debian-11-r41
+    tag: 2.39.0-debian-11-r44
     digest: ""
 metrics:
   image:
     registry: ghcr.io
     repository: zcube/bitnami-compat/nginx-exporter
-    tag: 0.11.0-debian-11-r41
+    tag: 0.11.0-debian-11-r44
     digest: ""

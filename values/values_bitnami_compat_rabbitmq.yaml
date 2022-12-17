@@ -1,11 +1,11 @@
 image:
   registry: ghcr.io
   repository: zcube/bitnami-compat/rabbitmq
-  tag: 3.9.26-debian-11-r41
+  tag: 3.9.27-debian-11-r44
   digest: ""
 volumePermissions:
   image:
     registry: ghcr.io
     repository: zcube/bitnami-compat/bitnami-shell
-    tag: 11.0.0-debian-11-r41
+    tag: 11.0.0-debian-11-r44
     digest: ""

@@ -38,6 +38,7 @@ tasks:
       - git add .github/workflows/build-on-push.yml
       - git add README.md
       - git add versioninfo.yaml
+      - ./scripts/generateValues.sh
       - git add values/*.yaml
 
   build:
