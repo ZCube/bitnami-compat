@@ -10,5 +10,4 @@ RUN mkdir -p /opt/bitnami \
     && wget https://archive.apache.org/dist/kafka/${KAFKA_VERSION}/kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz.sha512 \
     && tar -xzf kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz \
     && mv kafka_${SCALA_VERSION}-${KAFKA_VERSION}/ kafka \
-    && rm -rf kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz* \
-    && chown 1001:1001 -R /opt/bitnami/kafka
+    && rm -rf kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz*

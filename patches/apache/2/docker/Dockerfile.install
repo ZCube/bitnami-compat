@@ -48,5 +48,4 @@ RUN mkdir -p /opt/bitnami/apache/bin \
     && ln -sf /usr/lib/apache2/modules    /opt/bitnami/apache/ \              
     && sed -i 's,^\(LoadModule log_config_module modules/mod_log_config.so\),#\1,g' /opt/bitnami/apache/conf/httpd.conf \
     && sed -i 's,^\(LoadModule version_module modules/mod_version.so\),#\1,g' /opt/bitnami/apache/conf/httpd.conf \
-    && sed -i 's,^\(LoadModule unixd_module modules/mod_unixd.so\),#\1,g' /opt/bitnami/apache/conf/httpd.conf \
-    && chown 1001:1001 -R /opt/bitnami/apache
+    && sed -i 's,^\(LoadModule unixd_module modules/mod_unixd.so\),#\1,g' /opt/bitnami/apache/conf/httpd.conf

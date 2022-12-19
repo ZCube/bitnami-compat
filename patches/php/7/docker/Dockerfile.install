@@ -15,12 +15,10 @@ RUN mkdir -p /opt/bitnami/php/bin \
     && ln -sf /usr/sbin/pear*                                     /opt/bitnami/php/sbin/ \
     && ln -sf /usr/sbin/phar*                                     /opt/bitnami/php/sbin/ \
     && ln -sf /usr/sbin/composer*                                 /opt/bitnami/php/sbin/ \
-    && ln -sf $(php -r 'echo ini_get("extension_dir");')/*        /opt/bitnami/php/lib/php/extensions/ \
-    && chown 1001:1001 -R /opt/bitnami/php
+    && ln -sf $(php -r 'echo ini_get("extension_dir");')/*        /opt/bitnami/php/lib/php/extensions/
 
 RUN cd /tmp \
  && curl -LO https://downloads.bitnami.com/files/stacksmith/php-{{{VERSION_ORIGINAL}}}-linux-amd64-{{{OS_FLAVOUR}}}.tar.gz \
  && tar -xzf php-{{{VERSION_ORIGINAL}}}-linux-amd64-{{{OS_FLAVOUR}}}.tar.gz -C /tmp --strip-components=1 \
  && cp -rf /tmp/files/php/etc/* /opt/bitnami/php/etc/ \
- && chown 1001:1001 -R /opt/bitnami/php \
  && rm -rf /tmp/*

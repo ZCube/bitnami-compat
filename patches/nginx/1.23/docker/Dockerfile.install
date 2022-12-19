@@ -117,5 +117,4 @@ RUN mkdir -p /opt/bitnami/nginx/sbin \
     && rm -rf /opt/bitnami/nginx/conf/bitnami \
     && ln -s /usr/sbin/nginx                     /opt/bitnami/nginx/sbin/ \
 	&& ln -s /usr/lib/nginx/modules              /opt/bitnami/nginx/ \
-	&& ln -s /usr/share/nginx/html               /opt/bitnami/nginx/ \
-    && chown 1001:1001 -R /opt/bitnami/nginx
+	&& ln -s /usr/share/nginx/html               /opt/bitnami/nginx/
