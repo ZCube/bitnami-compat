@@ -1,6 +1,12 @@
 #!/bin/bash
 
-rm -rf values/*.yaml
+rm -rf ./values/*.yaml
+touch ./values/values_bitnami_compat_kibana.yaml
+touch ./values/values_bitnami_compat_node-exporter.yaml
+touch ./values/values_bitnami_compat_kube-state-metrics.yaml
+touch ./values/values_bitnami_compat_wavefront.yaml
+touch ./values/values_bitnami_compat_haproxy.yaml
+
 for d in ./charts/bitnami/*/ ; do
     [ -L "${d%/}" ] && continue
     [[ ${d} == *"common"* ]] && continue
@@ -44,6 +50,45 @@ for d in ./charts/bitnami/*/ ; do
     echo "$(basename $d)"
     echo "================================================================"
     mv tmp.yaml values/values_bitnami_compat_${HELM_APP_NAME}.yaml
-    cat values/values_bitnami_compat_${HELM_APP_NAME}.yaml
+    cat values/values_bitnami_compat_${HELM_APP_NAME}.yaml > values/values_bitnami_compat_${HELM_APP_NAME}_.yaml
+done
+    
+for d in ./charts/bitnami/*/ ; do
+    [ -L "${d%/}" ] && continue
+    [[ ${d} == *"common"* ]] && continue
+    [[ ${d} == *"appsmith"* ]] && continue
+    [[ ${d} == *"bitnami-shell"* ]] && continue
+    HELM_APP_NAME=$(basename $d)
+
+    notFound=false
+    for (( i=0; i<$len; i++ ));
+    do
+        if [[ ! -z "${imageRepositories[$i]}" ]]
+        then
+            APP_TAG=$(APP_NAME=${imageRepositories[$i]} yq e 'with_entries(select(.[].name == env(APP_NAME))) | .[].version_full' ./versioninfo.yaml | tail -1);
+            # echo "${imageKeys[$i]} : ${imageRepositories[$i]} : ${APP_TAG}";
+            if [[ ! -z "${imageRepositories[$i]}" ]]
+            then
+                if [[ ${APP_TAG} == "null" ]]
+                then
+                    # echo "null found"
+                    notFound=true
+                fi
+                APP_NAME=${imageRepositories[$i]} APP_TAG=${APP_TAG} yq e '(...|select(.repository == "bitnami/" + env(APP_NAME))) |= {"registry": "ghcr.io", "repository": "zcube/bitnami-compat/" + env(APP_NAME), "tag": env(APP_TAG), "digest":""} ' tmp.yaml > tmp.yaml_
+                mv tmp.yaml_ tmp.yaml
+            fi
+        fi
+    done
+
+    if [ $notFound = true ]; then
+        continue
+    fi
+    echo "================================================================"
+    echo "$(basename $d)"
+    echo "================================================================"
+
+    cat ./charts/bitnami/${HELM_APP_NAME}/Chart.yaml | yq e .dependencies[].name | grep -v common | xargs -I {} echo '{}:  !include values_bitnami_compat_{}.yaml' >> values/values_bitnami_compat_${HELM_APP_NAME}_.yaml
+    python3 ./scripts/yaml_import.py ./values/values_bitnami_compat_${HELM_APP_NAME}_.yaml > ./values/values_bitnami_compat_${HELM_APP_NAME}.yaml
+    rm values/values_bitnami_compat_${HELM_APP_NAME}_.yaml
 done
 

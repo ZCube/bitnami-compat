@@ -1,15 +1,16 @@
+aggregator:
+  image:
+    registry: ''
+    repository: ''
+    tag: ''
+forwarder:
+  image:
+    registry: ''
+    repository: ''
+    tag: ''
 image:
+  digest: ''
   registry: ghcr.io
   repository: zcube/bitnami-compat/fluentd
   tag: 1.15.3-debian-11-r44
-  digest: ""
-forwarder:
-  image:
-    registry: ""
-    repository: ""
-    tag: ""
-aggregator:
-  image:
-    registry: ""
-    repository: ""
-    tag: ""
+

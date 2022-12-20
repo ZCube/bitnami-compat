@@ -1,11 +1,24 @@
 image:
+  digest: ''
   registry: ghcr.io
   repository: zcube/bitnami-compat/solr
   tag: 9.1.0-debian-11-r44
-  digest: ""
 volumePermissions:
   image:
+    digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/bitnami-shell
     tag: 11.0.0-debian-11-r44
-    digest: ""
+zookeeper:
+  image:
+    digest: ''
+    registry: ghcr.io
+    repository: zcube/bitnami-compat/zookeeper
+    tag: 3.8.0-debian-11-r44
+  volumePermissions:
+    image:
+      digest: ''
+      registry: ghcr.io
+      repository: zcube/bitnami-compat/bitnami-shell
+      tag: 11.0.0-debian-11-r44
+

@@ -14,6 +14,10 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: 1.18
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - run: pip install -r requirements.txt
       - name: Update module
         run: |
           sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /usr/local/bin

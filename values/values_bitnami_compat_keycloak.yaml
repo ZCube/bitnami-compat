@@ -1,11 +1,30 @@
 image:
+  digest: ''
   registry: ghcr.io
   repository: zcube/bitnami-compat/keycloak
   tag: 19.0.3-debian-11-r44
-  digest: ""
 keycloakConfigCli:
   image:
+    digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/keycloak-config-cli
     tag: 5.5.0-debian-11-r44
-    digest: ""
+postgresql:
+  image:
+    digest: ''
+    registry: ghcr.io
+    repository: zcube/bitnami-compat/postgresql
+    tag: 15.1.0-debian-11-r44
+  metrics:
+    image:
+      digest: ''
+      registry: ghcr.io
+      repository: zcube/bitnami-compat/postgres-exporter
+      tag: 0.11.1-debian-11-r44
+  volumePermissions:
+    image:
+      digest: ''
+      registry: ghcr.io
+      repository: zcube/bitnami-compat/bitnami-shell
+      tag: 11.0.0-debian-11-r44
+

@@ -1,17 +1,18 @@
 image:
+  digest: ''
   registry: ghcr.io
   repository: zcube/bitnami-compat/mariadb
   tag: 10.8.6-debian-11-r44
-  digest: ""
-volumePermissions:
-  image:
-    registry: ghcr.io
-    repository: zcube/bitnami-compat/bitnami-shell
-    tag: 11.0.0-debian-11-r44
-    digest: ""
 metrics:
   image:
+    digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/mysqld-exporter
     tag: 0.14.0-debian-11-r44
-    digest: ""
+volumePermissions:
+  image:
+    digest: ''
+    registry: ghcr.io
+    repository: zcube/bitnami-compat/bitnami-shell
+    tag: 11.0.0-debian-11-r44
+
