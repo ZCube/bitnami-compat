@@ -97,7 +97,9 @@ RUN set -ex; \
 RUN mkdir -p /opt/bitnami/common/bin \
     && mkdir -p /opt/bitnami/common/sbin \
     && mkdir -p /opt/bitnami/common/lib \
-	&& mkdir -p /opt/bitnami/pgpool/bin \
+    && mkdir -p /opt/bitnami/pgpool/bin \
+    && mkdir -p /opt/bitnami/pgpool/tmp \
+    && chmod 0775 /opt/bitnami/pgpool/tmp \
     && mkdir -p /opt/bitnami/pgpool/sbin \
     && mkdir -p /opt/bitnami/pgpool/lib \
     && mkdir -p /opt/bitnami/pgpool/share \
@@ -112,7 +114,8 @@ RUN mkdir -p /opt/bitnami/common/bin \
 	&& ln -sf /opt/bitnami/pgpool/conf/pool_hba.conf   /etc/pgpool2/pool_hba.conf \
 	&& deluser postgres \
     && chmod 1777 /var/run/postgresql \
-    && sed -E -i "s/775/777/g" /usr/lib/tmpfiles.d/postgresql-common.conf
+    && sed -E -i "s/775/777/g" /usr/lib/tmpfiles.d/postgresql-common.conf \
+    && ln -s /run/postgresql/.s.PGSQL.5432 /opt/bitnami/pgpool/tmp/.s.PGSQL.5432
 
 COPY --from=bitnami/pgpool:{{{VERSION_MAJOR}}} /opt/bitnami/pgpool/etc/ /opt/bitnami/pgpool/etc/
 
