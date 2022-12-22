@@ -91,5 +91,7 @@ RUN mkdir -p /opt/bitnami/mariadb/bin \
     && rm -rf /etc/mysql/my.cnf \
     && rm -rf /etc/mysql/mariadb.cnf \
     && touch /opt/bitnami/mariadb/conf/my.cnf \
+    && rm -rf /etc/mysql/* \
     && ln -sf /opt/bitnami/mariadb/conf/my.cnf /etc/mysql/my.cnf \
+    && ln -sf /opt/bitnami/mariadb/conf/bitnami /etc/mysql/bitnami \
     && rm -f /opt/bitnami/mariadb/conf/my.cnf
