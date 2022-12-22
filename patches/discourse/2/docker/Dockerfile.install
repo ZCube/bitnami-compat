@@ -1,7 +1,7 @@
 # Reference : https://github.com/discourse/discourse_docker/blob/main/image/base/slim.Dockerfile
 # License : MIT License
 
-RUN install_packages curl libcurl4-openssl-dev wget libpq-dev build-essential && \
+RUN install_packages curl libcurl4-openssl-dev wget libpq-dev build-essential libpcre3-dev && \
     git clone --depth 1 --branch v2.8.9 https://github.com/discourse/discourse /opt/bitnami/discourse && \
     git -C /opt/bitnami/discourse remote set-branches --add origin tests-passed && \
     cd /opt/bitnami/discourse && \
