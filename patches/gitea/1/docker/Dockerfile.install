@@ -1,3 +1,10 @@
 ADD https://raw.githubusercontent.com/go-gitea/gitea/main/LICENSE /opt/bitnami/gitea/LICENSE
-COPY --from=gitea/gitea:{{{VERSION}}} /usr/local/bin/gitea /opt/bitnami/gitea/bin/gitea
+ARG TARGETARCH
+ENV TARGETARCH=${TARGETARCH:-amd64}
+RUN curl -LO https://github.com/go-gitea/gitea/releases/download/v{{{VERSION}}}/gitea-{{{VERSION}}}-linux-${TARGETARCH} \
+ && mkdir -p /opt/bitnami/gitea/bin/ \
+ && mv gitea-{{{VERSION}}}-linux-${TARGETARCH} /opt/bitnami/gitea/bin/gitea \
+ && chmod +x /opt/bitnami/gitea/bin/gitea
+
+# COPY --from=gitea/gitea:{{{VERSION}}} /usr/local/bin/gitea /opt/bitnami/gitea/bin/gitea
 
