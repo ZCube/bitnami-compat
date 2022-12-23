@@ -3,47 +3,47 @@ postgresql:
     digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/postgresql
-    tag: 15.1.0-debian-11-r46
+    tag: 15.1.0-debian-11-r47
   metrics:
     image:
       digest: ''
       registry: ghcr.io
       repository: zcube/bitnami-compat/postgres-exporter
-      tag: 0.11.1-debian-11-r46
+      tag: 0.11.1-debian-11-r47
   volumePermissions:
     image:
       digest: ''
       registry: ghcr.io
       repository: zcube/bitnami-compat/bitnami-shell
-      tag: 11.0.0-debian-11-r46
+      tag: 11.0.0-debian-11-r47
 redis:
   image:
     digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/redis
-    tag: 7.0.7-debian-11-r46
+    tag: 7.0.7-debian-11-r47
   metrics:
     image:
       digest: ''
       registry: ghcr.io
       repository: zcube/bitnami-compat/redis-exporter
-      tag: 1.45.0-debian-11-r46
+      tag: 1.45.0-debian-11-r47
   sentinel:
     image:
       digest: ''
       registry: ghcr.io
       repository: zcube/bitnami-compat/redis-sentinel
-      tag: 7.0.7-debian-11-r46
+      tag: 7.0.7-debian-11-r47
   sysctl:
     image:
       digest: ''
       registry: ghcr.io
       repository: zcube/bitnami-compat/bitnami-shell
-      tag: 11.0.0-debian-11-r46
+      tag: 11.0.0-debian-11-r47
   volumePermissions:
     image:
       digest: ''
       registry: ghcr.io
       repository: zcube/bitnami-compat/bitnami-shell
-      tag: 11.0.0-debian-11-r46
+      tag: 11.0.0-debian-11-r47
 
