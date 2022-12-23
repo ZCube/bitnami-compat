@@ -31,9 +31,6 @@
 
 * Every friday.
 
-* :warning: Recently deleted for old images older than 30 days.
-  * I think I'm using too much storage (I'm GitHub Free plan user...), so I'm cleaning it up. In the case of an old image, it may have been deleted, and in that case, a manifest unknown error occurs when docker pull is performed. Since this is a multi-arch image, the layer connected to the tag is deleted and only the manifest remains.
-
 ## Usage #1
 
 * I know I can't make the images in this repository trustworthy, and I know I can't fix it. This repository is just a personal repository.
@@ -84,8 +81,69 @@ image:
   repository: zcube/bitnami-compat/postgresql
   tag: 11.16.0-debian-11-r15
 ```
+or
+```bash
+curl -LO https://github.com/ZCube/bitnami-compat/blob/main/values/values_bitnami_compat_postgresql.yaml
+helm install db bitnami/postgresql -f values_bitnami_compat_postgresql.yaml
+```
 
-or use https://github.com/ZCube/bitnami-compat/blob/main/values/values_bitnami_compat_postgresql.yaml
+## Test
+
+* https://github.com/ZCube/bitnami-compat-test
+
+* legend
+
+  * O : test pass
+  * X : test pass fail
+  * Empty : not tested
+
+* note
+  * cypress v9 does not support arm64 so amd64 machine with ssh, docker needed to test.
+  * arm64 test was done on mac mini m1
+
+* result
+
+    | App    | Tests   | bitnami (amd64) | bitnami-compat (amd64) | bitnami-compat (arm64) | official (amd64) | official (arm64) | official link |
+    | :----- | :------ | :-------------: | :--------------------: | :--------------------: | :--------------: | :--------------: | :-----------: |
+    | cert-manager  | Goss    |  :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:     |                  |                  |                                                                                                                                                        |
+    | consul  | Goss    |  :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:     |                  |                  |               |
+    | consul  | Cypress |  :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:     |                  |                  |               |
+    | contour  | Goss    |  :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:     |                  |                  |               |
+    | discourse  | Goss    |  :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:     |                  |                  |               |
+    | discourse  | Cypress |  :heavy_check_mark: | :heavy_check_mark: | :x:     |                  |                  |               |
+    | elasticsearch  | Goss    |  :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:     |                  |                  |                                                                                                                                                        |
+    | elasticsearch  | Cypress |  :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:     |                  |                  |                                                                                                                                                        |
+    | etcd  | Goss    |  :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:     |                  |                  |               |
+    | external-dns  | Goss    |  :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:     |                  |                  |                                                                                                                                                        |
+    | fluentd  | Goss    |  :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:     |                  |                  |               |
+    | kafka  | Goss    |  :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:     |                  |                  |               |
+    | keycloak  | Goss    |  :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:     |                  |                  |               |
+    | keycloak  | Cypress |  :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:     |                  |                  |               |
+    | mariadb  | Goss    |  :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:     |                  |                  |               |
+    | mariadb-galera  | Goss    |  :heavy_check_mark: |  |      |                  |                  |               |
+    | memcached  | Goss    |  :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:     |                  |                  |               |
+    | minio  | Goss    |  :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:     |                  |                  |               |
+    | minio  | Cypress |  :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:     |                  |                  |               |
+    | mongodb  | Goss    |  :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:     |                  |                  |               |
+    | mongodb-sharded  | Goss    |  :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:     |                  |                  |                                                                                                                                                        |
+    | mysql  | Goss    |  :heavy_check_mark: |  | :heavy_check_mark:     |                  |                  |               |
+    | nginx  | Goss    |  :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:     |                  |                  |               |
+    | nginx  | Cypress |  :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:     |                  |                  |               |
+    | postgresql  | Goss    |  :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:     |                  |                  |                                                                                                                                                        |
+    | rabbitmq  | Goss    |  :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:     |                  |                  |               |
+    | rabbitmq  | Cypress |  :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:     |                  |                  |               |
+    | rabbitmq-cluster-operator  | Goss    |  :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:     |                  |                  |                                                                                                                                                        |
+    | rabbitmq-cluster-operator  | Cypress |  :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:     |                  |                  |                                                                                                                                                        |
+    | redis  | Goss    |  :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:     |                  |                  |               |
+    | redis-cluster  | Goss    |  :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:     |                  |                  |                                                                                                                                                        |
+    | sealed-secrets  | Cypress |  :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:     |                  |                  |                                                                                                                                                        |
+    | solr  | Goss    |  :x: | :x: | :x:     |                  |                  |               |
+    | solr  | Cypress |  :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:     |                  |                  |               |
+    | tomcat  | Goss    |  :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:     |                  |                  |               |
+    | tomcat  | Cypress |  :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:     |                  |                  |               |
+    | wordpress  | Goss    |  :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:     |                  |                  |               |
+    | wordpress  | Cypress |  :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:     |                  |                  |               |
+    | zookeeper  | Goss    |  :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:     |                  |                  |               |
 
 ## Supported bitnami charts
 
@@ -100,6 +158,7 @@ or use https://github.com/ZCube/bitnami-compat/blob/main/values/values_bitnami_c
 ✔️  etcd
 ✔️  external-dns
 ✔️  fluentd
+✔️  gitea
 ✔️  kafka
 ✔️  keycloak
 ✔️  mariadb
