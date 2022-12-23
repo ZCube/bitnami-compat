@@ -1,0 +1,3 @@
+ADD https://raw.githubusercontent.com/go-gitea/gitea/main/LICENSE /opt/bitnami/gitea/LICENSE
+COPY --from=gitea/gitea:{{{VERSION}}} /usr/local/bin/gitea /opt/bitnami/gitea/bin/gitea
+

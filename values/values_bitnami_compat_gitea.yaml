@@ -1,3 +1,8 @@
+image:
+  digest: ''
+  registry: ghcr.io
+  repository: zcube/bitnami-compat/gitea
+  tag: 1.17.3-debian-11-r44
 postgresql:
   image:
     digest: ''
@@ -16,4 +21,10 @@ postgresql:
       registry: ghcr.io
       repository: zcube/bitnami-compat/bitnami-shell
       tag: 11.0.0-debian-11-r44
+volumePermissions:
+  image:
+    digest: ''
+    registry: ghcr.io
+    repository: zcube/bitnami-compat/bitnami-shell
+    tag: 11.0.0-debian-11-r44
 

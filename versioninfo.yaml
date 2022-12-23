@@ -166,6 +166,13 @@
   os_flavour: debian-11
   os_name: linux
   revision: "44"
+- name: gitea
+  version: 1.17.3
+  version_major: "1"
+  version_full: 1.17.3-debian-11-r44
+  os_flavour: debian-11
+  os_name: linux
+  revision: "44"
 - name: java
   version: 1.8.352
   version_major: "1.8"

@@ -212,6 +212,7 @@ or use https://github.com/ZCube/bitnami-compat/blob/main/values/values_bitnami_c
 * external-dns : [`0`, `0-debian-11`, `0.13.1`, `0.13.1-debian-11`, `0.13.1-debian-11-r44`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fexternal-dns)
 * fluentd : [`1`, `1-debian-11`, `1.15.3`, `1.15.3-debian-11`, `1.15.3-debian-11-r44`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Ffluentd)
 * git : [`2`, `2-debian-11`, `2.39.0`, `2.39.0-debian-11`, `2.39.0-debian-11-r44`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fgit)
+* gitea : [`1`, `1-debian-11`, `1.17.3`, `1.17.3-debian-11`, `1.17.3-debian-11-r44`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fgitea)
 * java : [`1.8`, `1.8-debian-11`, `1.8.352`, `1.8.352-debian-11`, `1.8.352-debian-11-r44`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fjava)
 * java : [`11`, `11-debian-11`, `11.0.17`, `11.0.17-debian-11`, `11.0.17-debian-11-r44`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fjava)
 * java : [`17`, `17-debian-11`, `17.0.5`, `17.0.5-debian-11`, `17.0.5-debian-11-r44`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fjava)
