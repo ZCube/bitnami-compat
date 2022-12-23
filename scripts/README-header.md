@@ -83,7 +83,7 @@ image:
 ```
 or
 ```bash
-curl -LO https://github.com/ZCube/bitnami-compat/blob/main/values/values_bitnami_compat_postgresql.yaml
+curl -LO https://raw.githubusercontent.com/ZCube/bitnami-compat/main/values/values_bitnami_compat_postgresql.yaml
 helm install db bitnami/postgresql -f values_bitnami_compat_postgresql.yaml
 ```
 
