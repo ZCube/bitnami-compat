@@ -2,17 +2,17 @@ image:
   digest: ''
   registry: ghcr.io
   repository: zcube/bitnami-compat/consul
-  tag: 1.14.3-debian-11-r44
+  tag: 1.14.3-debian-11-r46
 metrics:
   image:
     digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/consul-exporter
-    tag: 0.9.0-debian-11-r44
+    tag: 0.9.0-debian-11-r46
 volumePermissions:
   image:
     digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/bitnami-shell
-    tag: 11.0.0-debian-11-r44
+    tag: 11.0.0-debian-11-r46
 

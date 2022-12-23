@@ -3,17 +3,17 @@ contour:
     digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/contour
-    tag: 1.22.3-debian-11-r44
+    tag: 1.22.3-debian-11-r46
 defaultBackend:
   image:
     digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/nginx
-    tag: 1.23.3-debian-11-r44
+    tag: 1.23.3-debian-11-r46
 envoy:
   image:
     digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/envoy
-    tag: 1.23.3-debian-11-r44
+    tag: 1.23.3-debian-11-r46
 
