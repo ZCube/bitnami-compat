@@ -76,21 +76,6 @@ Example : mariadb/10.8
 |thanos|docker.io/thanosio/thanos:v0.27.0|Official images are compatible.|
 |external-dns|registry.k8s.io/external-dns/external-dns:v0.12.2|Official images are compatible.|
 
-## Todo list
-
-* [ ] Create Containers manifest.
-* [ ] Version check tool for compatible images.
-* [*] Trivy scan.
-* [ ] Minimal tests. ( like : kubectl version --client=true, docker compose up )
-* [ ] Add Release branches & tags. ( weekly?, monthly? )
-* [ ] Faster build for multistaged images.
-* [ ] Split app patches and components patches.
-* [ ] Render Dockerfile.arm64 to repository.
-* [ ] Get an Arm64 machine for build and testing.
-* [ ] Remove unused apps.
-* [ ] Improve Readme template.
-* [*] Add docker labels for notice.
-
 ## License
 
 Apache 2.0

@@ -1,7 +1,7 @@
 # Bitnami-Compat
 
 [![Inactively Maintained](https://img.shields.io/badge/Maintenance%20Level-Inactively%20Maintained-yellowgreen.svg)](https://gist.github.com/cheerfulstoic/d107229326a01ff0f333a1d3476e068d)
-[![Project-Stage](https://img.shields.io/badge/Project%20Stage-Experimental-yellow.svg)](https://img.shields.io/badge/Project%20Stage-Experimental-yellow.svg)
+[![Project-Stage](https://img.shields.io/badge/Project%20Stage-Development-yellowgreen.svg)](https://img.shields.io/badge/Project%20Stage-Development-yellowgreen.svg)
 [![Production Ready](https://img.shields.io/badge/Production%20Ready-No-red.svg)](https://img.shields.io/badge/Production%20Ready-No-red.svg)
 [![Update bitnami-dockers](https://github.com/ZCube/bitnami-compat/actions/workflows/update.yml/badge.svg)](https://github.com/ZCube/bitnami-compat/actions/workflows/update.yml)
 [![Build](https://github.com/ZCube/bitnami-compat/actions/workflows/build-on-push.yml/badge.svg)](https://github.com/ZCube/bitnami-compat/actions/workflows/build-on-push.yml)
@@ -18,14 +18,11 @@
   * This repository cannot be stable. Changes in multiple repositories (apt, bitnami, etc...) are reflected so images can break at any time.
   * This repository is mainly maintained for my homelab and development.
 
-* This repository does not support all bitnami images.
-  * I believe that someday bitnami will support arm64.
-  * I don't use all images from bitnami.
-  * I prefer database or other development tools, not for general apps. (e.g. wordpress, odoo, discourse, ...)
-  * For general apps, if arm64 is already supported (not for bitnami), I recommended to use it. This repository's may not reach production ready.
-  * If anyone wants to make an image patch themselves, I can help with that. Please make an issue.
-
 * These images use Bitnami's scripts. Binaries refer to the official Docker or official distribution binaries of the software or Docker recipes for Docker.
+
+  * ![Bitnami-Compat](https://www.plantuml.com/plantuml/svg/XPH1pjem48NtSmgBJLUE4XTQLK88jOkgPwYw6E81B18xiXsXgkhTQySafFv_4bREctdFOhvCZiwZzNtR0BYRqXrQR9asaXnrR0SVdg95VOkYA07EGI2s-Quy8VlHueNOwJVxghp6LcqOEdQ99HKh5Vi3jMaxeqbxjWc5iQ5Y-xqeFdufIbv6l_DOtroh_FLmo2o4pzHeguhgSx5TiHdN9rSuF4oVrkvIMl6pQcWmXeTuJjvjkAzQibhIaYptr7OD-fIGj55AGULQq1sLvsTZUMTi6bPKWX2VnupTSeQhhUgy6zoFStG6nobH2kr_uKXQ1lOhGFcta8i-uofUSXKPL-py8b2H0PNchXk3abbg21sn2661hSZPcjxMuG_qgf7hT4L6zwLvdQz8RDQZ5WcBZ72UiiHOl6KCmwRDVjogozNp0njOGTgf5-K01uRrUTyVXm_JbkJrQSAGhy7KaWyGvc_w_s7p2S7qIkTtJeC0c7s2KW__ULLIaluL-vvL0UCU_0C0)
+
+  * Some example : https://gist.github.com/ZCube/7e3045b1f15b1c1223f58267fc738e57
 
 ## Update bitnami-dockers schedule
 
@@ -428,21 +425,6 @@ Example : mariadb/10.8
 |------|-----|------|
 |thanos|docker.io/thanosio/thanos:v0.27.0|Official images are compatible.|
 |external-dns|registry.k8s.io/external-dns/external-dns:v0.12.2|Official images are compatible.|
-
-## Todo list
-
-* [ ] Create Containers manifest.
-* [ ] Version check tool for compatible images.
-* [*] Trivy scan.
-* [ ] Minimal tests. ( like : kubectl version --client=true, docker compose up )
-* [ ] Add Release branches & tags. ( weekly?, monthly? )
-* [ ] Faster build for multistaged images.
-* [ ] Split app patches and components patches.
-* [ ] Render Dockerfile.arm64 to repository.
-* [ ] Get an Arm64 machine for build and testing.
-* [ ] Remove unused apps.
-* [ ] Improve Readme template.
-* [*] Add docker labels for notice.
 
 ## License
 
