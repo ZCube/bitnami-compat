@@ -14,7 +14,7 @@ RUN install_packages curl libcurl4-openssl-dev wget libpq-dev build-essential li
     bundler add passenger && \
     bundle update mini_racer && \
     bundle config --local deployment true && \
-    # bundle config --local path ./vendor/bundle && \
+    bundle config --local path ${PWD}/vendor/bundle && \
     bundle config --local without test development && \
     bundle install --jobs 4 && \
     # bundle exec rake maxminddb:get &&\
@@ -25,8 +25,6 @@ RUN install_packages curl libcurl4-openssl-dev wget libpq-dev build-essential li
     ruby -S passenger-config install-standalone-runtime && \
     ruby -S passenger-config build-native-support && \
     ruby -S passenger-config validate-install && \
-    rm -rf /usr/local/bundle/gems/passenger* && \
-    ln -sf /opt/bitnami/discourse/vendor/bundle/ruby/*/gems/passenger-* /usr/local/bundle/gems/ && \
     rm -fr /usr/local/share/ruby-build &&\
     rm -fr /var/lib/apt/lists/* &&\
     rm -fr /root/.gem &&\
