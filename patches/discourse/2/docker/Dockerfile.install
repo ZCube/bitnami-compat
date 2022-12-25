@@ -25,6 +25,8 @@ RUN install_packages curl libcurl4-openssl-dev wget libpq-dev build-essential li
     ruby -S passenger-config install-standalone-runtime && \
     ruby -S passenger-config build-native-support && \
     ruby -S passenger-config validate-install && \
+    rm -rf /opt/bitnami/discourse/vendor/bundle/ruby/*/gems/passenger* && \
+    ln -sf /usr/local/bundle/gems/passenger* /opt/bitnami/discourse/vendor/bundle/ruby/*/gems/ && \
     rm -fr /usr/local/share/ruby-build &&\
     rm -fr /var/lib/apt/lists/* &&\
     rm -fr /root/.gem &&\
