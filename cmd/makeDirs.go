@@ -77,15 +77,15 @@ var makeDirsCmd = &cobra.Command{
 					version = path
 				}
 
-				err = os.MkdirAll(filepath.Join("patches", appInfo.Name, version, "bash"), 0644)
+				err = os.MkdirAll(filepath.Join("patches", appInfo.Name, version, "bash"), 0755)
 				if err != nil {
 					log.Panic(err)
 				}
-				err = os.MkdirAll(filepath.Join("patches", appInfo.Name, version, "docker"), 0644)
+				err = os.MkdirAll(filepath.Join("patches", appInfo.Name, version, "docker"), 0755)
 				if err != nil {
 					log.Panic(err)
 				}
-				err = os.MkdirAll(filepath.Join("patches", appInfo.Name, version, "golang"), 0644)
+				err = os.MkdirAll(filepath.Join("patches", appInfo.Name, version, "golang"), 0755)
 				if err != nil {
 					log.Panic(err)
 				}

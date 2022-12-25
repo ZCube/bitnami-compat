@@ -1,6 +1,10 @@
 # Reference : https://github.com/discourse/discourse_docker/blob/main/image/base/slim.Dockerfile
 # License : MIT License
 
+# oxipng
+# imagemagick
+# jemalloc
+
 RUN install_packages curl libcurl4-openssl-dev wget libpq-dev build-essential libpcre3-dev && \
     git clone --depth 1 --branch v2.8.9 https://github.com/discourse/discourse /opt/bitnami/discourse && \
     git -C /opt/bitnami/discourse remote set-branches --add origin tests-passed && \
@@ -17,6 +21,10 @@ RUN install_packages curl libcurl4-openssl-dev wget libpq-dev build-essential li
     cd /opt/bitnami/discourse/app/assets/javascripts && \
     yarn install --production --frozen-lockfile && \
     yarn cache clean && \
+    ruby -S passenger-config install-agent && \
+    ruby -S passenger-config install-standalone-runtime && \
+    ruby -S passenger-config build-native-support && \
+    ruby -S passenger-config validate-install && \
     rm -fr /usr/local/share/ruby-build &&\
     rm -fr /var/lib/apt/lists/* &&\
     rm -fr /root/.gem &&\
