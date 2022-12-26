@@ -27,6 +27,8 @@ RUN install_packages curl libcurl4-openssl-dev wget libpq-dev build-essential li
     ruby -S passenger-config validate-install && \
     rm -rf /opt/bitnami/discourse/vendor/bundle/ruby/*/gems/passenger* && \
     ln -sf /usr/local/bundle/gems/passenger* /opt/bitnami/discourse/vendor/bundle/ruby/*/gems/ && \
+    # too slow arm64 && \
+    sed -i -E 's/15000/50000/g' /opt/bitnami/discourse/lib/discourse_js_processor.rb && \
     rm -fr /usr/local/share/ruby-build &&\
     rm -fr /var/lib/apt/lists/* &&\
     rm -fr /root/.gem &&\
