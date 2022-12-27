@@ -16,4 +16,5 @@ RUN mkdir -p /opt/bitnami/mysql/bin \
     && ln -sf /opt/bitnami/mysql/conf/bitnami /etc/bitnami \
     && ln -sf /opt/bitnami/mysql/conf/my_custom.cnf /etc/my_custom.cnf \
     && ln -sf /opt/bitnami/mysql/conf/my.cnf /etc/my.cnf \
+    && userdel mysql \
     && chown 1001:1001 -R /opt/bitnami/mysql /var/run/mysqld /etc/mysql 
