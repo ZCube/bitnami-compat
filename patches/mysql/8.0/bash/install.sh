@@ -11,3 +11,6 @@ sed -i "s/apt-get update && apt-get upgrade -y/#apt-get update && apt-get upgrad
 sed -i "s/apt-get clean/# apt-get clean/g" Dockerfile.arm64
 sed -i "s/rm -r \/var\/lib\/apt/#rm -r \/var\/lib\/apt/g" Dockerfile.arm64
 sed -i "s/RUN mkdir \/docker-entrypoint-initdb.d/RUN mkdir -p \/docker-entrypoint-initdb.d/g" Dockerfile.arm64
+
+sed -i 's/print_welcome_page/ls -alR \/opt\/bitnami/g' rootfs/opt/bitnami/scripts/mysql/entrypoint.sh
+
