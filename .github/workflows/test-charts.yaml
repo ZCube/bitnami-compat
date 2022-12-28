@@ -18,8 +18,7 @@ jobs:
         os: ["ubuntu-latest"]
         # os: ["ubuntu-latest", "ARM64"]
         USE_IMAGE_TYPE: ["bitnami", "bitnami-compat"]
-        APP_NAME: ["cert-manager", "consul", "contour", "contour-operator", "discourse", "elasticsearch", "etcd", "external-dns", "fluentd", "gitea", "kafka", "keycloak", "mariadb", "mariadb-galera", "memcached", "minio", "mongodb", "mongodb-sharded", "nginx", "postgresql", "postgresql-ha", "rabbitmq", "rabbitmq-cluster-operator", "redis", "redis-cluster", "sealed-secrets", "solr", "thanos", "tomcat", "wordpress", "zookeeper"]
-        # APP_NAME: ["cert-manager", "consul", "contour", "contour-operator", "discourse", "elasticsearch", "etcd", "external-dns", "fluentd", "gitea", "kafka", "keycloak", "mariadb", "mariadb-galera", "memcached", "minio", "mongodb", "mongodb-sharded", "mysql", "nginx", "postgresql", "postgresql-ha", "rabbitmq", "rabbitmq-cluster-operator", "redis", "redis-cluster", "sealed-secrets", "solr", "thanos", "tomcat", "wordpress", "zookeeper"]
+        APP_NAME: ["cert-manager", "consul", "contour", "contour-operator", "discourse", "elasticsearch", "etcd", "external-dns", "fluentd", "gitea", "kafka", "keycloak", "mariadb", "mariadb-galera", "memcached", "minio", "mongodb", "mongodb-sharded", "mysql", "nginx", "postgresql", "postgresql-ha", "rabbitmq", "rabbitmq-cluster-operator", "redis", "redis-cluster", "sealed-secrets", "solr", "thanos", "tomcat", "wordpress", "zookeeper"]
         exclude:
           - os: "ARM64"
             USE_IMAGE_TYPE: "bitnami"
