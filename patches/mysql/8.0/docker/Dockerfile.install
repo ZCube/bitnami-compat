@@ -1,4 +1,4 @@
-RUN install_packages curl wget xz-utils tar libaio1 libnuma1 libtinfo5 libudev0 && \
+RUN install_packages curl wget xz-utils tar libaio1 libnuma1 libtinfo5 libudev0 libncurses5 && \
     case $(uname -m) in \
       x86_64) \
         curl -LO https://cdn.mysql.com//Downloads/MySQL-8.0/mysql-{{{VERSION}}}-linux-glibc2.12-x86_64.tar.xz && \
@@ -12,5 +12,6 @@ RUN install_packages curl wget xz-utils tar libaio1 libnuma1 libtinfo5 libudev0 
       ;; \
     esac && \
     /opt/bitnami/mysql/bin/mysqld --version && \
+    rm -rf /tmp/mysql* && \
     ln -sf /opt/bitnami/mysql/conf /etc/mysql 
 
