@@ -1,0 +1,14 @@
+image:
+  debug: true
+
+envoy:
+  service:
+    ports:
+      http: 81
+
+# discourse
+discourse:
+  livenessProbe:
+    enabled: true
+    initialDelaySeconds: 5000
+

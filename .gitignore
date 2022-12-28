@@ -10,3 +10,4 @@ packages.sh
 *.orig
 *.exe
 vendor
+localpv/charts

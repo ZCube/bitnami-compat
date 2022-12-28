@@ -698,7 +698,7 @@ jobs:
                 echo "================================================================"
 
                 set +e
-                docker run --rm -v ${PWD}/charts/.vib/${HELM_APP_NAME}/cypress:/e2e -w /e2e cypress/included:${CYPRESS_VERSION} --headless --browser chrome
+                docker run --rm -e CYPRESS_VERIFY_TIMEOUT=${CYPRESS_VERIFY_TIMEOUT} -v ${PWD}/charts/.vib/${HELM_APP_NAME}/cypress:/e2e -w /e2e cypress/included:${CYPRESS_VERSION} --headless --browser chrome
                 status=$?
                 set -e
                 if [ $status -eq 0 ]; then
@@ -720,7 +720,7 @@ jobs:
                 ssh ubuntu@cypress-test "docker run --rm -v /tmp:/e2e -w /e2e ubuntu rm -rf /e2e/cypress-test"
                 rsync -avzh --delete ${PWD}/charts/.vib/${HELM_APP_NAME}/cypress/ ubuntu@cypress-test:/tmp/cypress-test/
                 set +e
-                ssh ubuntu@cypress-test "docker run --platform linux/amd64 --rm -v /tmp/cypress-test:/e2e -w /e2e cypress/included:${CYPRESS_VERSION} --headless --browser chrome"
+                ssh ubuntu@cypress-test "docker run --platform linux/amd64 --rm -e CYPRESS_VERIFY_TIMEOUT=${CYPRESS_VERIFY_TIMEOUT} -v /tmp/cypress-test:/e2e -w /e2e cypress/included:${CYPRESS_VERSION} --headless --browser chrome"
                 status=$?
                 set -e
                 if [ $status -eq 0 ]; then
