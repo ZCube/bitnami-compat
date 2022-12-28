@@ -1,209 +1,762 @@
 name: Chart Testing
 on:
-  push:
   workflow_dispatch:
   schedule:
     - cron: '0 8 * * 5'
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  test:
+    runs-on: ${{ matrix.os }}
+    if: >-
+      ${{ !contains(github.event.head_commit.message, '[ci skip]') &&
+      !contains(github.event.head_commit.message, '[skip ci]')
+      }}
+    continue-on-error: true
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ["ubuntu-latest"]
+        # os: ["ubuntu-latest", "ARM64"]
+        USE_IMAGE_TYPE: ["bitnami", "bitnami-compat"]
+        APP_NAME: ["cert-manager", "consul", "contour", "contour-operator", "discourse", "elasticsearch", "etcd", "external-dns", "fluentd", "gitea", "kafka", "keycloak", "mariadb", "mariadb-galera", "memcached", "minio", "mongodb", "mongodb-sharded", "nginx", "postgresql", "postgresql-ha", "rabbitmq", "rabbitmq-cluster-operator", "redis", "redis-cluster", "sealed-secrets", "solr", "thanos", "tomcat", "wordpress", "zookeeper"]
+        # APP_NAME: ["cert-manager", "consul", "contour", "contour-operator", "discourse", "elasticsearch", "etcd", "external-dns", "fluentd", "gitea", "kafka", "keycloak", "mariadb", "mariadb-galera", "memcached", "minio", "mongodb", "mongodb-sharded", "mysql", "nginx", "postgresql", "postgresql-ha", "rabbitmq", "rabbitmq-cluster-operator", "redis", "redis-cluster", "sealed-secrets", "solr", "thanos", "tomcat", "wordpress", "zookeeper"]
+        exclude:
+          - os: "ARM64"
+            USE_IMAGE_TYPE: "bitnami"
+
+    outputs:
+      bitnami-amd64-cert-manager-goss: ${{ steps.goss.outputs.bitnami-amd64-cert-manager-goss }}
+      bitnami-compat-arm64-cert-manager-goss: ${{ steps.goss.outputs.bitnami-compat-arm64-cert-manager-goss }}
+      bitnami-compat-amd64-cert-manager-goss: ${{ steps.goss.outputs.bitnami-compat-amd64-cert-manager-goss }}
+      bitnami-amd64-consul-goss: ${{ steps.goss.outputs.bitnami-amd64-consul-goss }}
+      bitnami-amd64-consul-cypress: ${{ steps.cypress.outputs.bitnami-amd64-consul-cypress }}
+      bitnami-compat-arm64-consul-goss: ${{ steps.goss.outputs.bitnami-compat-arm64-consul-goss }}
+      bitnami-compat-arm64-consul-cypress: ${{ steps.cypress.outputs.bitnami-compat-arm64-consul-cypress }}
+      bitnami-compat-amd64-consul-goss: ${{ steps.goss.outputs.bitnami-compat-amd64-consul-goss }}
+      bitnami-compat-amd64-consul-cypress: ${{ steps.cypress.outputs.bitnami-compat-amd64-consul-cypress }}
+      bitnami-amd64-contour-goss: ${{ steps.goss.outputs.bitnami-amd64-contour-goss }}
+      bitnami-compat-arm64-contour-goss: ${{ steps.goss.outputs.bitnami-compat-arm64-contour-goss }}
+      bitnami-compat-amd64-contour-goss: ${{ steps.goss.outputs.bitnami-compat-amd64-contour-goss }}
+      bitnami-amd64-discourse-goss: ${{ steps.goss.outputs.bitnami-amd64-discourse-goss }}
+      bitnami-amd64-discourse-cypress: ${{ steps.cypress.outputs.bitnami-amd64-discourse-cypress }}
+      bitnami-compat-arm64-discourse-goss: ${{ steps.goss.outputs.bitnami-compat-arm64-discourse-goss }}
+      bitnami-compat-arm64-discourse-cypress: ${{ steps.cypress.outputs.bitnami-compat-arm64-discourse-cypress }}
+      bitnami-compat-amd64-discourse-goss: ${{ steps.goss.outputs.bitnami-compat-amd64-discourse-goss }}
+      bitnami-compat-amd64-discourse-cypress: ${{ steps.cypress.outputs.bitnami-compat-amd64-discourse-cypress }}
+      bitnami-amd64-elasticsearch-goss: ${{ steps.goss.outputs.bitnami-amd64-elasticsearch-goss }}
+      bitnami-amd64-elasticsearch-cypress: ${{ steps.cypress.outputs.bitnami-amd64-elasticsearch-cypress }}
+      bitnami-compat-arm64-elasticsearch-goss: ${{ steps.goss.outputs.bitnami-compat-arm64-elasticsearch-goss }}
+      bitnami-compat-arm64-elasticsearch-cypress: ${{ steps.cypress.outputs.bitnami-compat-arm64-elasticsearch-cypress }}
+      bitnami-compat-amd64-elasticsearch-goss: ${{ steps.goss.outputs.bitnami-compat-amd64-elasticsearch-goss }}
+      bitnami-compat-amd64-elasticsearch-cypress: ${{ steps.cypress.outputs.bitnami-compat-amd64-elasticsearch-cypress }}
+      bitnami-amd64-etcd-goss: ${{ steps.goss.outputs.bitnami-amd64-etcd-goss }}
+      bitnami-compat-arm64-etcd-goss: ${{ steps.goss.outputs.bitnami-compat-arm64-etcd-goss }}
+      bitnami-compat-amd64-etcd-goss: ${{ steps.goss.outputs.bitnami-compat-amd64-etcd-goss }}
+      bitnami-amd64-external-dns-goss: ${{ steps.goss.outputs.bitnami-amd64-external-dns-goss }}
+      bitnami-compat-arm64-external-dns-goss: ${{ steps.goss.outputs.bitnami-compat-arm64-external-dns-goss }}
+      bitnami-compat-amd64-external-dns-goss: ${{ steps.goss.outputs.bitnami-compat-amd64-external-dns-goss }}
+      bitnami-amd64-fluentd-goss: ${{ steps.goss.outputs.bitnami-amd64-fluentd-goss }}
+      bitnami-compat-arm64-fluentd-goss: ${{ steps.goss.outputs.bitnami-compat-arm64-fluentd-goss }}
+      bitnami-compat-amd64-fluentd-goss: ${{ steps.goss.outputs.bitnami-compat-amd64-fluentd-goss }}
+      bitnami-amd64-gitea-goss: ${{ steps.goss.outputs.bitnami-amd64-gitea-goss }}
+      bitnami-amd64-gitea-cypress: ${{ steps.cypress.outputs.bitnami-amd64-gitea-cypress }}
+      bitnami-compat-arm64-gitea-goss: ${{ steps.goss.outputs.bitnami-compat-arm64-gitea-goss }}
+      bitnami-compat-arm64-gitea-cypress: ${{ steps.cypress.outputs.bitnami-compat-arm64-gitea-cypress }}
+      bitnami-compat-amd64-gitea-goss: ${{ steps.goss.outputs.bitnami-compat-amd64-gitea-goss }}
+      bitnami-compat-amd64-gitea-cypress: ${{ steps.cypress.outputs.bitnami-compat-amd64-gitea-cypress }}
+      bitnami-amd64-kafka-goss: ${{ steps.goss.outputs.bitnami-amd64-kafka-goss }}
+      bitnami-compat-arm64-kafka-goss: ${{ steps.goss.outputs.bitnami-compat-arm64-kafka-goss }}
+      bitnami-compat-amd64-kafka-goss: ${{ steps.goss.outputs.bitnami-compat-amd64-kafka-goss }}
+      bitnami-amd64-keycloak-goss: ${{ steps.goss.outputs.bitnami-amd64-keycloak-goss }}
+      bitnami-amd64-keycloak-cypress: ${{ steps.cypress.outputs.bitnami-amd64-keycloak-cypress }}
+      bitnami-compat-arm64-keycloak-goss: ${{ steps.goss.outputs.bitnami-compat-arm64-keycloak-goss }}
+      bitnami-compat-arm64-keycloak-cypress: ${{ steps.cypress.outputs.bitnami-compat-arm64-keycloak-cypress }}
+      bitnami-compat-amd64-keycloak-goss: ${{ steps.goss.outputs.bitnami-compat-amd64-keycloak-goss }}
+      bitnami-compat-amd64-keycloak-cypress: ${{ steps.cypress.outputs.bitnami-compat-amd64-keycloak-cypress }}
+      bitnami-amd64-mariadb-goss: ${{ steps.goss.outputs.bitnami-amd64-mariadb-goss }}
+      bitnami-compat-arm64-mariadb-goss: ${{ steps.goss.outputs.bitnami-compat-arm64-mariadb-goss }}
+      bitnami-compat-amd64-mariadb-goss: ${{ steps.goss.outputs.bitnami-compat-amd64-mariadb-goss }}
+      bitnami-amd64-mariadb-galera-goss: ${{ steps.goss.outputs.bitnami-amd64-mariadb-galera-goss }}
+      bitnami-compat-arm64-mariadb-galera-goss: ${{ steps.goss.outputs.bitnami-compat-arm64-mariadb-galera-goss }}
+      bitnami-compat-amd64-mariadb-galera-goss: ${{ steps.goss.outputs.bitnami-compat-amd64-mariadb-galera-goss }}
+      bitnami-amd64-memcached-goss: ${{ steps.goss.outputs.bitnami-amd64-memcached-goss }}
+      bitnami-compat-arm64-memcached-goss: ${{ steps.goss.outputs.bitnami-compat-arm64-memcached-goss }}
+      bitnami-compat-amd64-memcached-goss: ${{ steps.goss.outputs.bitnami-compat-amd64-memcached-goss }}
+      bitnami-amd64-minio-goss: ${{ steps.goss.outputs.bitnami-amd64-minio-goss }}
+      bitnami-amd64-minio-cypress: ${{ steps.cypress.outputs.bitnami-amd64-minio-cypress }}
+      bitnami-compat-arm64-minio-goss: ${{ steps.goss.outputs.bitnami-compat-arm64-minio-goss }}
+      bitnami-compat-arm64-minio-cypress: ${{ steps.cypress.outputs.bitnami-compat-arm64-minio-cypress }}
+      bitnami-compat-amd64-minio-goss: ${{ steps.goss.outputs.bitnami-compat-amd64-minio-goss }}
+      bitnami-compat-amd64-minio-cypress: ${{ steps.cypress.outputs.bitnami-compat-amd64-minio-cypress }}
+      bitnami-amd64-mongodb-goss: ${{ steps.goss.outputs.bitnami-amd64-mongodb-goss }}
+      bitnami-compat-arm64-mongodb-goss: ${{ steps.goss.outputs.bitnami-compat-arm64-mongodb-goss }}
+      bitnami-compat-amd64-mongodb-goss: ${{ steps.goss.outputs.bitnami-compat-amd64-mongodb-goss }}
+      bitnami-amd64-mongodb-sharded-goss: ${{ steps.goss.outputs.bitnami-amd64-mongodb-sharded-goss }}
+      bitnami-compat-arm64-mongodb-sharded-goss: ${{ steps.goss.outputs.bitnami-compat-arm64-mongodb-sharded-goss }}
+      bitnami-compat-amd64-mongodb-sharded-goss: ${{ steps.goss.outputs.bitnami-compat-amd64-mongodb-sharded-goss }}
+      # bitnami-amd64-mysql-goss: ${{ steps.goss.outputs.bitnami-amd64-mysql-goss }}
+      # bitnami-compat-arm64-mysql-goss: ${{ steps.goss.outputs.bitnami-compat-arm64-mysql-goss }}
+      # bitnami-compat-amd64-mysql-goss: ${{ steps.goss.outputs.bitnami-compat-amd64-mysql-goss }}
+      bitnami-amd64-nginx-goss: ${{ steps.goss.outputs.bitnami-amd64-nginx-goss }}
+      bitnami-amd64-nginx-cypress: ${{ steps.cypress.outputs.bitnami-amd64-nginx-cypress }}
+      bitnami-compat-arm64-nginx-goss: ${{ steps.goss.outputs.bitnami-compat-arm64-nginx-goss }}
+      bitnami-compat-arm64-nginx-cypress: ${{ steps.cypress.outputs.bitnami-compat-arm64-nginx-cypress }}
+      bitnami-compat-amd64-nginx-goss: ${{ steps.goss.outputs.bitnami-compat-amd64-nginx-goss }}
+      bitnami-compat-amd64-nginx-cypress: ${{ steps.cypress.outputs.bitnami-compat-amd64-nginx-cypress }}
+      bitnami-amd64-postgresql-goss: ${{ steps.goss.outputs.bitnami-amd64-postgresql-goss }}
+      bitnami-compat-arm64-postgresql-goss: ${{ steps.goss.outputs.bitnami-compat-arm64-postgresql-goss }}
+      bitnami-compat-amd64-postgresql-goss: ${{ steps.goss.outputs.bitnami-compat-amd64-postgresql-goss }}
+      bitnami-amd64-postgresql-ha-goss: ${{ steps.goss.outputs.bitnami-amd64-postgresql-ha-goss }}
+      bitnami-compat-arm64-postgresql-ha-goss: ${{ steps.goss.outputs.bitnami-compat-arm64-postgresql-ha-goss }}
+      bitnami-compat-amd64-postgresql-ha-goss: ${{ steps.goss.outputs.bitnami-compat-amd64-postgresql-ha-goss }}
+      bitnami-amd64-rabbitmq-goss: ${{ steps.goss.outputs.bitnami-amd64-rabbitmq-goss }}
+      bitnami-amd64-rabbitmq-cypress: ${{ steps.cypress.outputs.bitnami-amd64-rabbitmq-cypress }}
+      bitnami-compat-arm64-rabbitmq-goss: ${{ steps.goss.outputs.bitnami-compat-arm64-rabbitmq-goss }}
+      bitnami-compat-arm64-rabbitmq-cypress: ${{ steps.cypress.outputs.bitnami-compat-arm64-rabbitmq-cypress }}
+      bitnami-compat-amd64-rabbitmq-goss: ${{ steps.goss.outputs.bitnami-compat-amd64-rabbitmq-goss }}
+      bitnami-compat-amd64-rabbitmq-cypress: ${{ steps.cypress.outputs.bitnami-compat-amd64-rabbitmq-cypress }}
+      bitnami-amd64-rabbitmq-cluster-operator-goss: ${{ steps.goss.outputs.bitnami-amd64-rabbitmq-cluster-operator-goss }}
+      bitnami-amd64-rabbitmq-cluster-operator-cypress: ${{ steps.cypress.outputs.bitnami-amd64-rabbitmq-cluster-operator-cypress }}
+      bitnami-compat-arm64-rabbitmq-cluster-operator-goss: ${{ steps.goss.outputs.bitnami-compat-arm64-rabbitmq-cluster-operator-goss }}
+      bitnami-compat-arm64-rabbitmq-cluster-operator-cypress: ${{ steps.cypress.outputs.bitnami-compat-arm64-rabbitmq-cluster-operator-cypress }}
+      bitnami-compat-amd64-rabbitmq-cluster-operator-goss: ${{ steps.goss.outputs.bitnami-compat-amd64-rabbitmq-cluster-operator-goss }}
+      bitnami-compat-amd64-rabbitmq-cluster-operator-cypress: ${{ steps.cypress.outputs.bitnami-compat-amd64-rabbitmq-cluster-operator-cypress }}
+      bitnami-amd64-redis-goss: ${{ steps.goss.outputs.bitnami-amd64-redis-goss }}
+      bitnami-compat-arm64-redis-goss: ${{ steps.goss.outputs.bitnami-compat-arm64-redis-goss }}
+      bitnami-compat-amd64-redis-goss: ${{ steps.goss.outputs.bitnami-compat-amd64-redis-goss }}
+      bitnami-amd64-redis-cluster-goss: ${{ steps.goss.outputs.bitnami-amd64-redis-cluster-goss }}
+      bitnami-compat-arm64-redis-cluster-goss: ${{ steps.goss.outputs.bitnami-compat-arm64-redis-cluster-goss }}
+      bitnami-compat-amd64-redis-cluster-goss: ${{ steps.goss.outputs.bitnami-compat-amd64-redis-cluster-goss }}
+      bitnami-amd64-sealed-secrets-cypress: ${{ steps.cypress.outputs.bitnami-amd64-sealed-secrets-cypress }}
+      bitnami-compat-arm64-sealed-secrets-cypress: ${{ steps.cypress.outputs.bitnami-compat-arm64-sealed-secrets-cypress }}
+      bitnami-compat-amd64-sealed-secrets-cypress: ${{ steps.cypress.outputs.bitnami-compat-amd64-sealed-secrets-cypress }}
+      bitnami-amd64-solr-goss: ${{ steps.goss.outputs.bitnami-amd64-solr-goss }}
+      bitnami-amd64-solr-cypress: ${{ steps.cypress.outputs.bitnami-amd64-solr-cypress }}
+      bitnami-compat-arm64-solr-goss: ${{ steps.goss.outputs.bitnami-compat-arm64-solr-goss }}
+      bitnami-compat-arm64-solr-cypress: ${{ steps.cypress.outputs.bitnami-compat-arm64-solr-cypress }}
+      bitnami-compat-amd64-solr-goss: ${{ steps.goss.outputs.bitnami-compat-amd64-solr-goss }}
+      bitnami-compat-amd64-solr-cypress: ${{ steps.cypress.outputs.bitnami-compat-amd64-solr-cypress }}
+      bitnami-amd64-tomcat-goss: ${{ steps.goss.outputs.bitnami-amd64-tomcat-goss }}
+      bitnami-amd64-tomcat-cypress: ${{ steps.cypress.outputs.bitnami-amd64-tomcat-cypress }}
+      bitnami-compat-arm64-tomcat-goss: ${{ steps.goss.outputs.bitnami-compat-arm64-tomcat-goss }}
+      bitnami-compat-arm64-tomcat-cypress: ${{ steps.cypress.outputs.bitnami-compat-arm64-tomcat-cypress }}
+      bitnami-compat-amd64-tomcat-goss: ${{ steps.goss.outputs.bitnami-compat-amd64-tomcat-goss }}
+      bitnami-compat-amd64-tomcat-cypress: ${{ steps.cypress.outputs.bitnami-compat-amd64-tomcat-cypress }}
+      bitnami-amd64-wordpress-goss: ${{ steps.goss.outputs.bitnami-amd64-wordpress-goss }}
+      bitnami-amd64-wordpress-cypress: ${{ steps.cypress.outputs.bitnami-amd64-wordpress-cypress }}
+      bitnami-compat-arm64-wordpress-goss: ${{ steps.goss.outputs.bitnami-compat-arm64-wordpress-goss }}
+      bitnami-compat-arm64-wordpress-cypress: ${{ steps.cypress.outputs.bitnami-compat-arm64-wordpress-cypress }}
+      bitnami-compat-amd64-wordpress-goss: ${{ steps.goss.outputs.bitnami-compat-amd64-wordpress-goss }}
+      bitnami-compat-amd64-wordpress-cypress: ${{ steps.cypress.outputs.bitnami-compat-amd64-wordpress-cypress }}
+      bitnami-amd64-zookeeper-goss: ${{ steps.goss.outputs.bitnami-amd64-zookeeper-goss }}
+      bitnami-compat-arm64-zookeeper-goss: ${{ steps.goss.outputs.bitnami-compat-arm64-zookeeper-goss }}
+      bitnami-compat-amd64-zookeeper-goss: ${{ steps.goss.outputs.bitnami-compat-amd64-zookeeper-goss }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: clone bitnami charts
+      - name: Submodule init
+        shell: bash
+        run: git submodule init
+      - name: Checkout bitnami recipe
+        shell: bash
+        run: git submodule update charts
+      - name: uninstall qemu
         run: |
-          git clone --depth=1 https://github.com/bitnami/charts
+          docker run --privileged --rm tonistiigi/binfmt --uninstall all
 
       - name: install helm
         run: |
-          curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
-          chmod 700 get_helm.sh
-          ./get_helm.sh
+          if ! hash helm 2>/dev/null
+          then
+            curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+            chmod 700 get_helm.sh
+            ./get_helm.sh
+          fi
           
           helm repo add bitnami https://charts.bitnami.com/bitnami
 
+      - name: install kubectl
+        run: |
+          architecture=""
+          case $(uname -m) in
+            x86_64)  architecture="amd64" ;;
+            aarch64) architecture="arm64" ;;
+          esac
+          echo ${architecture}
+
+          if ! hash kubectl 2>/dev/null
+          then
+            curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/${architecture}/kubectl
+            chmod +x ./kubectl
+            sudo mv ./kubectl /usr/local/bin/kubectl
+          fi
+
+      - name: install yq
+        run: |
+          architecture=""
+          case $(uname -m) in
+            x86_64)  architecture="amd64" ;;
+            aarch64) architecture="arm64" ;;
+          esac
+          echo ${architecture}
+
+          if ! hash yq 2>/dev/null
+          then
+            export VERSION=v4.30.5
+            export BINARY=yq_linux_${architecture}
+            wget https://github.com/mikefarah/yq/releases/download/${VERSION}/${BINARY}.tar.gz -O - | tar xz
+            sudo mv ${BINARY} /usr/local/bin/yq
+          fi
+
+      - name: install jq
+        run: |
+          if ! hash jq 2>/dev/null
+          then
+            sudo apt update
+            sudo apt install -y jq
+          fi
+
       - name: install goss
         run: |
-          export GOSS_VER=v0.3.16
-          curl -fsSL https://goss.rocks/install | GOSS_DST=/usr/local/bin sh
+          if ! hash goss 2>/dev/null
+          then
+            export GOSS_VER=v0.3.20
+            curl -fsSL https://goss.rocks/install | GOSS_DST=/usr/local/bin sudo sh
+          fi
 
       - name: install k3d
         run: |
-          wget -q -O - https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | TAG=v5.4.6 bash
+          if ! hash k3d 2>/dev/null
+          then
+            wget -q -O - https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | TAG=v5.4.6 bash
+          fi
+          
+      - name: install mustache mo
+        run: |
+          if ! hash mo 2>/dev/null
+          then
+            curl -sSL https://git.io/get-mo -o mo
+            chmod +x mo
+            sudo mv mo /usr/local/bin/
+          fi
 
       - name: prepare k3s cluster by k3d
         run: |
+          docker info
+
           k3d cluster stop test-cluster || true
           k3d cluster delete test-cluster || true
-          k3d cluster create test-cluster \
-          -v /usr/local/bin/goss:/bin/goss:ro \
-          -v ${PWD}/charts/.vib:/goss_data \
-          -p "80:80@agent:0:direct" \
-          -p "443:443@agent:0:direct" \
-          -p "8053:53/udp@agent:0:direct" \
-          --agents 3 \
-          --image docker.io/rancher/k3s:v1.25.4-k3s1 \
-          --wait
+          
+          docker volume rm k3d-test-cluster-images || true
+          sudo mkdir -p containers
+          sudo chmod 0701 containers
+          sudo chown root:root containers
 
-          cat <<EOF > local_path_config.yaml
-          kind: ConfigMap
-          apiVersion: v1
-          metadata:
-            name: local-path-config
-            namespace: kube-system
-          data:
-            config.json: |-
-              {
-                "nodePathMap":[
-                {
-                  "node":"DEFAULT_PATH_FOR_NON_LISTED_NODES",
-                  "paths":["/var/lib/rancher/k3s/storage"]
-                }
-                ]
-              }
-            helperPod.yaml: |-
-              apiVersion: v1
-              kind: Pod
-              metadata:
-                name: helper-pod
-              spec:
-                containers:
-                - name: helper-pod
-                  image: rancher/mirrored-library-busybox:1.34.1
-                  imagePullPolicy: IfNotPresent
-            setup: |-
-              #!/bin/sh
-              while getopts "m:s:p:" opt
-              do
-                  case \$opt in
-                      p)
-                      absolutePath=\$OPTARG
-                      ;;
-                      s)
-                      sizeInBytes=\$OPTARG
-                      ;;
-                      m)
-                      volMode=\$OPTARG
-                      ;;
-                  esac
-              done
-              mkdir -m 2775 -p \${absolutePath}
-              chmod 701 \${absolutePath}/..
-            teardown: |-
-              #!/bin/sh
-              while getopts "m:s:p:" opt
-              do
-                  case \$opt in
-                      p)
-                      absolutePath=\$OPTARG
-                      ;;
-                      s)
-                      sizeInBytes=\$OPTARG
-                      ;;
-                      m)
-                      volMode=\$OPTARG
-                      ;;
-                  esac
-              done
-              rm -rf \${absolutePath}
-          EOF
-          kubectl apply -f local_path_config.yaml
+          if [ -f /etc/registries.yaml ]
+          then
+            k3d cluster create test-cluster \
+            -v /usr/local/bin/goss:/bin/goss:ro \
+            -v ${PWD}/charts/.vib:/goss_data \
+            -v ${PWD}/containers:/var/lib/docker/containers \
+            -p "80:28080@agent:0:direct" \
+            -p "443:28443@agent:0:direct" \
+            --k3s-arg "--disable=local-storage@server:*" \
+            --agents 1 \
+            --image docker.io/rancher/k3s:v1.25.4-k3s1 \
+            --registry-config "/etc/registries.yaml" \
+            --wait
+          else
+            k3d cluster create test-cluster \
+            -v /usr/local/bin/goss:/bin/goss:ro \
+            -v ${PWD}/charts/.vib:/goss_data \
+            -v ${PWD}/containers:/var/lib/docker/containers \
+            -p "80:28080@agent:0:direct" \
+            -p "443:28443@agent:0:direct" \
+            --k3s-arg "--disable=local-storage@server:*" \
+            --agents 1 \
+            --image docker.io/rancher/k3s:v1.25.4-k3s1 \
+            --wait
+          fi
 
-      - name: test minio
+          kubectl kustomize --enable-helm localpv | kubectl apply -f -
+
+          kubectl taint nodes  -l node-role.kubernetes.io/master=true         node-role.kubernetes.io=master:NoSchedule   --overwrite=true
+          kubectl taint nodes  -l node-role.kubernetes.io/control-plane=true  node-role.kubernetes.io=control-plane:NoSchedule   --overwrite=true
+          
+          kubectl apply -f traefik_config.yaml
+
+      - name: execute
         run: |
-          export HELM_APP_NAME=minio
-          export HELM_RELEASE_NAME=test
+          export HELM_APP_NAME=${{ matrix.APP_NAME }}
+          export HELM_RELEASE_NAME=${{ matrix.APP_NAME }}
+          export USE_IMAGE_TYPE=${{ matrix.USE_IMAGE_TYPE }}
+          architecture=""
+          case $(uname -m) in
+            x86_64)  architecture="amd64" ;;
+            aarch64) architecture="arm64" ;;
+          esac
+          echo ${architecture}
+
+
+          if [ -f ./charts/.vib/${HELM_APP_NAME}/vib-publish.json ]
+          then
+            cat charts/.vib/${HELM_APP_NAME}/vib-publish.json | jq -r .phases.verify.context.runtime_parameters | base64 -d | sed -E "s/amd64/${architecture}/g" > values_bitnami.yaml
+          else
+            rm values_bitnami.yaml || true
+            touch values_bitnami.yaml
+          fi
+
+          case "${USE_IMAGE_TYPE}" in
+            bitnami) 
+              helm upgrade -i ${HELM_RELEASE_NAME} bitnami/${HELM_APP_NAME} \
+                -f values_bitnami.yaml \
+                -f values_debug.yaml \
+                --set fullnameOverride=${HELM_APP_NAME} \
+                --wait --timeout 600s
+              ;;
+            bitnami-compat) 
+              helm upgrade -i ${HELM_RELEASE_NAME} bitnami/${HELM_APP_NAME} \
+                -f values_bitnami.yaml \
+                -f values_debug.yaml \
+                -f values/values_bitnami_compat_${HELM_APP_NAME}.yaml \
+                --set fullnameOverride=${HELM_APP_NAME} \
+                --wait --timeout 600s
+              ;;
+          esac;
+
+      - name: pull cypress
+        if: always()
+        run: |
+          architecture=""
+          case $(uname -m) in
+            x86_64)  architecture="amd64" ;;
+            aarch64) architecture="arm64" ;;
+          esac
+          echo ${architecture}
+          
+          kubectl get deploy -n kube-system --output name | \
+            xargs -n1 -t \
+              kubectl rollout status -n kube-system --timeout 180s || true &
+
+          kubectl get ds -n kube-system --output name | \
+            xargs -n1 -t \
+              kubectl rollout status -n kube-system --timeout 180s || true &
+
+          kubectl get sts -n kube-system --output name | \
+            xargs -n1 -t \
+              kubectl rollout status -n kube-system --timeout 180s || true &
+          
+          kubectl get rs -n kube-system --output name | \
+            xargs -n1 -t \
+              kubectl rollout status -n kube-system --timeout 180s || true &
+          
+          kubectl get job -n kube-system --output name | \
+            xargs -n1 -t \
+               kubectl wait --for=condition=Complete -n kube-system --timeout 180s || true &
+          
+          wait
+
+          export CYPRESS_VERSION=9.7.0
+
+          export HELM_APP_NAME=${{ matrix.APP_NAME }}
+          export HELM_RELEASE_NAME=${{ matrix.APP_NAME }}
+          export USE_IMAGE_TYPE=${{ matrix.USE_IMAGE_TYPE }}
+
+          sleep 120 &
+
+          if [ -f ./charts/.vib/${HELM_APP_NAME}/cypress/cypress.json ]
+          then
+            export ENDPOINT=$(cat charts/.vib/${HELM_APP_NAME}/vib-publish.json | jq -r '(.phases.verify.actions[] | select(has("action_id") and .action_id == "cypress")) | .params.endpoint')
+            export SVC_PROTOCOL=$(cat charts/.vib/${HELM_APP_NAME}/vib-publish.json | jq -r '(.phases.verify.actions[] | select(has("action_id") and .action_id == "cypress")) | .params.app_protocol' | tr '[:upper:]' '[:lower:]')
+            export SVC_AND_PORT_NAME=$(echo $ENDPOINT | sed -E 's/([^-]*)-(.*)/\2/')
+            export SVC_PORT_INFO=$(kubectl get svc -o go-template='{{range $k,$v:=.items}}{{range.spec.ports}}{{if .name}}{{$v.metadata.name}}-{{.name}} {{$v.metadata.name}} {{.name}} {{.port}}{{"\n"}}{{$v.metadata.name}}-{{.port}} {{$v.metadata.name}} {{.name}} {{.port}}{{"\n"}}{{else}}{{$v.metadata.name}}-{{.port}} {{$v.metadata.name}} noname {{.port}}{{"\n"}}{{end}}{{end}}{{end}}' | grep "${SVC_AND_PORT_NAME} ")
+            export SVC_NAME=$(echo ${SVC_PORT_INFO} | awk '{print $2}')
+            export SVC_PORT=$(echo ${SVC_PORT_INFO} | awk '{print $4}')
+            export SVC_PORT_NUM=$(echo ${SVC_PORT_INFO} | awk '{print $4}')
+            echo SVC info : ${ENDPOINT} ${SVC_NAME} ${SVC_PORT} ${SVC_PORT_NUM}
+            # sudo KUBECONFIG=$HOME/.kube/config kubectl port-forward service/${SVC_NAME} 80:${SVC_PORT_NUM} --address='0.0.0.0' &
+            # sudo KUBECONFIG=$HOME/.kube/config kubectl port-forward service/${SVC_NAME} ${SVC_PORT_NUM}:${SVC_PORT_NUM} --address='0.0.0.0' &
+            export TARGET_IP=$(ip a show $(ip route show default | awk '/default/ {print $5}') | grep "inet " | awk '{print $2}' | cut -d"/" -f1)
+
+            case "${SVC_PROTOCOL}" in
+              https) 
+            cat <<EOF > ingress.yaml
+          ---
+          apiVersion: traefik.containo.us/v1alpha1
+          kind: ServersTransport
+          metadata:
+            name: insecuretransport
+            namespace: default
+          spec:
+            insecureSkipVerify: true
+          ---
+          apiVersion: traefik.containo.us/v1alpha1
+          kind: Middleware
+          metadata:
+            name: https
+            namespace: default
+          spec:
+            redirectScheme:
+              scheme: https
+              permanent: true
+          ---
+          apiVersion: traefik.containo.us/v1alpha1
+          kind: IngressRoute
+          metadata:
+            name: cypress
+            namespace: default
+          spec:
+            entryPoints:
+            - web
+            - websecure
+            routes:
+            - kind: Rule
+              match: PathPrefix(\`/\`)
+              services:
+              - name: ${SVC_NAME}
+                port: ${SVC_PORT_NUM}
+                scheme: ${SVC_PROTOCOL}
+                serversTransport: insecuretransport
+              middlewares:
+              - name: https
+          EOF
+            kubectl apply -f ingress.yaml
+                ;;
+              *) 
+            cat <<EOF > ingress.yaml
+          ---
+          apiVersion: traefik.containo.us/v1alpha1
+          kind: ServersTransport
+          metadata:
+            name: insecuretransport
+            namespace: default
+          spec:
+            insecureSkipVerify: true
+          ---
+          apiVersion: traefik.containo.us/v1alpha1
+          kind: Middleware
+          metadata:
+            name: https
+            namespace: default
+          spec:
+            redirectScheme:
+              scheme: https
+              permanent: true
+          ---
+          apiVersion: traefik.containo.us/v1alpha1
+          kind: IngressRoute
+          metadata:
+            name: cypress
+            namespace: default
+          spec:
+            entryPoints:
+            - web
+            - websecure
+            routes:
+            - kind: Rule
+              match: PathPrefix(\`/\`)
+              services:
+              - name: ${SVC_NAME}
+                port: ${SVC_PORT_NUM}
+                scheme: ${SVC_PROTOCOL}
+                serversTransport: insecuretransport
+          EOF
+            kubectl apply -f ingress.yaml
+                ;;
+            esac;
+
+            # cypress v9 amd64 only
+            architecture=""
+            case $(uname -m) in
+              x86_64)  architecture="amd64" ;;
+              aarch64) architecture="arm64" ;;
+            esac
+            echo ${architecture}
+
+            case "$architecture" in
+              amd64) 
+                docker pull cypress/included:${CYPRESS_VERSION} &
+                ;;
+              arm64) 
+                ;;
+            esac;
+          fi
+          wait
+
+      - name: dump pod info
+        if: always()
+        run: |
+          export HELM_APP_NAME=${{ matrix.APP_NAME }}
+          export HELM_RELEASE_NAME=${{ matrix.APP_NAME }}
+          export USE_IMAGE_TYPE=${{ matrix.USE_IMAGE_TYPE }}
+
+          # pod list
+          kubectl get pods
+          kubectl get svc
+          kubectl get ingress
+          kubectl get pv
+          kubectl get pvc
+          
+          docker exec -i k3d-test-cluster-agent-0 crictl images --digests
+
+          kubectl get deploy --output name | \
+            xargs -n1 -t \
+              kubectl rollout status --timeout 180s || true &
+
+          kubectl get ds --output name | \
+            xargs -n1 -t \
+              kubectl rollout status --timeout 180s || true &
+
+          kubectl get sts --output name | \
+            xargs -n1 -t \
+              kubectl rollout status --timeout 180s || true &
+          
+          kubectl get rs --output name | \
+            xargs -n1 -t \
+              kubectl rollout status --timeout 180s || true &
+          
+          wait
+
+          declare -a GOSS_ACTIONS=( $(cat charts/.vib/${HELM_APP_NAME}/vib-publish.json | yq e -o=j -I=0 '(.phases.verify.actions[] | select(has("action_id") and .action_id == "goss")) | .') )
+          for json in "${GOSS_ACTIONS[@]}" ; do
+            echo $json
+          
+            export POD_TYPE=$(echo $json | yq -r '.params.remote.workload' | cut -d '-' -f1)
+            export POD_NAME=$(echo $json | yq -r '.params.remote.workload' | cut -d '-' -f2-)
+            case "${POD_TYPE}" in
+              pod)
+                ;;
+              *)
+                export OWNER_UID=$(kubectl get ${POD_TYPE} ${POD_NAME} -o jsonpath='{.metadata.uid}')
+                export REPLICA_NAME=$(kubectl get rs -o go-template='{{range .items}}{{.metadata.name}} {{if .metadata.ownerReferences}}{{range .metadata.ownerReferences}} {{.uid}} {{end}}{{end}} {{"\n"}}{{end}}' | grep $OWNER_UID | head -n 1 | awk '{print $1}')
+                if [ ! -z ${REPLICA_NAME} ]; then
+                  export OWNER_UID=$(kubectl get rs ${REPLICA_NAME} -o jsonpath='{.metadata.uid}');
+                fi
+                export POD_NAME=$(kubectl get pods -o go-template='{{range .items}}{{.metadata.name}} {{if .metadata.ownerReferences}}{{range .metadata.ownerReferences}} {{.uid}} {{end}}{{end}} {{"\n"}}{{end}}' | grep $OWNER_UID | head -n 1 | awk '{print $1}')
+                ;;
+            esac;
+          
+            echo Testing with pod: $POD_NAME
+            
+            # pod logs
+            kubectl logs -n default ${POD_NAME}
+
+            # pod describe
+            kubectl describe pod -n default ${POD_NAME}
+
+          done
+          
+          # pod list
+          kubectl get pods
+          kubectl get svc
+          kubectl get ingress
+          kubectl get pv
+          kubectl get pvc
+
+          docker exec -i k3d-test-cluster-agent-0 crictl images --digests
+          
+
+      - name: test goss
+        id: goss
+        if: always()
+        run: |
+          architecture=""
+          case $(uname -m) in
+            x86_64)  architecture="amd64" ;;
+            aarch64) architecture="arm64" ;;
+          esac
+          echo ${architecture}
+
+          export HELM_APP_NAME=${{ matrix.APP_NAME }}
+          export HELM_RELEASE_NAME=${{ matrix.APP_NAME }}
+          export USE_IMAGE_TYPE=${{ matrix.USE_IMAGE_TYPE }}
+
+
+          echo "================================================================"
+          echo "${HELM_APP_NAME} goss"
+          echo "================================================================"
+          
+          export status=0
+          declare -a GOSS_ACTIONS=( $(cat charts/.vib/${HELM_APP_NAME}/vib-publish.json | yq e -o=j -I=0 '(.phases.verify.actions[] | select(has("action_id") and .action_id == "goss")) | .') )
+          for json in "${GOSS_ACTIONS[@]}" ; do
+            echo $json
+          
+            export POD_TYPE=$(echo $json | yq -r '.params.remote.workload' | cut -d '-' -f1)
+            export POD_NAME=$(echo $json | yq -r '.params.remote.workload' | cut -d '-' -f2-)
+            case "${POD_TYPE}" in
+              pod)
+                ;;
+              *)
+                export OWNER_UID=$(kubectl get ${POD_TYPE} ${POD_NAME} -o jsonpath='{.metadata.uid}')
+                export REPLICA_NAME=$(kubectl get rs -o go-template='{{range .items}}{{.metadata.name}} {{if .metadata.ownerReferences}}{{range .metadata.ownerReferences}} {{.uid}} {{end}}{{end}} {{"\n"}}{{end}}' | grep $OWNER_UID | head -n 1 | awk '{print $1}')
+                if [ ! -z ${REPLICA_NAME} ]; then
+                  export OWNER_UID=$(kubectl get rs ${REPLICA_NAME} -o jsonpath='{.metadata.uid}');
+                fi
+                export POD_NAME=$(kubectl get pods -o go-template='{{range .items}}{{.metadata.name}} {{if .metadata.ownerReferences}}{{range .metadata.ownerReferences}} {{.uid}} {{end}}{{end}} {{"\n"}}{{end}}' | grep $OWNER_UID | head -n 1 | awk '{print $1}')
+                ;;
+            esac;
+          
+            echo Testing with pod: $POD_NAME
+            
+            cat /usr/local/bin/goss | kubectl exec -i -n default $POD_NAME "--" sh -c "cat > /tmp/goss"
+            kubectl exec -i -n default $POD_NAME "--" sh -c "chmod +x /tmp/goss"
+          
+            export GOSS_PATH=./charts$(echo $json | yq -r '.params.resources.path')/goss.yaml
+            export GOSS_VAR_PATH=./charts$(echo $json | yq -r '.params.resources.path')/$(echo $json | yq -r '.params.vars_file')
+          
+            echo permission 2775 -> 2777
+            cat ${GOSS_PATH} | sed -E "s/2775/2777/g" > ${GOSS_PATH}_
+          
+          
+            cat ${GOSS_PATH}_ | kubectl exec -i -n default $POD_NAME "--" sh -c "cat > /tmp/goss.yaml"
+            if [ -f ${GOSS_VAR_PATH} ]
+            then
+              cat ${GOSS_VAR_PATH} | kubectl exec -i -n default $POD_NAME "--" sh -c "cat > /tmp/vars.yaml"
+            fi
+          
+            if [ -f ${GOSS_VAR_PATH} ]
+            then
+              set +e
+              kubectl exec -n default $POD_NAME \
+                -- \
+                /tmp/goss -g /tmp/goss.yaml --vars /tmp/vars.yaml v
+              cur_status=$?
+              set -e
+              export status=$(( ($status || $cur_status) == 1 ? 1 : 0 ))
+            else
+              set +e
+              kubectl exec -n default $POD_NAME \
+                -- \
+                /tmp/goss -g /tmp/goss.yaml v
+              cur_status=$?
+              set -e
+              export status=$(( ($status || $cur_status) == 1 ? 1 : 0 ))
+            fi
+          done
+          
+          if [ ${#GOSS_ACTIONS[@]} -eq 0 ]; then
+              echo none
+          else
+            if [ $status -eq 0 ]; then
+              echo "${{ matrix.USE_IMAGE_TYPE }}-${architecture}-${{ matrix.APP_NAME }}-goss=success" >> $GITHUB_OUTPUT
+              echo "${{ matrix.USE_IMAGE_TYPE }}-${architecture}-${{ matrix.APP_NAME }}-goss=success"
+            else
+              echo "${{ matrix.USE_IMAGE_TYPE }}-${architecture}-${{ matrix.APP_NAME }}-goss=fail" >> $GITHUB_OUTPUT
+              echo "${{ matrix.USE_IMAGE_TYPE }}-${architecture}-${{ matrix.APP_NAME }}-goss=fail"
+              exit $status
+            fi
+          fi
+
+      - name: test cypress
+        id: cypress
+        if: always()
+        run: |
+          architecture=""
+          case $(uname -m) in
+            x86_64)  architecture="amd64" ;;
+            aarch64) architecture="arm64" ;;
+          esac
+          echo ${architecture}
           
           export CYPRESS_VERSION=9.7.0
-          cat charts/.vib/${HELM_APP_NAME}/vib-publish.json | jq -r .phases.verify.context.runtime_parameters | base64 -d > values_bitnami.yaml
+          export CYPRESS_VERIFY_TIMEOUT=100000
 
-          cat <<EOF > values_goss.yaml
-          extraVolumes:
-            - name: goss
-              hostPath:
-                path: /bin/goss
-                type: File
-            - name: goss-data
-              hostPath:
-                path: /goss_data
-                type: Directory
-          extraVolumeMounts:
-            - name: goss
-              mountPath: /bin/goss
-              readOnly: true
-            - name: goss-data
-              mountPath: /goss_data
-              readOnly: true
-          EOF
+          export HELM_APP_NAME=${{ matrix.APP_NAME }}
+          export HELM_RELEASE_NAME=${{ matrix.APP_NAME }}
+          export USE_IMAGE_TYPE=${{ matrix.USE_IMAGE_TYPE }}
 
-          # generated by
-          #   yq e '(.. | select(has("registry")) | pick(["registry","repository","tag","digest"])) as $i ireduce({}; setpath($i | path; $i))' values.yaml
-          # and manually modified.
-          # todo: use versioninfo.yaml
+          if [ -f ./charts/.vib/${HELM_APP_NAME}/cypress/cypress.json ]
+          then
+            export ENDPOINT=$(cat charts/.vib/${HELM_APP_NAME}/vib-publish.json | jq -r '(.phases.verify.actions[] | select(has("action_id") and .action_id == "cypress")) | .params.endpoint')
+            export SVC_PROTOCOL=$(cat charts/.vib/${HELM_APP_NAME}/vib-publish.json | jq -r '(.phases.verify.actions[] | select(has("action_id") and .action_id == "cypress")) | .params.app_protocol' | tr '[:upper:]' '[:lower:]')
+            export SVC_AND_PORT_NAME=$(echo $ENDPOINT | sed -E 's/([^-]*)-(.*)/\2/')
+            export SVC_PORT_INFO=$(kubectl get svc -o go-template='{{range $k,$v:=.items}}{{range.spec.ports}}{{if .name}}{{$v.metadata.name}}-{{.name}} {{$v.metadata.name}} {{.name}} {{.port}}{{"\n"}}{{$v.metadata.name}}-{{.port}} {{$v.metadata.name}} {{.name}} {{.port}}{{"\n"}}{{else}}{{$v.metadata.name}}-{{.port}} {{$v.metadata.name}} noname {{.port}}{{"\n"}}{{end}}{{end}}{{end}}' | grep "${SVC_AND_PORT_NAME} ")
+            export SVC_NAME=$(echo ${SVC_PORT_INFO} | awk '{print $2}')
+            export SVC_PORT=$(echo ${SVC_PORT_INFO} | awk '{print $4}')
+            export SVC_PORT_NUM=$(echo ${SVC_PORT_INFO} | awk '{print $4}')
+            echo SVC info : ${ENDPOINT} ${SVC_NAME} ${SVC_PORT} ${SVC_PORT_NUM}
+            # sudo KUBECONFIG=$HOME/.kube/config kubectl port-forward service/${SVC_NAME} 80:${SVC_PORT_NUM} --address='0.0.0.0' &
+            # sudo KUBECONFIG=$HOME/.kube/config kubectl port-forward service/${SVC_NAME} ${SVC_PORT_NUM}:${SVC_PORT_NUM} --address='0.0.0.0' &
+            export TARGET_IP=$(ip a show $(ip route show default | awk '/default/ {print $5}') | grep "inet " | awk '{print $2}' | cut -d"/" -f1)
 
-          cat <<EOF > values.yaml
-          image:
-            registry: ghcr.io
-            repository: zcube/bitnami-compat/minio
-            tag: 2022.12.7-debian-11
-            digest: ""
-          clientImage:
-            registry: ghcr.io
-            repository: zcube/bitnami-compat/minio-client
-            tag: 2022.12.2-debian-11
-            digest: ""
-          volumePermissions:
-            image:
-              registry: ghcr.io
-              repository: zcube/bitnami-compat/bitnami-shell
-              tag: 11-debian-11
-              digest: ""
-          EOF
+            # template
+            cat ${PWD}/charts/.vib/${HELM_APP_NAME}/cypress/cypress.json | mo > ${PWD}/charts/.vib/${HELM_APP_NAME}/cypress/cypress.json_
+            cp -f ${PWD}/charts/.vib/${HELM_APP_NAME}/cypress/cypress.json_ ${PWD}/charts/.vib/${HELM_APP_NAME}/cypress/cypress.json
 
-          helm upgrade -i ${HELM_RELEASE_NAME} bitnami/${HELM_APP_NAME} \
-            -f values_bitnami.yaml \
-            -f values_goss.yaml \
-            -f values.yaml \
-            --wait --timeout 300s
+            cat ${PWD}/charts/.vib/${HELM_APP_NAME}/cypress/cypress.json | jq '. + {"chromeWebSecurity": false}' > ${PWD}/charts/.vib/${HELM_APP_NAME}/cypress/cypress.json_
+            cp ${PWD}/charts/.vib/${HELM_APP_NAME}/cypress/cypress.json_ ${PWD}/charts/.vib/${HELM_APP_NAME}/cypress/cypress.json
 
-          cat <<EOF > svc.yaml
-          apiVersion: v1
-          kind: Service
-          metadata:
-            name: ${HELM_APP_NAME}
-          spec:
-            type: ExternalName
-            externalName: ${HELM_RELEASE_NAME}-${HELM_APP_NAME}.default.svc.cluster.local
-          EOF
-          kubectl apply -f svc.yaml
+            cat ${PWD}/charts/.vib/${HELM_APP_NAME}/cypress/cypress.json | sed -E "s/localhost/${TARGET_IP}/g" > ${PWD}/charts/.vib/${HELM_APP_NAME}/cypress/cypress.json_
+            cp ${PWD}/charts/.vib/${HELM_APP_NAME}/cypress/cypress.json_ ${PWD}/charts/.vib/${HELM_APP_NAME}/cypress/cypress.json
 
-          kubectl exec -n default $(kubectl get pod \
-            -l=app.kubernetes.io/name=${HELM_APP_NAME} \
-            -l=app.kubernetes.io/instance=${HELM_RELEASE_NAME} \
-            -n default -o jsonpath='{.items[0].metadata.name}') \
-            -- \
-            goss -g /goss_data/${HELM_APP_NAME}/goss/goss.yaml --vars /goss_data/${HELM_APP_NAME}/goss/vars.yaml v
+            # cypress v9 amd64 only
+            case "$architecture" in
+              amd64) 
+                echo "================================================================"
+                echo "${HELM_APP_NAME} cypress"
+                echo "================================================================"
 
-          docker run --rm --network host -v ${PWD}/charts/.vib/${HELM_APP_NAME}/cypress:/e2e -w /e2e cypress/included:${CYPRESS_VERSION}
-          
-          # pod logs
-          kubectl logs -n default $(kubectl get pod \
-            -l=app.kubernetes.io/name=${HELM_APP_NAME} \
-            -l=app.kubernetes.io/instance=${HELM_RELEASE_NAME} \
-            -n default -o jsonpath='{.items[0].metadata.name}')
+                set +e
+                docker run --rm -v ${PWD}/charts/.vib/${HELM_APP_NAME}/cypress:/e2e -w /e2e cypress/included:${CYPRESS_VERSION} --headless --browser chrome
+                status=$?
+                set -e
+                if [ $status -eq 0 ]; then
+                  echo "${{ matrix.USE_IMAGE_TYPE }}-${architecture}-${{ matrix.APP_NAME }}-cypress=success" >> $GITHUB_OUTPUT
+                  echo "${{ matrix.USE_IMAGE_TYPE }}-${architecture}-${{ matrix.APP_NAME }}-cypress=success"
+                else
+                  echo "${{ matrix.USE_IMAGE_TYPE }}-${architecture}-${{ matrix.APP_NAME }}-cypress=fail" >> $GITHUB_OUTPUT
+                  echo "${{ matrix.USE_IMAGE_TYPE }}-${architecture}-${{ matrix.APP_NAME }}-cypress=fail"
+                  exit $status
+                fi
+                ;;
+              arm64) 
+                echo "================================================================"
+                echo "${HELM_APP_NAME} cypress"
+                echo "================================================================"
+                
+                ssh ubuntu@cypress-test "docker run --rm -v /tmp:/e2e -w /e2e ubuntu rm -rf /e2e/cypress-test"
+                ssh ubuntu@cypress-test '/bin/bash -c "rm -rf /tmp/cypress-test ; mkdir -p /tmp/cypress-test"'
+                ssh ubuntu@cypress-test "docker run --rm -v /tmp:/e2e -w /e2e ubuntu rm -rf /e2e/cypress-test"
+                rsync -avzh --delete ${PWD}/charts/.vib/${HELM_APP_NAME}/cypress/ ubuntu@cypress-test:/tmp/cypress-test/
+                set +e
+                ssh ubuntu@cypress-test "docker run --platform linux/amd64 --rm -v /tmp/cypress-test:/e2e -w /e2e cypress/included:${CYPRESS_VERSION} --headless --browser chrome"
+                status=$?
+                set -e
+                if [ $status -eq 0 ]; then
+                  echo "${{ matrix.USE_IMAGE_TYPE }}-${architecture}-${{ matrix.APP_NAME }}-cypress=success" >> $GITHUB_OUTPUT
+                  echo "${{ matrix.USE_IMAGE_TYPE }}-${architecture}-${{ matrix.APP_NAME }}-cypress=success"
+                else
+                  echo "${{ matrix.USE_IMAGE_TYPE }}-${architecture}-${{ matrix.APP_NAME }}-cypress=fail" >> $GITHUB_OUTPUT
+                  echo "${{ matrix.USE_IMAGE_TYPE }}-${architecture}-${{ matrix.APP_NAME }}-cypress=fail"
+                  exit $status
+                fi
+                ssh ubuntu@cypress-test '/bin/bash -c "rm -rf /tmp/cypress-test ; mkdir -p /tmp/cypress-test"'
+                ssh ubuntu@cypress-test "docker run --rm -v /tmp:/e2e -w /e2e ubuntu rm -rf /e2e/cypress-test"
+                ;;
+            esac;
 
-          # pod describe
-          kubectl describe pod -n default $(kubectl get pod \
-            -l=app.kubernetes.io/name=${HELM_APP_NAME} \
-            -l=app.kubernetes.io/instance=${HELM_RELEASE_NAME} \
-            -n default -o jsonpath='{.items[0].metadata.name}')
-
-          kubectl delete -f svc.yaml
-          helm uninstall test
+            # sudo pkill kubectl
+          fi
 
       - name: Cleanup k3d
         if: always()
         run: |
+          # helm uninstall test \
+          #   --wait --timeout 300s || true
+          # kubectl delete pvc --all 
+          # kubectl delete ingress --all 
+          # kubectl delete svc --all 
+
           k3d cluster stop test-cluster
           k3d cluster delete test-cluster
+          docker run --privileged --rm tonistiigi/binfmt --uninstall all
+
+  aggregate-results:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Aggregate results
+        env:
+          NEEDS: ${{ toJSON(needs) }}
+        run: echo "$NEEDS"
