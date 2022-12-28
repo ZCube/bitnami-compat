@@ -1,3 +1,45 @@
+apache: null
+elasticsearch:
+  image:
+    digest: ''
+    registry: ghcr.io
+    repository: zcube/bitnami-compat/elasticsearch
+    tag: 7.17.8-debian-11-r48
+  kibana: null
+  metrics:
+    image:
+      digest: ''
+      registry: ghcr.io
+      repository: zcube/bitnami-compat/elasticsearch-exporter
+      tag: 1.5.0-debian-11-r48
+  sysctlImage:
+    digest: ''
+    registry: ghcr.io
+    repository: zcube/bitnami-compat/bitnami-shell
+    tag: 11.0.0-debian-11-r48
+  volumePermissions:
+    image:
+      digest: ''
+      registry: ghcr.io
+      repository: zcube/bitnami-compat/bitnami-shell
+      tag: 11.0.0-debian-11-r48
+minio:
+  clientImage:
+    digest: ''
+    registry: ghcr.io
+    repository: zcube/bitnami-compat/minio-client
+    tag: 2022.12.13-debian-11-r48
+  image:
+    digest: ''
+    registry: ghcr.io
+    repository: zcube/bitnami-compat/minio
+    tag: 2022.12.12-debian-11-r48
+  volumePermissions:
+    image:
+      digest: ''
+      registry: ghcr.io
+      repository: zcube/bitnami-compat/bitnami-shell
+      tag: 11.0.0-debian-11-r48
 postgresql:
   image:
     digest: ''

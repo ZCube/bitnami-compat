@@ -2,5 +2,5 @@ image:
   digest: ''
   registry: ghcr.io
   repository: zcube/bitnami-compat/external-dns
-  tag: 0.13.1-debian-11-r47
+  tag: 0.13.1-debian-11-r48
 
