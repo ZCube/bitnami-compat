@@ -1,4 +1,4 @@
-RUN install_packages curl wget xz-utils tar libaio1 libnuma1 libtinfo5 && \
+RUN install_packages curl wget xz-utils tar libaio1 libnuma1 libtinfo5 libudev0 && \
     case $(uname -m) in \
       x86_64) \
         curl -LO https://cdn.mysql.com//Downloads/MySQL-8.0/mysql-{{{VERSION}}}-linux-glibc2.12-x86_64.tar.xz && \
