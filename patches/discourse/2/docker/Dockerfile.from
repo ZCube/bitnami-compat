@@ -1,0 +1,8 @@
+FROM rust:1-bullseye AS oxipng
+
+RUN export DEBIAN_FRONTEND=noninteractive && \
+    apt update && \
+    apt install advancecomp jhead jpegoptim libjpeg-turbo-progs optipng && \
+    cargo install oxipng
+
+# /usr/local/cargo/bin/oxipng

@@ -5,7 +5,9 @@
 # imagemagick
 # jemalloc
 
-RUN install_packages curl libcurl4-openssl-dev wget libpq-dev build-essential libpcre3-dev && \
+COPY --from=oxipng /usr/local/cargo/bin/oxipng /usr/local/bin/oxipng
+
+RUN install_packages curl libcurl4-openssl-dev wget libpq-dev build-essential libpcre3-dev advancecomp jhead jpegoptim libjpeg-turbo-progs optipng && \
     git clone --depth 1 --branch v2.8.9 https://github.com/discourse/discourse /opt/bitnami/discourse && \
     git -C /opt/bitnami/discourse remote set-branches --add origin tests-passed && \
     cd /opt/bitnami/discourse && \
