@@ -1,8 +1,45 @@
-FROM rust:1-bullseye AS oxipng
+# ARG BUILDPLATFORM
+FROM --platform=$BUILDPLATFORM rust:1-bullseye AS oxipng
+ARG TARGETPLATFORM
 
-RUN export DEBIAN_FRONTEND=noninteractive && \
-    apt update && \
-    apt install -y advancecomp jhead jpegoptim libjpeg-turbo-progs optipng && \
-    cargo install oxipng
+RUN apt-get update && \
+    case "$TARGETPLATFORM" in \
+      "linux/arm64") \
+        apt-get install -y binutils-aarch64-linux-gnu g++-aarch64-linux-gnu && \
+        apt-get install -y libc6-dev-arm64-cross || true && \
+        rustup target add aarch64-unknown-linux-gnu && \
+        rustup toolchain install stable-aarch64-unknown-linux-gnu \
+      ;; \
+      "linux/amd64") \
+        apt-get install -y binutils-x86-64-linux-gnu g++-x86-64-linux-gnu && \
+        apt-get install -y libc6-dev-amd64-cross || true && \
+        rustup target add x86_64-unknown-linux-gnu && \
+        rustup toolchain install stable-x86_64-unknown-linux-gnu \
+      ;; \
+      *) exit 1 ;; \
+    esac && \
+    rm -rf /var/lib/apt/lists/*
 
-# /usr/local/cargo/bin/oxipng
+RUN cd /tmp && \
+    git clone -b v8.0.0 https://github.com/shssoichiro/oxipng && \
+    cd oxipng && \
+    case "$TARGETPLATFORM" in \
+      "linux/arm64") \
+        export CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER=aarch64-linux-gnu-gcc && \
+        export CC_aarch64_unknown_linux_gnu=aarch64-linux-gnu-gcc && \
+        export CXX_aarch64_unknown_linux_gnu=aarch64-linux-gnu-g++ && \
+        cargo build --release --target aarch64-unknown-linux-gnu && \
+        cp target/aarch64-unknown-linux-gnu/release/oxipng /usr/local/cargo/bin \
+      ;; \
+      "linux/amd64") \
+        export CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_LINKER=x86_64-linux-gnu-gcc && \
+        export CC_x86_64_unknown_linux_gnu=x86_64-linux-gnu-gcc && \
+        export CXX_x86_64_unknown_linux_gnu=x86_64-linux-gnu-g++ && \
+        cargo build --release --target x86_64-unknown-linux-gnu && \
+        cp target/x86_64-unknown-linux-gnu/release/oxipng /usr/local/cargo/bin \
+      ;; \
+      *) exit 1 ;; \
+    esac && \
+    rm -rf /tmp/* && \
+    readelf -h /usr/local/cargo/bin/oxipng
+
