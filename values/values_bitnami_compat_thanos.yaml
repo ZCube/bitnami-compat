@@ -2,28 +2,28 @@ image:
   digest: ''
   registry: ghcr.io
   repository: zcube/bitnami-compat/thanos
-  tag: 0.29.0-scratch-r48
+  tag: 0.29.0-scratch-r49
 minio:
   clientImage:
     digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/minio-client
-    tag: 2022.12.13-debian-11-r48
+    tag: 2022.12.13-debian-11-r49
   image:
     digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/minio
-    tag: 2022.12.12-debian-11-r48
+    tag: 2022.12.12-debian-11-r49
   volumePermissions:
     image:
       digest: ''
       registry: ghcr.io
       repository: zcube/bitnami-compat/bitnami-shell
-      tag: 11.0.0-debian-11-r48
+      tag: 11.0.0-debian-11-r49
 volumePermissions:
   image:
     digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/bitnami-shell
-    tag: 11.0.0-debian-11-r48
+    tag: 11.0.0-debian-11-r49
 

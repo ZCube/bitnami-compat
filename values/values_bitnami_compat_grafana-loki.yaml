@@ -3,17 +3,17 @@ memcached:
     digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/memcached
-    tag: 1.6.17-debian-11-r48
+    tag: 1.6.17-debian-11-r49
   metrics:
     image:
       digest: ''
       registry: ghcr.io
       repository: zcube/bitnami-compat/memcached-exporter
-      tag: 0.10.0-debian-11-r48
+      tag: 0.10.0-debian-11-r49
   volumePermissions:
     image:
       digest: ''
       registry: ghcr.io
       repository: zcube/bitnami-compat/bitnami-shell
-      tag: 11.0.0-debian-11-r48
+      tag: 11.0.0-debian-11-r49
 

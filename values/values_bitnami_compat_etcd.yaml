@@ -2,11 +2,11 @@ image:
   digest: ''
   registry: ghcr.io
   repository: zcube/bitnami-compat/etcd
-  tag: 3.5.6-debian-11-r48
+  tag: 3.5.6-debian-11-r49
 volumePermissions:
   image:
     digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/bitnami-shell
-    tag: 11.0.0-debian-11-r48
+    tag: 11.0.0-debian-11-r49
 
