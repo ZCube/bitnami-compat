@@ -9,13 +9,40 @@
 
 ## What is Bitnami-Compat?
 
-* This repository builds multi-arch (`linux/amd64` + `linux/arm64`) docker images for some bitnami charts.
+* Build https://github.com/bitnami/containers locally ( without Bitnami's StackSmith binaries )
 
-* This is a workaround for https://github.com/bitnami/charts/issues/7305.
+### Goal
 
-* These images are NOT intended for production use.
-  * This repository cannot be stable. Changes in multiple repositories (apt, bitnami, etc...) are reflected so images can break at any time.
-  * This repository is mainly maintained for my homelab and development.
+* [x] Build https://github.com/bitnami/containers 
+  * [x] Support Arm64.
+  * [x] Comment StackSmith download scripts.
+  * [x] Patch with component-based build script.
+  * [x] Synchronize with Bitnami containers version.
+  * [x] Build and deploy using Github Actions.
+  * [x] Listing supported images.
+
+* [x] Support https://github.com/bitnami/charts on Arm64
+  * [x] Listing supported charts.
+  * [x] Helm chart testing using Github Actions.
+    * [x] Goss
+    * [x] Cypress
+    * [ ] Ginko
+  * [x] Helm chart test with multiple images.
+    * [x] Bitnami Amd64
+    * [x] Bitnami-compat Amd64
+    * [x] Bitnami-compat Arm64 (Mac Mini M1)
+    * [ ] Official image Amd64
+    * [ ] Official image Arm64
+
+### Not Goal
+
+* Support every images and charts on Bitnami's
+  * Can't afford the time and cost of development and maintenance.
+
+* Production ready or commercial support.
+  * This repository is just open source and maintained by very few people.
+
+### More detail
 
 * These images use Bitnami's scripts. Binaries refer to the official Docker or official distribution binaries of the software or Docker recipes for Docker.
 
@@ -124,7 +151,7 @@ helm install db bitnami/postgresql -f values_bitnami_compat_postgresql.yaml
     | minio  | Cypress |  :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:     |                  |                  |               |
     | mongodb  | Goss    |  :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:     |                  |                  |               |
     | mongodb-sharded  | Goss    |  :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:     |                  |                  |               |
-    | mysql  | Goss    |  :heavy_check_mark: |  | :heavy_check_mark:     |                  |                  |               |
+    | mysql  | Goss    |  :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:     |                  |                  |               |
     | nginx  | Goss    |  :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:     |                  |                  |               |
     | nginx  | Cypress |  :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:     |                  |                  |               |
     | postgresql  | Goss    |  :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:     |                  |                  |               |
