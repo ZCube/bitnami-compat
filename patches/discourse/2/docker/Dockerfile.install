@@ -23,7 +23,8 @@ RUN install_packages curl libcurl4-openssl-dev wget libpq-dev build-essential li
     cd /opt/bitnami/discourse/app/assets/javascripts && \
     yarn install --production --frozen-lockfile && \
     yarn cache clean && \
-    ruby -S passenger-config install-agent --auto --optimize && \
+    ruby -S passenger-config compile-agent --auto --optimize && \
+    ruby -S passenger-config install-agent --auto && \
     ruby -S passenger-config install-standalone-runtime --auto && \
     ruby -S passenger-config build-native-support && \
     ruby -S passenger-config validate-install && \
