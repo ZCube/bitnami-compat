@@ -35,6 +35,7 @@ import (
 	"regexp"
 	"runtime"
 	"strings"
+	"time"
 
 	"github.com/Masterminds/semver"
 	"github.com/bmatcuk/doublestar/v4"
@@ -60,7 +61,7 @@ type AppVersionInfo struct {
 	Name         string `yaml:"name"`
 	Version      string `yaml:"version"`
 	VersionMajor string `yaml:"version_major"`
-	VersionFull string `yaml:"version_full"`
+	VersionFull  string `yaml:"version_full"`
 	OsFlavour    string `yaml:"os_flavour"`
 	OsName       string `yaml:"os_name"`
 	Revision     string `yaml:"revision"`
@@ -653,7 +654,21 @@ func PatchDockerfile(appInfo *AppInfo) {
 		if golangBuilder.Len() > 0 {
 			newDockerfile.Write(golangDockerfileHead)
 			newDockerfile.Write([]byte("\n"))
-			ioutil.WriteFile(filepath.Join(appInfo.Path, "packages.sh"), golangBuilder.Bytes(), 0644)
+			err = ioutil.WriteFile(filepath.Join(appInfo.Path, "packages.sh"), golangBuilder.Bytes(), 0755)
+			if err != nil {
+				log.Panic(err)
+			}
+
+			// for better docker build cache
+			fixedTimeForCache, err := time.ParseInLocation(time.RFC3339, "2023-01-01T00:00:00Z", time.UTC)
+			if err != nil {
+				log.Panic(err)
+			}
+
+			err = os.Chtimes(filepath.Join(appInfo.Path, "packages.sh"), fixedTimeForCache, fixedTimeForCache)
+			if err != nil {
+				fmt.Println(err)
+			}
 		}
 
 		{

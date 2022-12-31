@@ -137,5 +137,5 @@ RUN mkdir -p /opt/bitnami/openldap/bin \
     # && chmod 664 /etc/openldap/slapd.ldif \
     # && chmod 664 /etc/openldap/ldap.conf
 
-COPY --from=bitnami/openldap:{{{VERSION}}} /opt/bitnami/openldap/share /opt/bitnami/openldap/share
-COPY --from=bitnami/openldap:{{{VERSION}}} /opt/bitnami/openldap/etc /opt/bitnami/openldap/etc
+COPY --link --from=bitnami/openldap:{{{VERSION}}} /opt/bitnami/openldap/share /opt/bitnami/openldap/share
+COPY --link --from=bitnami/openldap:{{{VERSION}}} /opt/bitnami/openldap/etc /opt/bitnami/openldap/etc

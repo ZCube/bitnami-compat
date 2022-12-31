@@ -1,2 +1,2 @@
 ADD https://raw.githubusercontent.com/nginxinc/nginx-prometheus-exporter/main/LICENSE /opt/bitnami/nginx-exporter/licenses/LICENSE
-COPY --from=nginx-exporter /usr/bin/nginx-prometheus-exporter /opt/bitnami/nginx-exporter/bin/
+COPY --link --from=nginx-exporter /usr/bin/nginx-prometheus-exporter /opt/bitnami/nginx-exporter/bin/

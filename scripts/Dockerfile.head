@@ -1,7 +1,8 @@
 FROM golang:1.19-bullseye AS golang-builder
 
-RUN mkdir -p /opt/bitnami
+COPY packages.sh /packages.sh
 
-ADD packages.sh /packages.sh
-RUN chmod +x /packages.sh && \
-    /packages.sh
+RUN mkdir -p /opt/bitnami && \
+    chmod +x /packages.sh && \
+    /packages.sh && \
+    find /opt/bitnami -exec touch -a -m -t 202301010000.00 {} \;

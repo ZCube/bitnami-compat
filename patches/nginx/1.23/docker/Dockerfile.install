@@ -110,7 +110,7 @@ RUN set -x \
 # create a docker-entrypoint.d directory
     && mkdir /docker-entrypoint.d
 
-COPY --from=nginx /opt/bitnami/nginx/conf/ /opt/bitnami/nginx/conf/
+COPY --link --from=nginx /opt/bitnami/nginx/conf/ /opt/bitnami/nginx/conf/
 
 RUN mkdir -p /opt/bitnami/nginx/sbin \
     && mkdir -p /opt/bitnami/nginx/logs \

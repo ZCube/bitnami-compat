@@ -1,4 +1,4 @@
 # REFERENCE : https://github.com/projectcontour/contour
 # LICENSE : Apache-2.0 license
 
-COPY --from=ghcr.io/projectcontour/contour:v{{{VERSION}}} /bin/contour /opt/bitnami/contour/bin/
+COPY --link --from=ghcr.io/projectcontour/contour:v{{{VERSION}}} /bin/contour /opt/bitnami/contour/bin/

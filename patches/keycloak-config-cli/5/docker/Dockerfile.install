@@ -1,1 +1,1 @@
-COPY --from=bitnami/keycloak-config-cli:{{{VERSION_MAJOR}}} /opt/bitnami/keycloak-config-cli/ /opt/bitnami/keycloak-config-cli/
+COPY --link --from=bitnami/keycloak-config-cli:{{{VERSION_MAJOR}}} /opt/bitnami/keycloak-config-cli/ /opt/bitnami/keycloak-config-cli/
