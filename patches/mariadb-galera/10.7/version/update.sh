@@ -29,3 +29,4 @@ apt -qq update
 export VERSION_ORIGINAL=$(apt-cache policy mariadb-server | grep Candidate | awk '{print $2}' | cut  -d ':' -f2 | cut  -d '+' -f1)
 cat ${VERSION_DIR}.bitnami_components.json | jq -M --arg VERSION_ORIGINAL "$VERSION_ORIGINAL" '."mariadb-galera".version = $VERSION_ORIGINAL' > /tmp/components.json
 cp -rf /tmp/components.json ${VERSION_DIR}.bitnami_components.json
+find ${VERSION_DIR}.bitnami_components.json -exec touch -a -m -t 202301010000.00 {} \;
