@@ -84,7 +84,8 @@ RUN set -eux; \
 # rough smoke test
 	ruby --version; \
 	gem --version; \
-	bundle --version
+	bundle --version; \
+    apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # don't create ".bundle" in all our apps
 ENV GEM_HOME /usr/local/bundle
