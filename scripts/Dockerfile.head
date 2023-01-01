@@ -1,6 +1,13 @@
-FROM golang:1.19-bullseye AS golang-builder
+FROM alpine:3.12.0 as file-loader
 
 COPY packages.sh /packages.sh
+RUN chmod -R 755 /packages.sh \
+ && chown -R root:root /packages.sh \
+ && find /packages.sh -exec touch -a -m -t 202301010000.00 {} \;
+
+FROM golang:1.19.4-bullseye AS golang-builder
+
+COPY --link --from=file-loader /packages.sh /packages.sh
 
 RUN mkdir -p /opt/bitnami && \
     chmod +x /packages.sh && \
