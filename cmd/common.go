@@ -651,6 +651,9 @@ func PatchDockerfile(appInfo *AppInfo) {
 			}
 		}
 
+		newDockerfile.Write([]byte("# syntax=docker/dockerfile:1.4"))
+		newDockerfile.Write([]byte("\n"))
+
 		if golangBuilder.Len() > 0 {
 			newDockerfile.Write(golangDockerfileHead)
 			newDockerfile.Write([]byte("\n"))
@@ -731,6 +734,7 @@ func PatchDockerfile(appInfo *AppInfo) {
 					seperator = v
 				}
 			}
+
 			if golangBuilder.Len() > 0 {
 				originalDockerfileString = strings.ReplaceAll(originalDockerfileString,
 					seperator,
@@ -753,6 +757,7 @@ func PatchDockerfile(appInfo *AppInfo) {
 				strings.Contains(originalDockerfileString, "pgdg100") {
 				log.Panic(errors.New("buster + bullseye"))
 			}
+
 			newDockerfile.Write([]byte(originalDockerfileString))
 		}
 		ioutil.WriteFile(filepath.Join(appInfo.Path, "Dockerfile.arm64"), newDockerfile.Bytes(), 0644)
