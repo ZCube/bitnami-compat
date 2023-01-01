@@ -180,7 +180,7 @@ func init() {
 	buildCmd.PersistentFlags().BoolVar(&cacheTo, "cache-to", false, "cache-to")
 	buildCmd.PersistentFlags().StringVarP(&tag, "tag", "t", "ghcr.io/zcube/bitnami-compat/", "tag")
 	buildCmd.PersistentFlags().BoolVar(&push, "push", false, "push")
-	buildCmd.PersistentFlags().BoolVar(&pull, "pull", true, "pull")
+	// buildCmd.PersistentFlags().BoolVar(&pull, "pull", true, "pull")
 	buildCmd.PersistentFlags().StringVar(&platforms, "platforms", "linux/amd64", "platforms")
 
 	// Here you will define your flags and configuration settings.

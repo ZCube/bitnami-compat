@@ -9,3 +9,6 @@ chmod +x rootfs/opt/bitnami/scripts/mariadb-galera/patch.sh
 sed -i -e "s/  mysql_install_db/  \/opt\/bitnami\/scripts\/mariadb-galera\/patch.sh;mysql_install_db/g" rootfs/opt/bitnami/scripts/libmariadbgalera.sh
 sed -i -e "s/export LD_PRELOAD/export LD_PRELOAD;\/opt\/bitnami\/scripts\/mariadb-galera\/patch.sh/g" rootfs/opt/bitnami/scripts/mariadb-galera/run.sh
 
+find rootfs/opt/bitnami/scripts/mariadb-galera/patch.sh -exec touch -a -m -t 202301010000.00 {} \;
+find rootfs/opt/bitnami/scripts/libmariadbgalera.sh -exec touch -a -m -t 202301010000.00 {} \;
+find rootfs/opt/bitnami/scripts/mariadb-galera/run.sh -exec touch -a -m -t 202301010000.00 {} \;
