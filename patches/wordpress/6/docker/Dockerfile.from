@@ -1,4 +1,4 @@
 FROM alpine:3.12.0 as wordpress
 
-COPY --link --from=bitnami/wordpress:{{{VERSION}}} /opt/bitnami/wordpress/ /opt/bitnami/wordpress/
-COPY --link --from=bitnami/wordpress:{{{VERSION}}} /opt/bitnami/wp-cli/ /opt/bitnami/wp-cli/
+COPY --from=bitnami/wordpress:{{{VERSION}}} /opt/bitnami/wordpress/ /opt/bitnami/wordpress/
+COPY --from=bitnami/wordpress:{{{VERSION}}} /opt/bitnami/wp-cli/ /opt/bitnami/wp-cli/

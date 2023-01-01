@@ -1,2 +1,2 @@
 ADD https://raw.githubusercontent.com/danielqsj/kafka_exporter/master/LICENSE /opt/bitnami/kafka-exporter/licenses/LICENSE
-COPY --link --from=kafka-exporter /bin/kafka_exporter /opt/bitnami/kafka-exporter/bin/
+COPY --from=kafka-exporter /bin/kafka_exporter /opt/bitnami/kafka-exporter/bin/

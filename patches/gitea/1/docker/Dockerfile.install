@@ -6,5 +6,5 @@ RUN curl -LO https://github.com/go-gitea/gitea/releases/download/v{{{VERSION}}}/
  && mv gitea-{{{VERSION}}}-linux-${TARGETARCH} /opt/bitnami/gitea/bin/gitea \
  && chmod +x /opt/bitnami/gitea/bin/gitea
 
-# COPY --link --from=gitea/gitea:{{{VERSION}}} /usr/local/bin/gitea /opt/bitnami/gitea/bin/gitea
+# COPY --from=gitea/gitea:{{{VERSION}}} /usr/local/bin/gitea /opt/bitnami/gitea/bin/gitea
 

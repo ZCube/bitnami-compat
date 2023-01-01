@@ -1,2 +1,2 @@
 ADD https://raw.githubusercontent.com/Lusitaniae/apache_exporter/master/LICENSE /opt/bitnami/apache-exporter/licenses/LICENSE
-COPY --link --from=apache-exporter /bin/apache_exporter /opt/bitnami/apache-exporter/bin/apache_exporter
+COPY --from=apache-exporter /bin/apache_exporter /opt/bitnami/apache-exporter/bin/apache_exporter

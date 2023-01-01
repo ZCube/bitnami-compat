@@ -1,6 +1,6 @@
 # REFERENCE : https://github.com/envoyproxy/envoy/blob/main/ci/Dockerfile-envoy
 # LICENSE : Apache-2.0 license
 
-COPY --link --from=envoyproxy/envoy:v{{{VERSION}}} /usr/local/bin/envoy* /opt/bitnami/envoy/bin/
-COPY --link --from=envoyproxy/envoy:v{{{VERSION}}} /usr/local/bin/su-exec /usr/local/bin/
-COPY --link --from=envoyproxy/envoy:v{{{VERSION}}} /etc/envoy/envoy.yaml /etc/envoy/envoy.yaml
+COPY --from=envoyproxy/envoy:v{{{VERSION}}} /usr/local/bin/envoy* /opt/bitnami/envoy/bin/
+COPY --from=envoyproxy/envoy:v{{{VERSION}}} /usr/local/bin/su-exec /usr/local/bin/
+COPY --from=envoyproxy/envoy:v{{{VERSION}}} /etc/envoy/envoy.yaml /etc/envoy/envoy.yaml

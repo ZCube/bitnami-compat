@@ -738,7 +738,7 @@ func PatchDockerfile(appInfo *AppInfo) {
 			if golangBuilder.Len() > 0 {
 				originalDockerfileString = strings.ReplaceAll(originalDockerfileString,
 					seperator,
-					"COPY --link --from=golang-builder /opt/bitnami/ /opt/bitnami/ \n"+
+					"COPY --from=golang-builder /opt/bitnami/ /opt/bitnami/ \n"+
 						string(dockerfileInstallBuilder.Bytes())+
 						"\n\n"+seperator)
 

@@ -1,6 +1,6 @@
 RUN install_packages libaprutil1-ldap libldap-common apache2 libapache2-mod-security2 libmodsecurity3 libmodsecurity-dev
 
-COPY --link --from=apache /opt/bitnami/apache/conf/ /opt/bitnami/apache/conf/
+COPY --from=apache /opt/bitnami/apache/conf/ /opt/bitnami/apache/conf/
 
 RUN mkdir -p /opt/bitnami/apache/bin \
     && mkdir -p /opt/bitnami/apache/sbin \

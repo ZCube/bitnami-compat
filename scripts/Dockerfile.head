@@ -7,7 +7,7 @@ RUN chmod -R 755 /packages.sh \
 
 FROM golang:1.19.4-bullseye AS golang-builder
 
-COPY --link --from=file-loader /packages.sh /packages.sh
+COPY --from=file-loader /packages.sh /packages.sh
 
 RUN mkdir -p /opt/bitnami && \
     chmod +x /packages.sh && \

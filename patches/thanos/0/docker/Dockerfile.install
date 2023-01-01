@@ -1,2 +1,2 @@
 ADD https://raw.githubusercontent.com/thanos-io/thanos/main/LICENSE /opt/bitnami/thanos/licenses/LICENSE
-COPY --link --from=quay.io/thanos/thanos:v{{{VERSION}}} /bin/thanos /opt/bitnami/thanos/bin/thanos
+COPY --from=quay.io/thanos/thanos:v{{{VERSION}}} /bin/thanos /opt/bitnami/thanos/bin/thanos
