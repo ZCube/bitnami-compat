@@ -489,14 +489,14 @@ func PatchDockerfile(appInfo *AppInfo) {
 		log.Panic(err)
 	}
 
-	scriptfiles, err := doublestar.FilepathGlob(filepath.Join(appInfo.Path, "**", "*.sh"))
-	if err != nil {
-		log.Panic(err)
-	}
+	// scriptfiles, err := doublestar.FilepathGlob(filepath.Join(appInfo.Path, "**", "*.sh"))
+	// if err != nil {
+	// 	log.Panic(err)
+	// }
 
-	for _, scriptfile := range scriptfiles {
-		os.Chmod(scriptfile, 0755)
-	}
+	// for _, scriptfile := range scriptfiles {
+	// 	os.Chmod(scriptfile, 0755)
+	// }
 
 	golangDockerfileHead, err := ioutil.ReadFile("scripts/Dockerfile.head")
 	if err != nil {
