@@ -21,7 +21,9 @@
   * [x] Build and deploy using Github Actions.
   * [x] Listing supported images.
 
-* [x] Support https://github.com/bitnami/charts on Arm64
+* [x] Support https://github.com/bitnami/charts
+  * [x] Support Arm64.
+  * [x] Generate image patch values files.
   * [x] Listing supported charts.
   * [x] Helm chart testing using Github Actions.
     * [x] Goss

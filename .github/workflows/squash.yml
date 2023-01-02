@@ -1,0 +1,29 @@
+name: Squash
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    if: >-
+      ${{ !contains(github.event.head_commit.message, '[ci skip]') &&
+      !contains(github.event.head_commit.message, '[skip ci]')
+      }}
+    continue-on-error: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Submodule init
+        shell: bash
+        run: git submodule init
+      - name: Checkout bitnami recipe
+        shell: bash
+        run: git submodule update charts
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          cache: 'pip' # caching pip dependencies
+      - run: pip install docker-squash
+      - name: Squash
+        shell: bash
+        run: ./scripts/squash.sh
