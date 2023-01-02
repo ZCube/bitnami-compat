@@ -1,6 +1,5 @@
 #!/bin/bash
-
-#!/bin/bash
+set -e
 
 declare -a imageNames=$( yq e 'with_entries(.) | .[].name' ./versioninfo.yaml )
 imageNames=( ${imageNames[*]} )
@@ -26,8 +25,8 @@ do
   docker pull --platform=linux/arm64 ${IMAGE_TAG}:${imageVersionFulls[$i]}
   docker tag ${IMAGE_TAG}:${imageVersionFulls[$i]} ${IMAGE_TAG}:${imageVersionFulls[$i]}-arm64
 
-  docker-squash --tmp-dir "${PWD}/tmp" "${IMAGE_TAG}:${imageVersionFulls[$i]}-amd64" -t ${IMAGE_TAG}:${imageVersionFulls[$i]}-amd64-squash &
-  docker-squash --tmp-dir "${PWD}/tmp" "${IMAGE_TAG}:${imageVersionFulls[$i]}-arm64" -t ${IMAGE_TAG}:${imageVersionFulls[$i]}-arm64-squash &
+  docker-squash --tmp-dir "${PWD}/tmp-amd64" "${IMAGE_TAG}:${imageVersionFulls[$i]}-amd64" -t ${IMAGE_TAG}:${imageVersionFulls[$i]}-amd64-squash &
+  docker-squash --tmp-dir "${PWD}/tmp-arm64" "${IMAGE_TAG}:${imageVersionFulls[$i]}-arm64" -t ${IMAGE_TAG}:${imageVersionFulls[$i]}-arm64-squash &
   wait
 
   docker push ${IMAGE_TAG}:${imageVersionFulls[$i]}-amd64-squash &
