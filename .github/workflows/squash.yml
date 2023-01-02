@@ -3,8 +3,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  test:
-    runs-on: ${{ matrix.os }}
+  squash:
+    runs-on: ubuntu-latest
     if: >-
       ${{ !contains(github.event.head_commit.message, '[ci skip]') &&
       !contains(github.event.head_commit.message, '[skip ci]')
