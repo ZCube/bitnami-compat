@@ -3,11 +3,11 @@ zookeeper:
     digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/zookeeper
-    tag: 3.8.0-debian-11-r49
+    tag: 3.8.0-debian-11-r50
   volumePermissions:
     image:
       digest: ''
       registry: ghcr.io
       repository: zcube/bitnami-compat/bitnami-shell
-      tag: 11.0.0-debian-11-r49
+      tag: 11.0.0-debian-11-r50
 
