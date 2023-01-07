@@ -1,0 +1,2 @@
+
+COPY --from=ini-file /opt/bitnami/common/ /opt/bitnami/common/

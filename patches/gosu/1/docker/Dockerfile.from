@@ -1,0 +1,22 @@
+FROM golang:1.19.4-bullseye AS gosu
+
+RUN cd /tmp && \
+    mkdir -p /opt/bitnami && \
+    export PACKAGE=gosu && \
+    export TARGET_DIR=common && \
+    export VERSION={{{VERSION}}} && \
+    export REF={{{VERSION_MAJOR_MINOR}}} && \
+    export CGO_ENABLED=0  && \
+    rm -rf ${PACKAGE} || true && \
+    mkdir -p ${PACKAGE} && \
+    git clone -b "${REF}" https://github.com/tianon/gosu ${PACKAGE} && \
+    cd ${PACKAGE} && \
+    go mod download && \
+    go build -v -ldflags '-d -s -w' . && \
+    mkdir -p /opt/bitnami/${TARGET_DIR}/licenses && \
+    mkdir -p /opt/bitnami/${TARGET_DIR}/bin && \
+    cp -f LICENSE /opt/bitnami/${TARGET_DIR}/licenses/${PACKAGE}-${VERSION}.txt && \
+    cp -f ${PACKAGE} /opt/bitnami/${TARGET_DIR}/bin/gosu && \
+    cd .. && \
+    rm -rf ${PACKAGE} && \
+    find /opt/bitnami -exec touch -a -m -t 202301010000.00 {} \;

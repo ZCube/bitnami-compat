@@ -1,0 +1,2 @@
+
+COPY --from=rabbitmq-cluster-operator /opt/bitnami/rabbitmq-cluster-operator/ /opt/bitnami/rabbitmq-cluster-operator/

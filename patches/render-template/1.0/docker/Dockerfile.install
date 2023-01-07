@@ -1,0 +1,2 @@
+
+COPY --from=render-template /opt/bitnami/common/ /opt/bitnami/common/

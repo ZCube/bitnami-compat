@@ -1,0 +1,1 @@
+COPY --from=sealed-secrets /opt/bitnami/sealed-secrets/ /opt/bitnami/sealed-secrets/

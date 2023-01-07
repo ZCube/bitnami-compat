@@ -1,0 +1,2 @@
+
+COPY --from=external-dns /opt/bitnami/external-dns/ /opt/bitnami/external-dns/
