@@ -1,0 +1,2 @@
+ADD https://raw.githubusercontent.com/minio/mc/master/LICENSE /opt/bitnami/minio-client/licenses/LICENSE
+COPY --from=minio-client /bin/mc /opt/bitnami/minio-client/bin/mc
