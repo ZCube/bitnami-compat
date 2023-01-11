@@ -273,6 +273,94 @@ func packageInstallCommandSearch(n *parser.Node, a []PackageInstallCommand) []Pa
 	return a
 }
 
+func GenerateSquashDockerfile(path string, newPath string, imageTag string) error {
+	dockerfile, err := ioutil.ReadFile(path)
+	if err != nil {
+		return err
+	}
+
+	dockerfileString := string(dockerfile)
+
+	dockerfileBuffer := bytes.NewBufferString(dockerfileString)
+
+	result, err := parser.Parse(dockerfileBuffer)
+	if err != nil {
+		return err
+	}
+	ast := result.AST
+	nodes := []*parser.Node{ast}
+	if ast.Children != nil {
+		nodes = append(nodes, ast.Children...)
+	}
+	dockerfileLines := strings.Split(dockerfileString, "\n")
+	lastFrom := 0
+	{
+		node := nodes[0]
+
+		for k, n := range node.Children {
+			switch strings.ToLower(n.Value) {
+			case "from":
+				lastFrom = k
+			}
+		}
+	}
+	// fmt.Println("lastFrom", lastFrom)
+	squashedDockerfile := []string{}
+	writeSquashFile := func(n *parser.Node) {
+		for l := n.StartLine; l <= n.EndLine; l++ {
+			squashedDockerfile = append(squashedDockerfile, dockerfileLines[l-1])
+		}
+	}
+	writeSquashFileWithComment := func(n *parser.Node) {
+		for l := n.StartLine; l <= n.EndLine; l++ {
+			squashedDockerfile = append(squashedDockerfile, "# "+dockerfileLines[l-1])
+		}
+	}
+
+	{
+		node := nodes[0]
+
+		squashedDockerfile = append(squashedDockerfile, "# syntax=docker/dockerfile:1.4")
+		for k, n := range node.Children {
+			if k < lastFrom {
+				switch strings.ToLower(n.Value) {
+				case "arg":
+					writeSquashFile(n)
+				}
+				continue
+			}
+			switch strings.ToLower(n.Value) {
+			case "from":
+				// writeSquashFile(n)
+				writeSquashFileWithComment(n)
+				squashedDockerfile = append(squashedDockerfile, "FROM scratch")
+			case "arg":
+				writeSquashFile(n)
+			case "label":
+				writeSquashFile(n)
+			case "env":
+				writeSquashFile(n)
+			case "shell":
+				writeSquashFile(n)
+			case "expose":
+				writeSquashFile(n)
+			case "workdir":
+				writeSquashFile(n)
+			case "entrypoint":
+				writeSquashFile(n)
+			case "cmd":
+				writeSquashFile(n)
+			}
+		}
+	}
+
+	squashedDockerfile = append(squashedDockerfile, fmt.Sprintf("COPY --link=true --from=%v / /", imageTag))
+
+	ioutil.WriteFile(newPath, []byte(strings.Join(squashedDockerfile, "\n")), 0644)
+
+	return nil
+}
+
 func InspectDockerfile(path string) (*AppInfo, error) {
 	var err error
 	buf, err := ioutil.ReadFile("config.yaml")

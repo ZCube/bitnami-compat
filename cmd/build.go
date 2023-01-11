@@ -30,6 +30,7 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/Masterminds/semver"
 	"github.com/bmatcuk/doublestar/v4"
 	"github.com/kyokomi/emoji/v2"
 	"github.com/spf13/cobra"
@@ -38,13 +39,18 @@ import (
 )
 
 var (
-	tag       string
-	cacheFrom bool
-	cacheTo   bool
-	push      bool
-	pull      bool
-	platforms string
-	app       string
+	tag           string
+	cacheFrom     bool
+	cacheTo       bool
+	push          bool
+	pull          bool
+	platforms     string
+	app           string
+	squash        bool
+	load          bool
+	versionMin    string
+	versionMax    string
+	versionPrefix string
 )
 
 // buildCmd represents the build command
@@ -53,6 +59,21 @@ var buildCmd = &cobra.Command{
 	Short: "build",
 	Long:  `build`,
 	Run: func(cmd *cobra.Command, args []string) {
+		var semverMin *semver.Version
+		var semverMax *semver.Version
+		var err error
+		if len(versionMin) > 0 {
+			semverMin, err = semver.NewVersion(versionMin)
+			if err != nil {
+				log.Panic(err)
+			}
+		}
+		if len(versionMax) > 0 {
+			semverMax, err = semver.NewVersion(versionMax)
+			if err != nil {
+				log.Panic(err)
+			}
+		}
 		buf, err := ioutil.ReadFile("config.yaml")
 		if err != nil {
 			log.Panic(err)
@@ -122,6 +143,24 @@ var buildCmd = &cobra.Command{
 						}
 						versionSemver := fmt.Sprintf("%v.%v.%v", appInfo.Version.Major(), appInfo.Version.Minor(), appInfo.Version.Patch())
 						tags := strings.Split(tag, ",")
+
+						semverVersion, err := semver.NewVersion(versionSemver)
+						if err != nil {
+							log.Panic(err)
+						}
+
+						if semverMin != nil && semverMin.Compare(semverVersion) > 0 {
+							continue
+						}
+
+						if semverMax != nil && semverMax.Compare(semverVersion) < 0 {
+							continue
+						}
+
+						if !strings.HasPrefix(versionSemver, versionPrefix) {
+							continue
+						}
+
 						for _, tag_ := range tags {
 							args = append(args, "-t", fmt.Sprintf("%v%v:%v-%v-r%v", tag_, appInfo.Name, version, appInfo.OS_Flavour, p.Revision))
 							args = append(args, "-t", fmt.Sprintf("%v%v:%v-%v", tag_, appInfo.Name, version, appInfo.OS_Flavour))
@@ -145,6 +184,10 @@ var buildCmd = &cobra.Command{
 
 						if pull {
 							args = append(args, "--pull")
+						}
+
+						if load {
+							args = append(args, "--load")
 						}
 
 						args = append(args,
@@ -181,7 +224,11 @@ func init() {
 	buildCmd.PersistentFlags().StringVarP(&tag, "tag", "t", "ghcr.io/zcube/bitnami-compat/", "tag")
 	buildCmd.PersistentFlags().BoolVar(&push, "push", false, "push")
 	buildCmd.PersistentFlags().BoolVar(&pull, "pull", true, "pull")
+	buildCmd.PersistentFlags().BoolVar(&load, "load", true, "load")
 	buildCmd.PersistentFlags().StringVar(&platforms, "platforms", "linux/amd64", "platforms")
+	buildCmd.PersistentFlags().StringVar(&versionMin, "version-min", "", "version-min")
+	buildCmd.PersistentFlags().StringVar(&versionMax, "version-max", "", "version-max")
+	buildCmd.PersistentFlags().StringVar(&versionPrefix, "version-prefix", "", "version-prefix")
 
 	// Here you will define your flags and configuration settings.
 
