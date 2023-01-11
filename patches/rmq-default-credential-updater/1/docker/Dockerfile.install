@@ -1,0 +1,1 @@
+COPY --from=rmq-default-credential-updater /opt/bitnami/rmq-default-credential-updater/ /opt/bitnami/rmq-default-credential-updater/

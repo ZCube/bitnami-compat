@@ -1,0 +1,22 @@
+FROM golang:1.19.4-bullseye AS external-dns
+
+RUN cd /tmp && \
+    mkdir -p /opt/bitnami && \
+    export PACKAGE=external-dns && \
+    export TARGET_DIR=external-dns && \
+    export VERSION={{{VERSION}}} && \
+    export REF={{{VERSION}}} && \
+    export CGO_ENABLED=0  && \
+    rm -rf ${PACKAGE} || true && \
+    mkdir -p ${PACKAGE} && \
+    git clone -b "v${REF}" https://github.com/kubernetes-sigs/external-dns ${PACKAGE} && \
+    cd ${PACKAGE} && \
+    make && \
+    cp build/external-dns . && \
+    mkdir -p /opt/bitnami/${TARGET_DIR}/licenses && \
+    mkdir -p /opt/bitnami/${TARGET_DIR}/bin && \
+    cp -f LICENSE /opt/bitnami/${TARGET_DIR}/licenses/${PACKAGE}-${VERSION}.txt && \
+    cp -f ${PACKAGE} /opt/bitnami/${TARGET_DIR}/bin/external-dns && \
+    cd .. && \
+    rm -rf ${PACKAGE} && \
+    find /opt/bitnami -exec touch -a -m -t 202301010000.00 {} \;
