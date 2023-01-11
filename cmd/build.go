@@ -186,7 +186,7 @@ var buildCmd = &cobra.Command{
 							args = append(args, "--pull")
 						}
 
-						if load {
+						if load && !push {
 							args = append(args, "--load")
 						}
 
