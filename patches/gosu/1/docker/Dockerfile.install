@@ -1,2 +1,0 @@
-
-COPY --from=gosu /opt/bitnami/common/ /opt/bitnami/common/

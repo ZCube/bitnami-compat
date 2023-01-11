@@ -1,1 +1,0 @@
-COPY --from=rmq-messaging-topology-operator /opt/bitnami/rmq-messaging-topology-operator/ /opt/bitnami/rmq-messaging-topology-operator/
