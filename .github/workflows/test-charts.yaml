@@ -249,7 +249,7 @@ jobs:
           
           docker volume rm k3d-test-cluster-images || true
           sudo mkdir -p containers
-          sudo chmod 0701 containers
+          sudo chmod 0710 containers
           sudo chown root:root containers
 
           if [ -f /etc/registries.yaml ]
