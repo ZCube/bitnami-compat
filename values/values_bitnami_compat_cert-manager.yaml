@@ -3,23 +3,23 @@ cainjector:
     digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/cainjector
-    tag: 1.11.0-debian-11-r51
+    tag: 1.11.0-debian-11-r52
 controller:
   acmesolver:
     image:
       digest: ''
       registry: ghcr.io
       repository: zcube/bitnami-compat/acmesolver
-      tag: 1.11.0-debian-11-r51
+      tag: 1.11.0-debian-11-r52
   image:
     digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/cert-manager
-    tag: 1.11.0-debian-11-r51
+    tag: 1.11.0-debian-11-r52
 webhook:
   image:
     digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/cert-manager-webhook
-    tag: 1.11.0-debian-11-r51
+    tag: 1.11.0-debian-11-r52
 

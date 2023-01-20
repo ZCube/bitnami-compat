@@ -2,15 +2,15 @@ contourImage:
   digest: ''
   registry: ghcr.io
   repository: zcube/bitnami-compat/contour
-  tag: 1.22.3-debian-11-r51
+  tag: 1.22.3-debian-11-r52
 envoyImage:
   digest: ''
   registry: ghcr.io
   repository: zcube/bitnami-compat/envoy
-  tag: 1.23.3-debian-11-r51
+  tag: 1.23.3-debian-11-r52
 image:
   digest: ''
   registry: ghcr.io
   repository: zcube/bitnami-compat/contour-operator
-  tag: 1.22.1-scratch-r51
+  tag: 1.22.1-scratch-r52
 
