@@ -1,4 +1,20 @@
-apache: null
+apache:
+  git:
+    digest: ''
+    registry: ghcr.io
+    repository: zcube/bitnami-compat/git
+    tag: 2.39.1-debian-11-r52
+  image:
+    digest: ''
+    registry: ghcr.io
+    repository: zcube/bitnami-compat/apache
+    tag: 2.4.55-debian-11-r52
+  metrics:
+    image:
+      digest: ''
+      registry: ghcr.io
+      repository: zcube/bitnami-compat/apache-exporter
+      tag: 0.11.0-debian-11-r52
 elasticsearch:
   image:
     digest: ''
@@ -23,6 +39,11 @@ elasticsearch:
       registry: ghcr.io
       repository: zcube/bitnami-compat/bitnami-shell
       tag: 11.0.0-debian-11-r52
+image:
+  digest: ''
+  registry: ghcr.io
+  repository: zcube/bitnami-compat/mastodon
+  tag: 4.0.2-debian-11-r52
 minio:
   clientImage:
     digest: ''
@@ -88,4 +109,10 @@ redis:
       registry: ghcr.io
       repository: zcube/bitnami-compat/bitnami-shell
       tag: 11.0.0-debian-11-r52
+volumePermissions:
+  image:
+    digest: ''
+    registry: ghcr.io
+    repository: zcube/bitnami-compat/bitnami-shell
+    tag: 11.0.0-debian-11-r52
 

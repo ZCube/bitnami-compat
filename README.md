@@ -276,6 +276,7 @@ helm install db bitnami/postgresql -f values_bitnami_compat_postgresql.yaml
 * :warning: The mongodb provided by this repository does not currently work on Raspberry Pi 4. Use the image I distribute at https://github.com/ZCube/mongodb-for-armv8.0-a.
 
 * acmesolver : [`1`, `1-debian-11`, `1.11.0`, `1.11.0-debian-11`, `1.11.0-debian-11-r52`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Facmesolver)
+* apache : [`2.4`, `2.4-debian-11`, `2.4.55`, `2.4.55-debian-11`, `2.4.55-debian-11-r52`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fapache)
 * apache-exporter : [`0`, `0-debian-11`, `0.11.0`, `0.11.0-debian-11`, `0.11.0-debian-11-r52`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fapache-exporter)
 * bitnami-shell : [`11`, `11-debian-11`, `11.0.0`, `11.0.0-debian-11`, `11.0.0-debian-11-r52`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fbitnami-shell)
 * cainjector : [`1`, `1-debian-11`, `1.11.0`, `1.11.0-debian-11`, `1.11.0-debian-11-r52`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fcainjector)
@@ -320,6 +321,7 @@ helm install db bitnami/postgresql -f values_bitnami_compat_postgresql.yaml
 * mariadb-galera : [`10.6`, `10.6-debian-11`, `10.6.11`, `10.6.11-debian-11`, `10.6.11-debian-11-r52`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fmariadb-galera)
 * mariadb-galera : [`10.7`, `10.7-debian-11`, `10.7.7`, `10.7.7-debian-11`, `10.7.7-debian-11-r52`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fmariadb-galera)
 * mariadb-galera : [`10.8`, `10.8-debian-11`, `10.8.6`, `10.8.6-debian-11`, `10.8.6-debian-11-r52`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fmariadb-galera)
+* mastodon : [`4`, `4-debian-11`, `4.0.2`, `4.0.2-debian-11`, `4.0.2-debian-11-r52`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fmastodon)
 * memcached : [`1`, `1-debian-11`, `1.6.18`, `1.6.18-debian-11`, `1.6.18-debian-11-r52`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fmemcached)
 * memcached-exporter : [`0`, `0-debian-11`, `0.10.0`, `0.10.0-debian-11`, `0.10.0-debian-11-r52`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fmemcached-exporter)
 * minio : [`2022`, `2022-debian-11`, `2022.12.12`, `2022.12.12-debian-11`, `2022.12.12-debian-11-r52`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fminio)

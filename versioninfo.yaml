@@ -5,6 +5,13 @@
   os_flavour: debian-11
   os_name: linux
   revision: "52"
+- name: apache
+  version: 2.4.55
+  version_major: "2.4"
+  version_full: 2.4.55-debian-11-r52
+  os_flavour: debian-11
+  os_name: linux
+  revision: "52"
 - name: apache-exporter
   version: 0.11.0
   version_major: "0"
@@ -310,6 +317,13 @@
   version: 10.8.6
   version_major: "10.8"
   version_full: 10.8.6-debian-11-r52
+  os_flavour: debian-11
+  os_name: linux
+  revision: "52"
+- name: mastodon
+  version: 4.0.2
+  version_major: "4"
+  version_full: 4.0.2-debian-11-r52
   os_flavour: debian-11
   os_name: linux
   revision: "52"

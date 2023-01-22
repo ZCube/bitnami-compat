@@ -1,0 +1,66 @@
+RUN install_packages build-essential gcc g++ ca-certificates git libicu-dev libidn11-dev libpq-dev libjemalloc-dev zlib1g-dev libgdbm-dev libgmp-dev libssl-dev libyaml-0-2 ca-certificates libreadline8 python3 shared-mime-info libcurl4-openssl-dev && \
+    install_packages whois libcurl4 curl wget procps libssl1.1 libpq5 imagemagick ffmpeg libjemalloc2 libicu67 libidn11 libyaml-0-2 file ca-certificates tzdata libreadline8 && \
+    git clone --depth 1 --branch v{{{VERSION}}} https://github.com/mastodon/mastodon /opt/bitnami/mastodon && \
+    git -C /opt/bitnami/mastodon remote set-branches --add origin tests-passed 
+
+RUN cd /opt/bitnami/mastodon && \
+    bundler add passenger && \
+    bundle config --local deployment true && \
+    bundle config --local without test development && \
+    bundle config set silence_root_warning true && \
+    bundle install --jobs 4 && \
+    yarn install --pure-lockfile --network-timeout 600000 && \
+    RAILS_ENV="production" NODE_ENV="production" RAILS_SERVE_STATIC_FILES="true" BIND="0.0.0.0" OTP_SECRET=precompile_placeholder SECRET_KEY_BASE=precompile_placeholder rails assets:precompile && \
+    yarn cache clean && \
+    ruby -S passenger-config compile-agent --auto --optimize && \
+    ruby -S passenger-config install-agent --auto && \
+    ruby -S passenger-config install-standalone-runtime --auto && \
+    ruby -S passenger-config build-native-support && \
+    ruby -S passenger-config validate-install && \
+    rm -fr /usr/local/share/ruby-build && \
+    rm -fr /root/.gem && \
+    rm -fr /root/.npm && \
+    rm -fr /tmp/*
+
+RUN apt-get purge -y libicu-dev libidn11-dev libpq-dev libjemalloc-dev zlib1g-dev libgdbm-dev libgmp-dev libssl-dev libyaml-0-2 python3 libcurl4-openssl-dev && \
+    apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives && \
+    rm -fr /var/lib/apt/lists/*
+
+COPY --from=bitnami/mastodon:{{{VERSION}}} /opt/bitnami/mastodon/config/environments/production.rb /opt/bitnami/mastodon/config/environments/production.rb
+COPY --from=bitnami/mastodon:{{{VERSION}}} /opt/bitnami/mastodon/config/initializers/1_hosts.rb /opt/bitnami/mastodon/config/initializers/1_hosts.rb
+
+RUN ln -sf /usr/local/bundle/bin/bootsnap                                /opt/bitnami/mastodon/bin/ && \
+    ln -sf /usr/local/bundle/bin/byebug                                  /opt/bitnami/mastodon/bin/ && \
+    ln -sf /usr/local/bundle/bin/coderay                                 /opt/bitnami/mastodon/bin/ && \
+    ln -sf /usr/local/bundle/bin/exifr                                   /opt/bitnami/mastodon/bin/ && \
+    ln -sf /usr/local/bundle/bin/image_optim                             /opt/bitnami/mastodon/bin/ && \
+    ln -sf /usr/local/bundle/bin/mustache                                /opt/bitnami/mastodon/bin/ && \
+    ln -sf /usr/local/bundle/bin/nokogiri                                /opt/bitnami/mastodon/bin/ && \
+    ln -sf /usr/local/bundle/bin/oauth                                   /opt/bitnami/mastodon/bin/ && \
+    ln -sf /usr/local/bundle/bin/objspace_recorder_convert.rb            /opt/bitnami/mastodon/bin/ && \
+    ln -sf /usr/local/bundle/bin/passenger                               /opt/bitnami/mastodon/bin/ && \
+    ln -sf /usr/local/bundle/bin/passenger-config                        /opt/bitnami/mastodon/bin/ && \
+    ln -sf /usr/local/bundle/bin/passenger-install-apache2-module        /opt/bitnami/mastodon/bin/ && \
+    ln -sf /usr/local/bundle/bin/passenger-install-nginx-module          /opt/bitnami/mastodon/bin/ && \
+    ln -sf /usr/local/bundle/bin/passenger-memory-stats                  /opt/bitnami/mastodon/bin/ && \
+    ln -sf /usr/local/bundle/bin/passenger-status                        /opt/bitnami/mastodon/bin/ && \
+    ln -sf /usr/local/bundle/bin/pry                                     /opt/bitnami/mastodon/bin/ && \
+    ln -sf /usr/local/bundle/bin/puma                                    /opt/bitnami/mastodon/bin/ && \
+    ln -sf /usr/local/bundle/bin/pumactl                                 /opt/bitnami/mastodon/bin/ && \
+    ln -sf /usr/local/bundle/bin/r2                                      /opt/bitnami/mastodon/bin/ && \
+    ln -sf /usr/local/bundle/bin/racc                                    /opt/bitnami/mastodon/bin/ && \
+    ln -sf /usr/local/bundle/bin/rackup                                  /opt/bitnami/mastodon/bin/ && \
+    ln -sf /usr/local/bundle/bin/rbtrace                                 /opt/bitnami/mastodon/bin/ && \
+    ln -sf /usr/local/bundle/bin/readability                             /opt/bitnami/mastodon/bin/ && \
+    ln -sf /usr/local/bundle/bin/rotp                                    /opt/bitnami/mastodon/bin/ && \
+    # ln -sf /usr/local/bundle/bin/rtlit                                   /opt/bitnami/mastodon/bin/ && \
+    ln -sf /usr/local/bundle/bin/ruby-memory-profiler                    /opt/bitnami/mastodon/bin/ && \
+    ln -sf /usr/local/bundle/bin/sidekiq                                 /opt/bitnami/mastodon/bin/ && \
+    ln -sf /usr/local/bundle/bin/sidekiqmon                              /opt/bitnami/mastodon/bin/ && \
+    ln -sf /usr/local/bundle/bin/sprockets                               /opt/bitnami/mastodon/bin/ && \
+    ln -sf /usr/local/bundle/bin/stackprof                               /opt/bitnami/mastodon/bin/ && \
+    ln -sf /usr/local/bundle/bin/stackprof-flamegraph.pl                 /opt/bitnami/mastodon/bin/ && \
+    ln -sf /usr/local/bundle/bin/stackprof-gprof2dot.py                  /opt/bitnami/mastodon/bin/ && \
+    ln -sf /usr/local/bundle/bin/thor                                    /opt/bitnami/mastodon/bin/ && \
+    ln -sf /usr/local/bundle/bin/tilt                                    /opt/bitnami/mastodon/bin/ && \
+    ln -sf /usr/local/bundle/bin/unicorn_rails                           /opt/bitnami/mastodon/bin/

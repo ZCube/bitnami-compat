@@ -24,6 +24,8 @@ jobs:
         include:
          - APP: "acmesolver"
            REPO_OWNER: "bitnami"
+         - APP: "apache"
+           REPO_OWNER: "bitnami"
          - APP: "apache-exporter"
            REPO_OWNER: "bitnami"
          - APP: "bitnami-shell"
@@ -77,6 +79,8 @@ jobs:
          - APP: "mariadb"
            REPO_OWNER: "bitnami"
          - APP: "mariadb-galera"
+           REPO_OWNER: "bitnami"
+         - APP: "mastodon"
            REPO_OWNER: "bitnami"
          - APP: "memcached"
            REPO_OWNER: "bitnami"

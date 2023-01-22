@@ -76,13 +76,12 @@ RUN set -eux; \
 	cp -f /usr/src/redis/COPYING /opt/bitnami/redis/licenses/COPYING; \
 	rm -r /usr/src/redis; \
 	\
-	ls -al /usr/local/bin/redis*; \
 	apt-mark auto '.*' > /dev/null; \
 	[ -z "$savedAptMark" ] || apt-mark manual $savedAptMark > /dev/null; \
 	find /usr/local -type f -executable -exec ldd '{}' ';' \
 		| awk '/=>/ { print $(NF-1) }' \
 		| sort -u \
-		| xargs -r dpkg-query --search \
+		| xargs -r -n1 -I "{}" /bin/bash -c "dpkg-query --search {} || true" \
 		| cut -d: -f1 \
 		| sort -u \
 		| xargs -r apt-mark manual \
