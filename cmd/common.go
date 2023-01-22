@@ -34,6 +34,7 @@ import (
 	"path/filepath"
 	"regexp"
 	"runtime"
+	"sort"
 	"strings"
 	"time"
 
@@ -493,6 +494,10 @@ func InspectDockerfile(path string) (*AppInfo, error) {
 		// packageInfo.Version = packageVersion
 		packages2 = append(packages2, packageInfo)
 	}
+
+	sort.Slice(packages2, func(i, j int) bool {
+		return strings.Compare(packages2[i].Name, packages2[j].Name) < 0
+	})
 
 	{
 		packagesSorted := []PackageInfo{}
