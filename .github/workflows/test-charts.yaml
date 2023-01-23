@@ -496,6 +496,7 @@ jobs:
           kubectl get ingress
           kubectl get pv
           kubectl get pvc
+          kubectl get jobs
           
           docker exec -i k3d-test-cluster-agent-0 crictl images --digests
 
@@ -552,6 +553,7 @@ jobs:
           kubectl get ingress
           kubectl get pv
           kubectl get pvc
+          kubectl get jobs
 
           docker exec -i k3d-test-cluster-agent-0 crictl images --digests
           
