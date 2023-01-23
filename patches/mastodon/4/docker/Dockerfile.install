@@ -1,17 +1,39 @@
+# full build is too slow...
+# RUN install_packages build-essential gcc g++ ca-certificates git libicu-dev libidn11-dev libpq-dev libjemalloc-dev zlib1g-dev libgdbm-dev libgmp-dev libssl-dev libyaml-0-2 ca-certificates libreadline8 python3 shared-mime-info libcurl4-openssl-dev && \
+#     install_packages whois libcurl4 curl wget procps libssl1.1 libpq5 imagemagick ffmpeg libjemalloc2 libicu67 libidn11 libyaml-0-2 file ca-certificates tzdata libreadline8 && \
+#     git clone --depth 1 --branch v{{{VERSION}}} https://github.com/mastodon/mastodon /opt/bitnami/mastodon && \
+#     git -C /opt/bitnami/mastodon remote set-branches --add origin tests-passed && \
+#     cd /opt/bitnami/mastodon && \
+#     bundler add passenger && \
+#     bundle config --local deployment true && \
+#     bundle config --local without test development && \
+#     bundle config set silence_root_warning true && \
+#     bundle install --jobs 4 && \
+#     yarn install --pure-lockfile --network-timeout 600000 && \
+#     OTP_SECRET=precompile_placeholder SECRET_KEY_BASE=precompile_placeholder rails assets:precompile && \
+#     yarn cache clean && \
+#     ruby -S passenger-config compile-agent --auto --optimize && \
+#     ruby -S passenger-config install-agent --auto && \
+#     ruby -S passenger-config install-standalone-runtime --auto && \
+#     ruby -S passenger-config build-native-support && \
+#     ruby -S passenger-config validate-install && \
+#     rm -fr /usr/local/share/ruby-build && \
+#     rm -fr /root/.gem && \
+#     rm -fr /root/.npm && \
+#     rm -fr /tmp/* && \
+#     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives && \
+#     rm -fr /var/lib/apt/lists/*
+
+COPY --chown=root:root --from=tootsuite/mastodon:{{{VERSION}}} /opt/mastodon /opt/bitnami/mastodon
+
 RUN install_packages build-essential gcc g++ ca-certificates git libicu-dev libidn11-dev libpq-dev libjemalloc-dev zlib1g-dev libgdbm-dev libgmp-dev libssl-dev libyaml-0-2 ca-certificates libreadline8 python3 shared-mime-info libcurl4-openssl-dev && \
     install_packages whois libcurl4 curl wget procps libssl1.1 libpq5 imagemagick ffmpeg libjemalloc2 libicu67 libidn11 libyaml-0-2 file ca-certificates tzdata libreadline8 && \
-    git clone --depth 1 --branch v{{{VERSION}}} https://github.com/mastodon/mastodon /opt/bitnami/mastodon && \
-    git -C /opt/bitnami/mastodon remote set-branches --add origin tests-passed 
-
-RUN cd /opt/bitnami/mastodon && \
+    cd /opt/bitnami/mastodon && \
     bundler add passenger && \
     bundle config --local deployment true && \
     bundle config --local without test development && \
     bundle config set silence_root_warning true && \
     bundle install --jobs 4 && \
-    yarn install --pure-lockfile --network-timeout 600000 && \
-    RAILS_ENV="production" NODE_ENV="production" RAILS_SERVE_STATIC_FILES="true" BIND="0.0.0.0" OTP_SECRET=precompile_placeholder SECRET_KEY_BASE=precompile_placeholder rails assets:precompile && \
-    yarn cache clean && \
     ruby -S passenger-config compile-agent --auto --optimize && \
     ruby -S passenger-config install-agent --auto && \
     ruby -S passenger-config install-standalone-runtime --auto && \
@@ -20,9 +42,7 @@ RUN cd /opt/bitnami/mastodon && \
     rm -fr /usr/local/share/ruby-build && \
     rm -fr /root/.gem && \
     rm -fr /root/.npm && \
-    rm -fr /tmp/*
-
-RUN apt-get purge -y libicu-dev libidn11-dev libpq-dev libjemalloc-dev zlib1g-dev libgdbm-dev libgmp-dev libssl-dev libyaml-0-2 python3 libcurl4-openssl-dev && \
+    rm -fr /tmp/* && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives && \
     rm -fr /var/lib/apt/lists/*
 
