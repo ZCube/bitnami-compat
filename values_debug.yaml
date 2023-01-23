@@ -17,3 +17,8 @@ web:
   livenessProbe:
     enabled: true
     initialDelaySeconds: 5000
+
+# mastodon password needed
+postgresql:
+  auth:
+    password: test_password
