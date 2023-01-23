@@ -173,7 +173,7 @@ RUN set -eux; \
 		| sort -u \
 		| grep -v libcrypto \
 		| grep -v libssl \
-		| xargs -r dpkg-query --search \
+		| xargs -r -n1 -I "{}" /bin/bash -c "dpkg-query --search {} || true" \
 		| cut -d: -f1 \
 		| sort -u \
 		| xargs -r apt-mark manual \

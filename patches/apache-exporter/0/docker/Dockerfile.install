@@ -1,2 +1,6 @@
-ADD https://raw.githubusercontent.com/Lusitaniae/apache_exporter/master/LICENSE /opt/bitnami/apache-exporter/licenses/LICENSE
+RUN install_packages curl ca-certificates \
+ && mkdir -p /opt/bitnami/apache-exporter/licenses \
+ && curl -L -o /opt/bitnami/apache-exporter/licenses/LICENSE \
+    https://raw.githubusercontent.com/Lusitaniae/apache_exporter/master/LICENSE
+
 COPY --from=apache-exporter /bin/apache_exporter /opt/bitnami/apache-exporter/bin/apache_exporter

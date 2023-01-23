@@ -1,2 +1,6 @@
-ADD https://raw.githubusercontent.com/danielqsj/kafka_exporter/master/LICENSE /opt/bitnami/kafka-exporter/licenses/LICENSE
+RUN install_packages curl ca-certificates \
+ && mkdir -p /opt/bitnami/kafka-exporter/licenses \
+ && curl -L -o /opt/bitnami/kafka-exporter/licenses/LICENSE \
+    https://raw.githubusercontent.com/danielqsj/kafka_exporter/master/LICENSE
+
 COPY --from=kafka-exporter /bin/kafka_exporter /opt/bitnami/kafka-exporter/bin/

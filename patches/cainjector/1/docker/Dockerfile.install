@@ -1,2 +1,6 @@
-ADD https://raw.githubusercontent.com/jetstack/cert-manager/master/LICENSE /opt/bitnami/cainjector/licenses/LICENSE
+RUN install_packages curl ca-certificates \
+ && mkdir -p /opt/bitnami/cainjector/licenses \
+ && curl -L -o /opt/bitnami/cainjector/licenses/LICENSE \
+    https://raw.githubusercontent.com/jetstack/cert-manager/master/LICENSE
+
 COPY --from=cainjector /app/cmd/cainjector/cainjector /opt/bitnami/cainjector/bin/cainjector

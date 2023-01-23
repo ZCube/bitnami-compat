@@ -1,2 +1,6 @@
-ADD https://raw.githubusercontent.com/prometheus-community/elasticsearch_exporter/master/LICENSE /opt/bitnami/elasticsearch-exporter/licenses/LICENSE
+RUN install_packages curl ca-certificates \
+ && mkdir -p /opt/bitnami/elasticsearch-exporter/licenses \
+ && curl -L -o /opt/bitnami/elasticsearch-exporter/licenses/LICENSE \
+    https://raw.githubusercontent.com/prometheus-community/elasticsearch_exporter/master/LICENSE
+
 COPY --from=elasticsearch-exporter /bin/elasticsearch_exporter /opt/bitnami/elasticsearch-exporter/bin/

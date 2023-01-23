@@ -1,2 +1,6 @@
-ADD https://raw.githubusercontent.com/nginxinc/nginx-prometheus-exporter/main/LICENSE /opt/bitnami/nginx-exporter/licenses/LICENSE
+RUN install_packages curl ca-certificates \
+ && mkdir -p /opt/bitnami/nginx-exporter/licenses \
+ && curl -L -o /opt/bitnami/nginx-exporter/licenses/LICENSE \
+    https://raw.githubusercontent.com/nginxinc/nginx-prometheus-exporter/main/LICENSE
+
 COPY --from=nginx-exporter /usr/bin/nginx-prometheus-exporter /opt/bitnami/nginx-exporter/bin/

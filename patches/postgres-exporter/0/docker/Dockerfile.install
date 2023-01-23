@@ -1,2 +1,6 @@
-ADD https://raw.githubusercontent.com/prometheus-community/postgres_exporter/master/LICENSE /opt/bitnami/postgres-exporter/licenses/LICENSE
+RUN install_packages curl ca-certificates \
+ && mkdir -p /opt/bitnami/postgres-exporter/licenses \
+ && curl -L -o /opt/bitnami/postgres-exporter/licenses/LICENSE \
+    https://raw.githubusercontent.com/prometheus-community/postgres_exporter/master/LICENSE
+
 COPY --from=postgres-exporter /bin/postgres_exporter /opt/bitnami/postgres-exporter/bin/

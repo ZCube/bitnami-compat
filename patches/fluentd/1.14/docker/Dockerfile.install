@@ -2,7 +2,10 @@
 # license : Apache License 2.0
 # https://raw.githubusercontent.com/fluent/fluentd-docker-image/master/LICENSE
 
-ADD https://raw.githubusercontent.com/fluent/fluentd-docker-image/master/LICENSE /opt/bitnami/fluentd/licenses/LICENSE
+RUN install_packages curl ca-certificates \
+ && mkdir -p /opt/bitnami/fluentd/licenses \
+ && curl -L -o /opt/bitnami/fluentd/licenses/LICENSE \
+    https://raw.githubusercontent.com/fluent/fluentd-docker-image/master/LICENSE
 
 # Do not split this into multiple RUN!
 # Docker creates a layer for every RUN-Statement

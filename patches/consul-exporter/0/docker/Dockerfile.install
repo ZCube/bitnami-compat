@@ -1,2 +1,6 @@
-ADD https://raw.githubusercontent.com/prometheus/consul_exporter/master/LICENSE /opt/bitnami/consul-exporter/licenses/LICENSE
+RUN install_packages curl ca-certificates \
+ && mkdir -p /opt/bitnami/consul-exporter/licenses \
+ && curl -L -o /opt/bitnami/consul-exporter/licenses/LICENSE \
+    https://raw.githubusercontent.com/prometheus/consul_exporter/master/LICENSE
+
 COPY --from=consul-exporter /bin/consul_exporter /opt/bitnami/consul-exporter/bin/

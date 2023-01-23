@@ -2,7 +2,10 @@
 # license : BSD-3-Clause License
 # https://github.com/docker-library/memcached/blob/master/LICENSE
 
-ADD https://raw.githubusercontent.com/memcached/memcached/master/LICENSE /opt/bitnami/memcached/licenses/LICENSE
+RUN install_packages curl ca-certificates \
+ && mkdir -p /opt/bitnami/memcached/licenses \
+ && curl -L -o /opt/bitnami/memcached/licenses/LICENSE \
+    https://raw.githubusercontent.com/memcached/memcached/master/LICENSE
 
 RUN install_packages libsasl2-modules
 
@@ -70,7 +73,7 @@ RUN set -x \
 	&& find /usr/local -type f -executable -exec ldd '{}' ';' \
 		| awk '/=>/ { print $(NF-1) }' \
 		| sort -u \
-		| xargs -r dpkg-query --search \
+		| xargs -r -n1 -I "{}" /bin/bash -c "dpkg-query --search {} || true" \
 		| cut -d: -f1 \
 		| sort -u \
 		| xargs -r apt-mark manual \

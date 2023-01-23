@@ -9,7 +9,10 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN mkdir -p /opt/bitnami/openldap/etc \
     && mkdir -p /opt/bitnami/openldap/licenses
 
-ADD https://github.com/openldap/openldap/blob/master/LICENSE /opt/bitnami/openldap/licenses/LICENSE
+RUN install_packages curl ca-certificates \
+ && mkdir -p /opt/bitnami/openldap/licenses \
+ && curl -L -o /opt/bitnami/openldap/licenses/LICENSE \
+    https://github.com/openldap/openldap/blob/master/LICENSE
 
 RUN set -eux; \
     \
@@ -111,7 +114,7 @@ RUN set -eux; \
     find /usr/local -type f -executable -exec ldd '{}' ';' \
         | awk '/=>/ { print $(NF-1) }' \
         | sort -u \
-        | xargs -r dpkg-query --search \
+        | xargs -r -n1 -I "{}" /bin/bash -c "dpkg-query --search {} || true" \
         | cut -d: -f1 \
         | sort -u \
         | xargs -r apt-mark manual \

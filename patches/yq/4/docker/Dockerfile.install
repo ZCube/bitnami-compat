@@ -1,2 +1,6 @@
-ADD https://raw.githubusercontent.com/mikefarah/yq/master/LICENSE /opt/bitnami/common/licenses/LICENSE
+RUN install_packages curl ca-certificates \
+ && mkdir -p /opt/bitnami/common/licenses \
+ && curl -L -o /opt/bitnami/common/licenses/LICENSE \
+    https://raw.githubusercontent.com/mikefarah/yq/master/LICENSE
+
 COPY --from=yq /usr/bin/yq /opt/bitnami/common/bin/

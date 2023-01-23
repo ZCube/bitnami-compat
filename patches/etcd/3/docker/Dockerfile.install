@@ -1,2 +1,6 @@
-ADD https://raw.githubusercontent.com/etcd-io/etcd/main/LICENSE /opt/bitnami/etcd/licenses/LICENSE
+RUN install_packages curl ca-certificates \
+ && mkdir -p /opt/bitnami/etcd/licenses \
+ && curl -L -o /opt/bitnami/etcd/licenses/LICENSE \
+    https://raw.githubusercontent.com/etcd-io/etcd/main/LICENSE
+
 COPY --from=etcd /usr/local/bin/etcd* /opt/bitnami/etcd/bin/

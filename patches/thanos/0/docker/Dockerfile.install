@@ -1,2 +1,6 @@
-ADD https://raw.githubusercontent.com/thanos-io/thanos/main/LICENSE /opt/bitnami/thanos/licenses/LICENSE
+RUN install_packages curl ca-certificates \
+ && mkdir -p /opt/bitnami/thanos/licenses \
+ && curl -L -o /opt/bitnami/thanos/licenses/LICENSE \
+    https://raw.githubusercontent.com/thanos-io/thanos/main/LICENSE
+
 COPY --from=quay.io/thanos/thanos:v{{{VERSION}}} /bin/thanos /opt/bitnami/thanos/bin/thanos

@@ -1,2 +1,6 @@
-ADD https://raw.githubusercontent.com/oliver006/redis_exporter/master/LICENSE /opt/bitnami/redis-exporter/licenses/LICENSE
+RUN install_packages curl ca-certificates \
+ && mkdir -p /opt/bitnami/redis-exporter/licenses \
+ && curl -L -o /opt/bitnami/redis-exporter/licenses/LICENSE \
+    https://raw.githubusercontent.com/oliver006/redis_exporter/master/LICENSE
+
 COPY --from=redis-exporter /redis_exporter /opt/bitnami/redis-exporter/bin/

@@ -1,2 +1,6 @@
-ADD https://raw.githubusercontent.com/prometheus/memcached_exporter/master/LICENSE /opt/bitnami/memcached-exporter/licenses/LICENSE
+RUN install_packages curl ca-certificates \
+ && mkdir -p /opt/bitnami/memcached-exporter/licenses \
+ && curl -L -o /opt/bitnami/memcached-exporter/licenses/LICENSE \
+    https://raw.githubusercontent.com/prometheus/memcached_exporter/master/LICENSE
+
 COPY --from=memcached-exporter /bin/memcached_exporter /opt/bitnami/memcached-exporter/bin/

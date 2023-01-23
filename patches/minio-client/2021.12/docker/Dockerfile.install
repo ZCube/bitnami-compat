@@ -1,2 +1,6 @@
-ADD https://raw.githubusercontent.com/minio/mc/master/LICENSE /opt/bitnami/minio-client/licenses/LICENSE
+RUN install_packages curl ca-certificates \
+ && mkdir -p /opt/bitnami/minio-client/licenses \
+ && curl -L -o /opt/bitnami/minio-client/licenses/LICENSE \
+    https://raw.githubusercontent.com/minio/mc/master/LICENSE
+
 COPY --from=minio-client /bin/mc /opt/bitnami/minio-client/bin/mc

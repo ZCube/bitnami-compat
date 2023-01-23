@@ -1,2 +1,6 @@
-ADD https://raw.githubusercontent.com/prometheus/mysqld_exporter/master/LICENSE /opt/bitnami/consul-exporter/licenses/LICENSE
+RUN install_packages curl ca-certificates \
+ && mkdir -p /opt/bitnami/mysqld_exporter/licenses \
+ && curl -L -o /opt/bitnami/mysqld_exporter/licenses/LICENSE \
+    https://raw.githubusercontent.com/prometheus/mysqld_exporter/master/LICENSE
+
 COPY --from=mysqld-exporter /bin/mysqld_exporter /opt/bitnami/mysqld-exporter/bin/

@@ -1,2 +1,6 @@
-ADD https://raw.githubusercontent.com/jetstack/cert-manager/master/LICENSE /opt/bitnami/cert-manager/licenses/LICENSE
+RUN install_packages curl ca-certificates \
+ && mkdir -p /opt/bitnami/cert-manager-webhook/licenses \
+ && curl -L -o /opt/bitnami/cert-manager-webhook/licenses/LICENSE \
+    https://raw.githubusercontent.com/jetstack/cert-manager/master/LICENSE
+
 COPY --from=cert-manager-webhook /app/cmd/webhook/webhook /opt/bitnami/cert-manager-webhook/bin/cert-manager-webhook

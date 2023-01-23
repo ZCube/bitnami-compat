@@ -1,2 +1,6 @@
-ADD https://raw.githubusercontent.com/percona/mongodb_exporter/main/LICENSE /opt/bitnami/mongodb-exporter/licenses/LICENSE
+RUN install_packages curl ca-certificates \
+ && mkdir -p /opt/bitnami/mongodb-exporter/licenses \
+ && curl -L -o /opt/bitnami/mongodb-exporter/licenses/LICENSE \
+    https://raw.githubusercontent.com/percona/mongodb_exporter/main/LICENSE
+
 COPY --from=mongodb-exporter /mongodb_exporter /opt/bitnami/mongodb-exporter/bin/

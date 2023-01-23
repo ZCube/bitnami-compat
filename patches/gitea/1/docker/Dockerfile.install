@@ -1,4 +1,8 @@
-ADD https://raw.githubusercontent.com/go-gitea/gitea/main/LICENSE /opt/bitnami/gitea/LICENSE
+RUN install_packages curl ca-certificates \
+ && mkdir -p /opt/bitnami/gitea/licenses \
+ && curl -L -o /opt/bitnami/gitea/licenses/LICENSE \
+    https://raw.githubusercontent.com/go-gitea/gitea/main/LICENSE
+
 ARG TARGETARCH
 ENV TARGETARCH=${TARGETARCH:-amd64}
 RUN curl -LO https://github.com/go-gitea/gitea/releases/download/v{{{VERSION}}}/gitea-{{{VERSION}}}-linux-${TARGETARCH} \
