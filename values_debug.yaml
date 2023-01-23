@@ -12,3 +12,8 @@ discourse:
     enabled: true
     initialDelaySeconds: 5000
 
+# mastodon
+mastodon:
+  livenessProbe:
+    enabled: true
+    initialDelaySeconds: 5000
