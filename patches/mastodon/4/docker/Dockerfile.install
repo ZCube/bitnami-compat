@@ -26,8 +26,8 @@
 
 COPY --chown=root:root --from=tootsuite/mastodon:v{{{VERSION}}} /opt/mastodon /opt/bitnami/mastodon
 
-RUN install_packages build-essential gcc g++ ca-certificates git libicu-dev libidn11-dev libpq-dev libjemalloc-dev zlib1g-dev libgdbm-dev libgmp-dev libssl-dev libyaml-0-2 ca-certificates libreadline8 python3 shared-mime-info libcurl4-openssl-dev && \
-    install_packages whois libcurl4 curl wget procps libssl1.1 libpq5 imagemagick ffmpeg libjemalloc2 libicu67 libidn11 libyaml-0-2 file ca-certificates tzdata libreadline8 && \
+RUN install_packages build-essential gcc g++ ca-certificates git libpcre3-dev libicu-dev libidn11-dev libpq-dev libjemalloc-dev zlib1g-dev libgdbm-dev libgmp-dev libssl-dev libyaml-0-2 ca-certificates libreadline8 python3 shared-mime-info libcurl4-openssl-dev && \
+    install_packages whois libcurl4 curl wget procps libpcre3 libssl1.1 libpq5 imagemagick ffmpeg libjemalloc2 libicu67 libidn11 libyaml-0-2 file ca-certificates tzdata libreadline8 && \
     cd /opt/bitnami/mastodon && \
     bundler add passenger && \
     bundle config --local deployment true && \
