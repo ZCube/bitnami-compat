@@ -15,12 +15,5 @@ discourse:
 # mastodon
 apache:
   service:
-    ports:
-      http: 81
-      https: 444
+    type: ClusterIP
 
-
-# mastodon password needed
-postgresql:
-  auth:
-    password: test_password
