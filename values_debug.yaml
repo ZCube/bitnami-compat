@@ -17,6 +17,7 @@ apache:
   service:
     ports:
       http: 81
+      https: 444
 
 
 # mastodon password needed
