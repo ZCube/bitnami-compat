@@ -373,7 +373,13 @@ jobs:
             export SVC_NAME=$(echo ${SVC_PORT_INFO} | awk '{print $2}')
             export SVC_PORT=$(echo ${SVC_PORT_INFO} | awk '{print $4}')
             export SVC_PORT_NUM=$(echo ${SVC_PORT_INFO} | awk '{print $4}')
-            echo SVC info : ${ENDPOINT} ${SVC_NAME} ${SVC_PORT} ${SVC_PORT_NUM}
+            
+            if [[ "${SVC_PROTOCOL}" == "http" && "${SVC_PORT_NUM}" == "443" ]]
+            then
+              export SVC_PROTOCOL="https"
+            fi
+
+            echo SVC info : ${ENDPOINT} ${SVC_NAME} ${SVC_PORT} ${SVC_PORT_NUM} ${SVC_PROTOCOL}
             # sudo KUBECONFIG=$HOME/.kube/config kubectl port-forward service/${SVC_NAME} 80:${SVC_PORT_NUM} --address='0.0.0.0' &
             # sudo KUBECONFIG=$HOME/.kube/config kubectl port-forward service/${SVC_NAME} ${SVC_PORT_NUM}:${SVC_PORT_NUM} --address='0.0.0.0' &
             export TARGET_IP=$(ip a show $(ip route show default | awk '/default/ {print $5}') | grep "inet " | awk '{print $2}' | cut -d"/" -f1)
@@ -504,7 +510,12 @@ jobs:
             export SVC_NAME=$(echo ${SVC_PORT_INFO} | awk '{print $2}')
             export SVC_PORT=$(echo ${SVC_PORT_INFO} | awk '{print $4}')
             export SVC_PORT_NUM=$(echo ${SVC_PORT_INFO} | awk '{print $4}')
-            echo SVC info : ${ENDPOINT} ${SVC_NAME} ${SVC_PORT} ${SVC_PORT_NUM}
+            if [[ "${SVC_PROTOCOL}" == "http" && "${SVC_PORT_NUM}" == "443" ]]
+            then
+              export SVC_PROTOCOL="https"
+            fi
+
+            echo SVC info : ${ENDPOINT} ${SVC_NAME} ${SVC_PORT} ${SVC_PORT_NUM} ${SVC_PROTOCOL}
             # sudo KUBECONFIG=$HOME/.kube/config kubectl port-forward service/${SVC_NAME} 80:${SVC_PORT_NUM} --address='0.0.0.0' &
             # sudo KUBECONFIG=$HOME/.kube/config kubectl port-forward service/${SVC_NAME} ${SVC_PORT_NUM}:${SVC_PORT_NUM} --address='0.0.0.0' &
             export TARGET_IP=$(ip a show $(ip route show default | awk '/default/ {print $5}') | grep "inet " | awk '{print $2}' | cut -d"/" -f1)
@@ -736,7 +747,12 @@ jobs:
             export SVC_NAME=$(echo ${SVC_PORT_INFO} | awk '{print $2}')
             export SVC_PORT=$(echo ${SVC_PORT_INFO} | awk '{print $4}')
             export SVC_PORT_NUM=$(echo ${SVC_PORT_INFO} | awk '{print $4}')
-            echo SVC info : ${ENDPOINT} ${SVC_NAME} ${SVC_PORT} ${SVC_PORT_NUM}
+            if [[ "${SVC_PROTOCOL}" == "http" && "${SVC_PORT_NUM}" == "443" ]]
+            then
+              export SVC_PROTOCOL="https"
+            fi
+
+            echo SVC info : ${ENDPOINT} ${SVC_NAME} ${SVC_PORT} ${SVC_PORT_NUM} ${SVC_PROTOCOL}
             # sudo KUBECONFIG=$HOME/.kube/config kubectl port-forward service/${SVC_NAME} 80:${SVC_PORT_NUM} --address='0.0.0.0' &
             # sudo KUBECONFIG=$HOME/.kube/config kubectl port-forward service/${SVC_NAME} ${SVC_PORT_NUM}:${SVC_PORT_NUM} --address='0.0.0.0' &
             export TARGET_IP=$(ip a show $(ip route show default | awk '/default/ {print $5}') | grep "inet " | awk '{print $2}' | cut -d"/" -f1)
