@@ -601,7 +601,7 @@ jobs:
             wait-for-url() {
                 echo "Testing $1"
                 timeout -s TERM 120 bash -c \
-                'while [[ "$(curl -s --insecure -o /dev/null -L -w ''%{http_code}'' ${0})" != "200" && "$(curl -s --insecure -o /dev/null -L -w ''%{http_code}'' ${0}/healthz)" != "200" ]];\
+                'while [[ "$(curl -s --insecure -o /dev/null -L -w ''%{http_code}'' ${0})" != "200" && "$(curl -s --insecure -o /dev/null -L -w ''%{http_code}'' ${0}/healthz)" != "200" && "$(curl -s --insecure -o /dev/null -L -w ''%{http_code}'' ${0}/health)" != "200" && "$(curl -s --insecure -o /dev/null -L -w ''%{http_code}'' ${0}/metrics)" != "200" ]];\
                 do echo "Waiting for ${0}" && sleep 2;\
                 done' ${1}
                 echo "OK!"
