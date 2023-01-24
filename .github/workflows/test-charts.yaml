@@ -378,93 +378,6 @@ jobs:
             # sudo KUBECONFIG=$HOME/.kube/config kubectl port-forward service/${SVC_NAME} ${SVC_PORT_NUM}:${SVC_PORT_NUM} --address='0.0.0.0' &
             export TARGET_IP=$(ip a show $(ip route show default | awk '/default/ {print $5}') | grep "inet " | awk '{print $2}' | cut -d"/" -f1)
 
-            case "${SVC_PROTOCOL}" in
-              https) 
-            cat <<EOF > ingress.yaml
-          ---
-          apiVersion: traefik.containo.us/v1alpha1
-          kind: ServersTransport
-          metadata:
-            name: insecuretransport
-            namespace: default
-          spec:
-            insecureSkipVerify: true
-          ---
-          apiVersion: traefik.containo.us/v1alpha1
-          kind: Middleware
-          metadata:
-            name: https
-            namespace: default
-          spec:
-            redirectScheme:
-              scheme: https
-              permanent: true
-          ---
-          apiVersion: traefik.containo.us/v1alpha1
-          kind: IngressRoute
-          metadata:
-            name: cypress
-            namespace: default
-          spec:
-            entryPoints:
-            - web
-            - websecure
-            routes:
-            - kind: Rule
-              match: PathPrefix(\`/\`)
-              services:
-              - name: ${SVC_NAME}
-                port: ${SVC_PORT_NUM}
-                scheme: ${SVC_PROTOCOL}
-                serversTransport: insecuretransport
-              middlewares:
-              - name: https
-          EOF
-            kubectl apply -f ingress.yaml
-                ;;
-              *) 
-            cat <<EOF > ingress.yaml
-          ---
-          apiVersion: traefik.containo.us/v1alpha1
-          kind: ServersTransport
-          metadata:
-            name: insecuretransport
-            namespace: default
-          spec:
-            insecureSkipVerify: true
-          ---
-          apiVersion: traefik.containo.us/v1alpha1
-          kind: Middleware
-          metadata:
-            name: https
-            namespace: default
-          spec:
-            redirectScheme:
-              scheme: https
-              permanent: true
-          ---
-          apiVersion: traefik.containo.us/v1alpha1
-          kind: IngressRoute
-          metadata:
-            name: cypress
-            namespace: default
-          spec:
-            entryPoints:
-            - web
-            - websecure
-            routes:
-            - kind: Rule
-              match: PathPrefix(\`/\`)
-              services:
-              - name: ${SVC_NAME}
-                port: ${SVC_PORT_NUM}
-                scheme: ${SVC_PROTOCOL}
-                serversTransport: insecuretransport
-          EOF
-            kubectl apply -f ingress.yaml
-                ;;
-            esac;
-
             # cypress v9 amd64 only
             architecture=""
             case $(uname -m) in
@@ -557,6 +470,153 @@ jobs:
 
           docker exec -i k3d-test-cluster-agent-0 crictl images --digests
           
+
+      - name: test health-check
+        id: health-check
+        if: always()
+        run: |
+          architecture=""
+          case $(uname -m) in
+            x86_64)  architecture="amd64" ;;
+            aarch64) architecture="arm64" ;;
+          esac
+          echo ${architecture}
+
+          export HELM_APP_NAME=${{ matrix.APP_NAME }}
+          export HELM_RELEASE_NAME=${{ matrix.APP_NAME }}
+          export USE_IMAGE_TYPE=${{ matrix.USE_IMAGE_TYPE }}
+
+
+          echo "================================================================"
+          echo "${HELM_APP_NAME} health-check"
+          echo "================================================================"
+          
+          export status=0
+
+          declare -a HEALTH_CHECK_ACTIONS=( $(cat charts/.vib/${HELM_APP_NAME}/vib-publish.json | yq e -o=j -I=0 '(.phases.verify.actions[] | select(has("action_id") and .action_id == "health-check")) | .') )
+          for json in "${HEALTH_CHECK_ACTIONS[@]}" ; do
+            echo $json
+
+            export ENDPOINT=$(echo $json | yq -r '.params.endpoint')
+            export SVC_PROTOCOL=$(echo $json | yq -r '.params.app_protocol' | tr '[:upper:]' '[:lower:]')
+            export SVC_AND_PORT_NAME=$(echo $ENDPOINT | sed -E 's/([^-]*)-(.*)/\2/')
+            export SVC_PORT_INFO=$(kubectl get svc -o go-template='{{range $k,$v:=.items}}{{range.spec.ports}}{{if .name}}{{$v.metadata.name}}-{{.name}} {{$v.metadata.name}} {{.name}} {{.port}}{{"\n"}}{{$v.metadata.name}}-{{.port}} {{$v.metadata.name}} {{.name}} {{.port}}{{"\n"}}{{else}}{{$v.metadata.name}}-{{.port}} {{$v.metadata.name}} noname {{.port}}{{"\n"}}{{end}}{{end}}{{end}}' | grep "${SVC_AND_PORT_NAME} ")
+            export SVC_NAME=$(echo ${SVC_PORT_INFO} | awk '{print $2}')
+            export SVC_PORT=$(echo ${SVC_PORT_INFO} | awk '{print $4}')
+            export SVC_PORT_NUM=$(echo ${SVC_PORT_INFO} | awk '{print $4}')
+            echo SVC info : ${ENDPOINT} ${SVC_NAME} ${SVC_PORT} ${SVC_PORT_NUM}
+            # sudo KUBECONFIG=$HOME/.kube/config kubectl port-forward service/${SVC_NAME} 80:${SVC_PORT_NUM} --address='0.0.0.0' &
+            # sudo KUBECONFIG=$HOME/.kube/config kubectl port-forward service/${SVC_NAME} ${SVC_PORT_NUM}:${SVC_PORT_NUM} --address='0.0.0.0' &
+            export TARGET_IP=$(ip a show $(ip route show default | awk '/default/ {print $5}') | grep "inet " | awk '{print $2}' | cut -d"/" -f1)
+
+            # ingress
+            case "${SVC_PROTOCOL}" in
+              https)
+            cat <<EOF > ingress.yaml
+          ---
+          apiVersion: traefik.containo.us/v1alpha1
+          kind: ServersTransport
+          metadata:
+            name: insecuretransport
+            namespace: default
+          spec:
+            insecureSkipVerify: true
+          ---
+          apiVersion: traefik.containo.us/v1alpha1
+          kind: Middleware
+          metadata:
+            name: https
+            namespace: default
+          spec:
+            redirectScheme:
+              scheme: https
+              permanent: true
+          ---
+          apiVersion: traefik.containo.us/v1alpha1
+          kind: IngressRoute
+          metadata:
+            name: cypress
+            namespace: default
+          spec:
+            entryPoints:
+            - web
+            - websecure
+            routes:
+            - kind: Rule
+              match: PathPrefix(\`/\`)
+              services:
+              - name: ${SVC_NAME}
+                port: ${SVC_PORT_NUM}
+                scheme: ${SVC_PROTOCOL}
+                serversTransport: insecuretransport
+              middlewares:
+              - name: https
+          EOF
+            kubectl apply -f ingress.yaml
+                ;;
+              *)
+            cat <<EOF > ingress.yaml
+          ---
+          apiVersion: traefik.containo.us/v1alpha1
+          kind: ServersTransport
+          metadata:
+            name: insecuretransport
+            namespace: default
+          spec:
+            insecureSkipVerify: true
+          ---
+          apiVersion: traefik.containo.us/v1alpha1
+          kind: Middleware
+          metadata:
+            name: https
+            namespace: default
+          spec:
+            redirectScheme:
+              scheme: https
+              permanent: true
+          ---
+          apiVersion: traefik.containo.us/v1alpha1
+          kind: IngressRoute
+          metadata:
+            name: cypress
+            namespace: default
+          spec:
+            entryPoints:
+            - web
+            - websecure
+            routes:
+            - kind: Rule
+              match: PathPrefix(\`/\`)
+              services:
+              - name: ${SVC_NAME}
+                port: ${SVC_PORT_NUM}
+                scheme: ${SVC_PROTOCOL}
+                serversTransport: insecuretransport
+          EOF
+            kubectl apply -f ingress.yaml
+                ;;
+            esac;
+
+            # wait for svc
+            wait-for-url() {
+                echo "Testing $1"
+                timeout -s TERM 120 bash -c \
+                'while [[ "$(curl -s --insecure -o /dev/null -L -w ''%{http_code}'' ${0})" != "200" && "$(curl -s --insecure -o /dev/null -L -w ''%{http_code}'' ${0}/healthz)" != "200" ]];\
+                do echo "Waiting for ${0}" && sleep 2;\
+                done' ${1}
+                echo "OK!"
+                curl -I $1
+            }
+
+            case "${SVC_PROTOCOL}" in
+              https)
+                wait-for-url https://${TARGET_IP}
+                ;;
+              http)
+                wait-for-url http://${TARGET_IP}
+                ;;
+            esac;
+          done
 
       - name: test goss
         id: goss
@@ -681,25 +741,94 @@ jobs:
             # sudo KUBECONFIG=$HOME/.kube/config kubectl port-forward service/${SVC_NAME} ${SVC_PORT_NUM}:${SVC_PORT_NUM} --address='0.0.0.0' &
             export TARGET_IP=$(ip a show $(ip route show default | awk '/default/ {print $5}') | grep "inet " | awk '{print $2}' | cut -d"/" -f1)
 
-            # wait for svc
-            wait-for-url() {
-                echo "Testing $1"
-                timeout -s TERM 120 bash -c \
-                'while [[ "$(curl -s --insecure -o /dev/null -L -w ''%{http_code}'' ${0})" != "200" ]];\
-                do echo "Waiting for ${0}" && sleep 2;\
-                done' ${1}
-                echo "OK!"
-                curl -I $1
-            }
-
+            # ingress
             case "${SVC_PROTOCOL}" in
               https)
-                wait-for-url https://${TARGET_IP}
+            cat <<EOF > ingress.yaml
+          ---
+          apiVersion: traefik.containo.us/v1alpha1
+          kind: ServersTransport
+          metadata:
+            name: insecuretransport
+            namespace: default
+          spec:
+            insecureSkipVerify: true
+          ---
+          apiVersion: traefik.containo.us/v1alpha1
+          kind: Middleware
+          metadata:
+            name: https
+            namespace: default
+          spec:
+            redirectScheme:
+              scheme: https
+              permanent: true
+          ---
+          apiVersion: traefik.containo.us/v1alpha1
+          kind: IngressRoute
+          metadata:
+            name: cypress
+            namespace: default
+          spec:
+            entryPoints:
+            - web
+            - websecure
+            routes:
+            - kind: Rule
+              match: PathPrefix(\`/\`)
+              services:
+              - name: ${SVC_NAME}
+                port: ${SVC_PORT_NUM}
+                scheme: ${SVC_PROTOCOL}
+                serversTransport: insecuretransport
+              middlewares:
+              - name: https
+          EOF
+            kubectl apply -f ingress.yaml
                 ;;
-              http)
-                wait-for-url http://${TARGET_IP}
+              *)
+            cat <<EOF > ingress.yaml
+          ---
+          apiVersion: traefik.containo.us/v1alpha1
+          kind: ServersTransport
+          metadata:
+            name: insecuretransport
+            namespace: default
+          spec:
+            insecureSkipVerify: true
+          ---
+          apiVersion: traefik.containo.us/v1alpha1
+          kind: Middleware
+          metadata:
+            name: https
+            namespace: default
+          spec:
+            redirectScheme:
+              scheme: https
+              permanent: true
+          ---
+          apiVersion: traefik.containo.us/v1alpha1
+          kind: IngressRoute
+          metadata:
+            name: cypress
+            namespace: default
+          spec:
+            entryPoints:
+            - web
+            - websecure
+            routes:
+            - kind: Rule
+              match: PathPrefix(\`/\`)
+              services:
+              - name: ${SVC_NAME}
+                port: ${SVC_PORT_NUM}
+                scheme: ${SVC_PROTOCOL}
+                serversTransport: insecuretransport
+          EOF
+            kubectl apply -f ingress.yaml
                 ;;
             esac;
+
 
             # template
             cat ${PWD}/charts/.vib/${HELM_APP_NAME}/cypress/cypress.json | mo > ${PWD}/charts/.vib/${HELM_APP_NAME}/cypress/cypress.json_
