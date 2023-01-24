@@ -13,10 +13,11 @@ discourse:
     initialDelaySeconds: 5000
 
 # mastodon
-web:
-  livenessProbe:
-    enabled: true
-    initialDelaySeconds: 5000
+apache:
+  service:
+    ports:
+      http: 81
+
 
 # mastodon password needed
 postgresql:
