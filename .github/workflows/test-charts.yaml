@@ -312,7 +312,7 @@ jobs:
                 -f values_bitnami.yaml \
                 -f values_debug.yaml \
                 --set fullnameOverride=${HELM_APP_NAME} \
-                --timeout 1200s
+                --timeout 900s
               ;;
             bitnami-compat) 
               helm upgrade -i ${HELM_RELEASE_NAME} bitnami/${HELM_APP_NAME} \
@@ -320,7 +320,7 @@ jobs:
                 -f values_debug.yaml \
                 -f values/values_bitnami_compat_${HELM_APP_NAME}.yaml \
                 --set fullnameOverride=${HELM_APP_NAME} \
-                --timeout 1200s
+                --timeout 900s
               ;;
           esac;
 
