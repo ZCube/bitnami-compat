@@ -1,20 +1,19 @@
-revision: 52
+revision: 53
 ignores:
     - php-fpm
-    # - apache
     - ruby
 dependencies:
-    postgres-client:
-        - mastodon
-    redis-client:
-        - mastodon
     brotli:
         - discourse
     node:
         - discourse
         - mastodon
+    postgres-client:
+        - mastodon
     python:
         - discourse
+        - mastodon
+    redis-client:
         - mastodon
     ruby:
         - fluentd
