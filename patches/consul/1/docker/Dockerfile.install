@@ -3,4 +3,4 @@ RUN install_packages curl ca-certificates \
  && curl -L -o /opt/bitnami/consul/licenses/LICENSE \
     https://raw.githubusercontent.com/consul/consul/master/LICENSE-AGPLv3.txt
 
-COPY --from=consul /bin/consul /opt/bitnami/consul/bin/consul
+COPY --from=hashicorp/consul:{{{VERSION}}} /bin/consul /opt/bitnami/consul/bin/consul
