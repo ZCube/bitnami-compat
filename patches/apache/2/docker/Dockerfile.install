@@ -6,6 +6,8 @@ RUN mkdir -p /opt/bitnami/apache/bin \
     && mkdir -p /opt/bitnami/apache/sbin \
     && mkdir -p /opt/bitnami/apache/lib \
     && mkdir -p /opt/bitnami/apache/conf \
+    && mkdir -p /opt/bitnami/apache/htdocs \
+    && echo '<html><body><h1>It works!</h1></body></html>' > /opt/bitnami/apache/htdocs/index.html \
     && ln -sf /usr/bin/ab                 /opt/bitnami/apache/bin/ \
     && ln -sf /usr/bin/apachectl          /opt/bitnami/apache/bin/ \
     && ln -sf /usr/bin/apr-1-config       /opt/bitnami/apache/bin/ \
