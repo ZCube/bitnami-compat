@@ -175,56 +175,45 @@ helm install db bitnami/postgresql -f values_bitnami_compat_postgresql.yaml
 
 ## Supported bitnami charts
 
-```
-✔️  cert-manager
-✔️  common
-✔️  consul
-✔️  contour
-✔️  contour-operator
-✔️  discourse
-✔️  elasticsearch
-✔️  etcd
-✔️  external-dns
-✔️  fluentd
-✔️  gitea
-✔️  kafka
-✔️  keycloak
-✔️  mariadb
-✔️  mariadb-galera
-✔️  memcached
-✔️  minio
-✔️  mongodb
-✔️  mongodb-sharded
-✔️  mysql
-✔️  nginx
-✔️  node
-✔️  postgresql
-✔️  postgresql-ha
-✔️  rabbitmq
-✔️  rabbitmq-cluster-operator
-✔️  redis
-✔️  redis-cluster
-✔️  sealed-secrets
-✔️  solr
-✔️  thanos
-✔️  tomcat
-✔️  wordpress
-✔️  zookeeper
-❓  apache
-  ❌  apache
-  ✔️  git
-  ✔️  apache-exporter
-❓  nginx-ingress-controller
-  ❌  nginx-ingress-controller
-  ✔️  nginx
-❓  nginx-intel
-  ❌  nginx-intel
-  ✔️  git
-  ✔️  nginx-exporter
-❓  wordpress-intel
-  ❌  wordpress-intel
-  ✔️  bitnami-shell
-  ✔️  nginx-exporter
+```markdown
+* ✔️  apache
+* ✔️  cert-manager
+* ✔️  common
+* ✔️  consul
+* ✔️  contour
+* ✔️  contour-operator
+* ✔️  discourse
+* ✔️  elasticsearch
+* ✔️  etcd
+* ✔️  external-dns
+* ✔️  fluentd
+* ✔️  gitea
+* ✔️  kafka
+* ✔️  keycloak
+* ✔️  mariadb
+* ✔️  mariadb-galera
+* ✔️  mastodon
+* ✔️  memcached
+* ✔️  minio
+* ✔️  mongodb
+* ✔️  mongodb-sharded
+* ✔️  mysql
+* ✔️  nginx
+* ✔️  postgresql
+* ✔️  postgresql-ha
+* ✔️  rabbitmq
+* ✔️  rabbitmq-cluster-operator
+* ✔️  redis
+* ✔️  redis-cluster
+* ✔️  sealed-secrets
+* ✔️  solr
+* ✔️  thanos
+* ✔️  tomcat
+* ✔️  wordpress
+* ✔️  zookeeper
+* ❌  nginx-ingress-controller
+  * ❌  nginx-ingress-controller
+  * ✔️  nginx
 ```
 
 * For wordpress-intel charts, try using wordpress-nginx instead of wordpress-intel images. (wordpress-intel = wordpress-nginx)
@@ -290,6 +279,7 @@ helm install db bitnami/postgresql -f values_bitnami_compat_postgresql.yaml
 * contour-operator : [`1.22`, `1.22-scratch`, `1.22.1`, `1.22.1-scratch`, `1.22.1-scratch-r53`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fcontour-operator)
 * discourse : [`2`, `2-debian-11`, `2.8.14`, `2.8.14-debian-11`, `2.8.14-debian-11-r53`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fdiscourse)
 * elasticsearch : [`7`, `7-debian-11`, `7.17.8`, `7.17.8-debian-11`, `7.17.8-debian-11-r53`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Felasticsearch)
+* elasticsearch : [`8`, `8-debian-11`, `8.6.1`, `8.6.1-debian-11`, `8.6.1-debian-11-r53`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Felasticsearch)
 * elasticsearch-exporter : [`1`, `1-debian-11`, `1.5.0`, `1.5.0-debian-11`, `1.5.0-debian-11-r53`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Felasticsearch-exporter)
 * envoy : [`1.22`, `1.22-debian-11`, `1.22.6`, `1.22.6-debian-11`, `1.22.6-debian-11-r53`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fenvoy)
 * envoy : [`1.23`, `1.23-debian-11`, `1.23.3`, `1.23.3-debian-11`, `1.23.3-debian-11-r53`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fenvoy)

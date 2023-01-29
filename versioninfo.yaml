@@ -103,6 +103,13 @@
   os_flavour: debian-11
   os_name: linux
   revision: "53"
+- name: elasticsearch
+  version: 8.6.1
+  version_major: "8"
+  version_full: 8.6.1-debian-11-r53
+  os_flavour: debian-11
+  os_name: linux
+  revision: "53"
 - name: elasticsearch-exporter
   version: 1.5.0
   version_major: "1"

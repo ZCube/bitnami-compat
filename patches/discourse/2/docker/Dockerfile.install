@@ -11,14 +11,12 @@ RUN install_packages curl libcurl4-openssl-dev wget libpq-dev build-essential li
     git clone --depth 1 --branch v{{{VERSION}}} https://github.com/discourse/discourse /opt/bitnami/discourse && \
     git -C /opt/bitnami/discourse remote set-branches --add origin tests-passed && \
     cd /opt/bitnami/discourse && \
-    gem update --system && \
     bundle lock --add-platform $(arch)-linux && \
     bundler add passenger && \
     bundle update mini_racer && \
     bundle config --local deployment true && \
-    bundle config --local path ${PWD}/vendor/bundle && \
     bundle config --local without test development && \
-    bundle install --jobs 4 && \
+    bundle install --jobs "$(nproc)" && \
     # bundle exec rake maxminddb:get &&\
     cd /opt/bitnami/discourse/app/assets/javascripts && \
     yarn install --production --frozen-lockfile && \
@@ -28,8 +26,6 @@ RUN install_packages curl libcurl4-openssl-dev wget libpq-dev build-essential li
     ruby -S passenger-config install-standalone-runtime --auto && \
     ruby -S passenger-config build-native-support && \
     ruby -S passenger-config validate-install && \
-    rm -rf /opt/bitnami/discourse/vendor/bundle/ruby/*/gems/passenger* && \
-    ln -sf /usr/local/bundle/gems/passenger* /opt/bitnami/discourse/vendor/bundle/ruby/*/gems/ && \
     # too slow arm64 && \
     sed -i -E 's/15000/50000/g' /opt/bitnami/discourse/lib/discourse_js_processor.rb && \
     rm -fr /usr/local/share/ruby-build &&\

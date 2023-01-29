@@ -6,24 +6,66 @@ on:
 
 jobs:
   test:
-    runs-on: ${{ matrix.os }}
+    runs-on: '${{ matrix.os }}'
     if: >-
       ${{ !contains(github.event.head_commit.message, '[ci skip]') &&
-      !contains(github.event.head_commit.message, '[skip ci]')
-      }}
+      !contains(github.event.head_commit.message, '[skip ci]') }}
     continue-on-error: true
     strategy:
       fail-fast: false
       matrix:
-        os: ["ubuntu-latest"]
-        # os: ["ubuntu-latest", "ARM64"]
-        USE_IMAGE_TYPE: ["bitnami", "bitnami-compat"]
-        APP_NAME: ["cert-manager", "consul", "contour", "contour-operator", "discourse", "elasticsearch", "etcd", "external-dns", "fluentd", "gitea", "kafka", "keycloak", "mariadb", "mariadb-galera", "mastodon", "memcached", "minio", "mongodb", "mongodb-sharded", "mysql", "nginx", "postgresql", "postgresql-ha", "rabbitmq", "rabbitmq-cluster-operator", "redis", "redis-cluster", "sealed-secrets", "solr", "thanos", "tomcat", "wordpress", "zookeeper"]
+        os:
+          - ubuntu-latest
+          # - ARM64
+        USE_IMAGE_TYPE:
+          - bitnami
+          - bitnami-compat
+        APP_NAME:
+          - apache
+          - cert-manager
+          - consul
+          - contour
+          - contour-operator
+          - discourse
+          - elasticsearch
+          - etcd
+          - external-dns
+          - fluentd
+          - gitea
+          - kafka
+          - keycloak
+          - mariadb
+          - mariadb-galera
+          - mastodon
+          - memcached
+          - minio
+          - mongodb
+          - mongodb-sharded
+          - mysql
+          - nginx
+          - postgresql
+          - postgresql-ha
+          - rabbitmq
+          - rabbitmq-cluster-operator
+          - redis
+          - redis-cluster
+          - sealed-secrets
+          - solr
+          - thanos
+          - tomcat
+          - wordpress
+          - zookeeper
         exclude:
-          - os: "ARM64"
-            USE_IMAGE_TYPE: "bitnami"
+          - os: ARM64
+            USE_IMAGE_TYPE: bitnami
 
     outputs:
+      bitnami-amd64-apache-goss: ${{ steps.goss.outputs.bitnami-amd64-apache-goss }}
+      bitnami-amd64-apache-cypress: ${{ steps.cypress.outputs.bitnami-amd64-apache-cypress }}
+      bitnami-compat-arm64-apache-goss: ${{ steps.goss.outputs.bitnami-compat-arm64-apache-goss }}
+      bitnami-compat-arm64-apache-cypress: ${{ steps.cypress.outputs.bitnami-compat-arm64-apache-cypress }}
+      bitnami-compat-amd64-apache-goss: ${{ steps.goss.outputs.bitnami-compat-amd64-apache-goss }}
+      bitnami-compat-amd64-apache-cypress: ${{ steps.cypress.outputs.bitnami-compat-amd64-apache-cypress }}
       bitnami-amd64-cert-manager-goss: ${{ steps.goss.outputs.bitnami-amd64-cert-manager-goss }}
       bitnami-compat-arm64-cert-manager-goss: ${{ steps.goss.outputs.bitnami-compat-arm64-cert-manager-goss }}
       bitnami-compat-amd64-cert-manager-goss: ${{ steps.goss.outputs.bitnami-compat-amd64-cert-manager-goss }}
@@ -78,6 +120,12 @@ jobs:
       bitnami-amd64-mariadb-galera-goss: ${{ steps.goss.outputs.bitnami-amd64-mariadb-galera-goss }}
       bitnami-compat-arm64-mariadb-galera-goss: ${{ steps.goss.outputs.bitnami-compat-arm64-mariadb-galera-goss }}
       bitnami-compat-amd64-mariadb-galera-goss: ${{ steps.goss.outputs.bitnami-compat-amd64-mariadb-galera-goss }}
+      bitnami-amd64-mastodon-goss: ${{ steps.goss.outputs.bitnami-amd64-mastodon-goss }}
+      bitnami-amd64-mastodon-cypress: ${{ steps.cypress.outputs.bitnami-amd64-mastodon-cypress }}
+      bitnami-compat-arm64-mastodon-goss: ${{ steps.goss.outputs.bitnami-compat-arm64-mastodon-goss }}
+      bitnami-compat-arm64-mastodon-cypress: ${{ steps.cypress.outputs.bitnami-compat-arm64-mastodon-cypress }}
+      bitnami-compat-amd64-mastodon-goss: ${{ steps.goss.outputs.bitnami-compat-amd64-mastodon-goss }}
+      bitnami-compat-amd64-mastodon-cypress: ${{ steps.cypress.outputs.bitnami-compat-amd64-mastodon-cypress }}
       bitnami-amd64-memcached-goss: ${{ steps.goss.outputs.bitnami-amd64-memcached-goss }}
       bitnami-compat-arm64-memcached-goss: ${{ steps.goss.outputs.bitnami-compat-arm64-memcached-goss }}
       bitnami-compat-amd64-memcached-goss: ${{ steps.goss.outputs.bitnami-compat-amd64-memcached-goss }}
@@ -93,9 +141,9 @@ jobs:
       bitnami-amd64-mongodb-sharded-goss: ${{ steps.goss.outputs.bitnami-amd64-mongodb-sharded-goss }}
       bitnami-compat-arm64-mongodb-sharded-goss: ${{ steps.goss.outputs.bitnami-compat-arm64-mongodb-sharded-goss }}
       bitnami-compat-amd64-mongodb-sharded-goss: ${{ steps.goss.outputs.bitnami-compat-amd64-mongodb-sharded-goss }}
-      # bitnami-amd64-mysql-goss: ${{ steps.goss.outputs.bitnami-amd64-mysql-goss }}
-      # bitnami-compat-arm64-mysql-goss: ${{ steps.goss.outputs.bitnami-compat-arm64-mysql-goss }}
-      # bitnami-compat-amd64-mysql-goss: ${{ steps.goss.outputs.bitnami-compat-amd64-mysql-goss }}
+      bitnami-amd64-mysql-goss: ${{ steps.goss.outputs.bitnami-amd64-mysql-goss }}
+      bitnami-compat-arm64-mysql-goss: ${{ steps.goss.outputs.bitnami-compat-arm64-mysql-goss }}
+      bitnami-compat-amd64-mysql-goss: ${{ steps.goss.outputs.bitnami-compat-amd64-mysql-goss }}
       bitnami-amd64-nginx-goss: ${{ steps.goss.outputs.bitnami-amd64-nginx-goss }}
       bitnami-amd64-nginx-cypress: ${{ steps.cypress.outputs.bitnami-amd64-nginx-cypress }}
       bitnami-compat-arm64-nginx-goss: ${{ steps.goss.outputs.bitnami-compat-arm64-nginx-goss }}
@@ -480,6 +528,7 @@ jobs:
       - name: test health-check
         id: health-check
         if: always()
+        continue-on-error: true
         run: |
           architecture=""
           case $(uname -m) in

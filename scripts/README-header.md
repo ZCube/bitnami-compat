@@ -175,56 +175,45 @@ helm install db bitnami/postgresql -f values_bitnami_compat_postgresql.yaml
 
 ## Supported bitnami charts
 
-```
-✔️  cert-manager
-✔️  common
-✔️  consul
-✔️  contour
-✔️  contour-operator
-✔️  discourse
-✔️  elasticsearch
-✔️  etcd
-✔️  external-dns
-✔️  fluentd
-✔️  gitea
-✔️  kafka
-✔️  keycloak
-✔️  mariadb
-✔️  mariadb-galera
-✔️  memcached
-✔️  minio
-✔️  mongodb
-✔️  mongodb-sharded
-✔️  mysql
-✔️  nginx
-✔️  node
-✔️  postgresql
-✔️  postgresql-ha
-✔️  rabbitmq
-✔️  rabbitmq-cluster-operator
-✔️  redis
-✔️  redis-cluster
-✔️  sealed-secrets
-✔️  solr
-✔️  thanos
-✔️  tomcat
-✔️  wordpress
-✔️  zookeeper
-❓  apache
-  ❌  apache
-  ✔️  git
-  ✔️  apache-exporter
-❓  nginx-ingress-controller
-  ❌  nginx-ingress-controller
-  ✔️  nginx
-❓  nginx-intel
-  ❌  nginx-intel
-  ✔️  git
-  ✔️  nginx-exporter
-❓  wordpress-intel
-  ❌  wordpress-intel
-  ✔️  bitnami-shell
-  ✔️  nginx-exporter
+```markdown
+* ✔️  apache
+* ✔️  cert-manager
+* ✔️  common
+* ✔️  consul
+* ✔️  contour
+* ✔️  contour-operator
+* ✔️  discourse
+* ✔️  elasticsearch
+* ✔️  etcd
+* ✔️  external-dns
+* ✔️  fluentd
+* ✔️  gitea
+* ✔️  kafka
+* ✔️  keycloak
+* ✔️  mariadb
+* ✔️  mariadb-galera
+* ✔️  mastodon
+* ✔️  memcached
+* ✔️  minio
+* ✔️  mongodb
+* ✔️  mongodb-sharded
+* ✔️  mysql
+* ✔️  nginx
+* ✔️  postgresql
+* ✔️  postgresql-ha
+* ✔️  rabbitmq
+* ✔️  rabbitmq-cluster-operator
+* ✔️  redis
+* ✔️  redis-cluster
+* ✔️  sealed-secrets
+* ✔️  solr
+* ✔️  thanos
+* ✔️  tomcat
+* ✔️  wordpress
+* ✔️  zookeeper
+* ❌  nginx-ingress-controller
+  * ❌  nginx-ingress-controller
+  * ✔️  nginx
 ```
 
 * For wordpress-intel charts, try using wordpress-nginx instead of wordpress-intel images. (wordpress-intel = wordpress-nginx)

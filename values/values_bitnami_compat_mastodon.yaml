@@ -20,7 +20,7 @@ elasticsearch:
     digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/elasticsearch
-    tag: 7.17.8-debian-11-r53
+    tag: 8.6.1-debian-11-r53
   kibana: null
   metrics:
     image:
