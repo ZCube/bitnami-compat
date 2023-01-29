@@ -19,8 +19,8 @@ RUN install_packages build-essential gcc g++ ca-certificates git libpcre3-dev li
     ruby -S passenger-config install-standalone-runtime --auto && \
     ruby -S passenger-config build-native-support && \
     ruby -S passenger-config validate-install && \
-    rm -rf /opt/bitnami/discourse/vendor/bundle/ruby/*/gems/passenger* && \
-    ln -sf /usr/local/bundle/gems/passenger* /opt/bitnami/discourse/vendor/bundle/ruby/*/gems/ && \
+    rm -rf /opt/bitnami/mastodon/vendor/bundle/ruby/*/gems/passenger* && \
+    ln -sf /usr/local/bundle/gems/passenger* /opt/bitnami/mastodon/vendor/bundle/ruby/*/gems/ && \
     rm -fr /usr/local/share/ruby-build && \
     rm -fr /root/.gem && \
     rm -fr /root/.npm && \
