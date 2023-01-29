@@ -11,6 +11,7 @@ RUN install_packages curl libcurl4-openssl-dev wget libpq-dev build-essential li
     git clone --depth 1 --branch v{{{VERSION}}} https://github.com/discourse/discourse /opt/bitnami/discourse && \
     git -C /opt/bitnami/discourse remote set-branches --add origin tests-passed && \
     cd /opt/bitnami/discourse && \
+    gem update --system && \
     bundle lock --add-platform $(arch)-linux && \
     bundler add passenger && \
     bundle update mini_racer && \

@@ -8,7 +8,7 @@ mariadb:
     digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/mariadb
-    tag: 10.8.6-debian-11-r53
+    tag: 10.9.4-debian-11-r53
   metrics:
     image:
       digest: ''

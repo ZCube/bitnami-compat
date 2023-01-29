@@ -75,6 +75,13 @@
   os_flavour: debian-11
   os_name: linux
   revision: "53"
+- name: contour
+  version: 1.23.2
+  version_major: "1.23"
+  version_full: 1.23.2-debian-11-r53
+  os_flavour: debian-11
+  os_name: linux
+  revision: "53"
 - name: contour-operator
   version: 1.21.1
   version_major: "1.21"
@@ -86,6 +93,13 @@
   version: 1.22.1
   version_major: "1.22"
   version_full: 1.22.1-scratch-r53
+  os_flavour: scratch
+  os_name: linux
+  revision: "53"
+- name: contour-operator
+  version: 1.23.0
+  version_major: "1.23"
+  version_full: 1.23.0-scratch-r53
   os_flavour: scratch
   os_name: linux
   revision: "53"
@@ -128,6 +142,13 @@
   version: 1.23.3
   version_major: "1.23"
   version_full: 1.23.3-debian-11-r53
+  os_flavour: debian-11
+  os_name: linux
+  revision: "53"
+- name: envoy
+  version: 1.24.1
+  version_major: "1.24"
+  version_full: 1.24.1-debian-11-r53
   os_flavour: debian-11
   os_name: linux
   revision: "53"
@@ -198,6 +219,13 @@
   version: 17.0.6
   version_major: "17"
   version_full: 17.0.6-debian-11-r53
+  os_flavour: debian-11
+  os_name: linux
+  revision: "53"
+- name: java
+  version: 19.0.2
+  version_major: "19"
+  version_full: 19.0.2-debian-11-r53
   os_flavour: debian-11
   os_name: linux
   revision: "53"
@@ -272,6 +300,13 @@
   os_name: linux
   revision: "53"
 - name: mariadb
+  version: 10.10.2
+  version_major: "10.10"
+  version_full: 10.10.2-debian-11-r53
+  os_flavour: debian-11
+  os_name: linux
+  revision: "53"
+- name: mariadb
   version: 10.5.18
   version_major: "10.5"
   version_full: 10.5.18-debian-11-r53
@@ -299,6 +334,20 @@
   os_flavour: debian-11
   os_name: linux
   revision: "53"
+- name: mariadb
+  version: 10.9.4
+  version_major: "10.9"
+  version_full: 10.9.4-debian-11-r53
+  os_flavour: debian-11
+  os_name: linux
+  revision: "53"
+- name: mariadb-galera
+  version: 10.10.2
+  version_major: "10.10"
+  version_full: 10.10.2-debian-11-r53
+  os_flavour: debian-11
+  os_name: linux
+  revision: "53"
 - name: mariadb-galera
   version: 10.5.18
   version_major: "10.5"
@@ -324,6 +373,13 @@
   version: 10.8.6
   version_major: "10.8"
   version_full: 10.8.6-debian-11-r53
+  os_flavour: debian-11
+  os_name: linux
+  revision: "53"
+- name: mariadb-galera
+  version: 10.9.4
+  version_major: "10.9"
+  version_full: 10.9.4-debian-11-r53
   os_flavour: debian-11
   os_name: linux
   revision: "53"
@@ -530,6 +586,13 @@
   os_flavour: debian-11
   os_name: linux
   revision: "53"
+- name: postgresql-repmgr
+  version: 15.1.0
+  version_major: "15"
+  version_full: 15.1.0-debian-11-r53
+  os_flavour: debian-11
+  os_name: linux
+  revision: "53"
 - name: python
   version: 3.10.9
   version_major: "3.10"
@@ -688,6 +751,13 @@
   version: 10.0.27
   version_major: "10.0"
   version_full: 10.0.27-debian-11-r53
+  os_flavour: debian-11
+  os_name: linux
+  revision: "53"
+- name: tomcat
+  version: 10.1.5
+  version_major: "10.1"
+  version_full: 10.1.5-debian-11-r53
   os_flavour: debian-11
   os_name: linux
   revision: "53"

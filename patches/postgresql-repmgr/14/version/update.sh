@@ -1,7 +1,7 @@
 #/bin/bash
 set -e
 
-export VERSION_MAJOR=${VERSION_MAJOR:-11}
+export VERSION_MAJOR=${VERSION_MAJOR:-14}
 export VERSION_DIR=${VERSION_DIR:-./}
 export REPOSITORY="deb http://apt.postgresql.org/pub/repos/apt/ bullseye-pgdg main $VERSION_MAJOR"
 
