@@ -4,8 +4,10 @@ RUN install_packages build-essential gcc g++ ca-certificates git libpcre3-dev li
     git clone --depth 1 --branch v{{{VERSION}}} https://github.com/mastodon/mastodon /opt/bitnami/mastodon && \
     git -C /opt/bitnami/mastodon remote set-branches --add origin tests-passed && \
     cd /opt/bitnami/mastodon && \
+    gem update --system && \
     bundler add passenger && \
     bundle config --local deployment true && \
+    bundle config --local path ${PWD}/vendor/bundle && \
     bundle config --local without test development && \
     bundle config set silence_root_warning true && \
     bundle install --jobs "$(nproc)" && \
@@ -17,6 +19,8 @@ RUN install_packages build-essential gcc g++ ca-certificates git libpcre3-dev li
     ruby -S passenger-config install-standalone-runtime --auto && \
     ruby -S passenger-config build-native-support && \
     ruby -S passenger-config validate-install && \
+    rm -rf /opt/bitnami/discourse/vendor/bundle/ruby/*/gems/passenger* && \
+    ln -sf /usr/local/bundle/gems/passenger* /opt/bitnami/discourse/vendor/bundle/ruby/*/gems/ && \
     rm -fr /usr/local/share/ruby-build && \
     rm -fr /root/.gem && \
     rm -fr /root/.npm && \
