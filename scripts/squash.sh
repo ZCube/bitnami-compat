@@ -1,6 +1,22 @@
 #!/bin/bash
 set -e
 
+OS=Linux       # or Darwin, Windows
+ARCH=""
+case $(uname -m) in
+  x86_64)  ARCH="x86_64" ;;
+  aarch64) ARCH="arm64" ;;
+esac
+echo ${ARCH}
+mkdir -p /tmp/go-containerregistry
+cd /tmp/go-containerregistry
+curl -o go-containerregistry.tar.gz -sL "https://github.com/google/go-containerregistry/releases/latest/download/go-containerregistry_${OS}_${ARCH}.tar.gz"
+tar zxvf go-containerregistry.tar.gz
+cp -f crane $HOME/.local/bin/crane
+cp -f gcrane $HOME/.local/bin/gccrane
+cp -f krane $HOME/.local/bin/krane
+cd -
+
 declare -a imageNames=$( yq e 'with_entries(.) | .[].name' ./versioninfo.yaml )
 imageNames=( ${imageNames[*]} )
 declare -a imageVersionFulls=$( yq e 'with_entries(.) | .[].version_full' ./versioninfo.yaml )
@@ -22,36 +38,17 @@ do
   export IMAGE_TAG=ghcr.io/zcube/bitnami-compat/${imageNames[$i]}
   echo ${IMAGE_TAG}:${imageVersionFulls[$i]}
 
-  docker pull --platform=linux/amd64 ${IMAGE_TAG}:${imageVersionFulls[$i]}
-  docker tag ${IMAGE_TAG}:${imageVersionFulls[$i]} ${IMAGE_TAG}:${imageVersionFulls[$i]}-amd64
-  docker pull --platform=linux/arm64 ${IMAGE_TAG}:${imageVersionFulls[$i]}
-  docker tag ${IMAGE_TAG}:${imageVersionFulls[$i]} ${IMAGE_TAG}:${imageVersionFulls[$i]}-arm64
+  crane flatten --platform=all ${IMAGE_TAG}:${imageVersionFulls[$i]} \
+    -t ${IMAGE_TAG}:${imageVersions[$i]}-${imageOsFlavours[$i]}-r${imageRevisions[$i]}-squash \
+    -t ${IMAGE_TAG}:${imageVersionMajors[$i]}-${imageOsFlavours[$i]}-r${imageRevisions[$i]}-squash \
+    -t ${IMAGE_TAG}:${imageVersions[$i]}-${imageOsFlavours[$i]}-squash \
+    -t ${IMAGE_TAG}:${imageVersions[$i]}-squash \
+    -t ${IMAGE_TAG}:${imageVersionMajors[$i]}-${imageOsFlavours[$i]}-squash \
+    -t ${IMAGE_TAG}:${imageVersionMajors[$i]}-squash
 
-  docker-squash --tmp-dir "${PWD}/tmp-amd64" "${IMAGE_TAG}:${imageVersionFulls[$i]}-amd64" -t ${IMAGE_TAG}:${imageVersionFulls[$i]}-amd64-squash &
-  docker-squash --tmp-dir "${PWD}/tmp-arm64" "${IMAGE_TAG}:${imageVersionFulls[$i]}-arm64" -t ${IMAGE_TAG}:${imageVersionFulls[$i]}-arm64-squash &
-  wait
-
-  docker push ${IMAGE_TAG}:${imageVersionFulls[$i]}-amd64-squash &
-  docker push ${IMAGE_TAG}:${imageVersionFulls[$i]}-arm64-squash &
-  wait
-
-  docker manifest create ${IMAGE_TAG}:${imageVersions[$i]}-${imageOsFlavours[$i]}-r${imageRevisions[$i]}-squash ${IMAGE_TAG}:${imageVersionFulls[$i]}-amd64-squash ${IMAGE_TAG}:${imageVersionFulls[$i]}-arm64-squash
-  docker manifest push   ${IMAGE_TAG}:${imageVersions[$i]}-${imageOsFlavours[$i]}-r${imageRevisions[$i]}-squash
-
-  docker manifest create ${IMAGE_TAG}:${imageVersionMajors[$i]}-${imageOsFlavours[$i]}-r${imageRevisions[$i]}-squash ${IMAGE_TAG}:${imageVersionFulls[$i]}-amd64-squash ${IMAGE_TAG}:${imageVersionFulls[$i]}-arm64-squash
-  docker manifest push   ${IMAGE_TAG}:${imageVersionMajors[$i]}-${imageOsFlavours[$i]}-r${imageRevisions[$i]}-squash
-
-  docker manifest create ${IMAGE_TAG}:${imageVersions[$i]}-${imageOsFlavours[$i]}-squash ${IMAGE_TAG}:${imageVersionFulls[$i]}-amd64-squash ${IMAGE_TAG}:${imageVersionFulls[$i]}-arm64-squash
-  docker manifest push   ${IMAGE_TAG}:${imageVersions[$i]}-${imageOsFlavours[$i]}-squash
-
-  docker manifest create ${IMAGE_TAG}:${imageVersions[$i]}-squash ${IMAGE_TAG}:${imageVersionFulls[$i]}-amd64-squash ${IMAGE_TAG}:${imageVersionFulls[$i]}-arm64-squash
-  docker manifest push   ${IMAGE_TAG}:${imageVersions[$i]}-squash
-
-  docker manifest create ${IMAGE_TAG}:${imageVersionMajors[$i]}-${imageOsFlavours[$i]}-squash ${IMAGE_TAG}:${imageVersionFulls[$i]}-amd64-squash ${IMAGE_TAG}:${imageVersionFulls[$i]}-arm64-squash
-  docker manifest push   ${IMAGE_TAG}:${imageVersionMajors[$i]}-${imageOsFlavours[$i]}-squash
-
-  docker manifest create ${IMAGE_TAG}:${imageVersionMajors[$i]}-squash ${IMAGE_TAG}:${imageVersionFulls[$i]}-amd64-squash ${IMAGE_TAG}:${imageVersionFulls[$i]}-arm64-squash
-  docker manifest push   ${IMAGE_TAG}:${imageVersionMajors[$i]}-squash
+  # docker push ${IMAGE_TAG}:${imageVersionFulls[$i]}-amd64-squash &
+  # docker push ${IMAGE_TAG}:${imageVersionFulls[$i]}-arm64-squash &
+  # wait
 
   docker image prune -a -f
 done

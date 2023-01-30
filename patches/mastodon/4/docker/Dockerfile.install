@@ -7,7 +7,6 @@ RUN install_packages build-essential gcc g++ ca-certificates git libpcre3-dev li
     gem update --system && \
     bundler add passenger && \
     bundle config --local deployment true && \
-    bundle config --local path ${PWD}/vendor/bundle && \
     bundle config --local without test development && \
     bundle config set silence_root_warning true && \
     bundle install --jobs "$(nproc)" && \
