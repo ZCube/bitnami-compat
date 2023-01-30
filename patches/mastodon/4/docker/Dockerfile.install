@@ -4,7 +4,6 @@ RUN install_packages build-essential gcc g++ ca-certificates git libpcre3-dev li
     git clone --depth 1 --branch v{{{VERSION}}} https://github.com/mastodon/mastodon /opt/bitnami/mastodon && \
     git -C /opt/bitnami/mastodon remote set-branches --add origin tests-passed && \
     cd /opt/bitnami/mastodon && \
-    gem update --system && \
     bundler add passenger && \
     bundle config --local deployment true && \
     bundle config --local without test development && \
