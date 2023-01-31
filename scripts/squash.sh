@@ -24,17 +24,15 @@ do
   echo ${IMAGE_TAG}:${imageVersionFulls[$i]}
 
   docker pull --platform=linux/amd64 ${IMAGE_TAG_FROM}:${imageVersionFulls[$i]}
-  docker tag ${IMAGE_TAG_FROM}:${imageVersionFulls[$i]} ${IMAGE_TAG}:${imageVersionFulls[$i]}-amd64
+  docker tag ${IMAGE_TAG_FROM}:${imageVersionFulls[$i]} ${IMAGE_TAG_FROM}:${imageVersionFulls[$i]}-amd64
   docker pull --platform=linux/arm64 ${IMAGE_TAG_FROM}:${imageVersionFulls[$i]}
-  docker tag ${IMAGE_TAG_FROM}:${imageVersionFulls[$i]} ${IMAGE_TAG}:${imageVersionFulls[$i]}-arm64
+  docker tag ${IMAGE_TAG_FROM}:${imageVersionFulls[$i]} ${IMAGE_TAG_FROM}:${imageVersionFulls[$i]}-arm64
 
-  docker push ${IMAGE_TAG_FROM}:${imageVersionFulls[$i]}-amd64 &
-  docker push ${IMAGE_TAG_FROM}:${imageVersionFulls[$i]}-arm64 &
-  wait
+  docker push ${IMAGE_TAG_FROM}:${imageVersionFulls[$i]}-amd64
+  docker push ${IMAGE_TAG_FROM}:${imageVersionFulls[$i]}-arm64
 
-  crane flatten --platform=linux/amd64 "${IMAGE_TAG_FROM}:${imageVersionFulls[$i]}-amd64" -t ${IMAGE_TAG}:${imageVersionFulls[$i]}-amd64-squash &
-  crane flatten --platform=linux/arm64 "${IMAGE_TAG_FROM}:${imageVersionFulls[$i]}-arm64" -t ${IMAGE_TAG}:${imageVersionFulls[$i]}-arm64-squash &
-  wait
+  crane flatten --platform=linux/amd64 "${IMAGE_TAG_FROM}:${imageVersionFulls[$i]}-amd64" -t ${IMAGE_TAG}:${imageVersionFulls[$i]}-amd64-squash
+  crane flatten --platform=linux/arm64 "${IMAGE_TAG_FROM}:${imageVersionFulls[$i]}-arm64" -t ${IMAGE_TAG}:${imageVersionFulls[$i]}-arm64-squash
 
   docker manifest create ${IMAGE_TAG}:${imageVersions[$i]}-${imageOsFlavours[$i]}-r${imageRevisions[$i]}-squash ${IMAGE_TAG}:${imageVersionFulls[$i]}-amd64-squash ${IMAGE_TAG}:${imageVersionFulls[$i]}-arm64-squash
   docker manifest push   ${IMAGE_TAG}:${imageVersions[$i]}-${imageOsFlavours[$i]}-r${imageRevisions[$i]}-squash
