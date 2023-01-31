@@ -1,22 +1,6 @@
 #!/bin/bash
 set -e
 
-OS=Linux       # or Darwin, Windows
-ARCH=""
-case $(uname -m) in
-  x86_64)  ARCH="x86_64" ;;
-  aarch64) ARCH="arm64" ;;
-esac
-echo ${ARCH}
-mkdir -p /tmp/go-containerregistry
-cd /tmp/go-containerregistry
-curl -o go-containerregistry.tar.gz -sL "https://github.com/google/go-containerregistry/releases/latest/download/go-containerregistry_${OS}_${ARCH}.tar.gz"
-tar zxvf go-containerregistry.tar.gz
-cp -f crane $HOME/.local/bin/crane
-cp -f gcrane $HOME/.local/bin/gccrane
-cp -f krane $HOME/.local/bin/krane
-cd -
-
 declare -a imageNames=$( yq e 'with_entries(.) | .[].name' ./versioninfo.yaml )
 imageNames=( ${imageNames[*]} )
 declare -a imageVersionFulls=$( yq e 'with_entries(.) | .[].version_full' ./versioninfo.yaml )
