@@ -22,17 +22,8 @@ do
   export IMAGE_TAG=ghcr.io/zcube/bitnami-compat/${imageNames[$i]}
   echo ${IMAGE_TAG}:${imageVersionFulls[$i]}
 
-  docker pull --platform=linux/amd64 ${IMAGE_TAG}:${imageVersionFulls[$i]}
-  docker tag ${IMAGE_TAG}:${imageVersionFulls[$i]} ${IMAGE_TAG}:${imageVersionFulls[$i]}-amd64
-  docker pull --platform=linux/arm64 ${IMAGE_TAG}:${imageVersionFulls[$i]}
-  docker tag ${IMAGE_TAG}:${imageVersionFulls[$i]} ${IMAGE_TAG}:${imageVersionFulls[$i]}-arm64
-
-  docker push ${IMAGE_TAG}:${imageVersionFulls[$i]}-amd64 &
-  docker push ${IMAGE_TAG}:${imageVersionFulls[$i]}-arm64 &
-  wait
-
-  crane flatten --platform=linux/amd64 "${IMAGE_TAG}:${imageVersionFulls[$i]}-amd64" -t ${IMAGE_TAG}:${imageVersionFulls[$i]}-amd64-squash &
-  crane flatten --platform=linux/arm64 "${IMAGE_TAG}:${imageVersionFulls[$i]}-arm64" -t ${IMAGE_TAG}:${imageVersionFulls[$i]}-arm64-squash &
+  crane flatten --platform=linux/amd64 "${IMAGE_TAG}:${imageVersionFulls[$i]}" -t ${IMAGE_TAG}:${imageVersionFulls[$i]}-amd64-squash &
+  crane flatten --platform=linux/arm64 "${IMAGE_TAG}:${imageVersionFulls[$i]}" -t ${IMAGE_TAG}:${imageVersionFulls[$i]}-arm64-squash &
   wait
 
   docker manifest create ${IMAGE_TAG}:${imageVersions[$i]}-${imageOsFlavours[$i]}-r${imageRevisions[$i]}-squash ${IMAGE_TAG}:${imageVersionFulls[$i]}-amd64-squash ${IMAGE_TAG}:${imageVersionFulls[$i]}-arm64-squash
