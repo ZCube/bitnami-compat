@@ -26,7 +26,7 @@
         uses: actions/setup-go@v3
         with:
           go-version: 1.19
-      - name: Build Docker Image And Push To GHCR And Docker Hub
+      - name: Build Docker Image And Push To GHCR
         shell: bash
         run: |
           export repository=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')
@@ -35,7 +35,19 @@
           n=0
           until [ "$n" -ge 5 ] # retry 5 times
           do
-            go run main.go build --app=${{ matrix.APP }} --tag=${{ env.REGISTRY }}/${repository}/,docker.io/zcube/bitnami-compat- --cache-from --cache-to --push --platforms=linux/amd64,linux/arm64 && break
+            go run main.go build --app=${{ matrix.APP }} --tag=${{ env.REGISTRY }}/${repository}/cache/ --cache-from --cache-to --push --platforms=linux/amd64,linux/arm64 && break
+            n=$((n+1)) 
+            sleep 15
+          done
+          if [ "$n" -ge 5 ]; then
+            echo "Failed after 5 attempts!"
+            exit 1
+          fi
+          n=0
+          export APP=${{ matrix.APP }}
+          until [ "$n" -ge 5 ] # retry 5 times
+          do
+            ./scripts/squash_image.sh && break
             n=$((n+1)) 
             sleep 15
           done

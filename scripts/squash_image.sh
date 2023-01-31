@@ -18,6 +18,10 @@ len=${#imageNames[@]}
 
 for (( i=0; i<$len; i++ ));
 do
+  if [ "${imageNames[$i]}" != "${APP}" ]; then
+    continue
+  fi
+
   export IMAGE_TAG_FROM=ghcr.io/zcube/bitnami-compat/cache/${imageNames[$i]}
   export IMAGE_TAG=ghcr.io/zcube/bitnami-compat/${imageNames[$i]}
   echo ${IMAGE_TAG_FROM}:${imageVersionFulls[$i]}
