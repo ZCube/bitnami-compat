@@ -33,7 +33,7 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: install crane and login
+      - name: install crane
         run: |
           if ! hash crane 2>/dev/null
           then
