@@ -35,25 +35,25 @@ do
   docker push ${IMAGE_TAG_FROM}:${imageVersionFulls[$i]}-amd64
   docker push ${IMAGE_TAG_FROM}:${imageVersionFulls[$i]}-arm64
 
-  crane flatten --platform=linux/amd64 "${IMAGE_TAG_FROM}:${imageVersionFulls[$i]}-amd64" -t ${IMAGE_TAG_FROM}:${imageVersionFulls[$i]}-amd64-squash
-  crane flatten --platform=linux/arm64 "${IMAGE_TAG_FROM}:${imageVersionFulls[$i]}-arm64" -t ${IMAGE_TAG_FROM}:${imageVersionFulls[$i]}-arm64-squash
+  crane flatten --platform=linux/amd64 "${IMAGE_TAG_FROM}:${imageVersionFulls[$i]}-amd64" -t ${IMAGE_TAG}:${imageVersionFulls[$i]}-amd64-squash
+  crane flatten --platform=linux/arm64 "${IMAGE_TAG_FROM}:${imageVersionFulls[$i]}-arm64" -t ${IMAGE_TAG}:${imageVersionFulls[$i]}-arm64-squash
 
-  docker manifest create ${IMAGE_TAG}:${imageVersions[$i]}-${imageOsFlavours[$i]}-r${imageRevisions[$i]} ${IMAGE_TAG_FROM}:${imageVersionFulls[$i]}-amd64-squash ${IMAGE_TAG_FROM}:${imageVersionFulls[$i]}-arm64-squash
+  docker manifest create ${IMAGE_TAG}:${imageVersions[$i]}-${imageOsFlavours[$i]}-r${imageRevisions[$i]} ${IMAGE_TAG}:${imageVersionFulls[$i]}-amd64-squash ${IMAGE_TAG}:${imageVersionFulls[$i]}-arm64-squash
   docker manifest push   ${IMAGE_TAG}:${imageVersions[$i]}-${imageOsFlavours[$i]}-r${imageRevisions[$i]}
 
-  docker manifest create ${IMAGE_TAG}:${imageVersionMajors[$i]}-${imageOsFlavours[$i]}-r${imageRevisions[$i]} ${IMAGE_TAG_FROM}:${imageVersionFulls[$i]}-amd64-squash ${IMAGE_TAG_FROM}:${imageVersionFulls[$i]}-arm64-squash
+  docker manifest create ${IMAGE_TAG}:${imageVersionMajors[$i]}-${imageOsFlavours[$i]}-r${imageRevisions[$i]} ${IMAGE_TAG}:${imageVersionFulls[$i]}-amd64-squash ${IMAGE_TAG}:${imageVersionFulls[$i]}-arm64-squash
   docker manifest push   ${IMAGE_TAG}:${imageVersionMajors[$i]}-${imageOsFlavours[$i]}-r${imageRevisions[$i]}
 
-  docker manifest create ${IMAGE_TAG}:${imageVersions[$i]}-${imageOsFlavours[$i]} ${IMAGE_TAG_FROM}:${imageVersionFulls[$i]}-amd64-squash ${IMAGE_TAG_FROM}:${imageVersionFulls[$i]}-arm64-squash
+  docker manifest create ${IMAGE_TAG}:${imageVersions[$i]}-${imageOsFlavours[$i]} ${IMAGE_TAG}:${imageVersionFulls[$i]}-amd64-squash ${IMAGE_TAG}:${imageVersionFulls[$i]}-arm64-squash
   docker manifest push   ${IMAGE_TAG}:${imageVersions[$i]}-${imageOsFlavours[$i]}
 
-  docker manifest create ${IMAGE_TAG}:${imageVersions[$i]} ${IMAGE_TAG_FROM}:${imageVersionFulls[$i]}-amd64-squash ${IMAGE_TAG_FROM}:${imageVersionFulls[$i]}-arm64-squash
+  docker manifest create ${IMAGE_TAG}:${imageVersions[$i]} ${IMAGE_TAG}:${imageVersionFulls[$i]}-amd64-squash ${IMAGE_TAG}:${imageVersionFulls[$i]}-arm64-squash
   docker manifest push   ${IMAGE_TAG}:${imageVersions[$i]}
 
-  docker manifest create ${IMAGE_TAG}:${imageVersionMajors[$i]}-${imageOsFlavours[$i]} ${IMAGE_TAG_FROM}:${imageVersionFulls[$i]}-amd64-squash ${IMAGE_TAG_FROM}:${imageVersionFulls[$i]}-arm64-squash
+  docker manifest create ${IMAGE_TAG}:${imageVersionMajors[$i]}-${imageOsFlavours[$i]} ${IMAGE_TAG}:${imageVersionFulls[$i]}-amd64-squash ${IMAGE_TAG}:${imageVersionFulls[$i]}-arm64-squash
   docker manifest push   ${IMAGE_TAG}:${imageVersionMajors[$i]}-${imageOsFlavours[$i]}
 
-  docker manifest create ${IMAGE_TAG}:${imageVersionMajors[$i]} ${IMAGE_TAG_FROM}:${imageVersionFulls[$i]}-amd64-squash ${IMAGE_TAG_FROM}:${imageVersionFulls[$i]}-arm64-squash
+  docker manifest create ${IMAGE_TAG}:${imageVersionMajors[$i]} ${IMAGE_TAG}:${imageVersionFulls[$i]}-amd64-squash ${IMAGE_TAG}:${imageVersionFulls[$i]}-arm64-squash
   docker manifest push   ${IMAGE_TAG}:${imageVersionMajors[$i]}
 
   docker image prune -a -f
