@@ -55,8 +55,9 @@ dependencies:
         - supabase-studio
     php:
         - wordpress
-    postgres-client:
+    postgresql-client:
         - mastodon
+        - discourse
     python:
         - discourse
         - mastodon

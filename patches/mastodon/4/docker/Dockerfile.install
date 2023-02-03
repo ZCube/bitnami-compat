@@ -30,6 +30,14 @@ RUN install_packages build-essential gcc g++ ca-certificates git libpcre3-dev li
 COPY --from=bitnami/mastodon:{{{VERSION}}} /opt/bitnami/mastodon/config/environments/production.rb /opt/bitnami/mastodon/config/environments/production.rb
 COPY --from=bitnami/mastodon:{{{VERSION}}} /opt/bitnami/mastodon/config/initializers/1_hosts.rb /opt/bitnami/mastodon/config/initializers/1_hosts.rb
 
+COPY <<EOF /opt/bitnami/mastodon/Passengerfile.json
+{
+  "unlimited_concurrency_paths": [
+    "/api/v1/streaming"
+  ]
+}
+EOF
+
 RUN ln -sf /usr/local/bundle/bin/bootsnap                                /opt/bitnami/mastodon/bin/ && \
     ln -sf /usr/local/bundle/bin/byebug                                  /opt/bitnami/mastodon/bin/ && \
     ln -sf /usr/local/bundle/bin/coderay                                 /opt/bitnami/mastodon/bin/ && \

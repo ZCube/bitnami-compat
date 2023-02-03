@@ -7,14 +7,16 @@
 
 COPY --from=oxipng /usr/local/cargo/bin/oxipng /usr/local/bin/oxipng
 
-ENV PASSENGER_COMPILE_NATIVE_SUPPORT_BINARY=0
-ENV PASSENGER_DOWNLOAD_NATIVE_SUPPORT_BINARY=0
+# ENV PASSENGER_COMPILE_NATIVE_SUPPORT_BINARY=0
+# ENV PASSENGER_DOWNLOAD_NATIVE_SUPPORT_BINARY=0
 
-RUN install_packages curl libcurl4-openssl-dev wget libpq-dev build-essential libpcre3-dev advancecomp jhead jpegoptim libjpeg-turbo-progs optipng && \
+RUN install_packages curl libcurl4-openssl-dev wget libpq-dev build-essential libpcre3-dev advancecomp jhead jpegoptim libjpeg-turbo-progs && \
+    install_packages whois libcurl4 curl wget procps libpcre3 libssl1.1 libpq5 file ca-certificates tzdata optipng && \
     git clone --depth 1 --branch v{{{VERSION}}} https://github.com/discourse/discourse /opt/bitnami/discourse && \
     git -C /opt/bitnami/discourse remote set-branches --add origin tests-passed && \
     cd /opt/bitnami/discourse && \
-    gem update --system && \
+    # gem update --system && \
+    gem update && \
     bundle lock --add-platform $(arch)-linux && \
     bundler add passenger && \
     bundle update mini_racer && \
@@ -22,17 +24,16 @@ RUN install_packages curl libcurl4-openssl-dev wget libpq-dev build-essential li
     bundle config --local path ${PWD}/vendor/bundle && \
     bundle config --local without test development && \
     bundle install --jobs "$(nproc)" && \
-    # bundle exec rake maxminddb:get &&\
     cd /opt/bitnami/discourse/app/assets/javascripts && \
     yarn install --production --frozen-lockfile && \
     yarn cache clean && \
-    # ruby -S passenger-config compile-agent --auto --optimize && \
-    # ruby -S passenger-config install-agent --auto && \
-    # ruby -S passenger-config install-standalone-runtime --auto && \
-    # ruby -S passenger-config build-native-support && \
-    # ruby -S passenger-config validate-install && \
-    # rm -rf /opt/bitnami/discourse/vendor/bundle/ruby/*/gems/passenger* && \
-    # ln -sf /usr/local/bundle/gems/passenger* /opt/bitnami/discourse/vendor/bundle/ruby/*/gems/ && \
+    ruby -S passenger-config compile-agent --auto --optimize && \
+    ruby -S passenger-config install-agent --auto && \
+    ruby -S passenger-config install-standalone-runtime --auto && \
+    ruby -S passenger-config build-native-support && \
+    ruby -S passenger-config validate-install && \
+    rm -rf /opt/bitnami/discourse/vendor/bundle/ruby/*/gems/passenger* && \
+    ln -sf /usr/local/bundle/gems/passenger* /opt/bitnami/discourse/vendor/bundle/ruby/*/gems/ && \
     # too slow arm64 && \
     sed -i -E 's/15000/50000/g' /opt/bitnami/discourse/lib/discourse_js_processor.rb && \
     rm -fr /usr/local/share/ruby-build &&\
@@ -40,6 +41,7 @@ RUN install_packages curl libcurl4-openssl-dev wget libpq-dev build-essential li
     rm -fr /root/.gem &&\
     rm -fr /root/.npm &&\
     rm -fr /tmp/* && \
+    apt-get purge -y --auto-remove build-essential gcc g++ libpcre3-dev libpq-dev libcurl4-openssl-dev && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 RUN ln -sf /usr/local/bundle/bin/bootsnap                                /opt/bitnami/discourse/bin/ && \
@@ -77,3 +79,11 @@ RUN ln -sf /usr/local/bundle/bin/bootsnap                                /opt/bi
     ln -sf /usr/local/bundle/bin/thor                                    /opt/bitnami/discourse/bin/ && \
     ln -sf /usr/local/bundle/bin/tilt                                    /opt/bitnami/discourse/bin/ && \
     ln -sf /usr/local/bundle/bin/unicorn_rails                           /opt/bitnami/discourse/bin/
+
+COPY <<EOF /opt/bitnami/discourse/Passengerfile.json
+{
+  "unlimited_concurrency_paths": [
+    "/message_bus"
+  ]
+}
+EOF
