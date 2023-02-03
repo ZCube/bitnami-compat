@@ -1,4 +1,4 @@
-revision: 53
+revision: 54
 ignores:
     - php-fpm
     - ruby
@@ -7,46 +7,6 @@ dependencies:
         - discourse
     erlang:
         - rabbitmq
-    php:
-        - wordpress
-    libphp:
-        - wordpress
-    node:
-        - configurable-http-proxy
-        - discourse
-        - express
-        - ghost
-        - grafana-image-renderer
-        - jruby
-        - laravel
-        - mastodon
-        - odoo
-        - parse
-        - parse-dashboard
-        - rails
-        - supabase-postgres-meta
-        - supabase-storage
-        - supabase-studio
-    postgres-client:
-        - mastodon
-    python:
-        - discourse
-        - mastodon
-        - odoo
-        - parse
-        - parse-dashboard
-        - rails
-        - spark
-        - supabase-postgresql-meta
-        - supabase-storage
-        - supabase-studio
-    redis-client:
-        - mastodon
-    ruby:
-        - fluentd
-        - discourse
-        - mastodon
-        - python
     java:
         - cassandra
         - ejbca
@@ -75,3 +35,43 @@ dependencies:
         - wavefront-proxy
         - wildfly
         - zookeeper
+    libphp:
+        - wordpress
+    node:
+        - configurable-http-proxy
+        - discourse
+        - express
+        - ghost
+        - grafana-image-renderer
+        - jruby
+        - laravel
+        - mastodon
+        - odoo
+        - parse
+        - parse-dashboard
+        - rails
+        - supabase-postgres-meta
+        - supabase-storage
+        - supabase-studio
+    php:
+        - wordpress
+    postgres-client:
+        - mastodon
+    python:
+        - discourse
+        - mastodon
+        - odoo
+        - parse
+        - parse-dashboard
+        - rails
+        - spark
+        - supabase-postgresql-meta
+        - supabase-storage
+        - supabase-studio
+    redis-client:
+        - mastodon
+    ruby:
+        - fluentd
+        - discourse
+        - mastodon
+        - python

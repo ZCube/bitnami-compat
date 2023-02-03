@@ -2,59 +2,59 @@ image:
   digest: ''
   registry: ghcr.io
   repository: zcube/bitnami-compat/discourse
-  tag: 2.8.14-debian-11-r53
+  tag: 2.8.14-debian-11-r54
 postgresql:
   image:
     digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/postgresql
-    tag: 15.1.0-debian-11-r53
+    tag: 15.1.0-debian-11-r54
   metrics:
     image:
       digest: ''
       registry: ghcr.io
       repository: zcube/bitnami-compat/postgres-exporter
-      tag: 0.11.1-debian-11-r53
+      tag: 0.11.1-debian-11-r54
   volumePermissions:
     image:
       digest: ''
       registry: ghcr.io
       repository: zcube/bitnami-compat/bitnami-shell
-      tag: 11.0.0-debian-11-r53
+      tag: 11.0.0-debian-11-r54
 redis:
   image:
     digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/redis
-    tag: 7.0.8-debian-11-r53
+    tag: 7.0.8-debian-11-r54
   metrics:
     image:
       digest: ''
       registry: ghcr.io
       repository: zcube/bitnami-compat/redis-exporter
-      tag: 1.45.0-debian-11-r53
+      tag: 1.46.0-debian-11-r54
   sentinel:
     image:
       digest: ''
       registry: ghcr.io
       repository: zcube/bitnami-compat/redis-sentinel
-      tag: 7.0.8-debian-11-r53
+      tag: 7.0.8-debian-11-r54
   sysctl:
     image:
       digest: ''
       registry: ghcr.io
       repository: zcube/bitnami-compat/bitnami-shell
-      tag: 11.0.0-debian-11-r53
+      tag: 11.0.0-debian-11-r54
   volumePermissions:
     image:
       digest: ''
       registry: ghcr.io
       repository: zcube/bitnami-compat/bitnami-shell
-      tag: 11.0.0-debian-11-r53
+      tag: 11.0.0-debian-11-r54
 volumePermissions:
   image:
     digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/bitnami-shell
-    tag: 11.0.0-debian-11-r53
+    tag: 11.0.0-debian-11-r54
 
