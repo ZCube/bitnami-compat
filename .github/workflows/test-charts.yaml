@@ -210,6 +210,8 @@ jobs:
         run: |
           git submodule update charts
           sed -i.bak -E "s/reload\(\)/visit\(\'\/\'\)/g" "charts/.vib/discourse/cypress/cypress/integration/discourse_spec.js"
+          rm -f charts/.vib/discourse/cypress/cypress/integration/discourse_spec.js.bak || true
+
       - name: uninstall qemu
         run: |
           docker run --privileged --rm tonistiigi/binfmt --uninstall all
