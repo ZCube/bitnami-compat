@@ -82,7 +82,7 @@ RUN ln -sf /usr/local/bundle/bin/bootsnap                                /opt/bi
 COPY <<EOF /opt/bitnami/discourse/Passengerfile.json
 {
   "unlimited_concurrency_paths": [
-    "/message_bus"
+    "/message-bus"
   ]
 }
 EOF
