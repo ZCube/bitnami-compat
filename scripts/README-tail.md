@@ -40,32 +40,7 @@ task upgrade
 
 ## How to add a new image
 
-Example : mariadb/10.8
-
-1. Add submodule
-  ```bash
-  cd bitnami-dockers
-  git submodule add https://github.com/bitnami/bitnami-docker-mariadb
-  cd ..
-  go run main.go makeDirs
-  ```
-
-2. Write build scripts
-  * patches/golang/mariadb/10.8/install.sh
-  * patches/docker/mariadb/10.8/Dockerfile.from
-  * patches/docker/mariadb/10.8/Dockerfile.install
-  * patches/bash/mariadb/10.8/install.sh
-
-3. Apply and test
-  ```bash
-  task generate
-  cd bitnami-dockers/bitnami-docker-mariadb/10.8/debian-11
-  docker buildx create --name multiarchbuilder
-  docker buildx inspect multiarchbuilder --bootstrap
-  docker buildx use multiarchbuilder
-  docker buildx build --platform linux/amd64,linux/arm64 -t testimage . -f Dockerfile.arm64
-  docker run --rm -ti testimage
-  ```
+This section has moved to the [Wiki](https://github.com/ZCube/bitnami-compat/wiki/Creating-patch-guide).
 
 ## Compatible Images for Bitnami Charts
 
