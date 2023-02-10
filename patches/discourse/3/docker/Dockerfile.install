@@ -43,41 +43,42 @@ RUN install_packages curl libcurl4-openssl-dev wget libpq-dev build-essential li
     apt-get purge -y --auto-remove build-essential gcc g++ libpcre3-dev libpq-dev libcurl4-openssl-dev && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
-RUN ln -sf /usr/local/bundle/bin/bootsnap                                /opt/bitnami/discourse/bin/ && \
-    ln -sf /usr/local/bundle/bin/byebug                                  /opt/bitnami/discourse/bin/ && \
-    ln -sf /usr/local/bundle/bin/coderay                                 /opt/bitnami/discourse/bin/ && \
-    ln -sf /usr/local/bundle/bin/exifr                                   /opt/bitnami/discourse/bin/ && \
-    ln -sf /usr/local/bundle/bin/image_optim                             /opt/bitnami/discourse/bin/ && \
-    ln -sf /usr/local/bundle/bin/mustache                                /opt/bitnami/discourse/bin/ && \
-    ln -sf /usr/local/bundle/bin/nokogiri                                /opt/bitnami/discourse/bin/ && \
-    ln -sf /usr/local/bundle/bin/oauth                                   /opt/bitnami/discourse/bin/ && \
-    ln -sf /usr/local/bundle/bin/objspace_recorder_convert.rb            /opt/bitnami/discourse/bin/ && \
-    ln -sf /usr/local/bundle/bin/passenger                               /opt/bitnami/discourse/bin/ && \
-    ln -sf /usr/local/bundle/bin/passenger-config                        /opt/bitnami/discourse/bin/ && \
-    ln -sf /usr/local/bundle/bin/passenger-install-apache2-module        /opt/bitnami/discourse/bin/ && \
-    ln -sf /usr/local/bundle/bin/passenger-install-nginx-module          /opt/bitnami/discourse/bin/ && \
-    ln -sf /usr/local/bundle/bin/passenger-memory-stats                  /opt/bitnami/discourse/bin/ && \
-    ln -sf /usr/local/bundle/bin/passenger-status                        /opt/bitnami/discourse/bin/ && \
-    ln -sf /usr/local/bundle/bin/pry                                     /opt/bitnami/discourse/bin/ && \
-    ln -sf /usr/local/bundle/bin/puma                                    /opt/bitnami/discourse/bin/ && \
-    ln -sf /usr/local/bundle/bin/pumactl                                 /opt/bitnami/discourse/bin/ && \
-    ln -sf /usr/local/bundle/bin/r2                                      /opt/bitnami/discourse/bin/ && \
-    ln -sf /usr/local/bundle/bin/racc                                    /opt/bitnami/discourse/bin/ && \
-    ln -sf /usr/local/bundle/bin/rackup                                  /opt/bitnami/discourse/bin/ && \
-    ln -sf /usr/local/bundle/bin/rbtrace                                 /opt/bitnami/discourse/bin/ && \
-    ln -sf /usr/local/bundle/bin/readability                             /opt/bitnami/discourse/bin/ && \
-    ln -sf /usr/local/bundle/bin/rotp                                    /opt/bitnami/discourse/bin/ && \
-    # ln -sf /usr/local/bundle/bin/rtlit                                   /opt/bitnami/discourse/bin/ && \
-    ln -sf /usr/local/bundle/bin/ruby-memory-profiler                    /opt/bitnami/discourse/bin/ && \
-    ln -sf /usr/local/bundle/bin/sidekiq                                 /opt/bitnami/discourse/bin/ && \
-    ln -sf /usr/local/bundle/bin/sidekiqmon                              /opt/bitnami/discourse/bin/ && \
-    ln -sf /usr/local/bundle/bin/sprockets                               /opt/bitnami/discourse/bin/ && \
-    ln -sf /usr/local/bundle/bin/stackprof                               /opt/bitnami/discourse/bin/ && \
-    ln -sf /usr/local/bundle/bin/stackprof-flamegraph.pl                 /opt/bitnami/discourse/bin/ && \
-    ln -sf /usr/local/bundle/bin/stackprof-gprof2dot.py                  /opt/bitnami/discourse/bin/ && \
-    ln -sf /usr/local/bundle/bin/thor                                    /opt/bitnami/discourse/bin/ && \
-    ln -sf /usr/local/bundle/bin/tilt                                    /opt/bitnami/discourse/bin/ && \
-    ln -sf /usr/local/bundle/bin/unicorn_rails                           /opt/bitnami/discourse/bin/
+RUN ln -sf /usr/local/bundle/bin/bootsnap                                                 /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/byebug                                                   /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/coderay                                                  /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/exifr                                                    /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/image_optim                                              /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/mustache                                                 /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/nokogiri                                                 /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/oauth                                                    /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/objspace_recorder_convert.rb                             /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/passenger                                                /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/passenger-config                                         /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/passenger-install-apache2-module                         /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/passenger-install-nginx-module                           /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/passenger-memory-stats                                   /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/passenger-status                                         /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/pry                                                      /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/puma                                                     /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/pumactl                                                  /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/r2                                                       /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/racc                                                     /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/rackup                                                   /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/rbtrace                                                  /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/readability                                              /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/rotp                                                     /opt/bitnami/discourse/bin/ && \
+    # ln -sf /usr/local/bundle/bin/rtlit                                                    /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/ruby-memory-profiler                                     /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/sidekiq                                                  /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/sidekiqmon                                               /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/sprockets                                                /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/stackprof                                                /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/stackprof-flamegraph.pl                                  /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/stackprof-gprof2dot.py                                   /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/thor                                                     /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/tilt                                                     /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/unicorn_rails                                            /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/gems/passenger-*/buildout/ruby/*/passenger_native_support.so /opt/bitnami/discourse/lib/passenger_native_support.so
 
 COPY <<EOF /opt/bitnami/discourse/Passengerfile.json
 {
