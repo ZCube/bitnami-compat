@@ -4,41 +4,41 @@ externalAccess:
       digest: ''
       registry: ghcr.io
       repository: zcube/bitnami-compat/kubectl
-      tag: 1.26.1-debian-11-r54
+      tag: 1.26.1-debian-11-r55
 image:
   digest: ''
   registry: ghcr.io
   repository: zcube/bitnami-compat/kafka
-  tag: 3.3.2-debian-11-r54
+  tag: 3.3.2-debian-11-r55
 metrics:
   jmx:
     image:
       digest: ''
       registry: ghcr.io
       repository: zcube/bitnami-compat/jmx-exporter
-      tag: 0.17.2-debian-11-r54
+      tag: 0.17.2-debian-11-r55
   kafka:
     image:
       digest: ''
       registry: ghcr.io
       repository: zcube/bitnami-compat/kafka-exporter
-      tag: 1.6.0-debian-11-r54
+      tag: 1.6.0-debian-11-r55
 volumePermissions:
   image:
     digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/bitnami-shell
-    tag: 11.0.0-debian-11-r54
+    tag: 11.0.0-debian-11-r55
 zookeeper:
   image:
     digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/zookeeper
-    tag: 3.8.1-debian-11-r54
+    tag: 3.8.1-debian-11-r55
   volumePermissions:
     image:
       digest: ''
       registry: ghcr.io
       repository: zcube/bitnami-compat/bitnami-shell
-      tag: 11.0.0-debian-11-r54
+      tag: 11.0.0-debian-11-r55
 

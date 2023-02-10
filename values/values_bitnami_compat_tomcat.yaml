@@ -2,18 +2,18 @@ image:
   digest: ''
   registry: ghcr.io
   repository: zcube/bitnami-compat/tomcat
-  tag: 9.0.71-debian-11-r54
+  tag: 9.0.71-debian-11-r55
 metrics:
   jmx:
     image:
       digest: ''
       registry: ghcr.io
       repository: zcube/bitnami-compat/jmx-exporter
-      tag: 0.17.2-debian-11-r54
+      tag: 0.17.2-debian-11-r55
 volumePermissions:
   image:
     digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/bitnami-shell
-    tag: 11.0.0-debian-11-r54
+    tag: 11.0.0-debian-11-r55
 

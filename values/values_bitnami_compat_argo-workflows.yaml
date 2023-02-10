@@ -3,35 +3,35 @@ mysql:
     digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/mysql
-    tag: 8.0.32-debian-11-r54
+    tag: 8.0.32-debian-11-r55
   metrics:
     image:
       digest: ''
       registry: ghcr.io
       repository: zcube/bitnami-compat/mysqld-exporter
-      tag: 0.14.0-debian-11-r54
+      tag: 0.14.0-debian-11-r55
   volumePermissions:
     image:
       digest: ''
       registry: ghcr.io
       repository: zcube/bitnami-compat/bitnami-shell
-      tag: 11.0.0-debian-11-r54
+      tag: 11.0.0-debian-11-r55
 postgresql:
   image:
     digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/postgresql
-    tag: 15.1.0-debian-11-r54
+    tag: 15.2.0-debian-11-r55
   metrics:
     image:
       digest: ''
       registry: ghcr.io
       repository: zcube/bitnami-compat/postgres-exporter
-      tag: 0.11.1-debian-11-r54
+      tag: 0.11.1-debian-11-r55
   volumePermissions:
     image:
       digest: ''
       registry: ghcr.io
       repository: zcube/bitnami-compat/bitnami-shell
-      tag: 11.0.0-debian-11-r54
+      tag: 11.0.0-debian-11-r55
 

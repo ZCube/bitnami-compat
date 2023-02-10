@@ -2,17 +2,17 @@ image:
   digest: ''
   registry: ghcr.io
   repository: zcube/bitnami-compat/mongodb-sharded
-  tag: 6.0.4-debian-11-r54
+  tag: 6.0.4-debian-11-r55
 metrics:
   image:
     digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/mongodb-exporter
-    tag: 0.36.0-debian-11-r54
+    tag: 0.37.0-debian-11-r55
 volumePermissions:
   image:
     digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/bitnami-shell
-    tag: 11.0.0-debian-11-r54
+    tag: 11.0.0-debian-11-r55
 
