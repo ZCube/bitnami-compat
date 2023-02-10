@@ -1,0 +1,88 @@
+# Reference : https://github.com/discourse/discourse_docker/blob/main/image/base/slim.Dockerfile
+# License : MIT License
+
+# oxipng
+# imagemagick
+# jemalloc
+
+COPY --from=oxipng /usr/local/cargo/bin/oxipng /usr/local/bin/oxipng
+
+# ENV PASSENGER_COMPILE_NATIVE_SUPPORT_BINARY=0
+# ENV PASSENGER_DOWNLOAD_NATIVE_SUPPORT_BINARY=0
+
+RUN install_packages curl libcurl4-openssl-dev wget libpq-dev build-essential libpcre3-dev advancecomp jhead jpegoptim libjpeg-turbo-progs && \
+    install_packages whois libcurl4 curl wget procps libpcre3 libssl1.1 libpq5 file ca-certificates tzdata optipng && \
+    git clone --depth 1 --branch v{{{VERSION}}} https://github.com/discourse/discourse /opt/bitnami/discourse && \
+    git -C /opt/bitnami/discourse remote set-branches --add origin tests-passed && \
+    cd /opt/bitnami/discourse && \
+    gem update --system && \
+    bundle lock --add-platform $(arch)-linux && \
+    bundler add passenger && \
+    bundle update mini_racer && \
+    bundle config --local deployment true && \
+    bundle config --local path ${PWD}/vendor/bundle && \
+    bundle config --local without test development && \
+    bundle install --jobs "$(nproc)" && \
+    cd /opt/bitnami/discourse/app/assets/javascripts && \
+    yarn install --production --frozen-lockfile --network-timeout 600000 && \
+    yarn cache clean && \
+    ruby -S passenger-config compile-agent --auto --optimize && \
+    ruby -S passenger-config install-agent --auto && \
+    ruby -S passenger-config install-standalone-runtime --auto && \
+    ruby -S passenger-config build-native-support && \
+    ruby -S passenger-config validate-install && \
+    rm -rf /opt/bitnami/discourse/vendor/bundle/ruby/*/gems/passenger* && \
+    ln -sf /usr/local/bundle/gems/passenger* /opt/bitnami/discourse/vendor/bundle/ruby/*/gems/ && \
+    # too slow arm64 && \
+    sed -i -E 's/15000/50000/g' /opt/bitnami/discourse/lib/discourse_js_processor.rb && \
+    rm -fr /usr/local/share/ruby-build &&\
+    rm -fr /var/lib/apt/lists/* &&\
+    rm -fr /root/.gem &&\
+    rm -fr /root/.npm &&\
+    rm -fr /tmp/* && \
+    apt-get purge -y --auto-remove build-essential gcc g++ libpcre3-dev libpq-dev libcurl4-openssl-dev && \
+    apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
+
+RUN ln -sf /usr/local/bundle/bin/bootsnap                                /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/byebug                                  /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/coderay                                 /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/exifr                                   /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/image_optim                             /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/mustache                                /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/nokogiri                                /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/oauth                                   /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/objspace_recorder_convert.rb            /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/passenger                               /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/passenger-config                        /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/passenger-install-apache2-module        /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/passenger-install-nginx-module          /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/passenger-memory-stats                  /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/passenger-status                        /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/pry                                     /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/puma                                    /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/pumactl                                 /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/r2                                      /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/racc                                    /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/rackup                                  /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/rbtrace                                 /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/readability                             /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/rotp                                    /opt/bitnami/discourse/bin/ && \
+    # ln -sf /usr/local/bundle/bin/rtlit                                   /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/ruby-memory-profiler                    /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/sidekiq                                 /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/sidekiqmon                              /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/sprockets                               /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/stackprof                               /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/stackprof-flamegraph.pl                 /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/stackprof-gprof2dot.py                  /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/thor                                    /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/tilt                                    /opt/bitnami/discourse/bin/ && \
+    ln -sf /usr/local/bundle/bin/unicorn_rails                           /opt/bitnami/discourse/bin/
+
+COPY <<EOF /opt/bitnami/discourse/Passengerfile.json
+{
+  "unlimited_concurrency_paths": [
+    "/message-bus"
+  ]
+}
+EOF
