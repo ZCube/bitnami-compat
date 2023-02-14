@@ -62,6 +62,8 @@ jobs:
            REPO_OWNER: "bitnami"
          - APP: "gitea"
            REPO_OWNER: "bitnami"
+         - APP: "grafana"
+           REPO_OWNER: "bitnami"
          - APP: "java"
            REPO_OWNER: "bitnami"
          - APP: "jmx-exporter"

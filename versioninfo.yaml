@@ -201,6 +201,13 @@
   os_flavour: debian-11
   os_name: linux
   revision: "55"
+- name: grafana
+  version: 9.3.6
+  version_major: "9"
+  version_full: 9.3.6-debian-11-r55
+  os_flavour: debian-11
+  os_name: linux
+  revision: "55"
 - name: java
   version: 1.8.362
   version_major: "1.8"

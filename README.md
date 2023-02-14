@@ -299,6 +299,7 @@ helm install db bitnami/postgresql -f values_bitnami_compat_postgresql.yaml
 * fluentd : [`1`, `1-debian-11`, `1.15.3`, `1.15.3-debian-11`, `1.15.3-debian-11-r55`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Ffluentd)
 * git : [`2`, `2-debian-11`, `2.39.1`, `2.39.1-debian-11`, `2.39.1-debian-11-r55`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fgit)
 * gitea : [`1`, `1-debian-11`, `1.18.3`, `1.18.3-debian-11`, `1.18.3-debian-11-r55`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fgitea)
+* grafana : [`9`, `9-debian-11`, `9.3.6`, `9.3.6-debian-11`, `9.3.6-debian-11-r55`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fgrafana)
 * java : [`1.8`, `1.8-debian-11`, `1.8.362`, `1.8.362-debian-11`, `1.8.362-debian-11-r55`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fjava)
 * java : [`11`, `11-debian-11`, `11.0.18`, `11.0.18-debian-11`, `11.0.18-debian-11-r55`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fjava)
 * java : [`17`, `17-debian-11`, `17.0.6`, `17.0.6-debian-11`, `17.0.6-debian-11-r55`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fjava)
