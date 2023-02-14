@@ -194,6 +194,8 @@ helm install db bitnami/postgresql -f values_bitnami_compat_postgresql.yaml
 * ✔️  gitea
 * ✔️  kafka
 * ✔️  keycloak
+* ✔️  kibana
+* ✔️  logstash
 * ✔️  mariadb
 * ✔️  mariadb-galera
 * ✔️  mastodon
@@ -308,9 +310,13 @@ helm install db bitnami/postgresql -f values_bitnami_compat_postgresql.yaml
 * kafka-exporter : [`1`, `1-debian-11`, `1.6.0`, `1.6.0-debian-11`, `1.6.0-debian-11-r55`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fkafka-exporter)
 * keycloak : [`20`, `20-debian-11`, `20.0.3`, `20.0.3-debian-11`, `20.0.3-debian-11-r55`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fkeycloak)
 * keycloak-config-cli : [`5`, `5-debian-11`, `5.5.0`, `5.5.0-debian-11`, `5.5.0-debian-11-r55`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fkeycloak-config-cli)
+* kibana : [`7`, `7-debian-11`, `7.17.9`, `7.17.9-debian-11`, `7.17.9-debian-11-r55`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fkibana)
+* kibana : [`8`, `8-debian-11`, `8.6.1`, `8.6.1-debian-11`, `8.6.1-debian-11-r55`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fkibana)
 * kubectl : [`1.24`, `1.24-debian-11`, `1.24.10`, `1.24.10-debian-11`, `1.24.10-debian-11-r55`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fkubectl)
 * kubectl : [`1.25`, `1.25-debian-11`, `1.25.6`, `1.25.6-debian-11`, `1.25.6-debian-11-r55`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fkubectl)
 * kubectl : [`1.26`, `1.26-debian-11`, `1.26.1`, `1.26.1-debian-11`, `1.26.1-debian-11-r55`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fkubectl)
+* logstash : [`7`, `7-debian-11`, `7.17.9`, `7.17.9-debian-11`, `7.17.9-debian-11-r55`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Flogstash)
+* logstash : [`8`, `8-debian-11`, `8.6.1`, `8.6.1-debian-11`, `8.6.1-debian-11-r55`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Flogstash)
 * mariadb : [`10.10`, `10.10-debian-11`, `10.10.3`, `10.10.3-debian-11`, `10.10.3-debian-11-r55`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fmariadb)
 * mariadb : [`10.5`, `10.5-debian-11`, `10.5.19`, `10.5.19-debian-11`, `10.5.19-debian-11-r55`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fmariadb)
 * mariadb : [`10.6`, `10.6-debian-11`, `10.6.12`, `10.6.12-debian-11`, `10.6.12-debian-11-r55`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fmariadb)
@@ -440,7 +446,7 @@ This section has moved to the [Wiki](https://github.com/ZCube/bitnami-compat/wik
 
 Apache 2.0
 
-Copyright &copy; 2022 ZCube(zcubekr@gmail.com) 
+Copyright &copy; 2023 ZCube(zcubekr@gmail.com) 
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -468,7 +474,7 @@ https://github.com/bitnami/charts
 
 https://github.com/bitnami/containers
 
-Copyright &copy; 2022 Bitnami
+Copyright &copy; 2023 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

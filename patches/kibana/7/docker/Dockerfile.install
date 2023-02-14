@@ -1,0 +1,20 @@
+# Reference : https://www.elastic.co/guide/en/kibana/reference/current/targz.html
+
+RUN install_packages wget
+
+ENV KIBANA_VERSION {{{VERSION}}}
+
+ENV ES_JAVA_HOME=/opt/bitnami/java
+
+RUN mkdir -p /opt/bitnami \
+    && cd /opt/bitnami \
+    && wget https://artifacts.elastic.co/downloads/kibana/kibana-${KIBANA_VERSION}-linux-$(uname -m).tar.gz \
+    && wget https://artifacts.elastic.co/downloads/kibana/kibana-${KIBANA_VERSION}-linux-$(uname -m).tar.gz.sha512 \
+    && cat kibana-${KIBANA_VERSION}-linux-$(uname -m).tar.gz.sha512 | sha512sum --check - \
+    && tar -xzf kibana-${KIBANA_VERSION}-linux-$(uname -m).tar.gz \
+    && mv kibana-${KIBANA_VERSION}*/ kibana \
+    && rm -rf kibana-${KIBANA_VERSION}-linux-$(uname -m)* \
+    && rm -rf /opt/bitnami/kibana/config \
+    && chown 1001:1001 -R /opt/bitnami/kibana
+
+COPY --from=bitnami/kibana:{{{VERSION}}} /opt/bitnami/kibana/config/ /opt/bitnami/kibana/config/

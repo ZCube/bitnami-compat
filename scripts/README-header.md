@@ -194,6 +194,8 @@ helm install db bitnami/postgresql -f values_bitnami_compat_postgresql.yaml
 * ✔️  gitea
 * ✔️  kafka
 * ✔️  keycloak
+* ✔️  kibana
+* ✔️  logstash
 * ✔️  mariadb
 * ✔️  mariadb-galera
 * ✔️  mastodon

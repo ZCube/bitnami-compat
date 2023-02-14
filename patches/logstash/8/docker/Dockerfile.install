@@ -1,0 +1,20 @@
+# Reference : https://www.elastic.co/guide/en/logstash/reference/current/targz.html
+
+RUN install_packages wget
+
+ENV LOGSTASH_VERSION {{{VERSION}}}
+
+ENV ES_JAVA_HOME=/opt/bitnami/java
+
+RUN mkdir -p /opt/bitnami \
+    && cd /opt/bitnami \
+    && wget https://artifacts.elastic.co/downloads/logstash/logstash-${LOGSTASH_VERSION}-linux-$(uname -m).tar.gz \
+    && wget https://artifacts.elastic.co/downloads/logstash/logstash-${LOGSTASH_VERSION}-linux-$(uname -m).tar.gz.sha512 \
+    && cat logstash-${LOGSTASH_VERSION}-linux-$(uname -m).tar.gz.sha512 | sha512sum --check - \
+    && tar -xzf logstash-${LOGSTASH_VERSION}-linux-$(uname -m).tar.gz \
+    && mv logstash-${LOGSTASH_VERSION}*/ logstash \
+    && rm -rf logstash-${LOGSTASH_VERSION}-linux-$(uname -m)* \
+    && rm -rf /opt/bitnami/logstash/config \
+    && chown 1001:1001 -R /opt/bitnami/logstash
+
+COPY --from=bitnami/kibana:{{{VERSION}}} /opt/bitnami/logstash/config/ /opt/bitnami/logstash/config/

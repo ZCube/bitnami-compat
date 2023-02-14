@@ -55,7 +55,7 @@ This section has moved to the [Wiki](https://github.com/ZCube/bitnami-compat/wik
 
 Apache 2.0
 
-Copyright &copy; 2022 ZCube(zcubekr@gmail.com) 
+Copyright &copy; 2023 ZCube(zcubekr@gmail.com) 
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -83,7 +83,7 @@ https://github.com/bitnami/charts
 
 https://github.com/bitnami/containers
 
-Copyright &copy; 2022 Bitnami
+Copyright &copy; 2023 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

@@ -1,9 +1,8 @@
 #!/bin/bash
 
 rm -rf ./values/*.yaml
-touch ./values/values_bitnami_compat_kibana.yaml
-touch ./values/values_bitnami_compat_node-exporter.yaml
 touch ./values/values_bitnami_compat_kube-state-metrics.yaml
+touch ./values/values_bitnami_compat_node-exporter.yaml
 touch ./values/values_bitnami_compat_wavefront.yaml
 touch ./values/values_bitnami_compat_haproxy.yaml
 

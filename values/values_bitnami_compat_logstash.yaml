@@ -1,3 +1,12 @@
-null
-...
+image:
+  digest: ''
+  registry: ghcr.io
+  repository: zcube/bitnami-compat/logstash
+  tag: 8.6.1-debian-11-r55
+volumePermissions:
+  image:
+    digest: ''
+    registry: ghcr.io
+    repository: zcube/bitnami-compat/bitnami-shell
+    tag: 11.0.0-debian-11-r55
 
