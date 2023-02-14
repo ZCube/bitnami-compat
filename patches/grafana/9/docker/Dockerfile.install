@@ -1,4 +1,5 @@
 COPY --from=grafana/grafana:{{{VERSION}}} /usr/share/grafana/ /opt/bitnami/grafana/
+RUN rm -rf /opt/bitnami/grafana/conf/
 COPY --from=bitnami/grafana:{{{VERSION}}} /opt/bitnami/grafana/conf/ /opt/bitnami/grafana/conf/
 
 
