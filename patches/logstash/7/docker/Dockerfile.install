@@ -17,4 +17,4 @@ RUN mkdir -p /opt/bitnami \
     && rm -rf /opt/bitnami/logstash/config \
     && chown 1001:1001 -R /opt/bitnami/logstash
 
-COPY --from=bitnami/kibana:{{{VERSION}}} /opt/bitnami/logstash/config/ /opt/bitnami/logstash/config/
+COPY --from=bitnami/logstash:{{{VERSION}}} /opt/bitnami/logstash/config/ /opt/bitnami/logstash/config/
