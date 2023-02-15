@@ -1,9 +1,37 @@
-RUN install_packages curl unzip zip ca-certificates
+# Reference: arm64v8/eclipse-temurin:8-focal
+# Reference: https://github.com/adoptium/temurin-build
+# License: Apache-2.0
 
-RUN curl -fsSL "https://get.sdkman.io" | bash \
-    && bash -c ". $HOME/.sdkman/bin/sdkman-init.sh \
-    && sdk install java {{{VERSION_MAJOR_MINOR}}}.18-tem" \
-    && mkdir -p /opt/bitnami \
-    && ln -sf $HOME/.sdkman/candidates/java/current /opt/bitnami/java
+RUN install_packages curl unzip zip libatomic1 ca-certificates
 
-ENV JAVA_HOME=$HOME/.sdkman/candidates/java/current
+ENV JAVA_HOME=/opt/bitnami/java
+
+RUN export JAVA_VERSION=jdk-11.0.18%2B10 && \
+    export JAVA_PREFIX=OpenJDK11U && \
+    export JAVA_SUFFIX=hotspot_11.0.18_10 && \
+    mkdir -p $JAVA_HOME && \
+    ARCH="$(dpkg --print-architecture)" && \
+    case "${ARCH}" in aarch64 | arm64) \
+        BINARY_URL="https://github.com/adoptium/temurin{{{VERSION_MAJOR}}}-binaries/releases/download/${JAVA_VERSION}/${JAVA_PREFIX}-jdk_aarch64_linux_${JAVA_SUFFIX}.tar.gz" \
+        ;; \
+    armhf | arm) \
+        BINARY_URL="https://github.com/adoptium/temurin{{{VERSION_MAJOR}}}-binaries/releases/download/${JAVA_VERSION}/${JAVA_PREFIX}-jdk_arm_linux_${JAVA_SUFFIX}.tar.gz" \
+        ;; \
+    ppc64el | powerpc:common64) \
+        BINARY_URL="https://github.com/adoptium/temurin{{{VERSION_MAJOR}}}-binaries/releases/download/${JAVA_VERSION}/${JAVA_PREFIX}-jdk_ppc64le_linux_${JAVA_SUFFIX}.tar.gz" \
+        ;; \
+    amd64 | i386:x86-64) \
+        BINARY_URL="https://github.com/adoptium/temurin{{{VERSION_MAJOR}}}-binaries/releases/download/${JAVA_VERSION}/${JAVA_PREFIX}-jdk_x64_linux_${JAVA_SUFFIX}.tar.gz" \
+        ;; \
+    *) \
+        echo "Unsupported arch: ${ARCH}" \
+        exit 1 \
+        ;; \
+    esac && \
+    curl -L -o /tmp/openjdk.tar.gz ${BINARY_URL} && \
+    # echo "${ESUM} */tmp/openjdk.tar.gz" | sha256sum -c - && \
+    mkdir -p "$JAVA_HOME" && \
+    tar --extract --file /tmp/openjdk.tar.gz --directory "$JAVA_HOME" --strip-components 1 --no-same-owner && \
+    rm -f /tmp/openjdk.tar.gz ${JAVA_HOME}/src.zip && \
+    find "$JAVA_HOME/lib" -name '*.so' -exec dirname '{}' ';' | sort -u >/etc/ld.so.conf.d/docker-openjdk.conf && \
+    ldconfig

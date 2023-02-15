@@ -6,9 +6,9 @@ RUN install_packages curl unzip zip libatomic1 ca-certificates
 
 ENV JAVA_HOME=/opt/bitnami/java
 
-RUN export JAVA_VERSION=jdk-19.0.2%2B7 && \
-    export JAVA_PREFIX=OpenJDK19U && \
-    export JAVA_SUFFIX=hotspot_19.0.2_7 && \
+RUN export JAVA_VERSION=jdk-18.0.2.1%2B1 && \
+    export JAVA_PREFIX=OpenJDK18U && \
+    export JAVA_SUFFIX=hotspot_18.0.2.1_1 && \
     mkdir -p $JAVA_HOME && \
     ARCH="$(dpkg --print-architecture)" && \
     case "${ARCH}" in aarch64 | arm64) \
