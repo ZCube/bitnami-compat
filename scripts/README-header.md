@@ -195,6 +195,8 @@ helm install db bitnami/postgresql -f values_bitnami_compat_postgresql.yaml
 * ✔️  kafka
 * ✔️  keycloak
 * ✔️  kibana
+* ✔️  kube-state-metrics
+* ✔️  kubernetes-event-exporter
 * ✔️  logstash
 * ✔️  mariadb
 * ✔️  mariadb-galera
@@ -205,6 +207,7 @@ helm install db bitnami/postgresql -f values_bitnami_compat_postgresql.yaml
 * ✔️  mongodb-sharded
 * ✔️  mysql
 * ✔️  nginx
+* ✔️  node-exporter
 * ✔️  postgresql
 * ✔️  postgresql-ha
 * ✔️  rabbitmq
@@ -217,6 +220,27 @@ helm install db bitnami/postgresql -f values_bitnami_compat_postgresql.yaml
 * ✔️  tomcat
 * ✔️  wordpress
 * ✔️  zookeeper
+* ❌  grafana
+  * ✔️  grafana
+  * ❌  grafana-image-renderer
+  * ✔️  bitnami-shell
+* ❌  grafana-loki
+  * ❌  grafana-loki
+  * ✔️  nginx
+  * ❌  promtail
+  * ✔️  bitnami-shell
+  * ✔️  memcached
+  * ✔️  memcached
+  * ✔️  memcached
+  * ✔️  memcached
+* ❌  grafana-operator
+  * ❌  grafana-operator
+  * ✔️  grafana
+* ❌  grafana-tempo
+  * ❌  grafana-tempo
+  * ❌  grafana-tempo-query
+  * ❌  grafana-tempo-vulture
+  * ✔️  bitnami-shell
 * ❌  nginx-ingress-controller
   * ❌  nginx-ingress-controller
   * ✔️  nginx

@@ -1,0 +1,22 @@
+FROM golang:1.19.4-bullseye AS kubernetes-event-exporter
+
+RUN cd /tmp && \
+    mkdir -p /opt/bitnami && \
+    export PACKAGE=kubernetes-event-exporter && \
+    export TARGET_DIR=kubernetes-event-exporter && \
+    export VERSION={{{VERSION}}} && \
+    export REF={{{VERSION_MAJOR_MINOR}}} && \
+    export CGO_ENABLED=0  && \
+    rm -rf ${PACKAGE} || true && \
+    mkdir -p ${PACKAGE} && \
+    git clone -b "v${REF}" https://github.com/resmoio/kubernetes-event-exporter ${PACKAGE} && \
+    cd ${PACKAGE} && \
+    CGO_ENABLED=0 GOOS=linux GO11MODULE=on go build -a -o ${PACKAGE} . && \
+    mkdir -p /opt/bitnami/${TARGET_DIR}/licenses && \
+    mkdir -p /opt/bitnami/${TARGET_DIR}/bin && \
+    cp -f LICENSE /opt/bitnami/${TARGET_DIR}/licenses/${PACKAGE}-${VERSION}.txt && \
+    cp -f ${PACKAGE} /opt/bitnami/${TARGET_DIR}/bin/kubernetes-event-exporter && \
+    cd .. && \
+    rm -rf ${PACKAGE} && \
+    find /opt/bitnami -exec touch -a -m -t 202301010000.00 {} \;
+

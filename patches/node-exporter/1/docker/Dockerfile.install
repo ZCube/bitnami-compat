@@ -1,0 +1,9 @@
+RUN install_packages curl ca-certificates \
+ && mkdir -p /opt/bitnami/node-exporter/licenses \
+ && curl -L -o /opt/bitnami/node-exporter/licenses/LICENSE \
+    https://raw.githubusercontent.com/prometheus/node_exporter/master/LICENSE
+
+COPY --from=prom/node-exporter:v{{{VERSION}}} /bin/node_exporter /opt/bitnami/node-exporter/bin/node_exporter
+
+
+

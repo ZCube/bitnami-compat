@@ -195,6 +195,8 @@ helm install db bitnami/postgresql -f values_bitnami_compat_postgresql.yaml
 * ✔️  kafka
 * ✔️  keycloak
 * ✔️  kibana
+* ✔️  kube-state-metrics
+* ✔️  kubernetes-event-exporter
 * ✔️  logstash
 * ✔️  mariadb
 * ✔️  mariadb-galera
@@ -205,6 +207,7 @@ helm install db bitnami/postgresql -f values_bitnami_compat_postgresql.yaml
 * ✔️  mongodb-sharded
 * ✔️  mysql
 * ✔️  nginx
+* ✔️  node-exporter
 * ✔️  postgresql
 * ✔️  postgresql-ha
 * ✔️  rabbitmq
@@ -217,6 +220,27 @@ helm install db bitnami/postgresql -f values_bitnami_compat_postgresql.yaml
 * ✔️  tomcat
 * ✔️  wordpress
 * ✔️  zookeeper
+* ❌  grafana
+  * ✔️  grafana
+  * ❌  grafana-image-renderer
+  * ✔️  bitnami-shell
+* ❌  grafana-loki
+  * ❌  grafana-loki
+  * ✔️  nginx
+  * ❌  promtail
+  * ✔️  bitnami-shell
+  * ✔️  memcached
+  * ✔️  memcached
+  * ✔️  memcached
+  * ✔️  memcached
+* ❌  grafana-operator
+  * ❌  grafana-operator
+  * ✔️  grafana
+* ❌  grafana-tempo
+  * ❌  grafana-tempo
+  * ❌  grafana-tempo-query
+  * ❌  grafana-tempo-vulture
+  * ✔️  bitnami-shell
 * ❌  nginx-ingress-controller
   * ❌  nginx-ingress-controller
   * ✔️  nginx
@@ -313,9 +337,11 @@ helm install db bitnami/postgresql -f values_bitnami_compat_postgresql.yaml
 * keycloak-config-cli : [`5`, `5-debian-11`, `5.5.0`, `5.5.0-debian-11`, `5.5.0-debian-11-r55`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fkeycloak-config-cli)
 * kibana : [`7`, `7-debian-11`, `7.17.9`, `7.17.9-debian-11`, `7.17.9-debian-11-r55`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fkibana)
 * kibana : [`8`, `8-debian-11`, `8.6.1`, `8.6.1-debian-11`, `8.6.1-debian-11-r55`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fkibana)
+* kube-state-metrics : [`2`, `2-debian-11`, `2.7.0`, `2.7.0-debian-11`, `2.7.0-debian-11-r55`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fkube-state-metrics)
 * kubectl : [`1.24`, `1.24-debian-11`, `1.24.10`, `1.24.10-debian-11`, `1.24.10-debian-11-r55`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fkubectl)
 * kubectl : [`1.25`, `1.25-debian-11`, `1.25.6`, `1.25.6-debian-11`, `1.25.6-debian-11-r55`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fkubectl)
 * kubectl : [`1.26`, `1.26-debian-11`, `1.26.1`, `1.26.1-debian-11`, `1.26.1-debian-11-r55`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fkubectl)
+* kubernetes-event-exporter : [`1`, `1-debian-11`, `1.1.0`, `1.1.0-debian-11`, `1.1.0-debian-11-r55`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fkubernetes-event-exporter)
 * logstash : [`7`, `7-debian-11`, `7.17.9`, `7.17.9-debian-11`, `7.17.9-debian-11-r55`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Flogstash)
 * logstash : [`8`, `8-debian-11`, `8.6.1`, `8.6.1-debian-11`, `8.6.1-debian-11-r55`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Flogstash)
 * mariadb : [`10.10`, `10.10-debian-11`, `10.10.3`, `10.10.3-debian-11`, `10.10.3-debian-11-r55`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fmariadb)
@@ -347,6 +373,7 @@ helm install db bitnami/postgresql -f values_bitnami_compat_postgresql.yaml
 * node : [`14`, `14-debian-11`, `14.21.2`, `14.21.2-debian-11`, `14.21.2-debian-11-r55`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fnode)
 * node : [`16`, `16-debian-11`, `16.19.0`, `16.19.0-debian-11`, `16.19.0-debian-11-r55`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fnode)
 * node : [`18`, `18-debian-11`, `18.14.0`, `18.14.0-debian-11`, `18.14.0-debian-11-r55`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fnode)
+* node-exporter : [`1`, `1-debian-11`, `1.5.0`, `1.5.0-debian-11`, `1.5.0-debian-11-r55`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fnode-exporter)
 * openldap : [`2.6`, `2.6-debian-11`, `2.6.3`, `2.6.3-debian-11`, `2.6.3-debian-11-r55`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fopenldap)
 * pgpool : [`4`, `4-debian-11`, `4.4.2`, `4.4.2-debian-11`, `4.4.2-debian-11-r55`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fpgpool)
 * postgres-exporter : [`0`, `0-debian-11`, `0.11.1`, `0.11.1-debian-11`, `0.11.1-debian-11-r55`](https://github.com/zcube/bitnami-compat/pkgs/container/bitnami-compat%2Fpostgres-exporter)

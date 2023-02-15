@@ -1,3 +1,6 @@
-null
-...
+image:
+  digest: ''
+  registry: ghcr.io
+  repository: zcube/bitnami-compat/kube-state-metrics
+  tag: 2.7.0-debian-11-r55
 

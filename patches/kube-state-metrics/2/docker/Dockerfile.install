@@ -1,0 +1,9 @@
+RUN install_packages curl ca-certificates \
+ && mkdir -p /opt/bitnami/kube-state-metrics/licenses \
+ && curl -L -o /opt/bitnami/kube-state-metrics/licenses/LICENSE \
+    https://raw.githubusercontent.com//kubernetes/kube-state-metrics/master/LICENSE
+
+COPY --from=registry.k8s.io/kube-state-metrics/kube-state-metrics:v{{{VERSION}}}  /kube-state-metrics /opt/bitnami/kube-state-metrics/bin/kube-state-metrics
+
+
+
