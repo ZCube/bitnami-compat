@@ -54,7 +54,7 @@
 
 ## Update bitnami-dockers schedule
 
-* Every friday.
+* day-of-month 1 in every 2nd month
 
 ## Usage #1
 

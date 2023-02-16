@@ -3,7 +3,7 @@ on:
   push:
   workflow_dispatch:
   schedule:
-    - cron: '0 1 * * 5'
+    - cron: '0 1 1 */2 *'
 
 env:
   REGISTRY: ghcr.io
@@ -13,8 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     if: >-
       ${{ !contains(github.event.head_commit.message, '[ci skip]') &&
-      !contains(github.event.head_commit.message, '[skip ci]')
-      }}
+      !contains(github.event.head_commit.message, '[skip ci]') &&
+      !contains(github.event.head_commit.message, 'docs:') }}
     permissions:
       contents: read
       packages: write

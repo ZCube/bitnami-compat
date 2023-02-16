@@ -1,0 +1,9 @@
+*          text=auto
+
+# Scripts
+*.bash     text eol=lf
+*.sh       text eol=lf
+*.zsh      text eol=lf
+*.yml      text eol=lf
+*.yaml     text eol=lf
+

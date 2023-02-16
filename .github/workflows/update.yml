@@ -2,7 +2,7 @@ name: Update bitnami-dockers
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 0 * * 5'
+    - cron: '0 0 1 */2 *'
 jobs:
   update:
     runs-on: ubuntu-latest
