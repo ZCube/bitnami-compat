@@ -225,7 +225,7 @@ jobs:
             chmod 700 get_helm.sh
             ./get_helm.sh
           fi
-          
+
           helm repo add bitnami https://charts.bitnami.com/bitnami
 
       - name: install kubectl
@@ -283,7 +283,7 @@ jobs:
           then
             wget -q -O - https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | TAG=v5.4.6 bash
           fi
-          
+
       - name: install mustache mo
         run: |
           if ! hash mo 2>/dev/null
@@ -299,7 +299,7 @@ jobs:
 
           k3d cluster stop test-cluster || true
           k3d cluster delete test-cluster || true
-          
+
           docker volume rm k3d-test-cluster-images || true
           sudo mkdir -p containers
           sudo chmod 0710 containers
@@ -335,7 +335,7 @@ jobs:
 
           kubectl taint nodes  -l node-role.kubernetes.io/master=true         node-role.kubernetes.io=master:NoSchedule   --overwrite=true
           kubectl taint nodes  -l node-role.kubernetes.io/control-plane=true  node-role.kubernetes.io=control-plane:NoSchedule   --overwrite=true
-          
+
           kubectl apply -f traefik_config.yaml
 
       - name: execute
@@ -360,14 +360,14 @@ jobs:
           fi
 
           case "${USE_IMAGE_TYPE}" in
-            bitnami) 
+            bitnami)
               helm upgrade -i ${HELM_RELEASE_NAME} bitnami/${HELM_APP_NAME} \
                 -f values_bitnami.yaml \
                 -f values_debug.yaml \
                 --set fullnameOverride=${HELM_APP_NAME} \
                 --timeout 900s
               ;;
-            bitnami-compat) 
+            bitnami-compat)
               helm upgrade -i ${HELM_RELEASE_NAME} bitnami/${HELM_APP_NAME} \
                 -f values_bitnami.yaml \
                 -f values_debug.yaml \
@@ -386,7 +386,7 @@ jobs:
             aarch64) architecture="arm64" ;;
           esac
           echo ${architecture}
-          
+
           kubectl get deploy -n kube-system --output name | \
             xargs -n1 -t \
               kubectl rollout status -n kube-system --timeout 180s || true &
@@ -398,15 +398,15 @@ jobs:
           kubectl get sts -n kube-system --output name | \
             xargs -n1 -t \
               kubectl rollout status -n kube-system --timeout 180s || true &
-          
+
           kubectl get rs -n kube-system --output name | \
             xargs -n1 -t \
               kubectl rollout status -n kube-system --timeout 180s || true &
-          
+
           kubectl get job -n kube-system --output name | \
             xargs -n1 -t \
                kubectl wait --for=condition=Complete -n kube-system --timeout 180s || true &
-          
+
           wait
 
           export CYPRESS_VERSION=9.7.0
@@ -426,7 +426,7 @@ jobs:
             export SVC_NAME=$(echo ${SVC_PORT_INFO} | awk '{print $2}')
             export SVC_PORT=$(echo ${SVC_PORT_INFO} | awk '{print $4}')
             export SVC_PORT_NUM=$(echo ${SVC_PORT_INFO} | awk '{print $4}')
-            
+
             if [[ "${SVC_PROTOCOL}" == "http" && "${SVC_PORT_NUM}" == "443" ]]
             then
               export SVC_PROTOCOL="https"
@@ -446,10 +446,10 @@ jobs:
             echo ${architecture}
 
             case "$architecture" in
-              amd64) 
+              amd64)
                 docker pull cypress/included:${CYPRESS_VERSION} &
                 ;;
-              arm64) 
+              arm64)
                 ;;
             esac;
           fi
@@ -469,7 +469,7 @@ jobs:
           kubectl get pv
           kubectl get pvc
           kubectl get jobs
-          
+
           docker exec -i k3d-test-cluster-agent-0 crictl images --digests
 
           kubectl get deploy --output name | \
@@ -483,17 +483,17 @@ jobs:
           kubectl get sts --output name | \
             xargs -n1 -t \
               kubectl rollout status --timeout 180s || true &
-          
+
           kubectl get rs --output name | \
             xargs -n1 -t \
               kubectl rollout status --timeout 180s || true &
-          
+
           wait
 
           declare -a GOSS_ACTIONS=( $(cat charts/.vib/${HELM_APP_NAME}/vib-publish.json | yq e -o=j -I=0 '(.phases.verify.actions[] | select(has("action_id") and .action_id == "goss")) | .') )
           for json in "${GOSS_ACTIONS[@]}" ; do
             echo $json
-          
+
             export POD_TYPE=$(echo $json | yq -r '.params.remote.workload' | cut -d '-' -f1)
             export POD_NAME=$(echo $json | yq -r '.params.remote.workload' | cut -d '-' -f2-)
             case "${POD_TYPE}" in
@@ -508,9 +508,9 @@ jobs:
                 export POD_NAME=$(kubectl get pods -o go-template='{{range .items}}{{.metadata.name}} {{if .metadata.ownerReferences}}{{range .metadata.ownerReferences}} {{.uid}} {{end}}{{end}} {{"\n"}}{{end}}' | grep $OWNER_UID | head -n 1 | awk '{print $1}')
                 ;;
             esac;
-          
+
             echo Testing with pod: $POD_NAME
-            
+
             # pod logs
             kubectl logs -n default ${POD_NAME}
 
@@ -518,7 +518,7 @@ jobs:
             kubectl describe pod -n default ${POD_NAME}
 
           done
-          
+
           # pod list
           kubectl get pods
           kubectl get svc
@@ -528,7 +528,7 @@ jobs:
           kubectl get jobs
 
           docker exec -i k3d-test-cluster-agent-0 crictl images --digests
-          
+
 
       - name: test health-check
         id: health-check
@@ -550,7 +550,7 @@ jobs:
           echo "================================================================"
           echo "${HELM_APP_NAME} health-check"
           echo "================================================================"
-          
+
           export status=0
 
           declare -a HEALTH_CHECK_ACTIONS=( $(cat charts/.vib/${HELM_APP_NAME}/vib-publish.json | yq e -o=j -I=0 '(.phases.verify.actions[] | select(has("action_id") and .action_id == "health-check")) | .') )
@@ -702,12 +702,12 @@ jobs:
           echo "================================================================"
           echo "${HELM_APP_NAME} goss"
           echo "================================================================"
-          
+
           export status=0
           declare -a GOSS_ACTIONS=( $(cat charts/.vib/${HELM_APP_NAME}/vib-publish.json | yq e -o=j -I=0 '(.phases.verify.actions[] | select(has("action_id") and .action_id == "goss")) | .') )
           for json in "${GOSS_ACTIONS[@]}" ; do
             echo $json
-          
+
             export POD_TYPE=$(echo $json | yq -r '.params.remote.workload' | cut -d '-' -f1)
             export POD_NAME=$(echo $json | yq -r '.params.remote.workload' | cut -d '-' -f2-)
             case "${POD_TYPE}" in
@@ -722,25 +722,25 @@ jobs:
                 export POD_NAME=$(kubectl get pods -o go-template='{{range .items}}{{.metadata.name}} {{if .metadata.ownerReferences}}{{range .metadata.ownerReferences}} {{.uid}} {{end}}{{end}} {{"\n"}}{{end}}' | grep $OWNER_UID | head -n 1 | awk '{print $1}')
                 ;;
             esac;
-          
+
             echo Testing with pod: $POD_NAME
-            
+
             cat /usr/local/bin/goss | kubectl exec -i -n default $POD_NAME "--" sh -c "cat > /tmp/goss"
             kubectl exec -i -n default $POD_NAME "--" sh -c "chmod +x /tmp/goss"
-          
+
             export GOSS_PATH=./charts$(echo $json | yq -r '.params.resources.path')/goss.yaml
             export GOSS_VAR_PATH=./charts$(echo $json | yq -r '.params.resources.path')/$(echo $json | yq -r '.params.vars_file')
-          
+
             echo permission 2775 -> 2777
             cat ${GOSS_PATH} | sed -E "s/2775/2777/g" > ${GOSS_PATH}_
-          
-          
+
+
             cat ${GOSS_PATH}_ | kubectl exec -i -n default $POD_NAME "--" sh -c "cat > /tmp/goss.yaml"
             if [ -f ${GOSS_VAR_PATH} ]
             then
               cat ${GOSS_VAR_PATH} | kubectl exec -i -n default $POD_NAME "--" sh -c "cat > /tmp/vars.yaml"
             fi
-          
+
             if [ -f ${GOSS_VAR_PATH} ]
             then
               set +e
@@ -760,7 +760,7 @@ jobs:
               export status=$(( ($status || $cur_status) == 1 ? 1 : 0 ))
             fi
           done
-          
+
           if [ ${#GOSS_ACTIONS[@]} -eq 0 ]; then
               echo none
           else
@@ -784,7 +784,7 @@ jobs:
             aarch64) architecture="arm64" ;;
           esac
           echo ${architecture}
-          
+
           export CYPRESS_VERSION=9.7.0
           export CYPRESS_VERIFY_TIMEOUT=100000
 
@@ -912,7 +912,7 @@ jobs:
 
             # cypress v9 amd64 only
             case "$architecture" in
-              amd64) 
+              amd64)
                 echo "================================================================"
                 echo "${HELM_APP_NAME} cypress"
                 echo "================================================================"
@@ -930,11 +930,11 @@ jobs:
                   exit $status
                 fi
                 ;;
-              arm64) 
+              arm64)
                 echo "================================================================"
                 echo "${HELM_APP_NAME} cypress"
                 echo "================================================================"
-                
+
                 ssh ubuntu@cypress-test "docker run --rm -v /tmp:/e2e -w /e2e ubuntu rm -rf /e2e/cypress-test"
                 ssh ubuntu@cypress-test '/bin/bash -c "rm -rf /tmp/cypress-test ; mkdir -p /tmp/cypress-test"'
                 ssh ubuntu@cypress-test "docker run --rm -v /tmp:/e2e -w /e2e ubuntu rm -rf /e2e/cypress-test"
@@ -964,9 +964,9 @@ jobs:
         run: |
           # helm uninstall test \
           #   --wait --timeout 300s || true
-          # kubectl delete pvc --all 
-          # kubectl delete ingress --all 
-          # kubectl delete svc --all 
+          # kubectl delete pvc --all
+          # kubectl delete ingress --all
+          # kubectl delete svc --all
 
           k3d cluster stop test-cluster
           k3d cluster delete test-cluster

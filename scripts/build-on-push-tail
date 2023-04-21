@@ -38,9 +38,9 @@
               x86_64)  ARCH="x86_64" ;;
               aarch64) ARCH="arm64" ;;
             esac
-          
+
             echo ${OS}_${ARCH}
-          
+
             mkdir -p /tmp/go-containerregistry
             cd /tmp/go-containerregistry
             curl -o go-containerregistry.tar.gz -sL "https://github.com/google/go-containerregistry/releases/latest/download/go-containerregistry_${OS}_${ARCH}.tar.gz"
@@ -68,7 +68,7 @@
           until [ "$n" -ge 5 ] # retry 5 times
           do
             go run main.go build --app=${{ matrix.APP }} --tag=${{ env.REGISTRY }}/${repository}/cache/ --cache-from --cache-to --push --platforms=linux/amd64,linux/arm64 && break
-            n=$((n+1)) 
+            n=$((n+1))
             sleep 15
           done
           if [ "$n" -ge 5 ]; then
@@ -80,7 +80,7 @@
           until [ "$n" -ge 5 ] # retry 5 times
           do
             ./scripts/squash_image.sh && break
-            n=$((n+1)) 
+            n=$((n+1))
             sleep 15
           done
           if [ "$n" -ge 5 ]; then
@@ -96,7 +96,7 @@
           until [ "$n" -ge 5 ] # retry 5 times
           do
             go run main.go push --app=${{ matrix.APP }} --tag=${{ env.REGISTRY }}/${repository}/ --tag-to docker.io/zcube/bitnami-compat- --dest-creds=zcube:${{ secrets.DOCKER_HUB_KEY }} && break
-            n=$((n+1)) 
+            n=$((n+1))
             sleep 15
           done
           if [ "$n" -ge 5 ]; then

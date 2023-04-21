@@ -1,2 +1,2 @@
-         - APP: "{{{APP}}}"
-           REPO_OWNER: "bitnami"
+          - APP: "{{{APP}}}"
+            REPO_OWNER: "bitnami"

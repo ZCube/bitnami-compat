@@ -3,9 +3,9 @@ RUN install_packages libnss-wrapper git git-lfs git-cvs
 RUN mkdir -p /opt/bitnami/common/bin \
     && mkdir -p /opt/bitnami/common/sbin \
     && mkdir -p /opt/bitnami/common/lib \
-	&& mkdir -p /opt/bitnami/git/bin \
+    && mkdir -p /opt/bitnami/git/bin \
     && mkdir -p /opt/bitnami/git/sbin \
     && mkdir -p /opt/bitnami/git/lib \
     && mkdir -p /opt/bitnami/git/share \
-	&& ln -sf $(find /usr/lib/*linux-gnu | grep libnss_wrapper.so)    /opt/bitnami/common/lib/ \
+    && ln -sf $(find /usr/lib/*linux-gnu | grep libnss_wrapper.so)    /opt/bitnami/common/lib/ \
     && ln -sf /usr/bin/git*                                           /opt/bitnami/git/bin/

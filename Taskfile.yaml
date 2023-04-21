@@ -1,6 +1,6 @@
 # https://taskfile.dev
 
-version: '3'
+version: "3"
 
 tasks:
   install:tools:
@@ -39,6 +39,7 @@ tasks:
       - git add README.md
       - git add versioninfo.yaml
       - ./scripts/generateValues.sh
+      - pre-commit run --all-files
       - git add values/*.yaml
 
   build:
@@ -46,7 +47,7 @@ tasks:
     cmds:
       - go run main.go build --cache-from=false --cache-to=false --push --tag=ghcr.io/zcube/bitnami-compat --platforms=linux/amd64,linux/arm64
       # - go run main.go build --cache-from=false --cache-to=false --push --tag=ghcr.io/zcube/bitnami-compat --platforms=linux/amd64,linux/arm64 --app=bitnami-shell
-      
+
   checkCharts:
     desc: checkCharts
     ignore_error: true

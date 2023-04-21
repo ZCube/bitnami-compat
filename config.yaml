@@ -1,78 +1,78 @@
-revision: 55
+revision: 62
 ignores:
-    - php-fpm
-    - ruby
+  - php-fpm
+  - ruby
 dependencies:
-    brotli:
-        - discourse
-    erlang:
-        - rabbitmq
-    java:
-        - cassandra
-        - ejbca
-        - elasticsearch
-        - gradle
-        - jasperreports
-        - jenkins
-        - jmx-exporter
-        - jruby
-        - kafka
-        - keycloack
-        - keycloack-config
-        - ksql
-        - logstash
-        - neo4j
-        - prometheus-rsocket-proxy
-        - reportserver
-        - schema-registry
-        - solr
-        - spark
-        - spring-cloud-data-flow-composed-task-runner
-        - spring-cloud-dataflow
-        - spring-cloud-skipper
-        - spring-cloud-skipper-shell
-        - tomcat
-        - wavefront-proxy
-        - wildfly
-        - zookeeper
-    libphp:
-        - wordpress
-    node:
-        - configurable-http-proxy
-        - discourse
-        - express
-        - ghost
-        - grafana-image-renderer
-        - jruby
-        - laravel
-        - mastodon
-        - odoo
-        - parse
-        - parse-dashboard
-        - rails
-        - supabase-postgres-meta
-        - supabase-storage
-        - supabase-studio
-    php:
-        - wordpress
-    postgresql-client:
-        - mastodon
-        - discourse
-    python:
-        - discourse
-        - mastodon
-        - odoo
-        - parse
-        - parse-dashboard
-        - rails
-        - spark
-        - supabase-postgresql-meta
-        - supabase-storage
-        - supabase-studio
-    redis-client:
-        - mastodon
-    ruby:
-        - fluentd
-        - discourse
-        - mastodon
-        - python
+  brotli:
+    - discourse
+  erlang:
+    - rabbitmq
+  java:
+    - cassandra
+    - ejbca
+    - elasticsearch
+    - gradle
+    - jasperreports
+    - jenkins
+    - jmx-exporter
+    - jruby
+    - kafka
+    - keycloack
+    - keycloack-config
+    - ksql
+    - logstash
+    - neo4j
+    - prometheus-rsocket-proxy
+    - reportserver
+    - schema-registry
+    - solr
+    - spark
+    - spring-cloud-data-flow-composed-task-runner
+    - spring-cloud-dataflow
+    - spring-cloud-skipper
+    - spring-cloud-skipper-shell
+    - tomcat
+    - wavefront-proxy
+    - wildfly
+    - zookeeper
+  libphp:
+    - wordpress
+  node:
+    - configurable-http-proxy
+    - discourse
+    - express
+    - ghost
+    - grafana-image-renderer
+    - jruby
+    - laravel
+    - mastodon
+    - odoo
+    - parse
+    - parse-dashboard
+    - rails
+    - supabase-postgres-meta
+    - supabase-storage
+    - supabase-studio
+  php:
+    - wordpress
+  postgresql-client:
+    - mastodon
+    - discourse
+  python:
+    - discourse
+    - mastodon
+    - odoo
+    - parse
+    - parse-dashboard
+    - rails
+    - spark
+    - supabase-postgresql-meta
+    - supabase-storage
+    - supabase-studio
+  redis-client:
+    - mastodon
+  ruby:
+    - fluentd
+    - discourse
+    - mastodon
+    - python

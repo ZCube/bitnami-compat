@@ -16,4 +16,3 @@ discourse:
 apache:
   service:
     type: ClusterIP
-

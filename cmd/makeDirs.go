@@ -22,89 +22,89 @@ THE SOFTWARE.
 package cmd
 
 import (
-	"fmt"
-	"io/ioutil"
-	"log"
-	"os"
-	"path/filepath"
-	"strings"
+  "fmt"
+  "io/ioutil"
+  "log"
+  "os"
+  "path/filepath"
+  "strings"
 
-	"github.com/bmatcuk/doublestar/v4"
-	"github.com/spf13/cobra"
-	"golang.org/x/exp/slices"
-	"gopkg.in/yaml.v3"
+  "github.com/bmatcuk/doublestar/v4"
+  "github.com/spf13/cobra"
+  "golang.org/x/exp/slices"
+  "gopkg.in/yaml.v3"
 )
 
 // makeDirsCmd represents the makeDirs command
 var makeDirsCmd = &cobra.Command{
-	Use:   "makeDirs",
-	Short: "makeDirs",
-	Long:  `makeDirs`,
-	Run: func(cmd *cobra.Command, args []string) {
-		var err error
-		buf, err := ioutil.ReadFile("config.yaml")
-		if err != nil {
-			log.Panic(err)
-		}
+  Use:   "makeDirs",
+  Short: "makeDirs",
+  Long:  `makeDirs`,
+  Run: func(cmd *cobra.Command, args []string) {
+    var err error
+    buf, err := ioutil.ReadFile("config.yaml")
+    if err != nil {
+      log.Panic(err)
+    }
 
-		p := &Config{}
-		err = yaml.Unmarshal(buf, p)
-		if err != nil {
-			log.Fatalf("Unmarshal: %v", err)
-		}
+    p := &Config{}
+    err = yaml.Unmarshal(buf, p)
+    if err != nil {
+      log.Fatalf("Unmarshal: %v", err)
+    }
 
-		var dockerfiles []string
-		if len(app) > 0 {
-			dockerfiles, err = doublestar.FilepathGlob(fmt.Sprintf("containers/bitnami/%v/**/Dockerfile", app))
-		} else {
-			dockerfiles, err = doublestar.FilepathGlob(fmt.Sprintf("containers/bitnami/*/**/Dockerfile"))
-		}
-		if err != nil {
-			log.Panic(err)
-		}
+    var dockerfiles []string
+    if len(app) > 0 {
+      dockerfiles, err = doublestar.FilepathGlob(fmt.Sprintf("containers/bitnami/%v/**/Dockerfile", app))
+    } else {
+      dockerfiles, err = doublestar.FilepathGlob(fmt.Sprintf("containers/bitnami/*/**/Dockerfile"))
+    }
+    if err != nil {
+      log.Panic(err)
+    }
 
-		for i := range dockerfiles {
-			if appInfo, err := InspectDockerfile(dockerfiles[i]); err == nil {
-				if slices.Contains(p.Ignores, appInfo.Name) {
-					continue
-				}
+    for i := range dockerfiles {
+      if appInfo, err := InspectDockerfile(dockerfiles[i]); err == nil {
+        if slices.Contains(p.Ignores, appInfo.Name) {
+          continue
+        }
 
-				var version string
-				for _, path := range strings.Split(strings.ReplaceAll(appInfo.Path, "\\", "/"), "/") {
-					if path == appInfo.OS_Flavour {
-						break
-					}
-					version = path
-				}
+        var version string
+        for _, path := range strings.Split(strings.ReplaceAll(appInfo.Path, "\\", "/"), "/") {
+          if path == appInfo.OS_Flavour {
+            break
+          }
+          version = path
+        }
 
-				err = os.MkdirAll(filepath.Join("patches", appInfo.Name, version, "bash"), 0755)
-				if err != nil {
-					log.Panic(err)
-				}
-				err = os.MkdirAll(filepath.Join("patches", appInfo.Name, version, "docker"), 0755)
-				if err != nil {
-					log.Panic(err)
-				}
-				err = os.MkdirAll(filepath.Join("patches", appInfo.Name, version, "golang"), 0755)
-				if err != nil {
-					log.Panic(err)
-				}
-			}
-		}
-	},
+        err = os.MkdirAll(filepath.Join("patches", appInfo.Name, version, "bash"), 0755)
+        if err != nil {
+          log.Panic(err)
+        }
+        err = os.MkdirAll(filepath.Join("patches", appInfo.Name, version, "docker"), 0755)
+        if err != nil {
+          log.Panic(err)
+        }
+        err = os.MkdirAll(filepath.Join("patches", appInfo.Name, version, "golang"), 0755)
+        if err != nil {
+          log.Panic(err)
+        }
+      }
+    }
+  },
 }
 
 func init() {
-	rootCmd.AddCommand(makeDirsCmd)
-	makeDirsCmd.PersistentFlags().StringVar(&app, "app", "", "app")
+  rootCmd.AddCommand(makeDirsCmd)
+  makeDirsCmd.PersistentFlags().StringVar(&app, "app", "", "app")
 
-	// Here you will define your flags and configuration settings.
+  // Here you will define your flags and configuration settings.
 
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// makeDirsCmd.PersistentFlags().String("foo", "", "A help for foo")
+  // Cobra supports Persistent Flags which will work for this command
+  // and all subcommands, e.g.:
+  // makeDirsCmd.PersistentFlags().String("foo", "", "A help for foo")
 
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// makeDirsCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+  // Cobra supports local flags which will only run when this command
+  // is called directly, e.g.:
+  // makeDirsCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }

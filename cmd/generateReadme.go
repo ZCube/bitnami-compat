@@ -22,150 +22,150 @@ THE SOFTWARE.
 package cmd
 
 import (
-	"bytes"
-	"fmt"
-	"io/ioutil"
-	"log"
-	"strings"
+  "bytes"
+  "fmt"
+  "io/ioutil"
+  "log"
+  "strings"
 
-	"github.com/bmatcuk/doublestar/v4"
-	"github.com/cbroglie/mustache"
-	"github.com/kyokomi/emoji/v2"
-	"github.com/spf13/cobra"
-	"golang.org/x/exp/slices"
-	"gopkg.in/yaml.v3"
+  "github.com/bmatcuk/doublestar/v4"
+  "github.com/cbroglie/mustache"
+  "github.com/kyokomi/emoji/v2"
+  "github.com/spf13/cobra"
+  "golang.org/x/exp/slices"
+  "gopkg.in/yaml.v3"
 )
 
 // generateReadmeCmd represents the generateReadme command
 var generateReadmeCmd = &cobra.Command{
-	Use:   "generateReadme",
-	Short: "generateReadme",
-	Long:  `generateReadme`,
-	Run: func(cmd *cobra.Command, args []string) {
-		var err error
-		buf, err := ioutil.ReadFile("config.yaml")
-		if err != nil {
-			log.Panic(err)
-		}
+  Use:   "generateReadme",
+  Short: "generateReadme",
+  Long:  `generateReadme`,
+  Run: func(cmd *cobra.Command, args []string) {
+    var err error
+    buf, err := ioutil.ReadFile("config.yaml")
+    if err != nil {
+      log.Panic(err)
+    }
 
-		p := &Config{}
-		err = yaml.Unmarshal(buf, p)
-		if err != nil {
-			log.Fatalf("Unmarshal: %v", err)
-		}
+    p := &Config{}
+    err = yaml.Unmarshal(buf, p)
+    if err != nil {
+      log.Fatalf("Unmarshal: %v", err)
+    }
 
-		READMEHeader, err := ioutil.ReadFile("scripts/README-header.md")
-		if err != nil {
-			log.Panic(err)
-		}
+    READMEHeader, err := ioutil.ReadFile("scripts/README-header.md")
+    if err != nil {
+      log.Panic(err)
+    }
 
-		READMEBody, err := ioutil.ReadFile("scripts/README-body.md")
-		if err != nil {
-			log.Panic(err)
-		}
+    READMEBody, err := ioutil.ReadFile("scripts/README-body.md")
+    if err != nil {
+      log.Panic(err)
+    }
 
-		READMETail, err := ioutil.ReadFile("scripts/README-tail.md")
-		if err != nil {
-			log.Panic(err)
-		}
+    READMETail, err := ioutil.ReadFile("scripts/README-tail.md")
+    if err != nil {
+      log.Panic(err)
+    }
 
-		var README bytes.Buffer
+    var README bytes.Buffer
 
-		_, err = README.Write(READMEHeader)
-		if err != nil {
-			log.Panic(err)
-		}
+    _, err = README.Write(READMEHeader)
+    if err != nil {
+      log.Panic(err)
+    }
 
-		var dockerfiles []string
-		if len(app) > 0 {
-			dockerfiles, err = doublestar.FilepathGlob(fmt.Sprintf("containers/bitnami/%v/**/Dockerfile", app))
-		} else {
-			dockerfiles, err = doublestar.FilepathGlob(fmt.Sprintf("containers/bitnami/*/**/Dockerfile"))
-		}
-		if err != nil {
-			log.Panic(err)
-		}
+    var dockerfiles []string
+    if len(app) > 0 {
+      dockerfiles, err = doublestar.FilepathGlob(fmt.Sprintf("containers/bitnami/%v/**/Dockerfile", app))
+    } else {
+      dockerfiles, err = doublestar.FilepathGlob(fmt.Sprintf("containers/bitnami/*/**/Dockerfile"))
+    }
+    if err != nil {
+      log.Panic(err)
+    }
 
-		for i := range dockerfiles {
-			if appInfo, err := InspectDockerfile(dockerfiles[i]); err == nil {
-				if slices.Contains(p.Ignores, appInfo.Name) {
-					continue
-				}
+    for i := range dockerfiles {
+      if appInfo, err := InspectDockerfile(dockerfiles[i]); err == nil {
+        if slices.Contains(p.Ignores, appInfo.Name) {
+          continue
+        }
 
-				patchFound := false
-				var err error
-				var patchs []PatchInfo
-				if patchs, err = FindPatchs(appInfo); err == nil {
-					for _, patch := range patchs {
-						patchFound = (patch.BashPatch != "" ||
-							patch.DockerFromPatch != "" ||
-							patch.DockerInstallPatch != "" ||
-							patch.GolangBuild != "")
-						if patchFound == false {
-							break
-						}
-					}
-					if len(patchs) == 0 {
-						patchFound = len(patchs) == 0
-					}
-				} else {
-					patchFound = len(patchs) == 0
-				}
+        patchFound := false
+        var err error
+        var patchs []PatchInfo
+        if patchs, err = FindPatchs(appInfo); err == nil {
+          for _, patch := range patchs {
+            patchFound = (patch.BashPatch != "" ||
+              patch.DockerFromPatch != "" ||
+              patch.DockerInstallPatch != "" ||
+              patch.GolangBuild != "")
+            if patchFound == false {
+              break
+            }
+          }
+          if len(patchs) == 0 {
+            patchFound = len(patchs) == 0
+          }
+        } else {
+          patchFound = len(patchs) == 0
+        }
 
-				if patchFound {
-					emoji.Println(fmt.Sprintf(":heavy_check_mark: %v:%v", appInfo.Name, appInfo.Version.Original()))
-					READMEBodyString := string(READMEBody)
+        if patchFound {
+          emoji.Println(fmt.Sprintf(":heavy_check_mark: %v:%v", appInfo.Name, appInfo.Version.Original()))
+          READMEBodyString := string(READMEBody)
 
-					var version string
-					for _, path := range strings.Split(strings.ReplaceAll(appInfo.Path, "\\", "/"), "/") {
-						if path == appInfo.OS_Flavour {
-							break
-						}
-						version = path
-					}
-					READMEBodyString, err = mustache.Render(READMEBodyString,
-						map[string]string{
-							"APP":           appInfo.Name,
-							"VERSION":       appInfo.Version.Original(),
-							"VERSION_MAJOR": version,
-							"OS_FLAVOUR":    appInfo.OS_Flavour,
-							"OS_NAME":       appInfo.OS_Name,
-							"REVISION":      fmt.Sprint(p.Revision),
-						})
-					if err != nil {
-						log.Panic(err)
-					}
-					_, err = README.Write([]byte(READMEBodyString))
-					if err != nil {
-						log.Panic(err)
-					}
-				}
-			}
-		}
+          var version string
+          for _, path := range strings.Split(strings.ReplaceAll(appInfo.Path, "\\", "/"), "/") {
+            if path == appInfo.OS_Flavour {
+              break
+            }
+            version = path
+          }
+          READMEBodyString, err = mustache.Render(READMEBodyString,
+            map[string]string{
+              "APP":           appInfo.Name,
+              "VERSION":       appInfo.Version.Original(),
+              "VERSION_MAJOR": version,
+              "OS_FLAVOUR":    appInfo.OS_Flavour,
+              "OS_NAME":       appInfo.OS_Name,
+              "REVISION":      fmt.Sprint(p.Revision),
+            })
+          if err != nil {
+            log.Panic(err)
+          }
+          _, err = README.Write([]byte(READMEBodyString))
+          if err != nil {
+            log.Panic(err)
+          }
+        }
+      }
+    }
 
-		_, err = README.Write(READMETail)
-		if err != nil {
-			log.Panic(err)
-		}
+    _, err = README.Write(READMETail)
+    if err != nil {
+      log.Panic(err)
+    }
 
-		err = ioutil.WriteFile("README.md", README.Bytes(), 0644)
-		if err != nil {
-			log.Panic(err)
-		}
-	},
+    err = ioutil.WriteFile("README.md", README.Bytes(), 0644)
+    if err != nil {
+      log.Panic(err)
+    }
+  },
 }
 
 func init() {
-	rootCmd.AddCommand(generateReadmeCmd)
-	generateReadmeCmd.PersistentFlags().StringVar(&app, "app", "", "app")
+  rootCmd.AddCommand(generateReadmeCmd)
+  generateReadmeCmd.PersistentFlags().StringVar(&app, "app", "", "app")
 
-	// Here you will define your flags and configuration settings.
+  // Here you will define your flags and configuration settings.
 
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// generateReadmeCmd.PersistentFlags().String("foo", "", "A help for foo")
+  // Cobra supports Persistent Flags which will work for this command
+  // and all subcommands, e.g.:
+  // generateReadmeCmd.PersistentFlags().String("foo", "", "A help for foo")
 
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// generateReadmeCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+  // Cobra supports local flags which will only run when this command
+  // is called directly, e.g.:
+  // generateReadmeCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }

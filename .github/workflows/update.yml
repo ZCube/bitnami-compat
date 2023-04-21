@@ -30,4 +30,3 @@ jobs:
           git status
           git commit -am "Automated Update"
           git push
-

@@ -3,21 +3,20 @@ clusterOperator:
     digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/rabbitmq-cluster-operator
-    tag: 2.1.0-scratch-r55
+    tag: 2.2.0-scratch-r62
 credentialUpdaterImage:
   digest: ''
   registry: ghcr.io
   repository: zcube/bitnami-compat/rmq-default-credential-updater
-  tag: 1.0.2-scratch-r55
+  tag: 1.0.2-scratch-r62
 msgTopologyOperator:
   image:
     digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/rmq-messaging-topology-operator
-    tag: 1.10.1-scratch-r55
+    tag: 1.10.3-scratch-r62
 rabbitmqImage:
   digest: ''
   registry: ghcr.io
   repository: zcube/bitnami-compat/rabbitmq
-  tag: 3.9.28-debian-11-r55
-
+  tag: 3.9.29-debian-11-r62

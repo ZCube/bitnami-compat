@@ -5,28 +5,27 @@ mongodb:
         digest: ''
         registry: ghcr.io
         repository: zcube/bitnami-compat/kubectl
-        tag: 1.26.1-debian-11-r55
+        tag: 1.27.1-debian-11-r62
   image:
     digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/mongodb
-    tag: 6.0.4-debian-11-r55
+    tag: 6.0.5-debian-11-r62
   metrics:
     image:
       digest: ''
       registry: ghcr.io
       repository: zcube/bitnami-compat/mongodb-exporter
-      tag: 0.37.0-debian-11-r55
+      tag: 0.37.0-debian-11-r62
   tls:
     image:
       digest: ''
       registry: ghcr.io
       repository: zcube/bitnami-compat/nginx
-      tag: 1.23.3-debian-11-r55
+      tag: 1.23.4-debian-11-r62
   volumePermissions:
     image:
       digest: ''
       registry: ghcr.io
       repository: zcube/bitnami-compat/bitnami-shell
-      tag: 11.0.0-debian-11-r55
-
+      tag: 11.0.0-debian-11-r62

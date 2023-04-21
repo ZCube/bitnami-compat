@@ -1,4 +1,4 @@
-RUN install_packages wget 
+RUN install_packages wget
 
 ENV KEYCLOAK_MAJOR {{{VERSION_MAJOR}}}
 ENV KEYCLOAK_VERSION {{{VERSION}}}
@@ -28,7 +28,7 @@ ADD https://repo1.maven.org/maven2/com/microsoft/sqlserver/mssql-jdbc/$JDBC_MSSQ
 ADD https://raw.githubusercontent.com/keycloak/keycloak-containers/main/server/tools/databases/mysql/module.xml    /opt/bitnami/keycloak/modules/system/layers/keycloak/com/mysql/jdbc/main/module.xml_
 ADD https://raw.githubusercontent.com/keycloak/keycloak-containers/main/server/tools/databases/postgres/module.xml /opt/bitnami/keycloak/modules/system/layers/keycloak/org/postgresql/jdbc/main/
 ADD https://raw.githubusercontent.com/keycloak/keycloak-containers/main/server/tools/databases/mariadb/module.xml  /opt/bitnami/keycloak/modules/system/layers/keycloak/org/mariadb/jdbc/main/
-ADD https://raw.githubusercontent.com/keycloak/keycloak-containers/main/server/tools/databases/oracle/module.xml   /opt/bitnami/keycloak/modules/system/layers/keycloak/com/oracle/jdbc/main/   
+ADD https://raw.githubusercontent.com/keycloak/keycloak-containers/main/server/tools/databases/oracle/module.xml   /opt/bitnami/keycloak/modules/system/layers/keycloak/com/oracle/jdbc/main/
 ADD https://raw.githubusercontent.com/keycloak/keycloak-containers/main/server/tools/databases/mssql/module.xml    /opt/bitnami/keycloak/modules/system/layers/keycloak/com/microsoft/sqlserver/jdbc/main/
 
 RUN sed "s/JDBC_MYSQL_VERSION/$JDBC_MYSQL_VERSION/" /opt/bitnami/keycloak/modules/system/layers/keycloak/com/mysql/jdbc/main/module.xml_ > /opt/bitnami/keycloak/modules/system/layers/keycloak/com/mysql/jdbc/main/module.xml

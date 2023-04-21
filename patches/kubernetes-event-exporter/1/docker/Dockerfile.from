@@ -19,4 +19,3 @@ RUN cd /tmp && \
     cd .. && \
     rm -rf ${PACKAGE} && \
     find /opt/bitnami -exec touch -a -m -t 202301010000.00 {} \;
-

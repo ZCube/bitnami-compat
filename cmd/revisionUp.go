@@ -22,56 +22,60 @@ THE SOFTWARE.
 package cmd
 
 import (
-	"io/ioutil"
-	"log"
+  "bytes"
+  "io/ioutil"
+  "log"
 
-	"github.com/spf13/cobra"
-	"gopkg.in/yaml.v3"
+  "github.com/spf13/cobra"
+  "gopkg.in/yaml.v3"
 )
 
 // revisionUpCmd represents the revisionUp command
 var revisionUpCmd = &cobra.Command{
-	Use:   "revisionUp",
-	Short: "revisionUp",
-	Long:  `revisionUp`,
-	Run: func(cmd *cobra.Command, args []string) {
+  Use:   "revisionUp",
+  Short: "revisionUp",
+  Long:  `revisionUp`,
+  Run: func(cmd *cobra.Command, args []string) {
 
-		buf, err := ioutil.ReadFile("config.yaml")
-		if err != nil {
-			log.Panic(err)
-		}
+    buf, err := ioutil.ReadFile("config.yaml")
+    if err != nil {
+      log.Panic(err)
+    }
 
-		p := &Config{}
-		err = yaml.Unmarshal(buf, p)
-		if err != nil {
-			log.Fatalf("Unmarshal: %v", err)
-		}
+    p := &Config{}
+    err = yaml.Unmarshal(buf, p)
+    if err != nil {
+      log.Fatalf("Unmarshal: %v", err)
+    }
 
-		p.Revision = p.Revision + 1
+    p.Revision = p.Revision + 1
 
-		bytes, err := yaml.Marshal(p)
-		if err != nil {
-			log.Fatalf("Marshal: %v", err)
-		}
+    var b bytes.Buffer
+    yamlEncoder := yaml.NewEncoder(&b)
+    yamlEncoder.SetIndent(2)
+    err = yamlEncoder.Encode(p)
+    if err != nil {
+      log.Fatalf("Marshal: %v", err)
+    }
 
-		err = ioutil.WriteFile("config.yaml", bytes, 0644)
-		if err != nil {
-			log.Panic(err)
-		}
-	},
+    err = ioutil.WriteFile("config.yaml", b.Bytes(), 0644)
+    if err != nil {
+      log.Panic(err)
+    }
+  },
 }
 
 func init() {
-	rootCmd.AddCommand(revisionUpCmd)
-	revisionUpCmd.PersistentFlags().StringVar(&app, "app", "", "app")
+  rootCmd.AddCommand(revisionUpCmd)
+  revisionUpCmd.PersistentFlags().StringVar(&app, "app", "", "app")
 
-	// Here you will define your flags and configuration settings.
+  // Here you will define your flags and configuration settings.
 
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// revisionUpCmd.PersistentFlags().String("foo", "", "A help for foo")
+  // Cobra supports Persistent Flags which will work for this command
+  // and all subcommands, e.g.:
+  // revisionUpCmd.PersistentFlags().String("foo", "", "A help for foo")
 
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// revisionUpCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+  // Cobra supports local flags which will only run when this command
+  // is called directly, e.g.:
+  // revisionUpCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }

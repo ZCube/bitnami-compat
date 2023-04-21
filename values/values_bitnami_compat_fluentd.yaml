@@ -12,5 +12,4 @@ image:
   digest: ''
   registry: ghcr.io
   repository: zcube/bitnami-compat/fluentd
-  tag: 1.15.3-debian-11-r55
-
+  tag: 1.16.1-debian-11-r62

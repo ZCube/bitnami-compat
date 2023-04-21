@@ -4,6 +4,3 @@ RUN install_packages curl ca-certificates \
     https://raw.githubusercontent.com/prometheus/node_exporter/master/LICENSE
 
 COPY --from=prom/node-exporter:v{{{VERSION}}} /bin/node_exporter /opt/bitnami/node-exporter/bin/node_exporter
-
-
-

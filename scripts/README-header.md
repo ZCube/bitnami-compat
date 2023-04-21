@@ -13,7 +13,7 @@
 
 ### Goal
 
-* [x] Build https://github.com/bitnami/containers 
+* [x] Build https://github.com/bitnami/containers
   * [x] Support Arm64.
   * [x] Comment StackSmith download scripts.
   * [x] Patch with component-based build script.
@@ -81,7 +81,7 @@
   or (current platform only && push)
   go run main.go build --app=mongodb --tag ghcr.io/zcube/bitnami-compat/ --push
   or (docker buildx needed && push)
-  go run main.go build --app=mongodb --tag ghcr.io/zcube/bitnami-compat/ --push --platforms=linux/amd64,linux/arm64 
+  go run main.go build --app=mongodb --tag ghcr.io/zcube/bitnami-compat/ --push --platforms=linux/amd64,linux/arm64
 
   docker run --rm -ti ghcr.io/zcube/bitnami-compat/mongodb:6.0
   ```
@@ -293,4 +293,3 @@ helm install db bitnami/postgresql -f values_bitnami_compat_postgresql.yaml
 * :warning: For some images such as node and python, apache, java, the version can only match the major version. This is mostly the case for non-main apps, and I don't care because they're mostly dependencies for other apps.
 
 * :warning: The mongodb provided by this repository does not currently work on Raspberry Pi 4. Use the image I distribute at https://github.com/ZCube/mongodb-for-armv8.0-a.
-

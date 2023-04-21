@@ -1,861 +1,847 @@
 - name: acmesolver
-  version: 1.11.0
+  version: 1.11.1
   version_major: "1"
-  version_full: 1.11.0-debian-11-r55
+  version_full: 1.11.1-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: apache
-  version: 2.4.55
+  version: 2.4.57
   version_major: "2.4"
-  version_full: 2.4.55-debian-11-r55
+  version_full: 2.4.57-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: apache-exporter
-  version: 0.11.0
+  version: 0.13.1
   version_major: "0"
-  version_full: 0.11.0-debian-11-r55
+  version_full: 0.13.1-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: bitnami-shell
   version: 11.0.0
   version_major: "11"
-  version_full: 11.0.0-debian-11-r55
+  version_full: 11.0.0-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: cainjector
-  version: 1.11.0
+  version: 1.11.1
   version_major: "1"
-  version_full: 1.11.0-debian-11-r55
+  version_full: 1.11.1-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: cert-manager
-  version: 1.11.0
+  version: 1.11.1
   version_major: "1"
-  version_full: 1.11.0-debian-11-r55
+  version_full: 1.11.1-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: cert-manager-webhook
-  version: 1.11.0
+  version: 1.11.1
   version_major: "1"
-  version_full: 1.11.0-debian-11-r55
+  version_full: 1.11.1-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: consul
-  version: 1.14.4
+  version: 1.15.2
   version_major: "1"
-  version_full: 1.14.4-debian-11-r55
+  version_full: 1.15.2-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: consul-exporter
   version: 0.9.0
   version_major: "0"
-  version_full: 0.9.0-debian-11-r55
+  version_full: 0.9.0-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: contour
   version: 1.21.3
   version_major: "1.21"
-  version_full: 1.21.3-debian-11-r55
+  version_full: 1.21.3-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: contour
-  version: 1.22.4
+  version: 1.22.6
   version_major: "1.22"
-  version_full: 1.22.4-debian-11-r55
+  version_full: 1.22.6-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: contour
-  version: 1.23.3
+  version: 1.23.5
   version_major: "1.23"
-  version_full: 1.23.3-debian-11-r55
+  version_full: 1.23.5-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
+- name: contour
+  version: 1.24.3
+  version_major: "1.24"
+  version_full: 1.24.3-debian-11-r62
+  os_flavour: debian-11
+  os_name: linux
+  revision: "62"
 - name: contour-operator
   version: 1.21.1
   version_major: "1.21"
-  version_full: 1.21.1-scratch-r55
+  version_full: 1.21.1-scratch-r62
   os_flavour: scratch
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: contour-operator
   version: 1.22.1
   version_major: "1.22"
-  version_full: 1.22.1-scratch-r55
+  version_full: 1.22.1-scratch-r62
   os_flavour: scratch
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: contour-operator
   version: 1.23.0
   version_major: "1.23"
-  version_full: 1.23.0-scratch-r55
+  version_full: 1.23.0-scratch-r62
   os_flavour: scratch
   os_name: linux
-  revision: "55"
+  revision: "62"
+- name: contour-operator
+  version: 1.24.0
+  version_major: "1.24"
+  version_full: 1.24.0-scratch-r62
+  os_flavour: scratch
+  os_name: linux
+  revision: "62"
 - name: discourse
-  version: 3.0.1
+  version: 3.0.3
   version_major: "3"
-  version_full: 3.0.1-debian-11-r55
+  version_full: 3.0.3-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: elasticsearch
   version: 7.17.9
   version_major: "7"
-  version_full: 7.17.9-debian-11-r55
+  version_full: 7.17.9-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: elasticsearch
-  version: 8.6.1
+  version: 8.7.0
   version_major: "8"
-  version_full: 8.6.1-debian-11-r55
+  version_full: 8.7.0-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: elasticsearch-exporter
   version: 1.5.0
   version_major: "1"
-  version_full: 1.5.0-debian-11-r55
+  version_full: 1.5.0-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: envoy
-  version: 1.22.7
-  version_major: "1.22"
-  version_full: 1.22.7-debian-11-r55
-  os_flavour: debian-11
-  os_name: linux
-  revision: "55"
-- name: envoy
-  version: 1.23.4
+  version: 1.23.8
   version_major: "1.23"
-  version_full: 1.23.4-debian-11-r55
+  version_full: 1.23.8-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: envoy
-  version: 1.24.2
+  version: 1.24.6
   version_major: "1.24"
-  version_full: 1.24.2-debian-11-r55
+  version_full: 1.24.6-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: etcd
   version: 3.3.27
   version_major: "3.3"
-  version_full: 3.3.27-debian-11-r55
+  version_full: 3.3.27-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: etcd
-  version: 3.4.23
+  version: 3.4.25
   version_major: "3.4"
-  version_full: 3.4.23-debian-11-r55
+  version_full: 3.4.25-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: etcd
-  version: 3.5.7
+  version: 3.5.8
   version_major: "3.5"
-  version_full: 3.5.7-debian-11-r55
+  version_full: 3.5.8-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: external-dns
-  version: 0.13.2
+  version: 0.13.4
   version_major: "0"
-  version_full: 0.13.2-debian-11-r55
+  version_full: 0.13.4-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: fluentd
-  version: 1.15.3
+  version: 1.16.1
   version_major: "1"
-  version_full: 1.15.3-debian-11-r55
+  version_full: 1.16.1-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: git
-  version: 2.39.1
+  version: 2.40.0
   version_major: "2"
-  version_full: 2.39.1-debian-11-r55
+  version_full: 2.40.0-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: gitea
-  version: 1.18.3
+  version: 1.19.1
   version_major: "1"
-  version_full: 1.18.3-debian-11-r55
+  version_full: 1.19.1-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: grafana
-  version: 9.3.6
+  version: 9.4.7
   version_major: "9"
-  version_full: 9.3.6-debian-11-r55
+  version_full: 9.4.7-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: java
   version: 1.8.362
   version_major: "1.8"
-  version_full: 1.8.362-debian-11-r55
+  version_full: 1.8.362-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: java
-  version: 11.0.18
+  version: 11.0.19
   version_major: "11"
-  version_full: 11.0.18-debian-11-r55
+  version_full: 11.0.19-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: java
-  version: 17.0.6
+  version: 17.0.7
   version_major: "17"
-  version_full: 17.0.6-debian-11-r55
+  version_full: 17.0.7-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
-- name: java
-  version: 19.0.2
-  version_major: "19"
-  version_full: 19.0.2-debian-11-r55
-  os_flavour: debian-11
-  os_name: linux
-  revision: "55"
+  revision: "62"
 - name: jmx-exporter
-  version: 0.17.2
+  version: 0.18.0
   version_major: "0"
-  version_full: 0.17.2-debian-11-r55
+  version_full: 0.18.0-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
-- name: kafka
-  version: 3.1.2
-  version_major: "3.1"
-  version_full: 3.1.2-debian-11-r55
-  os_flavour: debian-11
-  os_name: linux
-  revision: "55"
+  revision: "62"
 - name: kafka
   version: 3.2.3
   version_major: "3.2"
-  version_full: 3.2.3-debian-11-r55
+  version_full: 3.2.3-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: kafka
   version: 3.3.2
   version_major: "3.3"
-  version_full: 3.3.2-debian-11-r55
+  version_full: 3.3.2-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
+- name: kafka
+  version: 3.4.0
+  version_major: "3.4"
+  version_full: 3.4.0-debian-11-r62
+  os_flavour: debian-11
+  os_name: linux
+  revision: "62"
 - name: kafka-exporter
   version: 1.6.0
   version_major: "1"
-  version_full: 1.6.0-debian-11-r55
+  version_full: 1.6.0-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: keycloak
-  version: 20.0.3
-  version_major: "20"
-  version_full: 20.0.3-debian-11-r55
+  version: 21.0.2
+  version_major: "21"
+  version_full: 21.0.2-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: keycloak-config-cli
-  version: 5.5.0
+  version: 5.6.1
   version_major: "5"
-  version_full: 5.5.0-debian-11-r55
+  version_full: 5.6.1-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: kibana
   version: 7.17.9
   version_major: "7"
-  version_full: 7.17.9-debian-11-r55
+  version_full: 7.17.9-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: kibana
-  version: 8.6.1
+  version: 8.7.0
   version_major: "8"
-  version_full: 8.6.1-debian-11-r55
+  version_full: 8.7.0-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: kube-state-metrics
-  version: 2.7.0
+  version: 2.8.2
   version_major: "2"
-  version_full: 2.7.0-debian-11-r55
+  version_full: 2.8.2-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: kubectl
-  version: 1.24.10
+  version: 1.24.13
   version_major: "1.24"
-  version_full: 1.24.10-debian-11-r55
+  version_full: 1.24.13-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: kubectl
-  version: 1.25.6
+  version: 1.25.9
   version_major: "1.25"
-  version_full: 1.25.6-debian-11-r55
+  version_full: 1.25.9-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: kubectl
-  version: 1.26.1
+  version: 1.26.4
   version_major: "1.26"
-  version_full: 1.26.1-debian-11-r55
+  version_full: 1.26.4-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
+- name: kubectl
+  version: 1.27.1
+  version_major: "1.27"
+  version_full: 1.27.1-debian-11-r62
+  os_flavour: debian-11
+  os_name: linux
+  revision: "62"
 - name: kubernetes-event-exporter
   version: 1.1.0
   version_major: "1"
-  version_full: 1.1.0-debian-11-r55
+  version_full: 1.1.0-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: logstash
   version: 7.17.9
   version_major: "7"
-  version_full: 7.17.9-debian-11-r55
+  version_full: 7.17.9-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: logstash
-  version: 8.6.1
+  version: 8.7.0
   version_major: "8"
-  version_full: 8.6.1-debian-11-r55
+  version_full: 8.7.0-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: mariadb
   version: 10.10.3
   version_major: "10.10"
-  version_full: 10.10.3-debian-11-r55
+  version_full: 10.10.3-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: mariadb
   version: 10.5.19
   version_major: "10.5"
-  version_full: 10.5.19-debian-11-r55
+  version_full: 10.5.19-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: mariadb
   version: 10.6.12
   version_major: "10.6"
-  version_full: 10.6.12-debian-11-r55
+  version_full: 10.6.12-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
-- name: mariadb
-  version: 10.7.8
-  version_major: "10.7"
-  version_full: 10.7.8-debian-11-r55
-  os_flavour: debian-11
-  os_name: linux
-  revision: "55"
+  revision: "62"
 - name: mariadb
   version: 10.8.7
   version_major: "10.8"
-  version_full: 10.8.7-debian-11-r55
+  version_full: 10.8.7-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: mariadb
   version: 10.9.5
   version_major: "10.9"
-  version_full: 10.9.5-debian-11-r55
+  version_full: 10.9.5-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: mariadb-galera
   version: 10.10.3
   version_major: "10.10"
-  version_full: 10.10.3-debian-11-r55
+  version_full: 10.10.3-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: mariadb-galera
   version: 10.5.19
   version_major: "10.5"
-  version_full: 10.5.19-debian-11-r55
+  version_full: 10.5.19-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: mariadb-galera
   version: 10.6.12
   version_major: "10.6"
-  version_full: 10.6.12-debian-11-r55
+  version_full: 10.6.12-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
-- name: mariadb-galera
-  version: 10.7.8
-  version_major: "10.7"
-  version_full: 10.7.8-debian-11-r55
-  os_flavour: debian-11
-  os_name: linux
-  revision: "55"
+  revision: "62"
 - name: mariadb-galera
   version: 10.8.7
   version_major: "10.8"
-  version_full: 10.8.7-debian-11-r55
+  version_full: 10.8.7-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: mariadb-galera
   version: 10.9.5
   version_major: "10.9"
-  version_full: 10.9.5-debian-11-r55
+  version_full: 10.9.5-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: mastodon
-  version: 4.0.2
+  version: 4.1.2
   version_major: "4"
-  version_full: 4.0.2-debian-11-r55
+  version_full: 4.1.2-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: memcached
-  version: 1.6.18
+  version: 1.6.19
   version_major: "1"
-  version_full: 1.6.18-debian-11-r55
+  version_full: 1.6.19-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: memcached-exporter
-  version: 0.10.0
+  version: 0.11.3
   version_major: "0"
-  version_full: 0.10.0-debian-11-r55
+  version_full: 0.11.3-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: minio
-  version: 2023.2.9
+  version: 2023.4.20
   version_major: "2023"
-  version_full: 2023.2.9-debian-11-r55
+  version_full: 2023.4.20-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: minio-client
-  version: 2023.1.28
+  version: 2023.4.12
   version_major: "2023"
-  version_full: 2023.1.28-debian-11-r55
+  version_full: 2023.4.12-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: mongodb
-  version: 5.0.14
+  version: 5.0.16
   version_major: "5.0"
-  version_full: 5.0.14-debian-11-r55
+  version_full: 5.0.16-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: mongodb
-  version: 6.0.4
+  version: 6.0.5
   version_major: "6.0"
-  version_full: 6.0.4-debian-11-r55
+  version_full: 6.0.5-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: mongodb-exporter
   version: 0.37.0
   version_major: "0"
-  version_full: 0.37.0-debian-11-r55
+  version_full: 0.37.0-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: mongodb-sharded
-  version: 5.0.14
+  version: 5.0.16
   version_major: "5.0"
-  version_full: 5.0.14-debian-11-r55
+  version_full: 5.0.16-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: mongodb-sharded
-  version: 6.0.4
+  version: 6.0.5
   version_major: "6.0"
-  version_full: 6.0.4-debian-11-r55
+  version_full: 6.0.5-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: mysql
-  version: 8.0.32
+  version: 8.0.33
   version_major: "8.0"
-  version_full: 8.0.32-debian-11-r55
+  version_full: 8.0.33-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: mysqld-exporter
   version: 0.14.0
   version_major: "0"
-  version_full: 0.14.0-debian-11-r55
+  version_full: 0.14.0-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: nginx
-  version: 1.23.3
+  version: 1.23.4
   version_major: "1.23"
-  version_full: 1.23.3-debian-11-r55
+  version_full: 1.23.4-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: nginx-exporter
   version: 0.11.0
   version_major: "0"
-  version_full: 0.11.0-debian-11-r55
+  version_full: 0.11.0-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: node
-  version: 14.21.2
+  version: 14.21.3
   version_major: "14"
-  version_full: 14.21.2-debian-11-r55
+  version_full: 14.21.3-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: node
-  version: 16.19.0
+  version: 16.20.0
   version_major: "16"
-  version_full: 16.19.0-debian-11-r55
+  version_full: 16.20.0-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: node
-  version: 18.14.0
+  version: 18.16.0
   version_major: "18"
-  version_full: 18.14.0-debian-11-r55
+  version_full: 18.16.0-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: node-exporter
   version: 1.5.0
   version_major: "1"
-  version_full: 1.5.0-debian-11-r55
+  version_full: 1.5.0-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: openldap
-  version: 2.6.3
+  version: 2.6.4
   version_major: "2.6"
-  version_full: 2.6.3-debian-11-r55
+  version_full: 2.6.4-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: pgpool
   version: 4.4.2
   version_major: "4"
-  version_full: 4.4.2-debian-11-r55
+  version_full: 4.4.2-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: postgres-exporter
-  version: 0.11.1
+  version: 0.12.0
   version_major: "0"
-  version_full: 0.11.1-debian-11-r55
+  version_full: 0.12.0-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: postgresql
   version: 11.19.0
   version_major: "11"
-  version_full: 11.19.0-debian-11-r55
+  version_full: 11.19.0-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: postgresql
   version: 12.14.0
   version_major: "12"
-  version_full: 12.14.0-debian-11-r55
+  version_full: 12.14.0-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: postgresql
   version: 13.10.0
   version_major: "13"
-  version_full: 13.10.0-debian-11-r55
+  version_full: 13.10.0-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: postgresql
   version: 14.7.0
   version_major: "14"
-  version_full: 14.7.0-debian-11-r55
+  version_full: 14.7.0-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: postgresql
   version: 15.2.0
   version_major: "15"
-  version_full: 15.2.0-debian-11-r55
+  version_full: 15.2.0-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: postgresql-repmgr
   version: 11.19.0
   version_major: "11"
-  version_full: 11.19.0-debian-11-r55
+  version_full: 11.19.0-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: postgresql-repmgr
   version: 12.14.0
   version_major: "12"
-  version_full: 12.14.0-debian-11-r55
+  version_full: 12.14.0-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: postgresql-repmgr
   version: 13.10.0
   version_major: "13"
-  version_full: 13.10.0-debian-11-r55
+  version_full: 13.10.0-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: postgresql-repmgr
   version: 14.7.0
   version_major: "14"
-  version_full: 14.7.0-debian-11-r55
+  version_full: 14.7.0-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: postgresql-repmgr
   version: 15.2.0
   version_major: "15"
-  version_full: 15.2.0-debian-11-r55
+  version_full: 15.2.0-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: python
-  version: 3.10.10
+  version: 3.10.11
   version_major: "3.10"
-  version_full: 3.10.10-debian-11-r55
+  version_full: 3.10.11-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: python
-  version: 3.11.2
+  version: 3.11.3
   version_major: "3.11"
-  version_full: 3.11.2-debian-11-r55
+  version_full: 3.11.3-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: python
   version: 3.7.16
   version_major: "3.7"
-  version_full: 3.7.16-debian-11-r55
+  version_full: 3.7.16-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: python
   version: 3.8.16
   version_major: "3.8"
-  version_full: 3.8.16-debian-11-r55
+  version_full: 3.8.16-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: python
   version: 3.9.16
   version_major: "3.9"
-  version_full: 3.9.16-debian-11-r55
+  version_full: 3.9.16-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: rabbitmq
-  version: 3.10.17
+  version: 3.10.20
   version_major: "3.10"
-  version_full: 3.10.17-debian-11-r55
+  version_full: 3.10.20-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: rabbitmq
-  version: 3.11.8
+  version: 3.11.13
   version_major: "3.11"
-  version_full: 3.11.8-debian-11-r55
+  version_full: 3.11.13-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: rabbitmq
-  version: 3.9.28
+  version: 3.9.29
   version_major: "3.9"
-  version_full: 3.9.28-debian-11-r55
+  version_full: 3.9.29-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: rabbitmq-cluster-operator
-  version: 2.1.0
+  version: 2.2.0
   version_major: "2"
-  version_full: 2.1.0-scratch-r55
+  version_full: 2.2.0-scratch-r62
   os_flavour: scratch
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: redis
-  version: 6.2.10
+  version: 6.2.12
   version_major: "6.2"
-  version_full: 6.2.10-debian-11-r55
+  version_full: 6.2.12-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: redis
-  version: 7.0.8
+  version: 7.0.11
   version_major: "7.0"
-  version_full: 7.0.8-debian-11-r55
+  version_full: 7.0.11-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: redis-cluster
-  version: 6.2.10
+  version: 6.2.12
   version_major: "6.2"
-  version_full: 6.2.10-debian-11-r55
+  version_full: 6.2.12-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: redis-cluster
-  version: 7.0.8
+  version: 7.0.11
   version_major: "7.0"
-  version_full: 7.0.8-debian-11-r55
+  version_full: 7.0.11-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: redis-exporter
-  version: 1.46.0
+  version: 1.50.0
   version_major: "1"
-  version_full: 1.46.0-debian-11-r55
+  version_full: 1.50.0-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: redis-sentinel
-  version: 6.2.10
+  version: 6.2.12
   version_major: "6.2"
-  version_full: 6.2.10-debian-11-r55
+  version_full: 6.2.12-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: redis-sentinel
-  version: 7.0.8
+  version: 7.0.11
   version_major: "7.0"
-  version_full: 7.0.8-debian-11-r55
+  version_full: 7.0.11-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: rmq-default-credential-updater
   version: 1.0.2
   version_major: "1"
-  version_full: 1.0.2-scratch-r55
+  version_full: 1.0.2-scratch-r62
   os_flavour: scratch
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: rmq-messaging-topology-operator
-  version: 1.10.1
+  version: 1.10.3
   version_major: "1"
-  version_full: 1.10.1-scratch-r55
+  version_full: 1.10.3-scratch-r62
   os_flavour: scratch
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: sealed-secrets
-  version: 0.19.4
+  version: 0.20.5
   version_major: "0"
-  version_full: 0.19.4-scratch-r55
+  version_full: 0.20.5-scratch-r62
   os_flavour: scratch
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: solr
   version: 8.11.2
   version_major: "8"
-  version_full: 8.11.2-debian-11-r55
+  version_full: 8.11.2-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: solr
-  version: 9.1.1
+  version: 9.2.0
   version_major: "9"
-  version_full: 9.1.1-debian-11-r55
+  version_full: 9.2.0-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: thanos
-  version: 0.30.2
+  version: 0.31.0
   version_major: "0"
-  version_full: 0.30.2-scratch-r55
+  version_full: 0.31.0-scratch-r62
   os_flavour: scratch
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: tomcat
-  version: 10.0.27
-  version_major: "10.0"
-  version_full: 10.0.27-debian-11-r55
-  os_flavour: debian-11
-  os_name: linux
-  revision: "55"
-- name: tomcat
-  version: 10.1.5
+  version: 10.1.8
   version_major: "10.1"
-  version_full: 10.1.5-debian-11-r55
+  version_full: 10.1.8-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: tomcat
-  version: 8.5.85
+  version: 8.5.88
   version_major: "8.5"
-  version_full: 8.5.85-debian-11-r55
+  version_full: 8.5.88-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: tomcat
-  version: 9.0.71
+  version: 9.0.74
   version_major: "9.0"
-  version_full: 9.0.71-debian-11-r55
+  version_full: 9.0.74-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: wordpress
-  version: 6.1.1
+  version: 6.2.0
   version_major: "6"
-  version_full: 6.1.1-debian-11-r55
+  version_full: 6.2.0-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: wordpress-nginx
-  version: 6.1.1
+  version: 6.2.0
   version_major: "6"
-  version_full: 6.1.1-debian-11-r55
+  version_full: 6.2.0-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: zookeeper
   version: 3.7.1
   version_major: "3.7"
-  version_full: 3.7.1-debian-11-r55
+  version_full: 3.7.1-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"
 - name: zookeeper
   version: 3.8.1
   version_major: "3.8"
-  version_full: 3.8.1-debian-11-r55
+  version_full: 3.8.1-debian-11-r62
   os_flavour: debian-11
   os_name: linux
-  revision: "55"
+  revision: "62"

@@ -24,5 +24,5 @@ package main
 import "github.com/zcube/bitnami-compat/cmd"
 
 func main() {
-	cmd.Execute()
+  cmd.Execute()
 }

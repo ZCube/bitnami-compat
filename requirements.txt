@@ -1,2 +1,4 @@
 pyyaml
 pyyaml-include
+pre-commit
+yamllint

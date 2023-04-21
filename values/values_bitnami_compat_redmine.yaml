@@ -3,35 +3,34 @@ mariadb:
     digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/mariadb
-    tag: 10.9.5-debian-11-r55
+    tag: 10.9.5-debian-11-r62
   metrics:
     image:
       digest: ''
       registry: ghcr.io
       repository: zcube/bitnami-compat/mysqld-exporter
-      tag: 0.14.0-debian-11-r55
+      tag: 0.14.0-debian-11-r62
   volumePermissions:
     image:
       digest: ''
       registry: ghcr.io
       repository: zcube/bitnami-compat/bitnami-shell
-      tag: 11.0.0-debian-11-r55
+      tag: 11.0.0-debian-11-r62
 postgresql:
   image:
     digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/postgresql
-    tag: 15.2.0-debian-11-r55
+    tag: 15.2.0-debian-11-r62
   metrics:
     image:
       digest: ''
       registry: ghcr.io
       repository: zcube/bitnami-compat/postgres-exporter
-      tag: 0.11.1-debian-11-r55
+      tag: 0.12.0-debian-11-r62
   volumePermissions:
     image:
       digest: ''
       registry: ghcr.io
       repository: zcube/bitnami-compat/bitnami-shell
-      tag: 11.0.0-debian-11-r55
-
+      tag: 11.0.0-debian-11-r62

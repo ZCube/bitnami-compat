@@ -1,1 +1,1 @@
-COPY --from=wordpress /opt/bitnami/ /opt/bitnami/ 
+COPY --from=wordpress /opt/bitnami/ /opt/bitnami/

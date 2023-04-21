@@ -42,4 +42,3 @@ RUN cd /tmp && \
     esac && \
     rm -rf /tmp/* && \
     readelf -h /usr/local/cargo/bin/oxipng
-

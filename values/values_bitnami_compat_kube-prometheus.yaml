@@ -3,11 +3,10 @@ kube-state-metrics:
     digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/kube-state-metrics
-    tag: 2.7.0-debian-11-r55
+    tag: 2.8.2-debian-11-r62
 node-exporter:
   image:
     digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/node-exporter
-    tag: 1.5.0-debian-11-r55
-
+    tag: 1.5.0-debian-11-r62

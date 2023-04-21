@@ -22,121 +22,121 @@ THE SOFTWARE.
 package cmd
 
 import (
-	"fmt"
-	"io/ioutil"
-	"log"
-	"os"
-	"os/exec"
-	"strings"
+  "fmt"
+  "io/ioutil"
+  "log"
+  "os"
+  "os/exec"
+  "strings"
 
-	"github.com/bmatcuk/doublestar/v4"
-	"github.com/kyokomi/emoji/v2"
-	"github.com/spf13/cobra"
-	"golang.org/x/exp/slices"
-	"gopkg.in/yaml.v3"
+  "github.com/bmatcuk/doublestar/v4"
+  "github.com/kyokomi/emoji/v2"
+  "github.com/spf13/cobra"
+  "golang.org/x/exp/slices"
+  "gopkg.in/yaml.v3"
 )
 
 // trivyCmd represents the trivy command
 var trivyCmd = &cobra.Command{
-	Use:   "trivy",
-	Short: "trivy",
-	Long:  `trivy`,
-	Run: func(cmd *cobra.Command, args []string) {
-		buf, err := ioutil.ReadFile("config.yaml")
-		if err != nil {
-			log.Panic(err)
-		}
+  Use:   "trivy",
+  Short: "trivy",
+  Long:  `trivy`,
+  Run: func(cmd *cobra.Command, args []string) {
+    buf, err := ioutil.ReadFile("config.yaml")
+    if err != nil {
+      log.Panic(err)
+    }
 
-		p := &Config{}
-		err = yaml.Unmarshal(buf, p)
-		if err != nil {
-			log.Fatalf("Unmarshal: %v", err)
-		}
+    p := &Config{}
+    err = yaml.Unmarshal(buf, p)
+    if err != nil {
+      log.Fatalf("Unmarshal: %v", err)
+    }
 
-		var dockerfiles []string
-		if len(app) > 0 {
-			dockerfiles, err = doublestar.FilepathGlob(fmt.Sprintf("containers/bitnami/%v/**/Dockerfile", app))
-		} else {
-			dockerfiles, err = doublestar.FilepathGlob(fmt.Sprintf("containers/bitnami/*/**/Dockerfile"))
-		}
-		if err != nil {
-			log.Panic(err)
-		}
+    var dockerfiles []string
+    if len(app) > 0 {
+      dockerfiles, err = doublestar.FilepathGlob(fmt.Sprintf("containers/bitnami/%v/**/Dockerfile", app))
+    } else {
+      dockerfiles, err = doublestar.FilepathGlob(fmt.Sprintf("containers/bitnami/*/**/Dockerfile"))
+    }
+    if err != nil {
+      log.Panic(err)
+    }
 
-		for i := range dockerfiles {
-			emoji.Println(dockerfiles[i])
-			if appInfo, err := InspectDockerfile(dockerfiles[i]); err == nil {
-				if slices.Contains(p.Ignores, appInfo.Name) {
-					continue
-				}
+    for i := range dockerfiles {
+      emoji.Println(dockerfiles[i])
+      if appInfo, err := InspectDockerfile(dockerfiles[i]); err == nil {
+        if slices.Contains(p.Ignores, appInfo.Name) {
+          continue
+        }
 
-				patchFound := false
-				var err error
-				var patchs []PatchInfo
-				if patchs, err = FindPatchs(appInfo); err == nil {
-					for _, patch := range patchs {
-						patchFound = (patch.BashPatch != "" ||
-							patch.DockerFromPatch != "" ||
-							patch.DockerInstallPatch != "" ||
-							patch.GolangBuild != "")
-						if patchFound == false {
-							break
-						}
-					}
-					if len(patchs) == 0 {
-						patchFound = len(patchs) == 0
-					}
-				} else {
-					patchFound = len(patchs) == 0
-				}
+        patchFound := false
+        var err error
+        var patchs []PatchInfo
+        if patchs, err = FindPatchs(appInfo); err == nil {
+          for _, patch := range patchs {
+            patchFound = (patch.BashPatch != "" ||
+              patch.DockerFromPatch != "" ||
+              patch.DockerInstallPatch != "" ||
+              patch.GolangBuild != "")
+            if patchFound == false {
+              break
+            }
+          }
+          if len(patchs) == 0 {
+            patchFound = len(patchs) == 0
+          }
+        } else {
+          patchFound = len(patchs) == 0
+        }
 
-				if patchFound {
-					var args []string
-					{
-						args = []string{
-							"run",
-							"--rm",
-							"ghcr.io/aquasecurity/trivy",
-							"image",
-							"-s",
-							"HIGH,CRITICAL",
-						}
+        if patchFound {
+          var args []string
+          {
+            args = []string{
+              "run",
+              "--rm",
+              "ghcr.io/aquasecurity/trivy",
+              "image",
+              "-s",
+              "HIGH,CRITICAL",
+            }
 
-						versionSemver := fmt.Sprintf("%v.%v.%v", appInfo.Version.Major(), appInfo.Version.Minor(), appInfo.Version.Patch())
-						tags := strings.Split(tag, ",")
-						for _, tag_ := range tags {
-							args = append(args, fmt.Sprintf("%v%v:%v-%v-r%v", tag_, appInfo.Name, versionSemver, appInfo.OS_Flavour, p.Revision))
-							break
-						}
+            versionSemver := fmt.Sprintf("%v.%v.%v", appInfo.Version.Major(), appInfo.Version.Minor(), appInfo.Version.Patch())
+            tags := strings.Split(tag, ",")
+            for _, tag_ := range tags {
+              args = append(args, fmt.Sprintf("%v%v:%v-%v-r%v", tag_, appInfo.Name, versionSemver, appInfo.OS_Flavour, p.Revision))
+              break
+            }
 
-						emoji.Println(args)
+            emoji.Println(args)
 
-						cmd := exec.Command("docker", args...)
-						cmd.Stdout = os.Stdout
-						cmd.Stderr = os.Stderr
-						if err := cmd.Run(); err != nil {
-							log.Panic(err)
-						}
-					}
-				}
-			} else {
-				log.Panic(err)
-			}
-		}
-	},
+            cmd := exec.Command("docker", args...)
+            cmd.Stdout = os.Stdout
+            cmd.Stderr = os.Stderr
+            if err := cmd.Run(); err != nil {
+              log.Panic(err)
+            }
+          }
+        }
+      } else {
+        log.Panic(err)
+      }
+    }
+  },
 }
 
 func init() {
-	rootCmd.AddCommand(trivyCmd)
-	trivyCmd.PersistentFlags().StringVar(&app, "app", "", "app")
-	trivyCmd.PersistentFlags().StringVarP(&tag, "tag", "t", "ghcr.io/zcube/bitnami-compat/", "tag")
+  rootCmd.AddCommand(trivyCmd)
+  trivyCmd.PersistentFlags().StringVar(&app, "app", "", "app")
+  trivyCmd.PersistentFlags().StringVarP(&tag, "tag", "t", "ghcr.io/zcube/bitnami-compat/", "tag")
 
-	// Here you will define your flags and configuration settings.
+  // Here you will define your flags and configuration settings.
 
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
+  // Cobra supports Persistent Flags which will work for this command
+  // and all subcommands, e.g.:
 
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// buildCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+  // Cobra supports local flags which will only run when this command
+  // is called directly, e.g.:
+  // buildCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }

@@ -11,14 +11,14 @@ RUN install_packages gnupg
 ARG GPG_KEYS=20691EEC35216C63CAF66CE1656408E390CFB1F5
 
 RUN set -ex; \
-	export GNUPGHOME="$(mktemp -d)"; \
-	for key in $GPG_KEYS; do \
-		gpg --batch --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys "$key"; \
-	done; \
-	gpg --batch --export $GPG_KEYS > /etc/apt/trusted.gpg.d/mongodb.gpg; \
-	command -v gpgconf > /dev/null && gpgconf --kill all || :; \
-	rm -fr "$GNUPGHOME"; \
-	apt-key list
+    export GNUPGHOME="$(mktemp -d)"; \
+    for key in $GPG_KEYS; do \
+        gpg --batch --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys "$key"; \
+    done; \
+    gpg --batch --export $GPG_KEYS > /etc/apt/trusted.gpg.d/mongodb.gpg; \
+    command -v gpgconf > /dev/null && gpgconf --kill all || :; \
+    rm -fr "$GNUPGHOME"; \
+    apt-key list
 
 # Allow build-time overrides (eg. to build image with MongoDB Enterprise version)
 # Options for MONGO_PACKAGE: mongodb-org OR mongodb-enterprise
@@ -37,21 +37,21 @@ ENV MONGO_VERSION {{{VERSION}}}
 
 RUN set -x \
 # installing "mongodb-enterprise" pulls in "tzdata" which prompts for input
-	&& export DEBIAN_FRONTEND=noninteractive \
-	&& apt-get update \
+    && export DEBIAN_FRONTEND=noninteractive \
+    && apt-get update \
 # starting with MongoDB 4.3 (and backported to 4.0 and 4.2 *and* 3.6??), the postinst for server includes an unconditional "systemctl daemon-reload" (and we don't have anything for "systemctl" to talk to leading to dbus errors and failed package installs)
-	&& ln -s /bin/true /usr/local/bin/systemctl \
-	&& apt-get install -y \
-		${MONGO_PACKAGE}=$MONGO_VERSION \
-		${MONGO_PACKAGE}-server=$MONGO_VERSION \
-		${MONGO_PACKAGE}-shell=$MONGO_VERSION \
-		${MONGO_PACKAGE}-mongos=$MONGO_VERSION \
-		${MONGO_PACKAGE}-tools=$MONGO_VERSION \
-		mongodb-mongosh \
-	&& rm -f /usr/local/bin/systemctl \
-	&& rm -rf /var/lib/apt/lists/* \
-	&& rm -rf /var/lib/mongodb \
-	&& mv /etc/mongod.conf /etc/mongod.conf.orig
+    && ln -s /bin/true /usr/local/bin/systemctl \
+    && apt-get install -y \
+        ${MONGO_PACKAGE}=$MONGO_VERSION \
+        ${MONGO_PACKAGE}-server=$MONGO_VERSION \
+        ${MONGO_PACKAGE}-shell=$MONGO_VERSION \
+        ${MONGO_PACKAGE}-mongos=$MONGO_VERSION \
+        ${MONGO_PACKAGE}-tools=$MONGO_VERSION \
+        mongodb-mongosh \
+    && rm -f /usr/local/bin/systemctl \
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /var/lib/mongodb \
+    && mv /etc/mongod.conf /etc/mongod.conf.orig
 
 RUN mkdir -p /opt/bitnami/mongodb/bin \
     && ln -s /usr/bin/install_compass            /opt/bitnami/mongodb/bin/ \

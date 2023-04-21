@@ -7,7 +7,7 @@ helmCharts:
     version: 3.3.0
     releaseName: localpv-provisioner
     namespace: kube-system
-    includeCRDs: true 
+    includeCRDs: true
     valuesInline:
       openebsNDM:
         enabled: false

@@ -2,11 +2,10 @@ image:
   digest: ''
   registry: ghcr.io
   repository: zcube/bitnami-compat/mariadb-galera
-  tag: 10.9.5-debian-11-r55
+  tag: 10.9.5-debian-11-r62
 metrics:
   image:
     digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/mysqld-exporter
-    tag: 0.14.0-debian-11-r55
-
+    tag: 0.14.0-debian-11-r62

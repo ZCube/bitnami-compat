@@ -22,71 +22,71 @@ THE SOFTWARE.
 package cmd
 
 import (
-	"fmt"
-	"io/ioutil"
-	"log"
-	"os"
-	"os/exec"
+  "fmt"
+  "io/ioutil"
+  "log"
+  "os"
+  "os/exec"
 
-	"github.com/bmatcuk/doublestar/v4"
-	"github.com/kyokomi/emoji/v2"
-	"github.com/spf13/cobra"
-	"golang.org/x/exp/slices"
-	"gopkg.in/yaml.v3"
+  "github.com/bmatcuk/doublestar/v4"
+  "github.com/kyokomi/emoji/v2"
+  "github.com/spf13/cobra"
+  "golang.org/x/exp/slices"
+  "gopkg.in/yaml.v3"
 )
 
 // generateCmd represents the generate command
 var generateCmd = &cobra.Command{
-	Use:   "generate",
-	Short: "generate dockerfile for arm64",
-	Long:  `generate dockerfile for arm64`,
-	Run: func(cmd *cobra.Command, args []string) {
-		emoji.Println("Clean bitnami containers")
-		{
-			args := []string{"submodule", "update", "--init", "--recursive", "--checkout", "-f"}
-			cmd := exec.Command("git", args...)
-			cmd.Stdout = os.Stdout
-			cmd.Stderr = os.Stderr
-			if err := cmd.Run(); err != nil {
-				log.Panic(err)
-			}
-		}
+  Use:   "generate",
+  Short: "generate dockerfile for arm64",
+  Long:  `generate dockerfile for arm64`,
+  Run: func(cmd *cobra.Command, args []string) {
+    emoji.Println("Clean bitnami containers")
+    {
+      args := []string{"submodule", "update", "--init", "--recursive", "--checkout", "-f"}
+      cmd := exec.Command("git", args...)
+      cmd.Stdout = os.Stdout
+      cmd.Stderr = os.Stderr
+      if err := cmd.Run(); err != nil {
+        log.Panic(err)
+      }
+    }
 
-		buf, err := ioutil.ReadFile("config.yaml")
-		if err != nil {
-			log.Panic(err)
-		}
+    buf, err := ioutil.ReadFile("config.yaml")
+    if err != nil {
+      log.Panic(err)
+    }
 
-		p := &Config{}
-		err = yaml.Unmarshal(buf, p)
-		if err != nil {
-			log.Fatalf("Unmarshal: %v", err)
-		}
+    p := &Config{}
+    err = yaml.Unmarshal(buf, p)
+    if err != nil {
+      log.Fatalf("Unmarshal: %v", err)
+    }
 
-		var dockerfiles []string
-		if len(app) > 0 {
-			dockerfiles, err = doublestar.FilepathGlob(fmt.Sprintf("containers/bitnami/%v/**/Dockerfile", app))
-		} else {
-			dockerfiles, err = doublestar.FilepathGlob(fmt.Sprintf("containers/bitnami/*/**/Dockerfile"))
-		}
-		if err != nil {
-			log.Panic(err)
-		}
+    var dockerfiles []string
+    if len(app) > 0 {
+      dockerfiles, err = doublestar.FilepathGlob(fmt.Sprintf("containers/bitnami/%v/**/Dockerfile", app))
+    } else {
+      dockerfiles, err = doublestar.FilepathGlob(fmt.Sprintf("containers/bitnami/*/**/Dockerfile"))
+    }
+    if err != nil {
+      log.Panic(err)
+    }
 
-		for i := range dockerfiles {
-			if appInfo, err := InspectDockerfile(dockerfiles[i]); err == nil {
-				if slices.Contains(p.Ignores, appInfo.Name) {
-					continue
-				}
-				PatchDockerfile(appInfo)
-			} else {
-				log.Panic(err)
-			}
-		}
-	},
+    for i := range dockerfiles {
+      if appInfo, err := InspectDockerfile(dockerfiles[i]); err == nil {
+        if slices.Contains(p.Ignores, appInfo.Name) {
+          continue
+        }
+        PatchDockerfile(appInfo)
+      } else {
+        log.Panic(err)
+      }
+    }
+  },
 }
 
 func init() {
-	rootCmd.AddCommand(generateCmd)
-	generateCmd.PersistentFlags().StringVar(&app, "app", "", "app")
+  rootCmd.AddCommand(generateCmd)
+  generateCmd.PersistentFlags().StringVar(&app, "app", "", "app")
 }

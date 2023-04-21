@@ -73,4 +73,3 @@ RUN ln -sf /usr/local/bundle/bin/bootsnap                                /opt/bi
     ln -sf /usr/local/bundle/bin/thor                                    /opt/bitnami/mastodon/bin/ && \
     ln -sf /usr/local/bundle/bin/tilt                                    /opt/bitnami/mastodon/bin/ && \
     ln -sf /usr/local/bundle/bin/unicorn_rails                           /opt/bitnami/mastodon/bin/
-

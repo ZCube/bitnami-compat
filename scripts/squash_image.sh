@@ -1,23 +1,22 @@
 #!/bin/bash
 set -e
 
-declare -a imageNames=$( yq e 'with_entries(.) | .[].name' ./versioninfo.yaml )
-imageNames=( ${imageNames[*]} )
-declare -a imageVersionFulls=$( yq e 'with_entries(.) | .[].version_full' ./versioninfo.yaml )
-imageVersionFulls=( ${imageVersionFulls[*]} )
-declare -a imageVersionMajors=$( yq e 'with_entries(.) | .[].version_major' ./versioninfo.yaml )
-imageVersionMajors=( ${imageVersionMajors[*]} )
-declare -a imageVersions=$( yq e 'with_entries(.) | .[].version' ./versioninfo.yaml )
-imageVersions=( ${imageVersions[*]} )
-declare -a imageOsFlavours=$( yq e 'with_entries(.) | .[].os_flavour' ./versioninfo.yaml )
-imageOsFlavours=( ${imageOsFlavours[*]} )
-declare -a imageRevisions=$( yq e 'with_entries(.) | .[].revision' ./versioninfo.yaml )
-imageRevisions=( ${imageRevisions[*]} )
+declare -a imageNames=$(yq e 'with_entries(.) | .[].name' ./versioninfo.yaml)
+imageNames=(${imageNames[*]})
+declare -a imageVersionFulls=$(yq e 'with_entries(.) | .[].version_full' ./versioninfo.yaml)
+imageVersionFulls=(${imageVersionFulls[*]})
+declare -a imageVersionMajors=$(yq e 'with_entries(.) | .[].version_major' ./versioninfo.yaml)
+imageVersionMajors=(${imageVersionMajors[*]})
+declare -a imageVersions=$(yq e 'with_entries(.) | .[].version' ./versioninfo.yaml)
+imageVersions=(${imageVersions[*]})
+declare -a imageOsFlavours=$(yq e 'with_entries(.) | .[].os_flavour' ./versioninfo.yaml)
+imageOsFlavours=(${imageOsFlavours[*]})
+declare -a imageRevisions=$(yq e 'with_entries(.) | .[].revision' ./versioninfo.yaml)
+imageRevisions=(${imageRevisions[*]})
 
 len=${#imageNames[@]}
 
-for (( i=0; i<$len; i++ ));
-do
+for ((i = 0; i < $len; i++)); do
   if [ "${imageNames[$i]}" != "${APP}" ]; then
     continue
   fi
@@ -39,22 +38,22 @@ do
   crane flatten --platform=linux/arm64 "${IMAGE_TAG_FROM}:${imageVersionFulls[$i]}-arm64" -t ${IMAGE_TAG}:${imageVersionFulls[$i]}-arm64-squash
 
   docker manifest create ${IMAGE_TAG}:${imageVersions[$i]}-${imageOsFlavours[$i]}-r${imageRevisions[$i]} ${IMAGE_TAG}:${imageVersionFulls[$i]}-amd64-squash ${IMAGE_TAG}:${imageVersionFulls[$i]}-arm64-squash
-  docker manifest push   ${IMAGE_TAG}:${imageVersions[$i]}-${imageOsFlavours[$i]}-r${imageRevisions[$i]}
+  docker manifest push ${IMAGE_TAG}:${imageVersions[$i]}-${imageOsFlavours[$i]}-r${imageRevisions[$i]}
 
   docker manifest create ${IMAGE_TAG}:${imageVersionMajors[$i]}-${imageOsFlavours[$i]}-r${imageRevisions[$i]} ${IMAGE_TAG}:${imageVersionFulls[$i]}-amd64-squash ${IMAGE_TAG}:${imageVersionFulls[$i]}-arm64-squash
-  docker manifest push   ${IMAGE_TAG}:${imageVersionMajors[$i]}-${imageOsFlavours[$i]}-r${imageRevisions[$i]}
+  docker manifest push ${IMAGE_TAG}:${imageVersionMajors[$i]}-${imageOsFlavours[$i]}-r${imageRevisions[$i]}
 
   docker manifest create ${IMAGE_TAG}:${imageVersions[$i]}-${imageOsFlavours[$i]} ${IMAGE_TAG}:${imageVersionFulls[$i]}-amd64-squash ${IMAGE_TAG}:${imageVersionFulls[$i]}-arm64-squash
-  docker manifest push   ${IMAGE_TAG}:${imageVersions[$i]}-${imageOsFlavours[$i]}
+  docker manifest push ${IMAGE_TAG}:${imageVersions[$i]}-${imageOsFlavours[$i]}
 
   docker manifest create ${IMAGE_TAG}:${imageVersions[$i]} ${IMAGE_TAG}:${imageVersionFulls[$i]}-amd64-squash ${IMAGE_TAG}:${imageVersionFulls[$i]}-arm64-squash
-  docker manifest push   ${IMAGE_TAG}:${imageVersions[$i]}
+  docker manifest push ${IMAGE_TAG}:${imageVersions[$i]}
 
   docker manifest create ${IMAGE_TAG}:${imageVersionMajors[$i]}-${imageOsFlavours[$i]} ${IMAGE_TAG}:${imageVersionFulls[$i]}-amd64-squash ${IMAGE_TAG}:${imageVersionFulls[$i]}-arm64-squash
-  docker manifest push   ${IMAGE_TAG}:${imageVersionMajors[$i]}-${imageOsFlavours[$i]}
+  docker manifest push ${IMAGE_TAG}:${imageVersionMajors[$i]}-${imageOsFlavours[$i]}
 
   docker manifest create ${IMAGE_TAG}:${imageVersionMajors[$i]} ${IMAGE_TAG}:${imageVersionFulls[$i]}-amd64-squash ${IMAGE_TAG}:${imageVersionFulls[$i]}-arm64-squash
-  docker manifest push   ${IMAGE_TAG}:${imageVersionMajors[$i]}
+  docker manifest push ${IMAGE_TAG}:${imageVersionMajors[$i]}
 
   docker image prune -a -f
 

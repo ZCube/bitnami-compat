@@ -4,5 +4,3 @@ RUN install_packages curl ca-certificates \
     https://raw.githubusercontent.com/resmoio/kubernetes-event-exporter/master/LICENSE
 
 COPY --from=kubernetes-event-exporter /opt/bitnami/kubernetes-event-exporter/ /opt/bitnami/kubernetes-event-exporter/
-
-

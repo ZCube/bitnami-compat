@@ -2,5 +2,4 @@ image:
   digest: ''
   registry: ghcr.io
   repository: zcube/bitnami-compat/kubernetes-event-exporter
-  tag: 1.1.0-debian-11-r55
-
+  tag: 1.1.0-debian-11-r62

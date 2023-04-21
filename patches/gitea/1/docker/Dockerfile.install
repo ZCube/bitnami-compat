@@ -11,4 +11,3 @@ RUN curl -LO https://github.com/go-gitea/gitea/releases/download/v{{{VERSION}}}/
  && chmod +x /opt/bitnami/gitea/bin/gitea
 
 # COPY --from=gitea/gitea:{{{VERSION}}} /usr/local/bin/gitea /opt/bitnami/gitea/bin/gitea
-
