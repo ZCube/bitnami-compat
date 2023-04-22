@@ -4,16 +4,16 @@ postgresql:
     digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/postgresql
-    tag: 15.2.0-debian-11-r62
+    tag: 15.2.0-debian-11-r63
   metrics:
     image:
       digest: ''
       registry: ghcr.io
       repository: zcube/bitnami-compat/postgres-exporter
-      tag: 0.12.0-debian-11-r62
+      tag: 0.12.0-debian-11-r63
   volumePermissions:
     image:
       digest: ''
       registry: ghcr.io
       repository: zcube/bitnami-compat/bitnami-shell
-      tag: 11.0.0-debian-11-r62
+      tag: 11.0.0-debian-11-r63

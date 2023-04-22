@@ -2,4 +2,4 @@ image:
   digest: ''
   registry: ghcr.io
   repository: zcube/bitnami-compat/node-exporter
-  tag: 1.5.0-debian-11-r62
+  tag: 1.5.0-debian-11-r63

@@ -5,70 +5,70 @@ kafka:
         digest: ''
         registry: ghcr.io
         repository: zcube/bitnami-compat/kubectl
-        tag: 1.27.1-debian-11-r62
+        tag: 1.27.1-debian-11-r63
   image:
     digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/kafka
-    tag: 3.4.0-debian-11-r62
+    tag: 3.4.0-debian-11-r63
   metrics:
     jmx:
       image:
         digest: ''
         registry: ghcr.io
         repository: zcube/bitnami-compat/jmx-exporter
-        tag: 0.18.0-debian-11-r62
+        tag: 0.18.0-debian-11-r63
     kafka:
       image:
         digest: ''
         registry: ghcr.io
         repository: zcube/bitnami-compat/kafka-exporter
-        tag: 1.6.0-debian-11-r62
+        tag: 1.6.0-debian-11-r63
   volumePermissions:
     image:
       digest: ''
       registry: ghcr.io
       repository: zcube/bitnami-compat/bitnami-shell
-      tag: 11.0.0-debian-11-r62
+      tag: 11.0.0-debian-11-r63
   zookeeper:
     image:
       digest: ''
       registry: ghcr.io
       repository: zcube/bitnami-compat/zookeeper
-      tag: 3.8.1-debian-11-r62
+      tag: 3.8.1-debian-11-r63
     volumePermissions:
       image:
         digest: ''
         registry: ghcr.io
         repository: zcube/bitnami-compat/bitnami-shell
-        tag: 11.0.0-debian-11-r62
+        tag: 11.0.0-debian-11-r63
 mariadb:
   image:
     digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/mariadb
-    tag: 10.9.5-debian-11-r62
+    tag: 10.9.5-debian-11-r63
   metrics:
     image:
       digest: ''
       registry: ghcr.io
       repository: zcube/bitnami-compat/mysqld-exporter
-      tag: 0.14.0-debian-11-r62
+      tag: 0.14.0-debian-11-r63
   volumePermissions:
     image:
       digest: ''
       registry: ghcr.io
       repository: zcube/bitnami-compat/bitnami-shell
-      tag: 11.0.0-debian-11-r62
+      tag: 11.0.0-debian-11-r63
 rabbitmq:
   image:
     digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/rabbitmq
-    tag: 3.9.29-debian-11-r62
+    tag: 3.9.29-debian-11-r63
   volumePermissions:
     image:
       digest: ''
       registry: ghcr.io
       repository: zcube/bitnami-compat/bitnami-shell
-      tag: 11.0.0-debian-11-r62
+      tag: 11.0.0-debian-11-r63
