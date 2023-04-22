@@ -36,7 +36,6 @@ tasks:
     desc: generate dockerfile, readme, workflow
     cmds:
       - git submodule update --init --recursive --checkout -f
-      # - task: permission
       - go run main.go generate
       - go run main.go generateWorkflow
       - go run main.go generateReadme
@@ -47,6 +46,7 @@ tasks:
       - ./scripts/generateValues.sh
       - pre-commit run --all-files || true
       - pre-commit run --all-files
+      - task: permission
       - git add values/*.yaml
 
   build:
