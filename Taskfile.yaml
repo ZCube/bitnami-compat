@@ -30,7 +30,8 @@ tasks:
   permission:
     desc: chmod +x *.sh
     cmds:
-      - docker run --rm -t --entrypoint="" -v ${PWD}:/work -w /work bitnami/git /bin/bash -c 'find ./patches/ | grep "\.sh$" | xargs -I {} git update-index --chmod=+x {}'
+      - 'find ./patches/ | grep "\.sh$" | xargs -I {} git update-index --chmod=+x {}'
+      - 'find ./scripts/ | grep "\.sh$" | xargs -I {} git update-index --chmod=+x {}'
 
   generate:
     desc: generate dockerfile, readme, workflow
@@ -46,7 +47,7 @@ tasks:
       - ./scripts/generateValues.sh
       - pre-commit run --all-files || true
       - pre-commit run --all-files
-      - task: permission
+      # - task: permission
       - git add values/*.yaml
 
   build:
