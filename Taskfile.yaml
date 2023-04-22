@@ -21,6 +21,12 @@ tasks:
     cmds:
       - go install github.com/cosmtrek/air@latest
 
+  shfmt:
+    desc: shfmt all
+    cmds:
+      - 'find ./patches/ | grep "\.sh$" | xargs -I {} shfmt -w -i 2 -ci -sr {}'
+      - 'find ./scripts/ | grep "\.sh$" | xargs -I {} shfmt -w -i 2 -ci -sr {}'
+
   permission:
     desc: chmod +x *.sh
     cmds:
@@ -39,6 +45,7 @@ tasks:
       - git add README.md
       - git add versioninfo.yaml
       - ./scripts/generateValues.sh
+      - pre-commit run --all-files || true
       - pre-commit run --all-files
       - git add values/*.yaml
 

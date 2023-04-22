@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 set -e
 
 export VERSION_MAJOR=${VERSION_MAJOR:-10}

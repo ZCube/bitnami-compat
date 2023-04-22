@@ -10,7 +10,7 @@ for d in ./charts/bitnami/*/; do
   [[ ${d} == *"appsmith"* ]] && continue
   [[ ${d} == *"bitnami-shell"* ]] && continue
   HELM_APP_NAME=$(basename $d)
-  yq e '(.. | select(has("tag")) | pick(["registry","repository","tag","digest"])) as $i ireduce({}; setpath($i | path; $i))' ./charts/bitnami/${HELM_APP_NAME}/values.yaml >tmp.yaml
+  yq e '(.. | select(has("tag")) | pick(["registry","repository","tag","digest"])) as $i ireduce({}; setpath($i | path; $i))' ./charts/bitnami/${HELM_APP_NAME}/values.yaml > tmp.yaml
 
   declare -a imageKeys=($(yq e '(...|select(has("tag"))) |.repository | (. | parent | path | join("."))' tmp.yaml))
   imageKeys=(${imageKeys[*]})
@@ -30,7 +30,7 @@ for d in ./charts/bitnami/*/; do
           # echo "null found"
           notFound=true
         fi
-        APP_NAME=${imageRepositories[$i]} APP_TAG=${APP_TAG} yq e '(...|select(.repository == "bitnami/" + env(APP_NAME))) |= {"registry": "ghcr.io", "repository": "zcube/bitnami-compat/" + env(APP_NAME), "tag": env(APP_TAG), "digest":""} ' tmp.yaml >tmp.yaml_
+        APP_NAME=${imageRepositories[$i]} APP_TAG=${APP_TAG} yq e '(...|select(.repository == "bitnami/" + env(APP_NAME))) |= {"registry": "ghcr.io", "repository": "zcube/bitnami-compat/" + env(APP_NAME), "tag": env(APP_TAG), "digest":""} ' tmp.yaml > tmp.yaml_
         mv tmp.yaml_ tmp.yaml
       fi
     fi
@@ -43,7 +43,7 @@ for d in ./charts/bitnami/*/; do
   echo "$(basename $d)"
   echo "================================================================"
   mv tmp.yaml values/values_bitnami_compat_${HELM_APP_NAME}.yaml
-  cat values/values_bitnami_compat_${HELM_APP_NAME}.yaml >values/values_bitnami_compat_${HELM_APP_NAME}_.yaml
+  cat values/values_bitnami_compat_${HELM_APP_NAME}.yaml > values/values_bitnami_compat_${HELM_APP_NAME}_.yaml
 done
 
 for d in ./charts/bitnami/*/; do
@@ -63,7 +63,7 @@ for d in ./charts/bitnami/*/; do
           # echo "null found"
           notFound=true
         fi
-        APP_NAME=${imageRepositories[$i]} APP_TAG=${APP_TAG} yq e '(...|select(.repository == "bitnami/" + env(APP_NAME))) |= {"registry": "ghcr.io", "repository": "zcube/bitnami-compat/" + env(APP_NAME), "tag": env(APP_TAG), "digest":""} ' tmp.yaml >tmp.yaml_
+        APP_NAME=${imageRepositories[$i]} APP_TAG=${APP_TAG} yq e '(...|select(.repository == "bitnami/" + env(APP_NAME))) |= {"registry": "ghcr.io", "repository": "zcube/bitnami-compat/" + env(APP_NAME), "tag": env(APP_TAG), "digest":""} ' tmp.yaml > tmp.yaml_
         mv tmp.yaml_ tmp.yaml
       fi
     fi
@@ -76,7 +76,7 @@ for d in ./charts/bitnami/*/; do
   echo "$(basename $d)"
   echo "================================================================"
 
-  cat ./charts/bitnami/${HELM_APP_NAME}/Chart.yaml | yq e .dependencies[].name | grep -v common | xargs -I {} echo '{}:  !include values_bitnami_compat_{}.yaml' >>values/values_bitnami_compat_${HELM_APP_NAME}_.yaml
-  python3 ./scripts/yaml_import.py ./values/values_bitnami_compat_${HELM_APP_NAME}_.yaml >./values/values_bitnami_compat_${HELM_APP_NAME}.yaml
+  cat ./charts/bitnami/${HELM_APP_NAME}/Chart.yaml | yq e .dependencies[].name | grep -v common | xargs -I {} echo '{}:  !include values_bitnami_compat_{}.yaml' >> values/values_bitnami_compat_${HELM_APP_NAME}_.yaml
+  python3 ./scripts/yaml_import.py ./values/values_bitnami_compat_${HELM_APP_NAME}_.yaml > ./values/values_bitnami_compat_${HELM_APP_NAME}.yaml
   rm values/values_bitnami_compat_${HELM_APP_NAME}_.yaml
 done

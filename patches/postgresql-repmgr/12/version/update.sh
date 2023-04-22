@@ -1,20 +1,20 @@
-#/bin/bash
+#!/bin/bash
 set -e
 
 export VERSION_MAJOR=${VERSION_MAJOR:-12}
 export VERSION_DIR=${VERSION_DIR:-./}
 export REPOSITORY="deb http://apt.postgresql.org/pub/repos/apt/ bullseye-pgdg main $VERSION_MAJOR"
 
-set -ex; \
-key='B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8'; \
-export GNUPGHOME="$(mktemp -d)"; \
-gpg --batch --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys "$key"; \
-gpg --batch --export "$key" > /etc/apt/trusted.gpg.d/postgres.gpg; \
-command -v gpgconf > /dev/null && gpgconf --kill all; \
-rm -rf "$GNUPGHOME"; \
+set -ex
+key='B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8'
+export GNUPGHOME="$(mktemp -d)"
+gpg --batch --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys "$key"
+gpg --batch --export "$key" > /etc/apt/trusted.gpg.d/postgres.gpg
+command -v gpgconf > /dev/null && gpgconf --kill all
+rm -rf "$GNUPGHOME"
 apt-key list
 
-set -e;\
+set -e
 echo "${REPOSITORY}" > /etc/apt/sources.list.d/pgdg.list
 
 apt -qq update
