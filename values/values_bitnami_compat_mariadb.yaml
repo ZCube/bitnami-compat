@@ -2,16 +2,16 @@ image:
   digest: ''
   registry: ghcr.io
   repository: zcube/bitnami-compat/mariadb
-  tag: 10.9.5-debian-11-r63
+  tag: 10.9.5-debian-11-r64
 metrics:
   image:
     digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/mysqld-exporter
-    tag: 0.14.0-debian-11-r63
+    tag: 0.14.0-debian-11-r64
 volumePermissions:
   image:
     digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/bitnami-shell
-    tag: 11.0.0-debian-11-r63
+    tag: 11.0.0-debian-11-r64

@@ -2,15 +2,15 @@ clientImage:
   digest: ''
   registry: ghcr.io
   repository: zcube/bitnami-compat/minio-client
-  tag: 2023.4.12-debian-11-r63
+  tag: 2023.4.12-debian-11-r64
 image:
   digest: ''
   registry: ghcr.io
   repository: zcube/bitnami-compat/minio
-  tag: 2023.4.20-debian-11-r63
+  tag: 2023.4.28-debian-11-r64
 volumePermissions:
   image:
     digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/bitnami-shell
-    tag: 11.0.0-debian-11-r63
+    tag: 11.0.0-debian-11-r64

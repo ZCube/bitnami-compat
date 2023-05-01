@@ -2,10 +2,10 @@ image:
   digest: ''
   registry: ghcr.io
   repository: zcube/bitnami-compat/logstash
-  tag: 8.7.0-debian-11-r63
+  tag: 8.7.0-debian-11-r64
 volumePermissions:
   image:
     digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/bitnami-shell
-    tag: 11.0.0-debian-11-r63
+    tag: 11.0.0-debian-11-r64

@@ -3,28 +3,28 @@ redis:
     digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/redis
-    tag: 7.0.11-debian-11-r63
+    tag: 7.0.11-debian-11-r64
   metrics:
     image:
       digest: ''
       registry: ghcr.io
       repository: zcube/bitnami-compat/redis-exporter
-      tag: 1.50.0-debian-11-r63
+      tag: 1.50.0-debian-11-r64
   sentinel:
     image:
       digest: ''
       registry: ghcr.io
       repository: zcube/bitnami-compat/redis-sentinel
-      tag: 7.0.11-debian-11-r63
+      tag: 7.0.11-debian-11-r64
   sysctl:
     image:
       digest: ''
       registry: ghcr.io
       repository: zcube/bitnami-compat/bitnami-shell
-      tag: 11.0.0-debian-11-r63
+      tag: 11.0.0-debian-11-r64
   volumePermissions:
     image:
       digest: ''
       registry: ghcr.io
       repository: zcube/bitnami-compat/bitnami-shell
-      tag: 11.0.0-debian-11-r63
+      tag: 11.0.0-debian-11-r64

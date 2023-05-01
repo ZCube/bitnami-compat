@@ -3,15 +3,15 @@ cloneStaticSiteFromGit:
     digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/git
-    tag: 2.40.0-debian-11-r63
+    tag: 2.40.1-debian-11-r64
 image:
   digest: ''
   registry: ghcr.io
   repository: zcube/bitnami-compat/nginx
-  tag: 1.23.4-debian-11-r63
+  tag: 1.23.4-debian-11-r64
 metrics:
   image:
     digest: ''
     registry: ghcr.io
     repository: zcube/bitnami-compat/nginx-exporter
-    tag: 0.11.0-debian-11-r63
+    tag: 0.11.0-debian-11-r64
